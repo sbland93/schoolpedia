@@ -4,9 +4,24 @@
   "description": "",
   "main": "schoolchoong.js",
   "dependencies": {
-    "express-handlebars": "^3.0.0"
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "express-handlebars": "^3.0.0",
+    "express-logger": "0.0.3",
+    "express-session": "^1.15.3",
+    "loadtest": "^2.3.0",
+    "mongoose": "^4.11.0",
+    "morgan": "^1.8.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "grunt": "^1.0.1",
+    "grunt-cafe-mocha": "^0.1.13",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-exec": "^2.0.0",
+    "mocha": "^3.4.2",
+    "restler": "^3.4.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

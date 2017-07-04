@@ -1,0 +1,11 @@
+<h1>Board Page, This page include board and sorting TODO</h1>
+
+
+<ul class="boardList">
+{{#each seedData.boards}}
+	<li>
+	<p>제목: {{title}}</p>
+	<p>내용: {{content}}</p>
+	</li>
+{{/each}}
+</ul>
