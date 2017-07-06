@@ -16,6 +16,8 @@ var profileSchema = mongoose.Schema({
 	gender: Boolean,
 	description: String,
 	replies : [replySchema],
+	up: { type: Number, default: 0 },
+	down: { type: Number, default: 0 },
 });
 
 var Profile = mongoose.model('Profile', profileSchema);

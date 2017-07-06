@@ -4,7 +4,7 @@ var expect = require('chai').expect;
 
 describe('Stress Tests', function() {
 	it('Homepage should handle 50 requests in a second', function(done){
-		this.timeout(1000 * 20);
+		this.timeout(1000 * 10);
 		var options = {
 			url: 'http://localhost:3000',
 			concurrency: 4,

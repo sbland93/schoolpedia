@@ -16,6 +16,8 @@ var boardSchema = mongoose.Schema({
 	content: String,
 	updated: { type: Date, default: Date.now },
 	replies: [ replySchema ],
+	up: { type: Number, default: 0 },
+	down: { type: Number, default: 0 },
 });
 
 

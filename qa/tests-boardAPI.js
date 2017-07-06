@@ -71,37 +71,59 @@ var boardLists = [
 ];
 
 
+
 describe('Board API Tests', function(){
-
-	var opts = {
-		server: {
-			socketOptions: { keepAlive: 1 }
-		}
-	};
-
-	mongoose.connect(credentials.mongo.test.connectionString, opts);
 
 
 	//School의 objectId를 위해서, school의 restler를 이용한다.
 	//이곳은 좀 refactoring이 필요. profileAPI의 test가 schoolAPI에 의존적 성격을 가지고 있음.
 	var schoolDocs, boardDocs;
+	var db;
 
-	//SchoolList를 Model에서 찾아낸 후, schoolDocs를 초기화한다.
+	//mongoose 연결을 확실시 하고, schoolDocs를 초기화시킨다.
 	before(function(done){
-		this.timeout(4000);
-		var schoolListsArray = schoolLists.map(function(el){
-			return {
-				"name" : el,
-			};
-		});
-		var queryObj = {
-			"$or" : schoolListsArray
-		};
-		School.find(queryObj, function(err, schools){
-			schoolDocs = schools;
-			expect(schools.length > 1).to.be.equal(true);
-			done();
-		});
+		this.timeout(1000 * 10);
+		//mongoose가  disconnect(0)이면 연결시키고, connected(1)상태이면 넘어간다.
+		console.log(mongoose.connection.readyState);
+		if(mongoose.connection.readyState === 0){
+			var opts = {
+					server: {
+						socketOptions: { keepAlive: 1 }
+					}
+				};
+			mongoose.connect(credentials.mongo.test.connectionString, credentials.mongo.options);
+
+			mongoose.connection.on("open", function(ref) {
+				console.log("Connected to mongo server.");
+				var schoolListsArray = schoolLists.map(function(el){
+					return {
+						"name" : el,
+					};
+				});
+				var queryObj = {
+					"$or" : schoolListsArray
+				};
+				School.find(queryObj, function(err, schools){
+					schoolDocs = schools;
+					expect(schools.length > 1).to.be.equal(true);
+					done();
+				});	
+			});
+		} else if (mongoose.connection.readyState === 1){
+				var schoolListsArray = schoolLists.map(function(el){
+					return {
+						"name" : el,
+					};
+				});
+				var queryObj = {
+					"$or" : schoolListsArray
+				};
+				School.find(queryObj, function(err, schools){
+					schoolDocs = schools;
+					expect(schools.length > 1).to.be.equal(true);
+					done();
+				});	
+		}
 	});
 
 	//우선 school부분을 채워줘야한다.
@@ -133,6 +155,7 @@ describe('Board API Tests', function(){
 	});
 
 
+
 	var base = "http://localhost:3000";
 
 	//api/board- post -> 요청 본문의 board를 추가한다.
@@ -158,7 +181,7 @@ describe('Board API Tests', function(){
 			function(data){
 				expect(data.length).to.be.equal(boardLists.length);
 				//DOLATER -refactoring below line.
-				expect(!data[0].school.name).to.be.equal(false);
+				expect(!(data[0].school.name)).to.be.equal(false);
 				done();
 			}
 		);

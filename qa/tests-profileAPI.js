@@ -82,39 +82,80 @@ var profileLists = [
 }];
 
 
-describe('Profile API Tests', function(){
-
-	var opts = {
-		server: {
-			socketOptions: { keepAlive: 1 }
-		}
+//School모델을 활용해,
+//schoolLists를 바탕으로, 전역변수 schoolDocs를 초기화 시켜주는 함수.
+function makeSchoolDocs(School, schoolLists, schoolDocs, done){
+	var schoolListsArray = schoolLists.map(function(el){
+		return {
+			"name" : el,
+		};
+	});
+	var queryObj = {
+		"$or" : schoolListsArray
 	};
+	School.find(queryObj, function(err, schools){
+		schoolDocs = schools;
+		expect(schools.length > 1).to.be.equal(true);
+		done();
+	});	
+}
 
-	mongoose.connect(credentials.mongo.test.connectionString, opts);
 
+
+
+describe('Profile API Tests', function(){
 
 	//School의 objectId를 위해서, school의 restler를 이용한다.
 	//이곳은 좀 refactoring이 필요. profileAPI의 test가 schoolAPI에 의존적 성격을 가지고 있음.
 	var schoolDocs, profileDocs;
+	var db;
+	var base = "http://localhost:3000";
 
-	//SchoolList를 Model에서 찾아낸 후, schoolDocs를 초기화한다.
+	//mongoose 연결을 확실시 하고, schoolDocs를 초기화시킨다.
 	before(function(done){
-		this.timeout(4000);
-		var schoolListsArray = schoolLists.map(function(el){
-			return {
-				"name" : el,
-			};
-		});
-		var queryObj = {
-			"$or" : schoolListsArray
-		};
-		School.find(queryObj, function(err, schools){
-			schoolDocs = schools;
-			expect(schools.length > 1).to.be.equal(true);
-			done();
-		});
-	});
+		this.timeout(1000 * 10);
+		//mongoose가  disconnect(0)이면 연결시키고, connected(1)상태이면 넘어간다.
+		console.log(mongoose.connection.readyState);
+		if(mongoose.connection.readyState === 0){
+			var opts = {
+					server: {
+						socketOptions: { keepAlive: 1 }
+					}
+				};
+			mongoose.connect(credentials.mongo.test.connectionString, credentials.mongo.options);
 
+			mongoose.connection.on("open", function(ref) {
+				console.log("Connected to mongo server.");
+				var schoolListsArray = schoolLists.map(function(el){
+					return {
+						"name" : el,
+					};
+				});
+				var queryObj = {
+					"$or" : schoolListsArray
+				};
+				School.find(queryObj, function(err, schools){
+					schoolDocs = schools;
+					expect(schools.length > 1).to.be.equal(true);
+					done();
+				});	
+			});
+		} else if (mongoose.connection.readyState === 1){
+				var schoolListsArray = schoolLists.map(function(el){
+					return {
+						"name" : el,
+					};
+				});
+				var queryObj = {
+					"$or" : schoolListsArray
+				};
+				School.find(queryObj, function(err, schools){
+					schoolDocs = schools;
+					expect(schools.length > 1).to.be.equal(true);
+					done();
+				});	
+		}
+	});
 	//매 Test 전마다, Profile모델을 통해서 profile들을 만들고
 	//profileDocs전역변수를 초기화한다.
 	beforeEach(function(done){
@@ -136,9 +177,6 @@ describe('Profile API Tests', function(){
 	});
 
 
-
-	var base = "http://localhost:3000";
-
 	//api/profile- post -> 요청 본문의 profile을 추가한다.
 	//(성공 응답: data.id를 보낸다./ data.success)
 	//일단 school의 objectId를 알아야하는데, 이걸 어떻게 테스트 해야 할지.
@@ -154,7 +192,6 @@ describe('Profile API Tests', function(){
 			}
 		);
 	});
-
 
 	//api/profile- get -> query에 해당하는 profile을 가져온다.
 	//query가 없으면 모든 profile을 가져온다.
@@ -209,8 +246,6 @@ describe('Profile API Tests', function(){
 			}
 		);
 	});
-
-
 
 });
 

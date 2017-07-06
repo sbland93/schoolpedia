@@ -112,7 +112,7 @@ module.exports = function(app){
 			res.json({
 				success: true,
 			});
-		})
+		});
 	});
 
 
@@ -131,9 +131,8 @@ module.exports = function(app){
 			res.json({
 				success: true
 			});
-		})
-
-	})
+		});
+	});
 
 
 
