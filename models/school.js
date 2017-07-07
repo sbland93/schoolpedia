@@ -6,6 +6,7 @@ var schoolSchema = mongoose.Schema({
 	available: { type: Boolean, default: false },
 	up: { type: Number, default: 0 },
 	down: { type: Number, default: 0 },
+	updated_at: {type: Date, default: Date.now },
 });
 
 var School = mongoose.model('School', schoolSchema);

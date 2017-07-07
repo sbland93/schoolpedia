@@ -41,31 +41,6 @@ module.exports = function(app){
 	//해당 id의 school을 available상태로 만들고 응답은 success를 담아준다.
 	app.put('/api/school/:id', function(req, res, next){
 		if(!req.params.id) return next('No Id');
-		/*School.findById(req.params.id, function(err, school){
-			if(err) console.error(err);
-			if(!school){
-				return res.json({
-					success: false,
-					message: 'NO DATA',
-				});
-			}else{
-				if(!school.available){
-					school.available = true;
-					school.save(function(err, el){
-						if(err) return next(err);
-						res.json({
-							success: true,
-							id : el._id,
-						});
-					});
-				} else {
-					res.json({
-						success: false,
-						message: 'Already'
-					});
-				}
-			}
-		});*/
 		//DOLATER req.body를 그대로 신뢰해서는 안된다.
 		School.update({_id: req.params.id}, req.body ,function(err, response){
 			if(err) console.error(err);

@@ -82,26 +82,6 @@ var profileLists = [
 }];
 
 
-//School모델을 활용해,
-//schoolLists를 바탕으로, 전역변수 schoolDocs를 초기화 시켜주는 함수.
-function makeSchoolDocs(School, schoolLists, schoolDocs, done){
-	var schoolListsArray = schoolLists.map(function(el){
-		return {
-			"name" : el,
-		};
-	});
-	var queryObj = {
-		"$or" : schoolListsArray
-	};
-	School.find(queryObj, function(err, schools){
-		schoolDocs = schools;
-		expect(schools.length > 1).to.be.equal(true);
-		done();
-	});	
-}
-
-
-
 
 describe('Profile API Tests', function(){
 

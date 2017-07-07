@@ -14,10 +14,10 @@ var boardSchema = mongoose.Schema({
 	school: { type: mongoose.Schema.Types.ObjectId, ref: 'School' },
 	title: String,
 	content: String,
-	updated: { type: Date, default: Date.now },
 	replies: [ replySchema ],
 	up: { type: Number, default: 0 },
 	down: { type: Number, default: 0 },
+	updated_at: { type: Date, default: Date.now },
 });
 
 

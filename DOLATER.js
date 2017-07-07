@@ -66,3 +66,44 @@
 			})
 		})
 	});
+
+
+
+switch(process.env.NODE_ENV){
+case 'production' :
+	//전국 학교 데이터 입력.
+	School.find({}, function(err, schools){
+		if(schools.length) return;
+		var promiseArr = [];
+		koreaSchoolData.forEach(function(el){
+			promiseArr.push(new Promise(function(resolve, reject){
+				new School({
+				name: el['학교명'],
+				location: el['시도교육청명'],
+				category: el['학교급구분'],
+				}).save(function(err){
+					if(err) return reject(err);
+					resolve();
+				});
+			}));
+			Promise.All(promiseArr).then(function(){
+				console.log('Dev School Data initiating has been finished...');
+			});
+		});
+	});
+	break;
+case 'development':
+case 'test':
+	//test용 학교 데이터 입력.
+	School.remove({}, function(err){
+		School.create(seedData.schoolLists, function(err, schools){
+			if(err) throw(err);
+			console.log('Test School Data initiating has been finished...');
+		});
+	})
+	break;
+default :
+	console.log('Please specify the NODE_ENV(development, test, production)');
+	throw new Error('Please specify the NODE_ENV(development, test, production)');
+	break;
+}

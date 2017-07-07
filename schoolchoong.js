@@ -4,6 +4,10 @@ var credentials = require('./credentials.js');
 var express = require('express');
 
 var app = express();
+//Model들 로드.
+var Boards = require('./models/board.js');
+var Profiles = require('./models/profile.js');
+var Schools = require('./models/school.js');
 
 
 //uncaughtError를 처리하기 위해서 domain생성 후 연결.
@@ -80,10 +84,12 @@ var opts = {
 		socketOptions: { keepAlive: 1 }
 	}
 };
+mongoose.Promise = global.Promise;
 
 //개발 환경에 따른 몽구스 연결.
+//DOLATER
 switch(app.get('env')){
-
+	
 	case 'development' : 
 		mongoose.connect(credentials.mongo.development.connectionString, opts);
 		break;
@@ -97,7 +103,8 @@ switch(app.get('env')){
 		throw new Error('Unknown execution environment: ' + app.get('env'));
 }
 
-//개발용 데이터 만들기.
+//데이터 초기화 및 생성.
+//매번 독립적으로 같은 데이터를 생성하기위해, 모두 삭제후 생성.
 require('./seed.js')();
 
 
@@ -232,10 +239,7 @@ app.get('/board', function(req, res){
 });
 
 
-//api 라우팅
-var Boards = require('./models/board.js');
-var Profiles = require('./models/profile.js');
-var Schools = require('./models/school.js');
+
 
 
 

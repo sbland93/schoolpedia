@@ -8,6 +8,7 @@ var replySchema = mongoose.Schema({
 });
 
 //school의 reference.
+//DOLATER school required 함.
 var profileSchema = mongoose.Schema({
 	school:[{ type: mongoose.Schema.Types.ObjectId, ref: 'School' }],
 	class: [{type: Number, min:100, max: 320}],
@@ -18,6 +19,7 @@ var profileSchema = mongoose.Schema({
 	replies : [replySchema],
 	up: { type: Number, default: 0 },
 	down: { type: Number, default: 0 },
+	updated_at: {type: Date, default: Date.now },
 });
 
 var Profile = mongoose.model('Profile', profileSchema);
