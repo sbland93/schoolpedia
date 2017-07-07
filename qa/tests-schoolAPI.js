@@ -139,11 +139,10 @@ describe('School API tests', function(){
 						expect(_data.success).to.be.equal(true);
 						done();
 					}
-				);	
+				);
 			}
 		);
 	});
-
 
 	//api/school/:id - get -> 해당하는 id의 school을 가져온다.
 	//(성공 응답: data.success를 보낸다./ data를 가져온다.)
