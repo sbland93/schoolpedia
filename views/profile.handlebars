@@ -2,10 +2,11 @@
 
 
 <ul class="profileList">
-{{#each seedData.profiles}}
+{{#each profileList}}
 	<li>
-	이름 : {{name}}<br>
-	내용: {{description}}<br>
+	<p>이름: {{name}}</p>
+	<p>내용: {{description}}</p>
+	<p class="updated_at">updated_at: {{updated_at}}</p>
 	</li>
 {{/each}}
 </ul>

@@ -179,7 +179,7 @@ app.use(function(req, res, next){
 });
 
 //모든 routing 로드.
-require('./routes.js')(app);
+require('./routes/routes.js')(app);
 
 //커스텀 404페이지.
 app.use(function(req, res){

@@ -1,21 +1,22 @@
 <h1>School Page, It will include Board and Profile TODO</h1>
 
-<ul class="profileList">
-{{#each profileList}}
+<ul class="boardList">
+{{#each boardList}}
 	<li>
-	이름 : {{name}}<br>
-	설명: {{description}}<br>
-	updated_at: {{updated_at}}
+	<p>제목: {{title}}</p>
+	<p>내용: {{content}}</p>
+	<p class="updated_at">updated_at: {{updated_at}}</p>
 	</li>
 {{/each}}
 </ul>
 
-<ul class="boardList">
-{{#each boardList}}
+
+<ul class="profileList">
+{{#each profileList}}
 	<li>
-	제목: {{title}}<br>
-	내용: {{content}}<br>
-	updated-at: {{updated_at}}
+	<p>이름: {{name}}</p>
+	<p>내용: {{description}}</p>
+	<p class="updated_at">updated_at: {{updated_at}}</p>
 	</li>
 {{/each}}
 </ul>

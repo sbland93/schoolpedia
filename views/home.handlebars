@@ -2,7 +2,9 @@
 
 
 <ul class="schoolList">
-{{#each schoolLists}}
-	<li>{{name}} / {{location}} - <p class="updated_at">{{updated_at}}</p></li>	
+{{#each schoolList}}
+	<a href="/school/{{id}}">
+		<li>{{name}} / {{location}} - <p class="updated_at">{{updated_at}}</p></li>
+	</a>
 {{/each}}
 </ul>
