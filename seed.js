@@ -34,9 +34,12 @@ module.exports = function(){
 				seedData.profileList.forEach(function(el){
 					var query = {};
 					if(el.school) query.name = el.school;
+					console.log(query);
 					promiseArr.push(new Promise(function(res , rej){
-						School.find(query, function(err, school){
-							el.school = [school._id];
+						School.find(query, function(err, schools){
+							if(err) reject(err);
+							el.school = [schools[0]._id];
+							console.log(el.school);
 							Profile.create(el, function(err, profile){
 								if(err) rej(err);
 								res();
