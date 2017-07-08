@@ -2,7 +2,7 @@
 
 
 <ul class="schoolList">
-{{#each seedData.schools}}
-	<li>{{.}}</li>	
+{{#each schoolLists}}
+	<li>{{name}} / {{location}} - <p class="updated_at">{{updated_at}}</p></li>	
 {{/each}}
 </ul>

@@ -17,7 +17,7 @@ module.exports = function(){
 	var p1,p2,p3;
 	p1 = new Promise(function(resolve, reject){
 		School.remove({}, function(err){
-			School.create(seedData.schoolLists, function(err, schools){
+			School.create(seedData.schoolList, function(err, schools){
 				if(err) reject(err);
 				resolve();
 			});
@@ -31,7 +31,7 @@ module.exports = function(){
 			Profile.remove({}, function(err){
 				if(err) reject(err);
 				var promiseArr = [];
-				seedData.profileLists.forEach(function(el){
+				seedData.profileList.forEach(function(el){
 					var query = {};
 					if(el.school) query.name = el.school;
 					promiseArr.push(new Promise(function(res , rej){
@@ -52,7 +52,7 @@ module.exports = function(){
 	
 	p3 = new Promise(function(resolve, reject){
 		Board.remove({}, function(err){
-			Board.create(seedData.boardLists, function(err, boards){
+			Board.create(seedData.boardList, function(err, boards){
 				if(err) reject(err);
 				resolve();
 			});

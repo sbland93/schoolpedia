@@ -140,19 +140,12 @@ describe('Profile API Tests', function(){
 	//profileDocs전역변수를 초기화한다.
 	beforeEach(function(done){
 		this.timeout(4000);
-		Profile.create(profileLists, function(err, profiles){
-			expect(err).to.be.equal(null);
-			profileDocs = profiles;
-			done();
-		});
-	});
-
-	//매 Test가 끝난 후, Profile모델을 통해서 profile들을 삭제한다.
-	afterEach(function(done){
-		this.timeout(4000);
 		Profile.remove({}, function(err){
-			expect(err).to.be.equal(null);
-			done();
+			Profile.create(profileLists, function(err, profiles){
+				expect(err).to.be.equal(null);
+				profileDocs = profiles;
+				done();
+			});
 		});
 	});
 

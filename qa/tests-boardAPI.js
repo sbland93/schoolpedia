@@ -127,7 +127,7 @@ describe('Board API Tests', function(){
 	});
 
 	//우선 school부분을 채워줘야한다.
-	//매 Test 전마다, Board모델을 통해서 board들을 만들고
+	//매 Test 전마다, Board모델을통해 documents를 완전삭제후,
 	//boardDocs 전역변수를 초기화한다.
 	beforeEach(function(done){
 		this.timeout(4000);
@@ -139,18 +139,12 @@ describe('Board API Tests', function(){
 			} 
 			el.school = schoolDocs[0]._id;
 		});
-		Board.create(boardLists, function(err, boards){
-			expect(err).to.be.equal(null);
-			boardDocs = boards;
-			done();
-		});
-	});
-
-	//매 Test가 끝난 후, Board모델을 통해서 board들을 삭제한다.
-	afterEach(function(done){
 		Board.remove({}, function(err){
-			expect(err).to.be.equal(null);
-			done();
+			Board.create(boardLists, function(err, boards){
+				expect(err).to.be.equal(null);
+				boardDocs = boards;
+				done();
+			});
 		});
 	});
 

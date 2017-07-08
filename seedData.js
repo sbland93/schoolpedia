@@ -1,5 +1,5 @@
 module.exports = {
-	profileLists : [
+	profileList : [
 		{
 			school: '백영고등학교',
 			name: '김승범',
@@ -81,7 +81,7 @@ module.exports = {
 		}
 	],
 
-	boardLists : [
+	boardList : [
 		{
 			title: '1학년때 김준선생님 담임이였는데..',
 			content: '잘계시는지 궁금하네요ㅋㅋㅋㅋ 이상한 애니메이션 보여주던 기억이 납니다.',
@@ -124,62 +124,81 @@ module.exports = {
 		},
 	],
 
-	schoolLists : [
+	schoolList : [
 		{
 			name: '백영고등학교',
 			location: '경기도교육청',
+			available: true,
+			updated_at: Date.now() + 10000,
 		},
 		{
 			name: '평촌중학교',
 			location: '경기도교육청',
+			available: true,
+			updated_at : Date.now() + 20000,
 		},
 		{
 			name: '평촌초등학교',
 			location: '경기도교육청',
+			available: true,
+			updated_at: Date.now() + 30000,
 		},
 		{
 			name: '평촌초등학교',
 			location: '충남교육청',
-		},
-		{
-			name: '삼성초등학교',
-			location: '서울교육청',
-		},
-		{
-			name: '귀인중학교',
-			location: '경기도교육청',
+			available: true,
+			updated_at: Date.now() + 40000,	
 		},
 		{
 			name: '충남외국어고등학교',
 			location: '충남교육청',
+			available: true,
+			updated_at: Date.now() + 50000,	
+		},
+		{
+			name: '삼성초등학교',
+			location: '서울교육청',
+			available: false,
+		},
+		{
+			name: '귀인중학교',
+			location: '경기도교육청',
+			available: false,
 		},
 		{
 			name: '충남고등학교',
 			location: '충남교육청',
+			available: false,
 		},
 		{
 			name: '충북고등학교',
-			location: '충북교육청'
+			location: '충북교육청',
+			available: false,
 		},
 		{
 			name: '경기고등학교',
 			location: '경기도교육청',
+			available: false,
 		},
 		{
 			name: '제주고등학교',
 			location: '제주도교육청',
+			available: false,
 		},
 		{
 			name: '전남고등학교',
 			location: '전남교육청',
+			available: false,
 		},
 		{
 			name: '전북고등학교',
 			location: '전북교육청',
+			available: false,
 		},
 		{
 			name: '강원고등학교',
 			location: '강원교육청',
+			available: false,
 		},
 	],
 }

@@ -4,7 +4,8 @@ var rest = require('restler');
 var mongoose = require('mongoose');
 var credentials = require('../credentials.js');
 var School = require('../models/school.js');
-
+var seedData = require('../seedData.js');
+var testUtils = require('../utils/testUtils.js')();
 /******
 
 	api 계획
@@ -33,17 +34,9 @@ var School = require('../models/school.js');
 ******/
 
 
+
 describe('School API tests', function(){
 	
-	var schoolData = {
-		name: '백영고등학교'
-	};
-
-	var schoolLists = [
-		'평촌중학교',
-		'삼성초등학교',
-		'귀인중학교',
-	];
 	var schoolDocs;
 	var base = 'http://localhost:3000';
 
@@ -62,53 +55,22 @@ describe('School API tests', function(){
 			done();
 		}
 	});
-			
-	//SchoolLists에 들어있는 학교들을 available상태로 만든다.
-	beforeEach(function(done){
-		this.timeout(10000);
-		var schoolListsArray = schoolLists.map(function(el){
-			return {
-				"name" : el,
-			};
-		});
-		var queryObj = {
-			"$or" : schoolListsArray
+	
+	var checkAvailable = function(boolean){
+		return function(el){
+			return el.available === boolean;
 		};
-		School.find(queryObj, function(err, schools){
-			var promiseArr = [];
-			schoolDocs = schools;
-			expect(schools.length > 1).to.be.equal(true);
-			schoolDocs.map(function(el){
-				el.available = true;
-				promiseArr.push(new Promise(function(resolve, reject){
-					el.save(function(err){
-						if(err) return reject(err);
-						resolve();
-					});
-				}));
-			});
-			Promise.all(promiseArr).then(function(){
-				done();
-			});
-		});	
-	});
+	};
 
-	//모든 available한 school들을 false를 만든다.
-	afterEach(function(done){
-		this.timeout(4000);
-		School.find({available: true}, function(err, schools){
-			var promiseArr = [];
-			expect(schools.length > 1).to.be.equal(true);
-			schools.map(function(el){
-				el.available = false;
-				promiseArr.push(new Promise(function(resolve, reject){
-					el.save(function(err){
-						if(err) return reject(err);
-						resolve();
-					});
-				}));
-			});
-			Promise.all(promiseArr).then(function(){
+	var availableList = seedData.schoolList.filter(checkAvailable(true));
+	var notAvailableList = seedData.schoolList.filter(checkAvailable(false));
+	console.log(notAvailableList);
+	beforeEach(function(done){
+		this.timeout(1000 * 10);
+		School.remove({}, function(err){
+			expect(err).to.be.equal(null);
+			School.create(seedData.schoolList, function(err, schools){
+				schoolDocs = schools;
 				done();
 			});
 		});
@@ -118,21 +80,26 @@ describe('School API tests', function(){
 	//if(query) 해당쿼리에 해당하는 모든 school을 꺼내온다.(보통 이름으로 조사하게 될것.) 
 	//(성공응답: data Array를 보낸다.)
 	it('should be able to get all schools by query', function(done){
-		rest.get(base + '/api/school', {query: schoolData}).on('success', 
+		var queryByName = {
+			name: seedData.schoolList[0].name
+		};
+		rest.get(base + '/api/school', {query: queryByName}).on('success', 
 			function(data){
 				expect(data.length).to.be.equal(1);
-				expect(data[0].name).to.be.equal(schoolData.name);
+				expect(data[0].name).to.be.equal(seedData.schoolList[0].name);
 				done();
 			}
 		);
 	});
 
-	//api/school/:id - put -> 해당하는 id의 school을 available상태로 만든다.
-	//너무 종속적이다. 다른 API와 마찬가지로 요청본문을 토대로 update한다.
-	//(성공 응답: data.id를 보낸다.)
+	//api/school/:id - put -> 요청본문을 토대로 update한다.
+	//(성공 응답: data.success를 보낸다.)
 	var updateQuery = { available: true };
 	it('should be able to make available of school', function(done){
-		rest.get(base + '/api/school', {query: schoolData}).on('success',
+		var queryOfNotAvailable = {
+			name: notAvailableList[0].name
+		};
+		rest.get(base + '/api/school' , {query: queryOfNotAvailable}).on('success',
 			function(data){
 				rest.put(base + '/api/school/' + data[0].id, {data: updateQuery}).on('success',
 					function(_data){
@@ -143,6 +110,25 @@ describe('School API tests', function(){
 			}
 		);
 	});
+
+	//api/school/:id - put -> 요청본문을 토대로 update한다.
+	//(성공 응답: data.success를 보낸다.)
+	it('should not be able to make available already available school', function(done){
+		var queryOfAvailable = {
+			name: availableList[0].name
+		};
+		rest.get(base + '/api/school' , {query: queryOfAvailable}).on('success',
+			function(data){
+				rest.put(base + '/api/school/' + data[0].id, {data: updateQuery}).on('success',
+					function(_data){
+						expect(_data.success).to.be.equal(false);
+						done();
+					}
+				);
+			}
+		);
+	});
+
 
 	//api/school/:id - get -> 해당하는 id의 school을 가져온다.
 	//(성공 응답: data.success를 보낸다./ data를 가져온다.)
@@ -171,9 +157,9 @@ describe('School API tests', function(){
 	it('should be able to get all available schools', function(done){
 		rest.get(base + '/api/school').on('success',
 			function(data){
-				expect(data.length).to.be.equal(schoolLists.length);
+				expect(data.length).to.be.equal(availableList.length);
 				var isThere = data.some(function(val){
-					return val.name === schoolDocs[0].name;
+					return val.name === availableList[0].name;
 				});
 				expect(isThere).to.be.equal(true);
 				done();
