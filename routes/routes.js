@@ -24,7 +24,6 @@ module.exports = function(app){
 	app.get('/', function(req, res, next){
 		School.find({available: true}, null, {sort: {updated_at: -1}}, function(err, schools){
 			if(err) next(err);
-			console.log('schools', schools);
 			res.render('home', {
 				schoolList : schools.map(function(a){
 					return {
@@ -39,25 +38,40 @@ module.exports = function(app){
 		});
 	});
 
-
 	//:id에 해당하는 school의 Board, Profile을 5개씩 리턴한다.
 	//DOLATER
 	app.get('/school/:id', function(req, res, next){
 		var profilePromise = new Promise(function(resolve, reject){
-			Profile.find({school : mongoose.Schema.Types.ObjectId(req.params.id)}).sort({updated_at : '-1'})
-				.limit(5).exec(function(err, profiles){
-					if(err) reject(err);
-					console.log(profiles);
-					resolve(profiles);
-				});
+			School.findById(req.params.id, function(err, school){
+				if(err) next(err);
+				//DOLATER if !school
+				var query;
+				switch(school.category){
+					case '고등학교' :
+						query = {highSchool: school._id};
+						break;
+					case '중학교' :
+						query = {middleSchool: school._id};
+						break;
+					case '초등학교' :
+						query = {elementarySchool: school._id};
+						break;
+				};
+				Profile.find(query).sort({updated_at : '-1'})
+					.limit(5).populate('highSchool middleSchool elementarySchool').exec(function(err, profiles){
+						if(err) reject(err);
+						console.log(profiles);
+						resolve(profiles);
+					});
+			});
 		});
 		var boardPromise = new Promise(function(resolve, reject){
-			Board.find({school : mongoose.Schema.Types.ObjectId(req.params.id)}).sort({updated_at : '-1'})
-				.limit(5).exec(function(err, boards){
-					if(err) reject(err);
-					console.log(boards);
-					resolve(boards);
-				});
+			Board.find({school : req.params.id}).sort({updated_at : '-1'})
+			.limit(5).populate('school').exec(function(err, boards){
+				console.log(boards);
+				if(err) reject(err);
+				resolve(boards);
+			});
 		});
 		Promise.all([profilePromise, boardPromise]).then(function(rtnArr){
 			res.render('school', {
@@ -69,13 +83,17 @@ module.exports = function(app){
 
 	//profile 페이지 라우팅
 	app.get('/profile', function(req, res){
-		Profile.find({}, null, {sort: {updated_at: -1}}, function(err, profiles){
+		Profile.find({}).sort({updated_at : '-1'})
+			.limit(5).populate('highSchool middleSchool elementarySchol')
+			.exec(function(err, profiles){
 			if(err) next(err);
 			res.render('profile', {
 				profileList : profiles.map(function(a){
 					return {
 						id: a._id,
-						school: a.school,
+						highSchool: a.highSchool,
+						middleSchool: a.middleSchool,
+						elementarySchool: a.elementarySchool,
 						class: a.class,
 						name: a.name,
 						age: a.age,
@@ -87,7 +105,7 @@ module.exports = function(app){
 				}),
 				pageTestScript: '/qa/tests-profile.js'
 			});
-		});
+		})
 	});
 
 	//board 페이지 라우팅
@@ -109,6 +127,5 @@ module.exports = function(app){
 			});
 		});
 	});
-
 
 }

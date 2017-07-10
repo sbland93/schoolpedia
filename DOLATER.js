@@ -221,5 +221,58 @@ profile에 school Array 가 있으면, index처리가 힘들것 같다.
 	=> 검색쿼리를 살핀후, middle경우에, middle로 검색하고,
 	=> highschool이면 highschool field에 검색하고,
 
+	profile, board 에 schoolID를 배정하고, 그걸 index처리.
+
 
 */
+
+var testprofileData = [];
+
+
+describe('Mongoose Index Test', function() {
+
+	//Insert Database from SeedData
+	before(function(done){
+		this.timeout(1000 * 20);
+		mongoose.connect(credentials.mongo.test.connectionString, credentials.mongo.options);
+
+		mongoose.connection.on("open", function(ref) {
+			console.log("Connected to mongo server.");
+			done();
+		});	
+	});
+	
+	it('Test for No index', function(done) {
+		this.timeout(1000 * 30);
+		var p1 = new Promise(function(resolve, reject){
+			Test.No.remove({}, function(err){
+				console.log('here');
+				Test.No.create(Test.testSeed, function(err, nos){
+					if(err) reject(err);
+					console.log(nos);
+					resolve();
+				});
+			});	
+		});
+		var p2 = new Promise(function(resolve, reject){
+			Test.Single.remove({}, function(err){
+				Test.Single.create(Test.testSeed, function(err, profiles){
+					if(err) reject(err);
+					resolve();
+				});
+			});	
+		});
+		var p3 = new Promise(function(resolve, reject){
+			Test.Double.remove({}, function(err){
+				Test.Double.create(Test.testSeed, function(err, profiles){
+					if(err) reject(err);
+					resolve();
+				});
+			});	
+		});
+		Promise.all([p1, p2, p3]).then(function(){
+			done();
+		});
+	});
+
+});

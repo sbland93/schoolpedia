@@ -59,11 +59,6 @@ describe('Board API Tests', function(){
 		this.timeout(1000 * 10);
 		//mongoose가  disconnect(0)이면 연결시키고, connected(1)상태이면 넘어간다.
 		if(mongoose.connection.readyState === 0){
-			var opts = {
-					server: {
-						socketOptions: { keepAlive: 1 }
-					}
-				};
 			mongoose.connect(credentials.mongo.test.connectionString, credentials.mongo.options);
 
 			mongoose.connection.on("open", function(ref) {

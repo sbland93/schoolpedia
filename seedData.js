@@ -249,7 +249,7 @@ module.exports = {
 		},
 	],
 
-	testBoardList : [		
+	testBoardList : [
 		{
 			title: '1학년때 김준선생님 담임이였는데..',
 			content: '잘계시는지 궁금하네요ㅋㅋㅋㅋ 이상한 애니메이션 보여주던 기억이 납니다.',
@@ -266,4 +266,5 @@ module.exports = {
 			updated: Date.now(),
 		},
 	],
+
 }

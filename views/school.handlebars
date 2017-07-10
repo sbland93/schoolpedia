@@ -4,6 +4,7 @@
 {{#each boardList}}
 	<li>
 	<p>제목: {{title}}</p>
+	<p>학교: {{school.name}}</p>
 	<p>내용: {{content}}</p>
 	<p class="updated_at">updated_at: {{updated_at}}</p>
 	</li>
@@ -15,6 +16,9 @@
 {{#each profileList}}
 	<li>
 	<p>이름: {{name}}</p>
+	<p>고등학교: {{highSchool.name}}</p>
+	<p>중학교: {{middleSchool.name}}</p>
+	<p>초등학교: {{elementarySchool.name}}</p>
 	<p>내용: {{description}}</p>
 	<p class="updated_at">updated_at: {{updated_at}}</p>
 	</li>

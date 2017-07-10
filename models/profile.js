@@ -11,8 +11,8 @@ var replySchema = mongoose.Schema({
 //DOLATER school required 함.
 var profileSchema = mongoose.Schema({
 	highSchool : { type: mongoose.Schema.Types.ObjectId, ref: 'School' , index: true},
-	middleSchool: { type: mongoose.Schema.Types.ObjectId, ref: 'School' },
-	elementarySchool: { type: mongoose.Schema.Types.ObjectId, ref: 'School' },
+	middleSchool: { type: mongoose.Schema.Types.ObjectId, ref: 'School', index: true },
+	elementarySchool: { type: mongoose.Schema.Types.ObjectId, ref: 'School', index: true },
 	class: [{type: Number, min:100, max: 330}],
 	name: String,
 	age: Number,
