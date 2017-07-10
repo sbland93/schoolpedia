@@ -3,72 +3,77 @@ var Profile = require('./models/profile.js');
 var Board = require('./models/board.js');
 var koreaSchoolData = require('../koreaSchoolData.js')
 var seedData = require('./seedData.js');
-
+var getRandomInt = require('./utils/testUtils.js')().getRandomInt;
 
 
 
 //DOLATER process.env에 따른 데이터 변경. 
 
-
-
-
 module.exports = function(){
 
 	var p1,p2,p3;
+	//p1. School remove -> School create by SeedData
 	p1 = new Promise(function(resolve, reject){
 		School.remove({}, function(err){
 			School.create(seedData.schoolList, function(err, schools){
 				if(err) reject(err);
-				resolve();
+				resolve(schools);
 			});
 		});	
 	});
 
-	p2 = new Promise(function(resolve, reject){
-		p1.then(function(){
-			//profile들을 모두 삭제한 후,
-			//profile에 있는 school을 바탕으로 id를 찾아넣는다.
+	p1.then(function(schools){
+		//available한 school만 리스트를 새로 뽑음.
+		var availableSchools = schools.filter(function(el){
+			return el.available === true;
+		});
+		//profileList에 랜덤하게 학교를 배정시켜줌. 초, 중, 고에 따라서!
+		seedData.profileList.forEach(function(el){
+			var randomInt = getRandomInt(availableSchools.length);
+			switch(availableSchools[randomInt].category){
+				case '고등학교' :
+					el.highSchool = availableSchools[randomInt]._id;
+					break;
+				case '중학교' :
+					el.middleSchool = availableSchools[randomInt]._id;
+					break;
+				case '초등학교' :
+					el.elementarySchool = availableSchools[randomInt]._id;
+					break;
+			}
+		});
+		//boardList에 school을 채워줌.
+		seedData.boardList.forEach(function(el){
+			var randomInt = getRandomInt(availableSchools.length);
+			el.school = availableSchools[randomInt]._id;
+		});
+		//p2 -> Profile remove - 위에서 채워진 profileList를 바탕으로, profile create
+		p2 = new Promise(function(resolve, reject){
 			Profile.remove({}, function(err){
-				if(err) reject(err);
-				var promiseArr = [];
-				seedData.profileList.forEach(function(el){
-					var query = {};
-					if(el.school) query.name = el.school;
-					console.log(query);
-					promiseArr.push(new Promise(function(res , rej){
-						School.find(query, function(err, schools){
-							if(err) reject(err);
-							el.school = [schools[0]._id];
-							console.log(el.school);
-							Profile.create(el, function(err, profile){
-								if(err) rej(err);
-								res();
-							});				
-						});	
-					}));
+				Profile.create(seedData.profileList, function(err, profiles){
+					if(err) reject(err);
+					resolve();
 				});
-				Promise.all(promiseArr).then(function(){resolve();})
-					.catch(function(){reject();})
 			});
 		});
-	});
-	
-	p3 = new Promise(function(resolve, reject){
-		Board.remove({}, function(err){
-			Board.create(seedData.boardList, function(err, boards){
-				if(err) reject(err);
-				resolve();
-			});
-		});	
-	});
-
-	Promise.all([p2, p3]).then(function(){
-		console.log("Data initiating All, Clear.");
-	}).catch(function(err){
+		//p3 -> Profile remove - 위에서 채워진 profileList를 바탕으로, profile create
+		p3 = new Promise(function(resolve, reject){
+			Board.remove({}, function(err){
+				Board.create(seedData.boardList, function(err, boards){
+					if(err) reject(err);
+					resolve();
+				});
+			});	
+		});
+		return Promise.all([p2,p3])
+	})
+	.then(function(){
+		console.log("Data initiating All, Success");
+	})
+	.catch(function(err){
 		console.log("Data initiating All, Fail", err);
 		throw new Error("Data initiating All, Fail");
 	});
-
 }
 
 

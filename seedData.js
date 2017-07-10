@@ -1,7 +1,6 @@
 module.exports = {
 	profileList : [
 		{
-			school: '백영고등학교',
 			name: '김승범',
 			age: '1993',
 			class: [107, 212, 314],
@@ -12,7 +11,6 @@ module.exports = {
 			updated_at: Date.now() + 10000,
 		},
 		{
-			school: '백영고등학교',
 			name: '임태환',
 			age: '1993',
 			class: [107, 202, 308],
@@ -24,7 +22,6 @@ module.exports = {
 			updated_at: Date.now() + 20000,
 		},
 		{
-			school: '백영고등학교',
 			name: '김인경',
 			class: [111, 212],
 			age: '1993',
@@ -35,7 +32,6 @@ module.exports = {
 			updated_at: Date.now() + 30000,
 		},
 		{
-			school: '백영고등학교',
 			name: '김재환',
 			age: '1991',
 			gender: true,
@@ -45,7 +41,6 @@ module.exports = {
 			updated_at: Date.now() + 40000,
 		},
 		{
-			school: '백영고등학교',
 			name: '강성식',
 			class: [107],
 			age: '1993',
@@ -56,7 +51,6 @@ module.exports = {
 			updated_at: Date.now() + 50000,
 		},
 		{
-			school: '백영고등학교',
 			name: '김용준',
 			class: [107, 202],
 			age: '1993',
@@ -66,7 +60,6 @@ module.exports = {
 			'낯가리는거 없고 장난치는거 좋아함ㅋㅋ'
 		},
 		{
-			school: '백영고등학교',
 			name: '유호규',
 			class: [107, 214],
 			age: '1993',
@@ -76,7 +69,6 @@ module.exports = {
 			'105였음'
 		},
 		{
-			school: '충남외국어고등학교',
 			name: '장유진',
 			age: '1993',
 			gender: true,
@@ -138,77 +130,140 @@ module.exports = {
 		{
 			name: '백영고등학교',
 			location: '경기도교육청',
+			category: '고등학교',
 			available: true,
 			updated_at: Date.now() + 10000,
 		},
 		{
 			name: '평촌중학교',
 			location: '경기도교육청',
+			category: '중학교',
 			available: true,
 			updated_at : Date.now() + 20000,
 		},
 		{
 			name: '평촌초등학교',
 			location: '경기도교육청',
+			category: '초등학교',
 			available: true,
 			updated_at: Date.now() + 30000,
 		},
 		{
 			name: '평촌초등학교',
 			location: '충남교육청',
+			category: '초등학교',
 			available: true,
 			updated_at: Date.now() + 40000,	
 		},
 		{
 			name: '충남외국어고등학교',
 			location: '충남교육청',
+			category: '고등학교',
 			available: true,
 			updated_at: Date.now() + 50000,	
 		},
 		{
 			name: '삼성초등학교',
 			location: '서울교육청',
+			category: '초등학교',
 			available: false,
 		},
 		{
 			name: '귀인중학교',
 			location: '경기도교육청',
+			category: '중학교',
 			available: false,
 		},
 		{
 			name: '충남고등학교',
 			location: '충남교육청',
+			category: '고등학교',
 			available: false,
 		},
 		{
 			name: '충북고등학교',
 			location: '충북교육청',
+			category: '고등학교',
 			available: false,
 		},
 		{
 			name: '경기고등학교',
 			location: '경기도교육청',
+			category: '고등학교',
 			available: false,
 		},
 		{
 			name: '제주고등학교',
 			location: '제주도교육청',
+			category: '고등학교',
 			available: false,
 		},
 		{
 			name: '전남고등학교',
 			location: '전남교육청',
+			category: '고등학교',
 			available: false,
 		},
 		{
 			name: '전북고등학교',
 			location: '전북교육청',
+			category: '고등학교',
 			available: false,
 		},
 		{
 			name: '강원고등학교',
 			location: '강원교육청',
+			category: '고등학교',
 			available: false,
+		},
+	],
+
+	testSchoolList : [
+		{
+			name: '백영고등학교',
+			location: '경기도교육청',
+			category: '고등학교',
+			available: true,
+			updated_at: Date.now() + 10000,
+		},
+		{
+			name: '평촌중학교',
+			location: '경기도교육청',
+			category: '중학교',
+			available: true,
+			updated_at : Date.now() + 20000,
+		},
+		{
+			name: '평촌초등학교',
+			location: '경기도교육청',
+			category: '초등학교',
+			available: true,
+			updated_at: Date.now() + 30000,
+		},
+		{
+			name: '승범초등학교',
+			location: '경기도교육청',
+			category: '초등학교',
+			available: false,
+			updated_at: Date.now() + 30000,
+		},
+	],
+
+	testBoardList : [		
+		{
+			title: '1학년때 김준선생님 담임이였는데..',
+			content: '잘계시는지 궁금하네요ㅋㅋㅋㅋ 이상한 애니메이션 보여주던 기억이 납니다.',
+			updated: Date.now(),
+		},
+		{
+			title: '체육대회 3일이던 시절 분들 여기 계신가요? 기수로는..',
+			content: '기수로는 언젠지 모르겠는데, 한창 저희 체육대회 겸 축제 재밌다고 주변 학교에 소문났던시절인데....',
+			updated: Date.now(),
+		},
+		{
+			title: '이페이지는 누가 만든건가요',
+			content: '짐작가는 사람이 있긴한데 ㅅㅂ... 누구지...ㅅㅂ?',
+			updated: Date.now(),
 		},
 	],
 }

@@ -62,14 +62,13 @@ describe('School API tests', function(){
 		};
 	};
 
-	var availableList = seedData.schoolList.filter(checkAvailable(true));
-	var notAvailableList = seedData.schoolList.filter(checkAvailable(false));
-	console.log(notAvailableList);
+	var availableList = seedData.testSchoolList.filter(checkAvailable(true));
+	var notAvailableList = seedData.testSchoolList.filter(checkAvailable(false));
 	beforeEach(function(done){
 		this.timeout(1000 * 10);
 		School.remove({}, function(err){
 			expect(err).to.be.equal(null);
-			School.create(seedData.schoolList, function(err, schools){
+			School.create(seedData.testSchoolList, function(err, schools){
 				schoolDocs = schools;
 				done();
 			});
@@ -81,12 +80,12 @@ describe('School API tests', function(){
 	//(성공응답: data Array를 보낸다.)
 	it('should be able to get all schools by query', function(done){
 		var queryByName = {
-			name: seedData.schoolList[0].name
+			name: seedData.testSchoolList[0].name
 		};
 		rest.get(base + '/api/school', {query: queryByName}).on('success', 
 			function(data){
 				expect(data.length).to.be.equal(1);
-				expect(data[0].name).to.be.equal(seedData.schoolList[0].name);
+				expect(data[0].name).to.be.equal(seedData.testSchoolList[0].name);
 				done();
 			}
 		);
@@ -99,6 +98,7 @@ describe('School API tests', function(){
 		var queryOfNotAvailable = {
 			name: notAvailableList[0].name
 		};
+		console.log(notAvailableList);
 		rest.get(base + '/api/school' , {query: queryOfNotAvailable}).on('success',
 			function(data){
 				rest.put(base + '/api/school/' + data[0].id, {data: updateQuery}).on('success',

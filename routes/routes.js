@@ -41,6 +41,7 @@ module.exports = function(app){
 
 
 	//:id에 해당하는 school의 Board, Profile을 5개씩 리턴한다.
+	//DOLATER
 	app.get('/school/:id', function(req, res, next){
 		var profilePromise = new Promise(function(resolve, reject){
 			Profile.find({school : mongoose.Schema.Types.ObjectId(req.params.id)}).sort({updated_at : '-1'})

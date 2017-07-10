@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var School = require('../models/school.js');
 var Profile = require('../models/profile.js');
 var credentials = require('../credentials.js');
+var seedData = require('../seedData.js');
 /******
 
 	api 계획
@@ -26,13 +27,6 @@ var credentials = require('../credentials.js');
 	(성공 응답: data.success)
 
 	******/
-var schoolLists = [
-		'평촌초등학교',
-		'평촌중학교',
-		'백영고등학교',
-		'삼성초등학교',
-		'귀인중학교',
-	];
 
 var profileData = {
 	class: [107, 212, 314],
@@ -45,7 +39,7 @@ var profileData = {
 };
 
 
-var profileLists = [ 
+var profileList = [ 
 {
 	class: [107, 203, 307],
 	name: '임태환',
@@ -93,9 +87,8 @@ describe('Profile API Tests', function(){
 
 	//mongoose 연결을 확실시 하고, schoolDocs를 초기화시킨다.
 	before(function(done){
-		this.timeout(1000 * 10);
+		this.timeout(1000 * 15);
 		//mongoose가  disconnect(0)이면 연결시키고, connected(1)상태이면 넘어간다.
-		console.log(mongoose.connection.readyState);
 		if(mongoose.connection.readyState === 0){
 			var opts = {
 					server: {
@@ -106,34 +99,22 @@ describe('Profile API Tests', function(){
 
 			mongoose.connection.on("open", function(ref) {
 				console.log("Connected to mongo server.");
-				var schoolListsArray = schoolLists.map(function(el){
-					return {
-						"name" : el,
-					};
+				School.remove({}, function(err){
+					expect(err).to.be.equal(null);
+					School.create(seedData.testSchoolList, function(err, schools){
+						schoolDocs = schools;
+						done();
+					});
 				});
-				var queryObj = {
-					"$or" : schoolListsArray
-				};
-				School.find(queryObj, function(err, schools){
-					schoolDocs = schools;
-					expect(schools.length > 1).to.be.equal(true);
-					done();
-				});	
 			});
 		} else if (mongoose.connection.readyState === 1){
-				var schoolListsArray = schoolLists.map(function(el){
-					return {
-						"name" : el,
-					};
-				});
-				var queryObj = {
-					"$or" : schoolListsArray
-				};
-				School.find(queryObj, function(err, schools){
+			School.remove({}, function(err){
+				expect(err).to.be.equal(null);
+				School.create(seedData.testSchoolList, function(err, schools){
 					schoolDocs = schools;
-					expect(schools.length > 1).to.be.equal(true);
 					done();
-				});	
+				});
+			});
 		}
 	});
 	//매 Test 전마다, Profile모델을 통해서 profile들을 만들고
@@ -141,7 +122,7 @@ describe('Profile API Tests', function(){
 	beforeEach(function(done){
 		this.timeout(4000);
 		Profile.remove({}, function(err){
-			Profile.create(profileLists, function(err, profiles){
+			Profile.create(profileList, function(err, profiles){
 				expect(err).to.be.equal(null);
 				profileDocs = profiles;
 				done();
@@ -152,11 +133,23 @@ describe('Profile API Tests', function(){
 
 	//api/profile- post -> 요청 본문의 profile을 추가한다.
 	//(성공 응답: data.id를 보낸다./ data.success)
-	//일단 school의 objectId를 알아야하는데, 이걸 어떻게 테스트 해야 할지.
 	it('should able to add Profile', function(done){
-		profileData.school = [];
+		this.timeout(1000* 10);
 		schoolDocs.forEach(function(el){
-			profileData.school.push(el.id);
+			switch(el.category){
+				case '고등학교':
+					if(profileData.highSchool) return;
+					profileData.highSchool = (el._id).toString();
+					break;
+				case '중학교':
+					if(profileData.middleSchool) return;
+					profileData.middleSchool = (el._id).toString();
+					break;
+				case '초등학교':
+					if(profileData.elementarySchool) return;
+					profileData.elementarySchool = (el._id).toString();
+					break;
+			}
 		});
 		rest.post(base + '/api/profile', {data: profileData}).on('success',
 			function(data){
@@ -172,7 +165,7 @@ describe('Profile API Tests', function(){
 	it('should be able to get all profiles', function(done){
 		rest.get(base + '/api/profile').on('success',
 			function(data){
-				expect(data.length).to.be.equal(profileLists.length);
+				expect(data.length).to.be.equal(profileList.length);
 				done();
 			}
 		);
@@ -194,6 +187,7 @@ describe('Profile API Tests', function(){
 	//data.success가 true인지 확인.
 	//업데이트 된 데이터의 property 확인.
 	it('should be able to update a profile', function(done){
+		this.timeout(1000* 10);
 		rest.put(base + '/api/profile/' + profileDocs[0]._id, {data: profileData}).on('success',
 			function(data){
 				expect(data.success).to.be.equal(true);

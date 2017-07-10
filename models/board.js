@@ -11,7 +11,7 @@ var replySchema = mongoose.Schema({
 //School의 reference두기.
 var boardSchema = mongoose.Schema({
 	user: String,
-	school: { type: mongoose.Schema.Types.ObjectId, ref: 'School' },
+	school: { type: mongoose.Schema.Types.ObjectId, ref: 'School' , index: true},
 	title: String,
 	content: String,
 	replies: [ replySchema ],

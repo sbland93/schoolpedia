@@ -107,3 +107,119 @@ default :
 	throw new Error('Please specify the NODE_ENV(development, test, production)');
 	break;
 }
+
+
+
+
+var School = require('./models/school.js');
+var Profile = require('./models/profile.js');
+var Board = require('./models/board.js');
+var koreaSchoolData = require('../koreaSchoolData.js')
+var seedData = require('./seedData.js');
+var getRandomInt = require('./utils/testUtils.js').getRandomInt;
+
+
+
+//DOLATER process.env에 따른 데이터 변경. 
+
+
+
+
+module.exports = function(){
+
+	var p1,p2,p3;
+	p1 = new Promise(function(resolve, reject){
+		School.remove({}, function(err){
+			School.create(seedData.schoolList, function(err, schools){
+				if(err) reject(err);
+				resolve(schools);
+			});
+		});	
+	});
+
+	p2 = new Promise(function(resolve, reject){
+		Profile.remove({}, function(err){
+			Profile.create(seedData.profileList, function(err, profiles){
+				if(err) reject(err);
+				resolve(profiles);
+			});
+		});
+	});
+	
+	p3 = new Promise(function(resolve, reject){
+		Board.remove({}, function(err){
+			Board.create(seedData.boardList, function(err, boards){
+				if(err) reject(err);
+				resolve(boards);
+			});
+		});	
+	});
+
+
+	Promise.all([p1, p2, p3]).then(function(rtnArr){
+		var schoolDocs = rtnArr[0];		
+		var profileDocs = rtnArr[1];		
+		var boardDocs = rtnArr[2];
+		var availableSchools = schoolDocs.filter(function(el){
+			return el.available === true;
+		});
+		profileDocs.forEach(function(el){
+			var randomInt = getRandomInt(availableSchools.length);
+			if(availableSchools[randomInt].profileList === undefined) availableSchools[randomInt].profileList = [];
+			availableSchools[randomInt].profileList.push(el._id);
+		});
+		boardDocs.forEach(function(el){
+			var randomInt = getRandomInt(availableSchools.length);
+			if(availableSchools[randomInt].boardList === undefined) availableSchools[randomInt].boardList = [];
+			availableSchools[randomInt].boardList.push(el._id);
+		});
+		availableSchools.forEach(function(el){
+			var haveProfileList = (el.profileList === undefined);
+			var haveBoardList = (el.boardList === undefined);
+			if(haveProfileList){
+				el.profileList.forEach(function(a){
+					profileDocs.forEach(function(b){
+						if(a === b._id) b.schoolList = []
+					})
+				})
+			}
+
+		});
+	}).catch(function(err){
+		console.log("Data initiating All, Fail", err);
+		throw new Error("Data initiating All, Fail");
+	})
+
+
+}
+
+
+/*
+
+profile에 school Array 가 있으면, index처리가 힘들것 같다.
+
+1. school에 profileLIst를 넣는다.
+
+	=> 이럴경우, school자체가 굉장히 무거워지고,
+	profile query limit 10 같은것을 school 기반으로 날리기가 어려워진다.
+
+2. profile에 school을 하나만 배정한다.
+
+	=> 최상의 시나리오, 제일 간단한 형태다.
+	profile에 school을 배정하고, index처리를 하면 굉장히 깔끔.
+	하지만, profile을 통한 확산이 힘들어진다.
+
+3. profile에 school Array를 배정한다.
+
+	=> 제일 원하는 시나리오 형태이다.
+	하지만 인덱싱 처리가 힘들다.
+
+
+4. 2번과 3번의 중간은 없을까?
+
+ 	=> profile에 highSchool, middleSchool, lowschool? 나눈다.
+	=> 검색쿼리를 살핀후, middle경우에, middle로 검색하고,
+	=> highschool이면 highschool field에 검색하고,
+
+
+*/

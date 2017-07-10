@@ -1,4 +1,7 @@
 var mongoose = require('mongoose');
+var Board = require('./board.js');
+var Profile = require('./profile.js');
+
 var schoolSchema = mongoose.Schema({
 	name: String,
 	location: String,

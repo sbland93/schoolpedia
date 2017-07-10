@@ -1,8 +1,9 @@
 module.exports = function(){
 	
 	return {
-		getRandomInt : function getRandomInt(min, max) {
-	 		return Math.floor(Math.random() * (max - min)) + min;
+		//max이하의 randomInt를 return하는 함수.
+		getRandomInt : function(max) {
+	 		return Math.floor(Math.random() * max);
 		},
 	};
 
