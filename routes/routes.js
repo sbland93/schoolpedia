@@ -22,7 +22,8 @@ module.exports = function(app){
 	//home 페이지 라우팅.
 	//schoolList가 필요.
 	app.get('/', function(req, res, next){
-		School.find({available: true}, null, {sort: {updated_at: -1}}, function(err, schools){
+		School.find({available: true}).sort({updated_at : '-1'})
+		.exec(function(err, schools){
 			if(err) next(err);
 			res.render('home', {
 				schoolList : schools.map(function(a){
@@ -110,7 +111,8 @@ module.exports = function(app){
 
 	//board 페이지 라우팅
 	app.get('/board', function(req, res){
-		Board.find({}, null, {sort: {updated_at: -1}}, function(err, boards){
+		Board.find({}).sort({updated_at : '-1'})
+		.exec(function(err, boards){
 			if(err) next(err);
 			res.render('board', {
 				boardList : boards.map(function(a){
