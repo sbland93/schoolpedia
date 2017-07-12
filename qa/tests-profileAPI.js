@@ -38,45 +38,6 @@ var profileData = {
 	'공부를 열심히 했음'
 };
 
-
-var profileList = [ 
-{
-	class: [107, 203, 307],
-	name: '임태환',
-	age: '1993',
-	gender: true,
-	description: '전교부회장 역임' +
-	'지조로 유명했음' +
-	'공부를 열심히 했음' +
-	'관련일화: 반전체 눈치게임을 하는데, 끝까지 일어나지 않아서 45번으로 벌칙에 걸렸다는 일화..',
-	replies : [{user: '21jij234', content: '역시 임지조.'}, 
-	{user: '42qjk455', content: '최근에 태환이랑 연락되는 사람 있나요? 보고싶네ㅋㅋㅋ'}],
-}, 
-{
-	class: [111, 212, 310],
-	name: '김인경',
-	age: '1993',
-	gender: false,
-	description: '털털하고 시원한 성격의 인구' +
-	'별명이 인구였는데 왜 인구가 되었는지는 아무도 모르고 있음.' +
-	'아는사람 업데이트 바람.',
-	replies : [{user: '49kik5k9', content: '인경이 요즘 뭐하고 지내나ㅋㅋㅋ'}, 
-	{user: '89828sk', content: '분명히 이거 보고 모른척 했을듯 인구'}],
-}, 
-{
-	class: [101, 201, 314],
-	name: '김재환',
-	age: '1991',
-	gender: true,
-	description: '성격 좋고 노래 잘함' +
-	'얼굴이 큰 편이여서 대두, 대갈장군 등의 이름을 가지고 있었음.' +
-	'3학년때 장난기가 많은 편이였음.',
-	replies : [{user: '8391eifk', content: '동생이 아마 백영고 였을걸?'}, 
-	{user: '6726001', content: '장수현쌤일때 같은반이였는데 성격 ㄱㅊ'}],
-}];
-
-
-
 describe('Profile API Tests', function(){
 
 	//School의 objectId를 위해서, school의 restler를 이용한다.
@@ -117,7 +78,7 @@ describe('Profile API Tests', function(){
 	beforeEach(function(done){
 		this.timeout(4000);
 		Profile.remove({}, function(err){
-			Profile.create(profileList, function(err, profiles){
+			Profile.create(seedData.profileList, function(err, profiles){
 				expect(err).to.be.equal(null);
 				profileDocs = profiles;
 				done();
@@ -156,11 +117,11 @@ describe('Profile API Tests', function(){
 
 	//api/profile- get -> query에 해당하는 profile을 가져온다.
 	//query가 없으면 모든 profile을 가져온다.
-	//data.length가 profileList의 개수와 같은지 확인한다.
+	//data.length가 seedData.profileList의 개수와 같은지 확인한다.
 	it('should be able to get all profiles', function(done){
 		rest.get(base + '/api/profile').on('success',
 			function(data){
-				expect(data.length).to.be.equal(profileList.length);
+				expect(data.length).to.be.equal(seedData.profileList.length);
 				done();
 			}
 		);

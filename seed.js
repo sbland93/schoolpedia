@@ -7,10 +7,9 @@ var getRandomInt = require('./utils/testUtils.js')().getRandomInt;
 
 
 
-//DOLATER process.env에 따른 데이터 변경. 
 
-module.exports = function(){
-
+//Seed All Data From seedData.
+var seedDev = function(){
 	var p1,p2,p3;
 	//p1. School remove -> School create by SeedData
 	p1 = new Promise(function(resolve, reject){
@@ -76,4 +75,41 @@ module.exports = function(){
 	});
 }
 
+//Clear All Models.
+var seedClearTest = function(){
+	var p1 = new Promise(function(resolve, reject){
+		School.remove({}, function(err){
+			if(err) reject(err);
+			resolve();
+		});	
+	});
 
+	var p2 = new Promise(function(resolve, reject){
+		Profile.remove({}, function(err){
+			if(err) reject(err);
+			resolve();
+		})
+	})
+
+	var p3 = new Promise(function(resolve, reject){
+		Board.remove({}, function(err){
+			if(err) reject(err);
+			resolve();
+		})
+	})
+
+	Promise.all([p1,p2,p3]).then(function(){
+		console.log("Data Clear All, Success");
+	})
+	.catch(function(err){
+		console.log("Data Clear All, Fail", err);
+		throw new Error("Data Clear All, Fail");
+	});
+}
+
+//DOLATER process.env에 따른 데이터 변경. 
+
+module.exports =  {
+	development: seedDev,
+	test: seedClearTest,
+};

@@ -69,6 +69,7 @@ module.exports = function(app){
 
 	//요청본문에 해당하는 profile을 새로 생성한다.
 	//검증과정이 있어야하는데, 어떤게 필수일까 name, age, gender은 필수로 하자!
+	//DOLATER school중 하나도 있어야한다.
 	app.post('/api/profile', function(req, res, next){
 		if(req.body.name && req.body.age && req.body.gender){
 			Profile.create(req.body, function(err, profile){

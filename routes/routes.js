@@ -130,4 +130,12 @@ module.exports = function(app){
 		});
 	});
 
+	app.get('/test', function(req, res){
+		res.render('test', {
+			pageTestScript: '/qa/tests-clientAPI.js',
+			showTests: true,
+			testAPI: true,
+		});
+	});
+
 }

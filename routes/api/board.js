@@ -76,6 +76,11 @@ module.exports = function(app){
 					replies : board.replies,
 				});
 			});
+		}else{
+			res.json({
+				success: false,
+				message: 'TITLE CONTENT SCHOOL REQUIRED',
+			});
 		}
 	})
 

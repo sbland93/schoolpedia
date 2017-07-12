@@ -98,7 +98,6 @@ describe('School API tests', function(){
 		var queryOfNotAvailable = {
 			name: notAvailableList[0].name
 		};
-		console.log(notAvailableList);
 		rest.get(base + '/api/school' , {query: queryOfNotAvailable}).on('success',
 			function(data){
 				rest.put(base + '/api/school/' + data[0].id, {data: updateQuery}).on('success',
@@ -128,7 +127,6 @@ describe('School API tests', function(){
 			}
 		);
 	});
-
 
 	//api/school/:id - get -> 해당하는 id의 school을 가져온다.
 	//(성공 응답: data.success를 보낸다./ data를 가져온다.)
@@ -162,6 +160,16 @@ describe('School API tests', function(){
 					return val.name === availableList[0].name;
 				});
 				expect(isThere).to.be.equal(true);
+				done();
+			}
+		);
+	});
+
+	it('should be able to add a school', function(done){
+		rest.post(base + '/api/school').on('success',
+			function(data){
+				expect(data.success).to.be.equal(true);
+				expect(!data.id).to.be.equal(false);
 				done();
 			}
 		);

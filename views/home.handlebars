@@ -1,6 +1,12 @@
 <h1>SC home page, It will include School List. TODO</h1>
 
 
+<form action="/api/school" id="searchSchool">
+	<input type="text" name="name" placeholder="Search...">
+	<input type="submit">
+</form>
+
+
 <ul class="schoolList">
 {{#each schoolList}}
 	<a href="/school/{{id}}">
@@ -8,3 +14,55 @@
 	</a>
 {{/each}}
 </ul>
+
+<div id="test"></div>
+
+{{#section 'head'}}
+	<script id="schoolListTemplate" type="text/x-handlebars-template">
+			<ul class="schoolList">
+				\{{#each searchedList}}
+				<a href="/school/{{id}}">
+					<li>\{{name}} / \{{location}} - <p class="updated_at">\{{updated_at}}</p></li>
+				</a>
+				\{{/each}}
+			</ul>
+	</script>
+{{/section}}
+
+
+
+<div id="searchResult"></div>
+
+
+{{#section 'jquery'}}
+	<script>
+	var schoolListTemplatet
+	$(document).ready(function(){
+		console.log("making Handlebars");	
+		schoolListTemplate = Handlebars.compile(
+			$('#schoolListTemplate').html()
+		);
+	});
+	$('#searchSchool').submit(function(evt){
+		//stop Form from submitting normally
+		console.log("Event Prevented");	
+		evt.preventDefault();
+
+		var $form = $(this),
+			nameOfSchool = $form.find('input[name="name"]').val(),
+			url = $form.attr('action')
+
+		var searching = $.ajax({
+			method: 'GET',
+			url: url,
+			data: { 
+				name: nameOfSchool
+			},
+			success: function(data){
+				$('#searchResult').html(schoolListTemplate({searchedList : data}));
+				console.log(data);
+			}
+		});
+	});
+	</script>
+{{/section}}

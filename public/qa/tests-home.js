@@ -11,5 +11,5 @@ describe('"home"page Tests', function() {
 		var dateOfSecond = $('.schoolList li > .updated_at')[1].innerHTML;
 		expect(dateOfFirst > dateOfSecond).to.be.equal(true);
 	});
-
 });
+

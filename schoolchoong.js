@@ -94,7 +94,7 @@ switch(app.get('env')){
 		mongoose.connect(credentials.mongo.development.connectionString, opts);
 		//데이터 초기화 및 생성.
 		//매번 독립적으로 같은 데이터를 생성하기위해, 모두 삭제후 생성.
-		require('./seed.js')();
+		require('./seed.js').development();
 		break;
 	case 'production' :
 		mongoose.connect(credentials.mongo.production.connectionString, opts);
@@ -102,6 +102,7 @@ switch(app.get('env')){
 	//test환경에서는, 완전히 독립적이게 유지하는게 좋을것이다.
 	case 'test' :
 		mongoose.connect(credentials.mongo.test.connectionString, opts);
+		require('./seed.js').test();
 		break;
 	default:
 		throw new Error('Unknown execution environment: ' + app.get('env'));
