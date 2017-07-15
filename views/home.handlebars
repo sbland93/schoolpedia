@@ -19,13 +19,13 @@
 
 {{#section 'head'}}
 	<script id="schoolListTemplate" type="text/x-handlebars-template">
-			<ul class="schoolList">
-				\{{#each searchedList}}
-				<a href="/school/{{id}}">
-					<li>\{{name}} / \{{location}} - <p class="updated_at">\{{updated_at}}</p></li>
-				</a>
-				\{{/each}}
-			</ul>
+		<ul class="schoolList">
+			\{{#each searchedList}}
+			<a href="/school/{{id}}">
+				<li>\{{name}} / \{{location}} - <p class="updated_at">\{{updated_at}}</p></li>
+			</a>
+			\{{/each}}
+		</ul>
 	</script>
 {{/section}}
 
@@ -36,7 +36,7 @@
 
 {{#section 'jquery'}}
 	<script>
-	var schoolListTemplatet
+	var schoolListTemplate
 	$(document).ready(function(){
 		console.log("making Handlebars");	
 		schoolListTemplate = Handlebars.compile(
@@ -50,7 +50,7 @@
 
 		var $form = $(this),
 			nameOfSchool = $form.find('input[name="name"]').val(),
-			url = $form.attr('action')
+			url = $form.attr('action');
 
 		var searching = $.ajax({
 			method: 'GET',

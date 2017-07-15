@@ -10,7 +10,9 @@ var getRandomInt = require('./utils/testUtils.js')().getRandomInt;
 
 //Seed All Data From seedData.
 var seedDev = function(){
+
 	var p1,p2,p3;
+
 	//p1. School remove -> School create by SeedData
 	p1 = new Promise(function(resolve, reject){
 		School.remove({}, function(err){
