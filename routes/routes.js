@@ -39,48 +39,46 @@ module.exports = function(app){
 	});
 
 	//profile 페이지 라우팅
-	app.get('/profile', function(req, res){
-		Profile.find({}).sort({updated_at : '-1'})
-			.limit(5).populate('highSchool middleSchool elementarySchol')
-			.exec(function(err, profiles){
+	//DOLATER !profile
+	app.get('/profile/:id', function(req, res){
+		Profile.findById(req.params.id)
+			.populate('highSchool middleSchool elementarySchol')
+			.exec(function(err, profile){
 			if(err) next(err);
 			res.render('profile', {
-				profileList : profiles.map(function(a){
-					return {
-						id: a._id,
-						highSchool: a.highSchool,
-						middleSchool: a.middleSchool,
-						elementarySchool: a.elementarySchool,
-						class: a.class,
-						name: a.name,
-						age: a.age,
-						gender: a.gender,
-						description: a.description,
-						replies : a.replies,
-						updated_at: a.updated_at,
-					};
-				}),
+				profile: {
+					id: profile._id,
+					highSchool: profile.highSchool,
+					middleSchool: profile.middleSchool,
+					elementarySchool: profile.elementarySchool,
+					class: profile.class,
+					name: profile.name,
+					age: profile.age,
+					gender: profile.gender,
+					description: profile.description,
+					replies : profile.replies,
+					updated_at: profile.updated_at,
+				},		
 				pageTestScript: '/qa/tests-profile.js'
 			});
 		})
 	});
 
 	//board 페이지 라우팅
-	app.get('/board', function(req, res){
-		Board.find({}).sort({updated_at : '-1'})
-		.exec(function(err, boards){
+	//DOLATER !board
+	app.get('/board/:id', function(req, res){
+		Board.findById(req.params.id)
+		.exec(function(err, board){
 			if(err) next(err);
 			res.render('board', {
-				boardList : boards.map(function(a){
-					return {
-						id: a._id,
-						title: a.title,
-						school: a.school,
-						content: a.content,
-						replies : a.replies,
-						updated_at: a.updated_at,
-					};
-				}),
+				board : {
+						id: board._id,
+						title: board.title,
+						school: board.school,
+						content: board.content,
+						replies : board.replies,
+						updated_at: board.updated_at,
+					},
 				pageTestScript: '/qa/tests-board.js'
 			});
 		});

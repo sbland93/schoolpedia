@@ -2,11 +2,13 @@
 
 
 <ul class="boardList">
-{{#each boardList}}
-	<li>
-	<p>제목: {{title}}</p>
-	<p>내용: {{content}}</p>
-	<p class="updated_at">updated_at: {{updated_at}}</p>
-	</li>
-{{/each}}
+	{{#each boardList}}
+		<a href="/board/{{id}}">
+			<li>
+			<p>제목: {{title}}</p>
+			<p>내용: {{content}}</p>
+			<p class="updated_at">updated_at: {{updated_at}}</p>
+			</li>
+		</a>
+	{{/each}}
 </ul>

@@ -2,14 +2,16 @@
 
 
 <ul class="profileList">
-{{#each profileList}}
-	<li>
-	<p>이름: {{name}}</p>
-	<p>고등학교: {{highSchool.name}}</p>
-	<p>중학교: {{middleSchool.name}}</p>
-	<p>초등학교: {{elementarySchool.name}}</p>
-	<p>내용: {{description}}</p>
-	<p class="updated_at">updated_at: {{updated_at}}</p>
-	</li>
-{{/each}}
+	{{#each profileList}}
+		<a href="/profile/{{id}}">
+			<li>
+			<p>이름: {{name}}</p>
+			<p>고등학교: {{highSchool.name}}</p>
+			<p>중학교: {{middleSchool.name}}</p>
+			<p>초등학교: {{elementarySchool.name}}</p>
+			<p>내용: {{description}}</p>
+			<p class="updated_at">updated_at: {{updated_at}}</p>
+			</li>
+		</a>
+	{{/each}}
 </ul>
