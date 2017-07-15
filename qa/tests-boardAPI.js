@@ -47,7 +47,7 @@ var boardData = 	{
 
 
 describe('Board API Tests', function(){
-
+	console.log('Please Ensure Make Node_env = "test"');
 
 	//School의 objectId를 위해서, school의 restler를 이용한다.
 	//이곳은 좀 refactoring이 필요. profileAPI의 test가 schoolAPI에 의존적 성격을 가지고 있음.
@@ -93,6 +93,26 @@ describe('Board API Tests', function(){
 				boardDocs = boards;
 				done();
 			});
+		});
+	});
+
+
+	//테스트 독립성 확실을 위해, 다큐먼트들을 클리어한다.
+	after(function(done){
+		var p1 = new Promise(function(resolve , reject){
+			School.remove({}, function(err){
+				if(err) reject(err);
+				resolve();
+			});	
+		});
+		var p2 = new Promise(function(resolve , reject){
+			Board.remove({}, function(err){
+				if(err) reject(err);
+				resolve();
+			});	
+		});
+		Promise.all([p1, p2]).then(function(){
+			done();
 		});
 	});
 

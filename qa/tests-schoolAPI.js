@@ -36,6 +36,7 @@ var testUtils = require('../utils/testUtils.js')();
 
 
 describe('School API tests', function(){
+	console.log('Please Ensure Make Node_env = "test"');
 	
 	var schoolDocs;
 	var base = 'http://localhost:3000';
@@ -72,6 +73,15 @@ describe('School API tests', function(){
 				schoolDocs = schools;
 				done();
 			});
+		});
+	});
+
+	//테스트 독립성 확실을 위해, 다큐먼트들을 클리어한다.
+	after(function(done){
+		School.remove({}, function(err){
+			expect(err).to.be.equal(null);
+			console.log('Model clear After Test');
+			done();
 		});
 	});
 

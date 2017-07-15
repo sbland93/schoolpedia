@@ -79,18 +79,6 @@ module.exports = function(app){
 	//id에 해당하는 school의 available을 false로 만든다.
 	app.delete('/api/school/:id', function(req, res, next){
 		if(!req.params.id) return next('No Id');
-		/*School.findById({_id: req.params.id}, function(err, school){
-			if(err) return next(err);
-			if(school && school.available){
-				school.available = false;
-				school.save(function(err, a){
-					res.json({
-						success: true,
-						id: school._id,
-					});
-				});
-			} 
-		});*/
 		School.remove({_id: req.params.id}, function(err){
 			if(err) return next(err);
 			res.json({

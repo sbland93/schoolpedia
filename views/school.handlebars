@@ -1,26 +1,27 @@
 <h1>School Page, It will include Board and Profile TODO</h1>
 
-<ul class="boardList">
-{{#each boardList}}
-	<li>
-	<p>제목: {{title}}</p>
-	<p>학교: {{school.name}}</p>
-	<p>내용: {{content}}</p>
-	<p class="updated_at">updated_at: {{updated_at}}</p>
-	</li>
-{{/each}}
+<a href="/school/{{schoolInfo.id}}/profile"><h2>{{schoolInfo.name}}의 ProfileList</h2></a>
+<ul class="profileList">
+	{{#each profileList}}
+		<li>
+		<p>이름: {{name}}</p>
+		<p>고등학교: {{highSchool.name}}</p>
+		<p>중학교: {{middleSchool.name}}</p>
+		<p>초등학교: {{elementarySchool.name}}</p>
+		<p>내용: {{description}}</p>
+		<p class="updated_at">updated_at: {{updated_at}}</p>
+		</li>
+	{{/each}}
 </ul>
 
-
-<ul class="profileList">
-{{#each profileList}}
-	<li>
-	<p>이름: {{name}}</p>
-	<p>고등학교: {{highSchool.name}}</p>
-	<p>중학교: {{middleSchool.name}}</p>
-	<p>초등학교: {{elementarySchool.name}}</p>
-	<p>내용: {{description}}</p>
-	<p class="updated_at">updated_at: {{updated_at}}</p>
-	</li>
-{{/each}}
+<a href="/school/{{schoolInfo.id}}/board"><h2>{{schoolInfo.name}}의 BoardList</h2></a>
+<ul class="boardList">
+	{{#each boardList}}
+		<li>
+		<p>제목: {{title}}</p>
+		<p>학교: {{school.name}}</p>
+		<p>내용: {{content}}</p>
+		<p class="updated_at">updated_at: {{updated_at}}</p>
+		</li>
+	{{/each}}
 </ul>

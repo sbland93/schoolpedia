@@ -53,7 +53,7 @@ describe('client API Test', function(){
 
 		it('should be able to get by query', function(done){
 			getSchools({name: schoolData.name}).then(function(data){
-				expect(data.length === 1).to.be.equal(true);
+				expect(!data.length).to.be.equal(false);
 				expect(data[0].name).to.be.equal(schoolData.name);
 				done();
 			});
@@ -106,6 +106,7 @@ describe('client API Test', function(){
 
 		it('should be able to get by query', function(done){
 			getBoards({name: boardData.name}).then(function(data){
+				console.log(data);
 				expect(data.length === 1).to.be.equal(true);
 				expect(data[0].name).to.be.equal(boardData.name);
 				done();

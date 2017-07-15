@@ -1,0 +1,12 @@
+<h1>Board Page, This page include board and sorting TODO</h1>
+
+
+<ul class="boardList">
+{{#each boardList}}
+	<li>
+	<p>제목: {{title}}</p>
+	<p>내용: {{content}}</p>
+	<p class="updated_at">updated_at: {{updated_at}}</p>
+	</li>
+{{/each}}
+</ul>
