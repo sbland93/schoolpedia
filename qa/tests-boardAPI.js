@@ -86,7 +86,7 @@ describe('Board API Tests', function(){
 	//매 Test 전마다, Board모델을통해 documents를 완전삭제후,
 	//boardDocs 전역변수를 초기화한다.
 	beforeEach(function(done){
-		this.timeout(4000);
+		this.timeout(1000 * 5);
 		Board.remove({}, function(err){
 			Board.create(seedData.testBoardList, function(err, boards){
 				expect(err).to.be.equal(null);

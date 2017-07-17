@@ -1,0 +1,64 @@
+
+
+<h3>프로필생성</h3>
+
+<form class="form-horizontal newProfileForm" role="form" action="/api/profile" method="POST">
+	<div class="form-group">
+		<label for="fieldName" class="col-sm-2 control-label">이름</label>
+		<div class="col-sm-4">
+			<input type="text" class="form-control" required name="name" id="fieldName">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="fieldHighSchool" class="col-sm-2 control-label">고등학교</label>
+		<div class="col-sm-4">
+			<input type="text" class="form-control" name="highSchool" id="fieldHighSchool">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="fieldMiddleSchool" class="col-sm-2 control-label">중학교</label>
+		<div class="col-sm-4">
+			<input type="text" class="form-control" name="middleSchool" id="fieldMiddleSchool">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="fieldElementarySchool" class="col-sm-2 control-label">초등학교</label>
+		<div class="col-sm-4">
+			<input type="text" class="form-control" name="elementarySchool" id="fieldElementarySchool">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="fieldClass" class="col-sm-2 control-label">학급</label>
+		<div class="col-sm-4">
+			<input type="text" class="form-control" name="title" id="fieldClass">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="fieldDescription" class="col-sm-2 control-label">내용</label>
+		<div class="col-sm-4">
+			<textarea class="form-control" required name="title" id="fieldDescription" rows="10">
+			</textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-4">
+			<button type="submit" class="btn btn-default">글생성</button>
+		</div>
+	</div>
+</form>
+
+{{#section 'jquery'}}
+	<script type="text/javascript" src="/js/api/profile.js"></script>
+	<script type="text/javascript">
+		$('.newProfileForm').on('submit', function(evt){
+			evt.preventDefault();
+			console.log('here');
+			addProfile($(this).serialize()).then(function(data){
+				if(data.success) location.href = '/profile/' + data.id;
+				alert('Error Occured');
+			}).catch(function(){
+				alert('Error Occured');
+			})
+		});
+	</script>
+{{/section}}

@@ -66,7 +66,7 @@ describe('School API tests', function(){
 	var availableList = seedData.testSchoolList.filter(checkAvailable(true));
 	var notAvailableList = seedData.testSchoolList.filter(checkAvailable(false));
 	beforeEach(function(done){
-		this.timeout(1000 * 10);
+		this.timeout(1000 * 5);
 		School.remove({}, function(err){
 			expect(err).to.be.equal(null);
 			School.create(seedData.testSchoolList, function(err, schools){

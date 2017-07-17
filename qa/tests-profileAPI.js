@@ -77,7 +77,7 @@ describe('Profile API Tests', function(){
 	//매 Test 전마다, Profile모델을 통해서 profile들을 만들고
 	//profileDocs전역변수를 초기화한다.
 	beforeEach(function(done){
-		this.timeout(4000);
+		this.timeout(1000 * 5);
 		Profile.remove({}, function(err){
 			Profile.create(seedData.profileList, function(err, profiles){
 				expect(err).to.be.equal(null);

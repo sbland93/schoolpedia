@@ -38,9 +38,19 @@ module.exports = function(app){
 		});
 	});
 
+	//Board Create Form.
+	app.get('/board/new', function(req, res){
+		res.render('newBoard');
+	});
+
+	//Profile Create Form.
+	app.get('/profile/new', function(req, res){
+		res.render('newProfile');
+	});
+
 	//profile 페이지 라우팅
 	//DOLATER !profile
-	app.get('/profile/:id', function(req, res){
+	app.get('/profile/:id', function(req, res, next){
 		Profile.findById(req.params.id)
 			.populate('highSchool middleSchool elementarySchol')
 			.exec(function(err, profile){
@@ -66,7 +76,7 @@ module.exports = function(app){
 
 	//board 페이지 라우팅
 	//DOLATER !board
-	app.get('/board/:id', function(req, res){
+	app.get('/board/:id', function(req, res, next){
 		Board.findById(req.params.id)
 		.exec(function(err, board){
 			if(err) next(err);
@@ -136,11 +146,13 @@ module.exports = function(app){
 
 	//:id에 해당하는 school의 Profile을 10개 Return한다.
 	app.get('/school/:id/profile', function(req, res, next){
+		var schoolDocument;
 		var profilePromise = new Promise(function(resolve, reject){
 			School.findById(req.params.id, function(err, school){
 				if(err) next(err);
 				//DOLATER if !school
 				var query;
+				schoolDocument = school;
 				switch(school.category){
 					case '고등학교' :
 						query = {highSchool: school._id};
@@ -176,6 +188,11 @@ module.exports = function(app){
 						updated_at: a.updated_at,
 					};
 				}),
+				schoolInfo : {
+					id: schoolDocument._id,
+					name: schoolDocument.name,
+					location: schoolDocument.location,
+				},
 				pageTestScript: '/qa/tests-schoolProfile.js'
 			});
 		});
@@ -206,6 +223,29 @@ module.exports = function(app){
 			});
 		});
 	});
+
+	//School활용을 위해!
+	//rendering Create Board Form
+	app.get('/school/:id/board/new', function(req, res, next){
+		School.findById(req.params.id, function(err, school){
+			if(err) next(err);
+			//DOLATER !school
+			res.render('newBoard', {
+				schoolInfo: {
+						id: school._id,
+						name: school.name,
+						location: school.location,
+						updated_at : school.updated_at,
+					},
+				pageTestScript: '/qa/tests-newBoard.js'
+			});
+		});
+	});
+
+	//rendering Create Profile Form
+	app.get('/school/:id/profile/new', function(req, res, next){
+		res.render('newProfile');
+	})
 
 	app.get('/test', function(req, res){
 		res.render('test', {

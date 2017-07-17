@@ -9,5 +9,22 @@
 	<p class="updated_at">{{profile.updated_at}}</p>	
 </div>
 
+<button class="btn btn-primary" id="update">수정</button>
+<button class="btn btn-primary" id="remove">삭제</button>
 
 
+
+{{#section jquery}}
+	<script type="text/javascript">
+	$('#remove').on('click', function(evt){
+		evt.preventDefault();
+
+		deleteProfile({{profile.id}}).then(function(data){
+			if(data.success) location.href = document.referrer;
+			alert('Error occured');
+		}).catch(function(){
+			alert('Error occured')
+		});
+	});
+	</script>
+{{/section}}

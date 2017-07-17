@@ -5,3 +5,22 @@
 	<p class="content">{{board.content}}</p>
 	<p class="updated_at">{{board.updated_at}}</p>
 </div>
+<button class="btn btn-primary" id="remove">삭제</button>
+
+
+
+{{#section 'jquery'}}
+	<script type="text/javascript" src="/js/api/board.js"></script>
+	<script type="text/javascript">
+		$('#remove').on('click', function(evt){
+			evt.preventDefault();
+
+			deleteBoard('{{board.id}}').then(function(data){
+				if(data.success) location.href = document.referrer;
+				else alert('Error Occured');
+			}).catch(function(){
+				alert('Error occured');
+			});
+		});
+	</script>
+{{/section}}
