@@ -190,7 +190,7 @@ app.use(function(req, res, next){
 require('./routes/routes.js')(app);
 
 //커스텀 404페이지.
-app.use(function(req, res){
+app.use(function(req, res, next){
 	//200이 default이므로 바꿔준다.
 	res.status(404);
 	res.render('404');

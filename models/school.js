@@ -5,7 +5,7 @@ var Profile = require('./profile.js');
 var schoolSchema = mongoose.Schema({
 	name: String,
 	location: String,
-	category: { type: String, enum: ['초등학교', '중학교', '고등학교'] },
+	category: { type: String, enum: ['elementarySchool', 'middleSchool', 'highSchool'] },
 	available: { type: Boolean, default: false },
 	up: { type: Number, default: 0 },
 	down: { type: Number, default: 0 },
@@ -16,13 +16,13 @@ var schoolSchema = mongoose.Schema({
 //SchoolId를 이용해 Profile들을 가져온는 method.
 schoolSchema.methods.getProfiles = function(sortOptions, limitNumber, cb){
 	switch(this.category){
-		case '고등학교' :
+		case 'highSchool' :
 			var query = {highSchool: this._id};
 			break;
-		case '중학교' :
+		case 'middleSchool' :
 			var query = {middleSchool: this._id};
 			break;
-		case '초등학교' :
+		case 'elementarySchool' :
 			var query = {elementarySchool: this._id};
 			break;
 	};

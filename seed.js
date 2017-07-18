@@ -32,13 +32,13 @@ var seedDev = function(){
 		seedData.profileList.forEach(function(el){
 			var randomInt = getRandomInt(availableSchools.length);
 			switch(availableSchools[randomInt].category){
-				case '고등학교' :
+				case 'highSchool' :
 					el.highSchool = availableSchools[randomInt]._id;
 					break;
-				case '중학교' :
+				case 'middleSchool' :
 					el.middleSchool = availableSchools[randomInt]._id;
 					break;
-				case '초등학교' :
+				case 'elementarySchool' :
 					el.elementarySchool = availableSchools[randomInt]._id;
 					break;
 			}

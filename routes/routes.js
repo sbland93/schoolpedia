@@ -49,6 +49,7 @@ module.exports = function(app){
 	//rendering Create Profile Form
 	app.get('/school/:id/profile/new', homeHandlers.newProfile);
 
+	//Client Test Page (API)
 	app.get('/test', homeHandlers.clientTest);
 
 	//Test epic fail uncaught Error

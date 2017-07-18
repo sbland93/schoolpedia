@@ -1,7 +1,7 @@
 var schoolData = {
 	name: '백영고등학교',
 	location: '경기도교육청',
-	category: '고등학교',
+	category: 'highSchool',
 	available: false,
 	updated_at: Date.now() + 10000,
 };
@@ -13,7 +13,9 @@ var boardData = 	{
 };
 
 var profileData = {
-	class: [107, 212, 314],
+	firstclass: 107,
+	secondClass: 212,
+	thirdClass: 314,
 	name: '김승범',
 	age: '1993',
 	gender: true,
