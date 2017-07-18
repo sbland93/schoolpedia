@@ -1,6 +1,9 @@
 var School = require('../models/school.js');
 var Profile = require('../models/profile.js');
 var Board = require('../models/board.js');
+var schoolViewModel = require('../viewModels/school.js');
+var boardViewModel = require('../viewModels/board.js');
+var profileViewModel = require('../viewModels/profile.js');
 var mongoose = require('mongoose');
 
 
@@ -25,14 +28,7 @@ module.exports = function(app){
 		.exec(function(err, schools){
 			if(err) next(err);
 			res.render('home', {
-				schoolList : schools.map(function(a){
-					return {
-						id: a._id,
-						name: a.name,
-						location: a.location,
-						updated_at : a.updated_at,
-					};
-				}),
+				schoolList : schools.map(schoolViewModel),
 				pageTestScript: '/qa/tests-home.js'
 			});
 		});
@@ -56,19 +52,7 @@ module.exports = function(app){
 			.exec(function(err, profile){
 			if(err) next(err);
 			res.render('profile', {
-				profile: {
-					id: profile._id,
-					highSchool: profile.highSchool,
-					middleSchool: profile.middleSchool,
-					elementarySchool: profile.elementarySchool,
-					class: profile.class,
-					name: profile.name,
-					age: profile.age,
-					gender: profile.gender,
-					description: profile.description,
-					replies : profile.replies,
-					updated_at: profile.updated_at,
-				},		
+				profile: profileViewModel(profile),		
 				pageTestScript: '/qa/tests-profile.js'
 			});
 		})
@@ -81,14 +65,7 @@ module.exports = function(app){
 		.exec(function(err, board){
 			if(err) next(err);
 			res.render('board', {
-				board : {
-						id: board._id,
-						title: board.title,
-						school: board.school,
-						content: board.content,
-						replies : board.replies,
-						updated_at: board.updated_at,
-					},
+				board : boardViewModel(board),
 				pageTestScript: '/qa/tests-board.js'
 			});
 		});
@@ -103,25 +80,11 @@ module.exports = function(app){
 				if(err) next(err);
 				//DOLATER if !school
 				schoolDocument = school;
-				if(!school) next('No Data');
-				var query;
-				switch(school.category){
-					case '고등학교' :
-						query = {highSchool: school._id};
-						break;
-					case '중학교' :
-						query = {middleSchool: school._id};
-						break;
-					case '초등학교' :
-						query = {elementarySchool: school._id};
-						break;
-				};
-				Profile.find(query).sort({updated_at : '-1'})
-					.limit(5).populate('highSchool middleSchool elementarySchool')
-					.exec(function(err, profiles){
-						if(err) reject(err);
-						resolve(profiles);
-					});
+				if(!school) return next('No Data');
+				school.getProfiles({updated_at : '-1'},  5, function(err, profiles){
+					if(err) reject(err);
+					resolve(profiles);
+				});
 			});
 		});
 		var boardPromise = new Promise(function(resolve, reject){
@@ -133,12 +96,7 @@ module.exports = function(app){
 		});
 		Promise.all([profilePromise, boardPromise]).then(function(rtnArr){
 			res.render('school', {
-				schoolInfo: {
-						id: schoolDocument._id,
-						name: schoolDocument.name,
-						location: schoolDocument.location,
-						updated_at : schoolDocument.updated_at,
-					},
+				schoolInfo: schoolViewModel(schoolDocument),
 				profileList : rtnArr[0],
 				boardList : rtnArr[1],
 			});
@@ -152,48 +110,17 @@ module.exports = function(app){
 			School.findById(req.params.id, function(err, school){
 				if(err) next(err);
 				//DOLATER if !school
-				var query;
 				schoolDocument = school;
-				switch(school.category){
-					case '고등학교' :
-						query = {highSchool: school._id};
-						break;
-					case '중학교' :
-						query = {middleSchool: school._id};
-						break;
-					case '초등학교' :
-						query = {elementarySchool: school._id};
-						break;
-				};
-				Profile.find(query).sort({updated_at : '-1'})
-					.limit(10).populate('highSchool middleSchool elementarySchool').exec(function(err, profiles){
-						if(err) reject(err);
-						resolve(profiles);
-					});
+				school.getProfiles({updated_at : '-1'},  10, function(err, profiles){
+					if(err) reject(err);
+					resolve(profiles);
+				});
 			});
 		});
 		profilePromise.then(function(profiles){
 			res.render('schoolProfile', {
-				profileList : profiles.map(function(a){
-					return {
-						id: a._id,
-						highSchool: a.highSchool,
-						middleSchool: a.middleSchool,
-						elementarySchool: a.elementarySchool,
-						class: a.class,
-						name: a.name,
-						age: a.age,
-						gender: a.gender,
-						description: a.description,
-						replies : a.replies,
-						updated_at: a.updated_at,
-					};
-				}),
-				schoolInfo : {
-					id: schoolDocument._id,
-					name: schoolDocument.name,
-					location: schoolDocument.location,
-				},
+				profileList : profiles.map(profileViewModel),
+				schoolInfo : schoolViewModel(schoolDocument),
 				pageTestScript: '/qa/tests-schoolProfile.js'
 			});
 		});
@@ -214,25 +141,12 @@ module.exports = function(app){
 				resolve(school);
 			});
 		});
-		Promise.all([boardPromise,schoolPromise]).then(function(rtnArr){
+		Promise.all([boardPromise , schoolPromise]).then(function(rtnArr){
 			var boards = rtnArr[0];
 			var school = rtnArr[1];
 			res.render('schoolBoard', {
-				boardList : boards.map(function(a){
-					return {
-						id: a._id,
-						title: a.title,
-						school: a.school,
-						content: a.content,
-						replies : a.replies,
-						updated_at: a.updated_at,
-					};
-				}),
-				schoolInfo: {
-					id: school._id,
-					name: school.name,
-					location: school.location,
-				},
+				boardList : boards.map(boardViewModel),
+				schoolInfo: schoolViewModel(school),
 				pageTestScript: '/qa/tests-schoolBoard.js'
 			});
 		});
@@ -245,12 +159,7 @@ module.exports = function(app){
 			if(err) next(err);
 			//DOLATER !school
 			res.render('newBoard', {
-				schoolInfo: {
-						id: school._id,
-						name: school.name,
-						location: school.location,
-						updated_at : school.updated_at,
-					},
+				schoolInfo: schoolViewModel(school),
 				pageTestScript: '/qa/tests-newBoard.js'
 			});
 		});
@@ -262,12 +171,7 @@ module.exports = function(app){
 			if(err) next(err);
 			//DOLATER !school
 			res.render('newProfile', {
-				schoolInfo: {
-						id: school._id,
-						name: school.name,
-						location: school.location,
-						updated_at : school.updated_at,
-					},
+				schoolInfo: schoolViewModel(school),
 				pageTestScript: '/qa/tests-newProfile.js'
 			});
 		});

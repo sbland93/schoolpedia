@@ -326,3 +326,60 @@ describe('Mongoose Index Test', function() {
 	});
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.get('/school/:id', function(req, res, next){
+		var schoolDocument;
+		var profilePromise = new Promise(function(resolve, reject){
+			School.findById(req.params.id, function(err, school){
+				if(err) next(err);
+				//DOLATER if !school
+				schoolDocument = school;
+				if(!school) return next('No Data');
+				var query;
+				switch(school.category){
+					case '고등학교' :
+						query = {highSchool: school._id};
+						break;
+					case '중학교' :
+						query = {middleSchool: school._id};
+						break;
+					case '초등학교' :
+						query = {elementarySchool: school._id};
+						break;
+				};
+				Profile.find(query).sort({updated_at : '-1'})
+				.limit(5).populate('highSchool middleSchool elementarySchool')
+				.exec(function(err, profiles){
+					if(err) reject(err);
+					resolve(profiles);
+				});
+			});
+		});
+		var boardPromise = new Promise(function(resolve, reject){
+			Board.find({school : req.params.id}).sort({updated_at : '-1'})
+			.limit(5).populate('school').exec(function(err, boards){
+				if(err) reject(err);
+				resolve(boards);
+			});
+		});
+		Promise.all([profilePromise, boardPromise]).then(function(rtnArr){
+			res.render('school', {
+				schoolInfo: schoolViewModel(schoolDocument),
+				profileList : rtnArr[0],
+				boardList : rtnArr[1],
+			});
+		}).catch(function(err){ next(err); });
+	});
