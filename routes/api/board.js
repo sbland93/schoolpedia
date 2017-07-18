@@ -64,7 +64,6 @@ module.exports = function(app){
 	//요청본문에 해당하는 board을 새로 생성한다.
 	//검증과정이 있어야하는데, 어떤게 필수일까 title, content, school을 필수로 하자!
 	app.post('/api/board', function(req, res, next){
-		console.log(req.body);
 		if(req.body.title && req.body.content && req.body.school){
 			Board.create(req.body, function(err, board){
 				if(err) return next(err);

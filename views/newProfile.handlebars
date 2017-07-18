@@ -1,5 +1,5 @@
 
-
+<!--NameSpace : NP-->
 <h3>프로필생성</h3>
 
 <form class="form-horizontal newProfileForm" role="form" action="/api/profile" method="POST">
@@ -10,34 +10,84 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="fieldHighSchool" class="col-sm-2 control-label">고등학교</label>
+		<label for="gender" class="col-sm-2 control-label">성별</label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" name="highSchool" id="fieldHighSchool">
+			<input type="radio" name="gender" value="true" id="gender" checked> 남자
+  			<input type="radio" name="gender" value="false" id="gender"> 여자<br>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="fieldMiddleSchool" class="col-sm-2 control-label">중학교</label>
+		<label for="fieldAge" class="col-sm-2 control-label">나이</label>
+		<div class="col-sm-2">
+			<select name="age" class="form-control" id="fieldAge">
+				{{#iterateWithPlus 50 1950}}
+					<option value="{{this}}">{{this}}</option>
+				{{/iterateWithPlus}}
+			</select>
+		</div>
+	</div>
+	<!--DOLATER Hidden -->
+	<div class="form-group">
+		<label for="highSchoolField" class="col-sm-2 control-label">고등학교</label>
+		<div class="col-sm-2" id="NPsearchHighResult">
+			<input class="form-control schoolInput" type="text" name="highSchool" id="highSchoolField" placeholder="입력후 학교확인">
+		</div>
+		<button class="btn btn-danger col-sm-1 checkSchool" category="highSchool">학교 확인</button>
+		<span class="dynamicInput"></span>
+	</div>
+	<div class="form-group">
+		<label for="middleSchoolField" class="col-sm-2 control-label">중학교</label>
+		<div class="col-sm-2">
+			<input type="text" class="form-control schoolInput" name="middleSchool" id="middleSchoolField" placeholder="입력후 학교확인">
+		</div>
+		<button class="btn btn-danger col-sm-1 checkSchool" category="middleSchool">학교 확인</button>
+		<span class="dynamicInput"></span>
+	</div>
+	<div class="form-group">
+		<label for="elementarySchoolField" class="col-sm-2 control-label">초등학교</label>
+		<div class="col-sm-2">
+			<input type="text" class="form-control schoolInput" name="elementarySchool" id="elementarySchoolField" placeholder="입력후 학교확인">
+		</div>
+		<button class="btn btn-danger col-sm-1 checkSchool" category="elementarySchool">학교 확인</button>
+		<span class="dynamicInput"></span>
+	</div>
+	<div class="form-group">
+		<label for="fieldFirstClass" class="col-sm-2 control-label">1학년 학급</label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" name="middleSchool" id="fieldMiddleSchool">
+			<select name="firstClass" class="form-control" id="fieldFirstClass">
+				<option value="100">기억이 잘..</option>
+				{{#iterateWithPlus 20 100}}
+					<option value="{{this}}">{{this}}</option>
+				{{/iterateWithPlus}}
+			</select>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="fieldElementarySchool" class="col-sm-2 control-label">초등학교</label>
+		<label for="fieldSecondClass" class="col-sm-2 control-label">2학년 학급</label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" name="elementarySchool" id="fieldElementarySchool">
+			<select name="secondClass" class="form-control" id="fieldSecondClass">
+				<option value="100">기억이 잘..</option>
+				{{#iterateWithPlus 20 200}}
+					<option value="{{this}}">{{this}}</option>
+				{{/iterateWithPlus}}
+			</select>
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="fieldClass" class="col-sm-2 control-label">학급</label>
+		<label for="fieldThirdClass" class="col-sm-2 control-label">3학년 학급</label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" name="title" id="fieldClass">
+			<select name="thirdClass" class="form-control" id="fieldThirdClass">
+				<option value="100">기억이 잘..</option>
+				{{#iterateWithPlus 20 300}}
+					<option value="{{this}}">{{this}}</option>
+				{{/iterateWithPlus}}
+			</select>
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="fieldDescription" class="col-sm-2 control-label">내용</label>
 		<div class="col-sm-4">
-			<textarea class="form-control" required name="title" id="fieldDescription" rows="10">
-			</textarea>
+			<textarea class="form-control" required name="title" id="fieldDescription" rows="10"></textarea>
 		</div>
 	</div>
 	<div class="form-group">
@@ -47,18 +97,71 @@
 	</div>
 </form>
 
+
+{{#section 'head'}}
+	<script id="schoolSearchResult" type="text/x-handlebars-template">
+		\{{#each schools}}
+			해당학교가 맞다면 클릭해주세용.
+			<button class="btn btn-sm NPsearchResult" id="\{{id}}" category="\{{category}}">\{{name}}/\{{location}}</button>
+		\{{/each}}
+	</script>
+{{/section}}
+
+
+
 {{#section 'jquery'}}
 	<script type="text/javascript" src="/js/api/profile.js"></script>
+	<script type="text/javascript" src="/js/api/school.js"></script>
 	<script type="text/javascript">
-		$('.newProfileForm').on('submit', function(evt){
-			evt.preventDefault();
-			console.log('here');
-			addProfile($(this).serialize()).then(function(data){
-				if(data.success) location.href = '/profile/' + data.id;
-				alert('Error Occured');
-			}).catch(function(){
-				alert('Error Occured');
-			})
+		
+		$(document).ready(function(){
+			//Form Submit Event Controller
+			$('.newProfileForm').on('submit', function(evt){
+				evt.preventDefault();
+				$('.schoolInput').attr('disabled', true);
+				console.log($(this).serialize())
+				addProfile($(this).serialize()).then(function(data){
+					console.log('here');
+					if(data.success) location.href = '/profile/' + data.id;
+					//alert('Error Occured');
+				}).catch(function(){
+					alert('Error Occured');
+				})
+			});
+
+			//SearchSchoolResult Template Compile
+			var schoolSearchTemplate;
+			schoolSearchTemplate = Handlebars.compile($('#schoolSearchResult').html());
+		
+			//Check School Event Controller
+			$('.checkSchool').on('click', function(evt){
+				evt.preventDefault();
+
+				var _this = $(this);
+				_this.next().text('');
+				
+				var category = _this.attr('category');
+				//display Input Field의 select연산자.
+				var selector = '#' + category + 'Field';
+				//공백제거한 selector Input Field의 value.(schoolName)
+				var schoolName = $(selector).val().split(' ').join('');
+				if(schoolName === '') return _this.next().html('<b>학교이름을 입력해주세용</b>');
+				
+				//DOLATER no school.
+				getSchools({name: schoolName}).then(function(data){
+					var response = { schools : data };
+					_this.next().html(schoolSearchTemplate(response));
+					//After Search School Controller
+					$('.NPsearchResult').on('click', function(evt){
+						evt.preventDefault();
+						$(selector).val($(this).html());
+						_this.next().text('확인되었어용');
+						_this.next().html('	<input type="hidden" value="'+$(this).attr('id')+'" name="'+ category +'">');
+					});
+				});
+			});
 		});
 	</script>
 {{/section}}
+
+

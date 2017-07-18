@@ -123,8 +123,15 @@ var handlebars = require('express-handlebars').create({
 			if(!this._sections) this._sections = {};
 			this._sections[name] = options.fn(this);
 			return null;
-		}
-	}
+		},
+		iterateWithPlus: function(n, plus, block){
+			var accum = '';
+			for(var i= 1; i < n; ++i){
+				accum += block.fn(plus + i);
+			}
+			return accum;
+		},
+	},
 });
 
 app.engine('handlebars', handlebars.engine);

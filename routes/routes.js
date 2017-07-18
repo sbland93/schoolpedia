@@ -103,6 +103,7 @@ module.exports = function(app){
 				if(err) next(err);
 				//DOLATER if !school
 				schoolDocument = school;
+				if(!school) next('No Data');
 				var query;
 				switch(school.category){
 					case '고등학교' :
@@ -207,7 +208,15 @@ module.exports = function(app){
 				resolve(boards);
 			});
 		});
-		boardPromise.then(function(boards){
+		var schoolPromise = new Promise(function(resolve, reject){
+			School.findById(req.params.id, function(err, school){
+				if(err) reject(err);
+				resolve(school);
+			});
+		});
+		Promise.all([boardPromise,schoolPromise]).then(function(rtnArr){
+			var boards = rtnArr[0];
+			var school = rtnArr[1];
 			res.render('schoolBoard', {
 				boardList : boards.map(function(a){
 					return {
@@ -219,6 +228,11 @@ module.exports = function(app){
 						updated_at: a.updated_at,
 					};
 				}),
+				schoolInfo: {
+					id: school._id,
+					name: school.name,
+					location: school.location,
+				},
 				pageTestScript: '/qa/tests-schoolBoard.js'
 			});
 		});
@@ -244,7 +258,19 @@ module.exports = function(app){
 
 	//rendering Create Profile Form
 	app.get('/school/:id/profile/new', function(req, res, next){
-		res.render('newProfile');
+		School.findById(req.params.id, function(err, school){
+			if(err) next(err);
+			//DOLATER !school
+			res.render('newProfile', {
+				schoolInfo: {
+						id: school._id,
+						name: school.name,
+						location: school.location,
+						updated_at : school.updated_at,
+					},
+				pageTestScript: '/qa/tests-newProfile.js'
+			});
+		});
 	})
 
 	app.get('/test', function(req, res){

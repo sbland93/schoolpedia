@@ -3,7 +3,9 @@ module.exports = {
 		{
 			name: '김승범',
 			age: '1993',
-			class: [107, 212, 314],
+			firstClass: 107,
+			secondClass: 212,
+			thirdClass: 314,
 			gender: true,
 			description: '1-7 반장, 2-12 반장, 3-14 반장' +
 			'ㄹㅇ 공부 개열심히함' +
@@ -13,7 +15,9 @@ module.exports = {
 		{
 			name: '임태환',
 			age: '1993',
-			class: [107, 202, 308],
+			firstClass: 107,
+			secondClass: 202,
+			thirdClass: 307,
 			gender: true,
 			description: '전교부회장 역임' +
 			'지조로 유명했음' +
@@ -23,7 +27,9 @@ module.exports = {
 		},
 		{
 			name: '김인경',
-			class: [111, 212],
+			firstClass: 107,
+			secondClass: 212,
+			thirdClass: 310,
 			age: '1993',
 			gender: false,
 			description: '털털하고 시원한 성격의 인구' +
@@ -42,7 +48,9 @@ module.exports = {
 		},
 		{
 			name: '강성식',
-			class: [107],
+			firstClass: 107,
+			secondClass: 213,
+			thirdClass: 313,
 			age: '1993',
 			gender: true,
 			description: '성식이 1학년때 1번이여씀ㅋㅋㅋㅋ' +
@@ -52,7 +60,9 @@ module.exports = {
 		},
 		{
 			name: '김용준',
-			class: [107, 202],
+			firstClass: 107,
+			secondClass: 202,
+			thirdClass: 307,
 			age: '1993',
 			gender: true,
 			description: '별명 용꼬임' +
@@ -61,7 +71,9 @@ module.exports = {
 		},
 		{
 			name: '유호규',
-			class: [107, 214],
+			firstClass: 107,
+			secondClass: 212,
+			thirdClass: 314,
 			age: '1993',
 			gender: true,
 			description: '키 ㄹㅇ 개큼 엄지척' +
@@ -269,7 +281,9 @@ module.exports = {
 
 	testProfileList : [
 		{
-			class: [107, 203, 307],
+			firstClass: 107,
+			secondClass: 212,
+			thirdClass: 314,
 			name: '임태환',
 			age: '1993',
 			gender: true,
@@ -281,7 +295,9 @@ module.exports = {
 			{user: '42qjk455', content: '최근에 태환이랑 연락되는 사람 있나요? 보고싶네ㅋㅋㅋ'}],
 		}, 
 		{
-			class: [111, 212, 310],
+			firstClass: 107,
+			secondClass: 212,
+			thirdClass: 314,
 			name: '김인경',
 			age: '1993',
 			gender: false,
@@ -292,7 +308,9 @@ module.exports = {
 			{user: '89828sk', content: '분명히 이거 보고 모른척 했을듯 인구'}],
 		}, 
 		{
-			class: [101, 201, 314],
+			firstClass: 107,
+			secondClass: 212,
+			thirdClass: 314,
 			name: '김재환',
 			age: '1991',
 			gender: true,

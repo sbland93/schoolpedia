@@ -31,11 +31,16 @@ module.exports = function(app){
 		(query = req.query);
 		School.find(query, function(err, schools){
 			if(err) return next(err);
+			if(schools.length === 0) return res.json({
+				success: false,
+				message: 'NO DATA',
+			});
 			res.json(schools.map(function(a){
 				return {
 					name: a.name,
 					id: a._id,
 					location: a.location,
+					category: a.category,
 					updated_at: a.updated_at,
 				}
 			}));

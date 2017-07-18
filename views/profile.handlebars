@@ -14,12 +14,12 @@
 
 
 
-{{#section jquery}}
+{{#section 'jquery'}}
+	<script type="text/javascript" src="/js/api/profile.js"></script>
 	<script type="text/javascript">
 	$('#remove').on('click', function(evt){
 		evt.preventDefault();
-
-		deleteProfile({{profile.id}}).then(function(data){
+		deleteProfile('{{profile.id}}').then(function(data){
 			if(data.success) location.href = document.referrer;
 			alert('Error occured');
 		}).catch(function(){
