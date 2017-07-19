@@ -1,3 +1,10 @@
+{{#if newSchoolPage}}
+	<h1>NewSchoolPage It would be better seperated than OnePage</h1>
+
+	<h2>안녕하세요, {{schoolInfo.name}}의 교문을 함께 열어봐요!</h2>
+
+	{{schoolInfo.name}}의 학교페이지를 열려면, {{schoolInfo.name}}학생 데이터 최소 한개가 필요해요. 걱정마세요, 순식간에 끝날거에요.
+{{/if}}
 
 <!--NameSpace : NP-->
 <h3>프로필생성</h3>
@@ -87,7 +94,7 @@
 	<div class="form-group">
 		<label for="fieldDescription" class="col-sm-2 control-label">내용</label>
 		<div class="col-sm-4">
-			<textarea class="form-control" required name="title" id="fieldDescription" rows="10"></textarea>
+			<textarea class="form-control" required name="title" id="fieldDescription" rows="10" placeholder="학창시절 재밌는 일화, 성격, 특이했던 점, 기억나는 점 등.."></textarea>
 		</div>
 	</div>
 	<div class="form-group">
@@ -98,8 +105,6 @@
 	</div>
 </form>
 
-
-
 {{#section 'head'}}
 	<script id="schoolSearchResult" type="text/x-handlebars-template">
 		\{{#each schools}}
@@ -108,8 +113,6 @@
 		\{{/each}}
 	</script>
 {{/section}}
-
-
 
 {{#section 'jquery'}}
 	<script type="text/javascript" src="/js/api/profile.js"></script>
@@ -127,14 +130,24 @@
 			$('.newProfileForm').on('submit', function(evt){
 				evt.preventDefault();
 				$('.schoolInput').attr('disabled', true);
-				console.log($(this).serialize())
 				addProfile($(this).serialize()).then(function(data){
-					console.log('here');
-					if(data.success) location.href = '/profile/' + data.id;
-					//alert('Error Occured');
+					if(data.success){
+						if({{newSchoolPage}}){
+							updateSchool('{{schoolInfo.id}}', {available: true})
+							.then(function(data){
+								if(data.success){
+									alert('{{schoolInfo.name}}교문이 열렸어요. 더많은 친구들의 정보를 업데이트하고 함께 즐겨요.');
+									location.href = '/school/{{schoolInfo.id}}';	
+								} else {
+									alert('Error Occured');
+								}
+							});	
+						}
+						location.href = '/profile/' + data.id;	
+					}
 				}).catch(function(){
 					alert('Error Occured');
-				})
+				});
 			});
 
 			//사용자 경험을 위해 글쓰기를 누른 페이지로부터의 school정보를 폼에 자동입력한다.

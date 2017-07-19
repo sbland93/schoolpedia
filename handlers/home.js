@@ -179,6 +179,21 @@ module.exports = function(){
 			});
 		},
 
+		newSchool: function(req, res, next){
+			School.findById(req.params.id, function(err, school){
+				if(err) next(err);
+				if(!school){
+					res.locals.message404 = '해당학교 페이지는 존재하지 않아요ㅠㅠ';
+					return next();
+				}
+				res.render('newProfile', {
+					newSchoolPage: true,
+					schoolInfo: schoolViewModel(school),
+					pageTestScript: '/qa/tests-newSchool.js'
+				});
+			});
+		},
+
 		clientTest: function(req, res){
 			res.render('test', {
 				pageTestScript: '/qa/tests-clientAPI.js',

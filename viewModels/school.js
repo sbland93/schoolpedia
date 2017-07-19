@@ -5,5 +5,6 @@ module.exports = function(school){
 		location: school.location,
 		updated_at : school.updated_at,
 		category: school.category,
+		available: school.available,
 	}
 }

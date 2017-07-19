@@ -26,9 +26,10 @@ module.exports = function(app){
 	//query가 있으면 query에 해당하는 school들을 조사
 	//없으면 available = true인 school반환.
 	app.get('/api/school', function(req, res, next){
-		var query;
-		(Object.keys(req.query).length === 0) ? (query = {available: true}) :
-		(query = req.query);
+		var query = req.query;
+		//query가 비어있다면
+		if(Object.keys(req.query).length === 0)	query = {available: true};
+		else if(req.query.name)	query = {"name": new RegExp('^'+req.query.name)};
 		School.find(query, function(err, schools){
 			if(err) return next(err);
 			if(schools.length === 0) return res.json({
@@ -97,13 +98,13 @@ module.exports = function(app){
 	app.post('/api/school', function(req, res, next){
 		if(!req.body) return next('NO DATA')
 		School.create(req.body, function(err, school){
-				if(err) return next(err);
-				res.json({
-					success: true,
-					id: school._id,
-					name: school.name,
-					location : school.location,
-				});
+			if(err) return next(err);
+			res.json({
+				success: true,
+				id: school._id,
+				name: school.name,
+				location : school.location,
 			});
-	})
+		});
+	});
 }

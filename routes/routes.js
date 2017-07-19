@@ -36,6 +36,8 @@ module.exports = function(app){
 	//DOLATER
 	app.get('/school/:id', homeHandlers.school);
 
+	app.get('/school/:id/new', homeHandlers.newSchool);
+
 	//:id에 해당하는 school의 Profile을 10개 Return한다.
 	app.get('/school/:id/profile', homeHandlers.schoolProfiles);
 
