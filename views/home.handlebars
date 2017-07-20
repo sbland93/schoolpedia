@@ -1,3 +1,5 @@
+
+<!--NameSpace : HM -->
 <h1>SC home page, It will include School List. TODO</h1>
 
 
@@ -20,50 +22,11 @@
 <div id="test"></div>
 
 {{#section 'head'}}
-	<script id="schoolListTemplate" type="text/x-handlebars-template">
-		<ul class="schoolList">
-			\{{#each searchedList}}
-				<a href="/school/{{id}}">
-					<li>\{{name}} / \{{location}}</li>
-				</a>
-				\{{#unless available}}
-					아직 학교문을 열지 않았어요! 학교 문을 열어주세용
-					<a class="btn btn-default" href="/school/\{{id}}/new">교문열기</a>
-				\{{/unless}}
-			\{{/each}}
-		</ul>
-		\{{#if noData}}
-			그런학교가 없는거 같아요ㅠ_ㅠㅠ.
-		\{{/if}}
-	</script>
+	<script type="text/javascript" src="/js/templates/templates.js"></script>
 {{/section}}
 
 
 {{#section 'jquery'}}
-	<script type="text/javascript" src="js/api/school.js"></script>
-	<script>
-		var schoolListTemplate;
-		$(document).ready(function(){
-			console.log("making Handlebars");
-			schoolListTemplate = Handlebars.compile(
-				$('#schoolListTemplate').html()
-			);
-
-			$('#searchSchool').submit(function(evt){
-				//stop Form from submitting normally
-				console.log("Event Prevented");	
-				evt.preventDefault();
-
-				var $form = $(this),
-					nameOfSchool = $form.find('input[name="name"]').val().split(' ').join(''),
-					url = $form.attr('action');
-
-				getSchools({name: nameOfSchool}).then(function(data){
-					if(data.length) return $('#searchResult').html(schoolListTemplate({searchedList : data}));
-					if(!data.success) return $('#searchResult').html(schoolListTemplate({noData : true}))
-				});
-			});
-		});
-		
-	</script>
+	<script type="text/javascript" src="/js/api/school.js"></script>
+	<script src="/js/controllers/homeController.js"></script>
 {{/section}}
