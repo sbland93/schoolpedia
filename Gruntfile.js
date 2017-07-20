@@ -21,7 +21,7 @@ module.exports = function(grunt){
 
 		jshint: {
 			app: ['schoolchoong.js', 'public/js/**/*.js', 
-				'lib/**/*.js',],
+				'lib/**/*.js', '!public/js/templates/*.js'],
 			qa: ['Gruntfile.js', 'public/qa/**/*.js', 'qa/**/*.js'],
 		},
 

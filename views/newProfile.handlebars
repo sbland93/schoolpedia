@@ -34,28 +34,29 @@
 		</div>
 	</div>
 	<!--DOLATER Hidden -->
+	<input type="hidden" name="{{schoolInfo.category}}" value="{{schoolInfo.id}}" schoolName="{{schoolInfo.name}}" newSchool="{{schoolInfo.newSchool}}" id="defaultSchool">
 	<div class="form-group">
 		<label for="highSchoolField" class="col-sm-2 control-label">고등학교</label>
 		<div class="col-sm-2" id="NPsearchHighResult">
-			<input class="form-control schoolInput" type="text" name="highSchool" id="highSchoolField" placeholder="입력후 학교확인">
+			<input class="form-control schoolInput" type="text" name="highSchool" id="highSchoolField" placeholder="입력후 학교확인" value="{{schoolInfo.highSchool}}" {{#if schoolInfo.highSchool}} disabled {{/if}}>
 		</div>
-		<button class="btn btn-danger col-sm-1 checkSchool" category="highSchool">학교 확인</button>
+		<button class="btn btn-danger col-sm-1 checkSchool" category="highSchool" {{#if schoolInfo.highSchool}} disabled {{/if}}>학교 확인</button>
 		<span class="dynamicInput"></span>
 	</div>
 	<div class="form-group">
 		<label for="middleSchoolField" class="col-sm-2 control-label">중학교</label>
 		<div class="col-sm-2">
-			<input type="text" class="form-control schoolInput" name="middleSchool" id="middleSchoolField" placeholder="입력후 학교확인">
+			<input type="text" class="form-control schoolInput" name="middleSchool" id="middleSchoolField" placeholder="입력후 학교확인" value="{{schoolInfo.middleSchool}}" {{#if schoolInfo.middleSchool}} disabled {{/if}}>
 		</div>
-		<button class="btn btn-danger col-sm-1 checkSchool" category="middleSchool">학교 확인</button>
+		<button class="btn btn-danger col-sm-1 checkSchool" category="middleSchool" {{#if schoolInfo.middleSchool}} disabled {{/if}}>학교 확인</button>
 		<span class="dynamicInput"></span>
 	</div>
 	<div class="form-group">
 		<label for="elementarySchoolField" class="col-sm-2 control-label">초등학교</label>
 		<div class="col-sm-2">
-			<input type="text" class="form-control schoolInput" name="elementarySchool" id="elementarySchoolField" placeholder="입력후 학교확인">
+			<input type="text" class="form-control schoolInput" name="elementarySchool" id="elementarySchoolField" placeholder="입력후 학교확인" value="{{schoolInfo.elementarySchool}}" {{#if schoolInfo.elementarySchool}} disabled {{/if}}>
 		</div>
-		<button class="btn btn-danger col-sm-1 checkSchool" category="elementarySchool">학교 확인</button>
+		<button class="btn btn-danger col-sm-1 checkSchool" category="elementarySchool" {{#if schoolInfo.elementarySchool}} disabled {{/if}}>학교 확인</button>
 		<span class="dynamicInput"></span>
 	</div>
 	<div class="form-group">
@@ -113,7 +114,7 @@
 {{#section 'jquery'}}
 	<script type="text/javascript" src="/js/api/profile.js"></script>
 	<script type="text/javascript" src="/js/api/school.js"></script>
-{{/section}}
 	<script type="text/javascript" src="/js/controllers/newProfileController.js"></script>
+{{/section}}
 
 

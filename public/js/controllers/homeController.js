@@ -2,7 +2,7 @@
 //Home Controller
 $(document).ready(function(){
 
-	var searchedSchoolList = TPL['HMsearchedSchoolList'];
+	var searchedSchoolList = TPL.HMsearchedSchoolList;
 
 	$('#searchSchool').submit(function(evt){
 		//stop Form from submitting normally
@@ -15,7 +15,7 @@ $(document).ready(function(){
 
 		getSchools({name: nameOfSchool}).then(function(data){
 			if(data.length) return $('#searchResult').html(searchedSchoolList({searchedList : data}));
-			if(!data.success) return $('#searchResult').html(searchedSchoolList({noData : true}))
+			if(!data.success) return $('#searchResult').html(searchedSchoolList({noData : true}));
 		});
 	});
 });

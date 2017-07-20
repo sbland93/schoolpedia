@@ -6,18 +6,24 @@ $(document).ready(function(){
 		location.href = document.referrer;
 	});
 
+	//사용자경험을 위해 자동으로 입력되는 HiddenInput에 Object들을 특성으로 함께 넣어두고, 핸들링.
+	var defaultHiddenInput = $('#defaultSchool');
+	var defaultSchoolId = defaultHiddenInput.attr('value');
+	var defaultSchoolName = defaultHiddenInput.attr('schoolName');
+	var isNewSchoolPageNow = defaultHiddenInput.attr('newSchool');
+
 	//Form Submit Event Controller
 	$('.newProfileForm').on('submit', function(evt){
 		evt.preventDefault();
 		$('.schoolInput').attr('disabled', true);
 		addProfile($(this).serialize()).then(function(data){
 			if(data.success){
-				if({{newSchool}}){
-					updateSchool('{{schoolInfo.id}}', {available: true})
+				if(isNewSchoolPageNow){
+					updateSchool(defaultSchoolId, {available: true})
 					.then(function(data){
 						if(data.success){
-							alert('{{schoolInfo.name}}교문이 열렸어요. 더많은 친구들의 정보를 업데이트하고 함께 즐겨요.');
-							location.href = '/school/{{schoolInfo.id}}';	
+							alert(defaultSchoolName + '교문이 열렸어요. 더많은 친구들의 정보를 업데이트하고 함께 즐겨요.');
+							location.href = '/school/' + defaultSchoolId;	
 						} else {
 							alert('Error Occured');
 						}
@@ -30,21 +36,8 @@ $(document).ready(function(){
 		});
 	});
 
-	//사용자 경험을 위해 글쓰기를 누른 페이지로부터의 school정보를 폼에 자동입력한다.
-	var defaultCategory = '{{schoolInfo.category}}';
-	var defaultName = '{{schoolInfo.name}}'
-	var defaultId = '{{schoolInfo.id}}'
-	var defaultInputSelector = '#' + defaultCategory + 'Field';
-	var defaultButtonSelector = 'button[category="' + defaultCategory + '"]';
-	//해당학교 Input Disabled
-	$(defaultInputSelector).attr('value', defaultName).attr('disabled', true);
-	//학교확인버튼 삭제
-	$(defaultButtonSelector).remove();
-	//hidden Input(For schoolId) 생성.
-	$('<input type="hidden">').attr('name', defaultCategory).attr('value', defaultId).appendTo('#newProfileForm');
-
 	//SearchSchoolResult Template Compile
-	var NPsearchedSchools = TPL['NPsearchedSchools'];
+	var NPsearchedSchools = TPL.NPsearchedSchools;
 
 	//Check School Event Controller
 	$('.checkSchool').on('click', function(evt){

@@ -174,7 +174,7 @@ module.exports = function(){
 				}
 				res.render('newProfile', {
 					newSchool: false,
-					schoolInfo: schoolViewModel(school),
+					schoolInfo: schoolViewModel(school, true),
 					pageTestScript: '/qa/tests-newProfile.js'
 				});
 			});
