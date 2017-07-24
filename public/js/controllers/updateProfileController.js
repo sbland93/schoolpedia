@@ -1,26 +1,23 @@
 	
 $(document).ready(function(){
 
-	
-
 	//취소버튼을 누르면 뒤로 가는 controller
-	//DOLATER 단순히 뒤로가면 안될거 같은데..
 	$('.goBack').on('click', function(evt){
 		evt.preventDefault();
 		location.href = document.referrer;
 	});
 
-	//사용자경험을 위해 자동으로 입력되는 HiddenInput에 Object들을 특성으로 함께 넣어두고, 핸들링.
-	var defaultHiddenInput = $('#defaultSchool');
-	var defaultSchoolId = defaultHiddenInput.attr('value');
-	var defaultSchoolName = defaultHiddenInput.attr('schoolName');
-	var isNewSchoolPageNow = (defaultHiddenInput.attr('newSchool') === true);
 
+	var profileId = $('#updateProfileForm').attr('profileId');
+
+	/*var classSelect = $('select .highClass');
+	var selectedValue = classSelect.value('value');
+	classSelect.find('option value=selectedValue').attr('selected', true);
+	*/
 	//Form Submit Event Controller
-	$('.newProfileForm').on('submit', function(evt){
+	$('#updateProfileForm').on('submit', function(evt){
 		evt.preventDefault();
 		var profileData = { 
-			stories: [],
 			elementaryClass: [],
 			middleClass: [],
 			highClass: [], 
@@ -34,19 +31,8 @@ $(document).ready(function(){
 
 		console.log(profileData);
 
-		addProfile(profileData).then(function(data){
+		updateProfile(profileId, profileData).then(function(data){
 			if(data.success){
-				if(isNewSchoolPageNow){
-					updateSchool(defaultSchoolId, {available: true})
-					.then(function(data){
-						if(data.success){
-							alert(defaultSchoolName + '교문이 열렸어요. 더많은 친구들의 정보를 업데이트하고 함께 즐겨요.');
-							location.href = '/school/' + defaultSchoolId;	
-						} else {
-							alert('Error Occured UPDATESCHOOL');
-						}
-					});	
-				}
 				location.href = '/profile/' + data.id;	
 			} else{
 				console.log('Some Error');
@@ -87,5 +73,7 @@ $(document).ready(function(){
 				_this.next().html('	<input type="hidden" value="'+$(this).attr('id')+'" name="'+ category +'">');
 			});
 		});
+		
 	});
+
 });

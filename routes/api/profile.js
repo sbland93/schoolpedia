@@ -133,16 +133,11 @@ module.exports = function(app){
 	app.put('/api/profile/:id', function(req, res, next){
 		if(!req.params.id) return next('No Id');
 		//DOLATER - 업데이트 메커니즘 적용 및 업데이트 검증.
-		/*if(req.session.upCnt > 10){
-			return res.json({
-				success: false,
-				message: "죄송합니다 이미 단일 연결 업데이트 제한 횟수를 넘어갔습니다. 가입을 통해 제한 없는 더 자유로운 활동을 해보세요!"
-			});
-		}*/
 		Profile.update({_id: req.params.id}, req.body, function(err, response){
 			if(err) return next(err);
 			res.json({
-				success: true
+				success: true,
+				id: req.params.id,
 			});
 		})
 

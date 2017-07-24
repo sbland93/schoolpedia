@@ -1,7 +1,8 @@
 //credentials보안파일 로드
 var credentials = require('./credentials.js');
-
 var express = require('express');
+
+var fs = require('fs');
 
 var app = express();
 //Model들 로드.
@@ -124,15 +125,40 @@ var handlebars = require('express-handlebars').create({
 			this._sections[name] = options.fn(this);
 			return null;
 		},
-		iterateWithPlus: function(n, plus, block){
+		iterateOptionWithGrade: function(n, grade, selectedValue, block){
 			var accum = '';
 			for(var i= 1; i < n; ++i){
-				accum += block.fn(plus + i);
+				var classNum = (grade*100) + i;
+				var data = {
+					optionValue : classNum,
+					selectedValue: classNum === selectedValue, 
+				};
+				accum += block.fn(data);
+			}
+			return accum;
+		},
+		iterateWithPlus: function(n, plus, block){
+			var accum = '';
+			for(var i=0; i<n; ++i){
+				accum+=block.fn(i+plus);
+			}
+			return accum;
+		},
+		iterateForClass: function(n, classArray, block){
+			var accum = '';
+			for(var i = 0; i < n; ++i){
+				accum+=block.fn({
+					classIndex: (i+1),
+					gradeValue: classArray ? classArray[i] : null,
+					gradeNumber: (i+1)*100,
+				});
 			}
 			return accum;
 		},
 	},
 });
+
+
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');

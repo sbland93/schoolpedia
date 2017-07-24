@@ -383,3 +383,58 @@ app.get('/school/:id', function(req, res, next){
 			});
 		}).catch(function(err){ next(err); });
 	});
+
+
+
+<div class="middleSchoolDiv">
+		<div class="form-group">
+			<label for="middleSchoolField" class="col-sm-2 control-label">중학교</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control schoolInput" id="middleSchoolField" placeholder="입력후 학교확인" value="{{profile.middleSchool.name}}" {{#if profile.middleSchool.name}} disabled {{/if}}>
+			</div>
+			<button class="btn btn-danger col-sm-1 checkSchool" category="middleSchool" {{#if profile.middleSchool.name}} disabled {{/if}}>학교 확인</button>
+			<span class="dynamicInput"></span>
+		</div>
+
+		<div class="middleClass">
+			{{#iterateForClass 3}}
+			<div class="form-group">
+				<label for="fieldMiddle{{index}}" class="col-sm-2 control-label">{{index}}학년 학급</label>
+				<div class="col-sm-4">
+					<select class="form-control" name="middleClass" id="fieldMiddle{{index}}">
+						<option value="{{gradeNumber}}">기억이 잘안나요</option>
+						{{#iterateWithPlus 20 gradeNumber}}
+							<option value="{{this}}">{{this}}</option>
+						{{/iterateWithPlus}}
+					</select>
+				</div>
+			</div>
+			{{/iterateForClass}}
+		</div>
+	</div>
+	
+	<div class="elementarySchoolDiv">
+		<div class="form-group">
+			<label for="elementarySchoolField" class="col-sm-2 control-label">초등학교</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control schoolInput" id="elementarySchoolField" placeholder="입력후 학교확인" value="{{profile.elementarySchool.name}}" {{#if profile.elementarySchool.name}} disabled {{/if}}>
+			</div>
+			<button class="btn btn-danger col-sm-1 checkSchool" category="elementarySchool" {{#if profile.elementarySchool.name}} disabled {{/if}}>학교 확인</button>
+			<span class="dynamicInput"></span>
+		</div>
+		<div class="elementaryClass">
+			{{#iterateForClass 6}}
+			<div class="form-group">
+				<label for="fieldElementary{{index}}" class="col-sm-2 control-label">{{index}}학년 학급</label>
+				<div class="col-sm-4">
+					<select class="form-control" name="elementaryClass" id="fieldElementary{{index}}">
+						<option value="{{gradeNumber}}">기억이 잘안나요</option>
+						{{#iterateWithPlus 20 gradeNumber}}
+							<option value="{{this}}">{{this}}</option>
+						{{/iterateWithPlus}}
+					</select>
+				</div>
+			</div>
+			{{/iterateForClass}}
+		</div>
+	</div>

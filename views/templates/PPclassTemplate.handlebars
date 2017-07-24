@@ -1,0 +1,15 @@
+
+
+{{#interateForClass 3 'highClass'}}
+<div class="form-group">
+	<label for="fieldHigh3" class="col-sm-2 control-label">3학년 학급</label>
+	<div class="col-sm-4">
+		<select class="form-control" name="highClass" id="fieldHigh3">
+			<option value="100">기억이 잘..</option>
+			{{#iterateWithPlus 20  {{this}} }}
+				<option value="{{this}}">{{this}}</option>
+			{{/iterateWithPlus}}
+		</select>
+	</div>
+</div>
+{{/iterateForClass}}

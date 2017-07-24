@@ -3,90 +3,90 @@ module.exports = {
 		{
 			name: '김승범',
 			age: '1993',
-			firstClass: 107,
-			secondClass: 212,
-			thirdClass: 314,
+			highClass: [107, 200, 300],
+			middleClass: [100, 212, 300],
+			elementaryClass: [100, 200, 314, 400, 500, 600],
 			gender: true,
-			description: '1-7 반장, 2-12 반장, 3-14 반장' +
+			stories: [{content: '1-7 반장, 2-12 반장, 3-14 반장' +
 			'ㄹㅇ 공부 개열심히함' +
-			'그리고 지금도 공부 열심히 하고 있는거로 알고 있음',
+			'그리고 지금도 공부 열심히 하고 있는거로 알고 있음'}],
 			updated_at: Date.now() + 10000,
 		},
 		{
 			name: '임태환',
 			age: '1993',
-			firstClass: 107,
-			secondClass: 202,
-			thirdClass: 307,
+			highClass: [107, 200, 300],
+			middleClass: [100, 212, 300],
+			elementaryClass: [101, 211, 314, 411, 511, 600],
 			gender: true,
-			description: '전교부회장 역임' +
+			stories: [{content: '전교부회장 역임' +
 			'지조로 유명했음' +
 			'공부를 열심히 했음' +
-			'관련일화: 반전체 눈치게임을 하는데, 끝까지 일어나지 않아서 45번으로 벌칙에 걸렸다는 일화..',
+			'관련일화: 반전체 눈치게임을 하는데, 끝까지 일어나지 않아서 45번으로 벌칙에 걸렸다는 일화..'}],
 			updated_at: Date.now() + 20000,
 		},
 		{
 			name: '김인경',
-			firstClass: 107,
-			secondClass: 212,
-			thirdClass: 310,
+			highClass: [107, 200, 300],
+			middleClass: [100, 212, 300],
+			elementaryClass: [101, 211, 314, 411, 511, 600],
 			age: '1993',
 			gender: false,
-			description: '털털하고 시원한 성격의 인구' +
+			stories: [{content: '털털하고 시원한 성격의 인구' +
 			'별명이 인구였는데 왜 인구가 되었는지는 아무도 모르고 있음.' +
-			'아는사람 업데이트 바람.',
+			'아는사람 업데이트 바람.'}],
 			updated_at: Date.now() + 30000,
 		},
 		{
 			name: '김재환',
 			age: '1991',
 			gender: true,
-			description: '성격 좋고 노래 잘함' +
+			stories: [{content: '성격 좋고 노래 잘함' +
 			'얼굴이 큰 편이여서 대두, 대갈장군 등의 이름을 가지고 있었음.' +
-			'3학년때 장난기가 많은 편이였음.',
+			'3학년때 장난기가 많은 편이였음.'}],
 			updated_at: Date.now() + 40000,
 		},
 		{
 			name: '강성식',
-			firstClass: 107,
-			secondClass: 213,
-			thirdClass: 313,
+			highClass: [107, 200, 300],
+			middleClass: [100, 212, 300],
+			elementaryClass: [101, 211, 314, 411, 511, 600],
 			age: '1993',
 			gender: true,
-			description: '성식이 1학년때 1번이여씀ㅋㅋㅋㅋ' +
+			stories: [{content: '성식이 1학년때 1번이여씀ㅋㅋㅋㅋ' +
 			'성식이 과학수학 개잘함 천재여씀' +
-			'은근히 낯가리는데 친해지면 꿀잼임',
+			'은근히 낯가리는데 친해지면 꿀잼임'}],
 			updated_at: Date.now() + 50000,
 		},
 		{
 			name: '김용준',
-			firstClass: 107,
-			secondClass: 202,
-			thirdClass: 307,
+			highClass: [107, 200, 300],
+			middleClass: [100, 212, 300],
+			elementaryClass: [101, 211, 314, 411, 511, 600],
 			age: '1993',
 			gender: true,
-			description: '별명 용꼬임' +
+			stories: [{content: '별명 용꼬임' +
 			'노는거 좋아해씀ㅋㅋㅋㅋ' +
-			'낯가리는거 없고 장난치는거 좋아함ㅋㅋ'
+			'낯가리는거 없고 장난치는거 좋아함ㅋㅋ'}],
 		},
 		{
 			name: '유호규',
-			firstClass: 107,
-			secondClass: 212,
-			thirdClass: 314,
+			highClass: [107, 200, 300],
+			middleClass: [100, 212, 300],
+			elementaryClass: [101, 211, 314, 411, 511, 600],
 			age: '1993',
 			gender: true,
-			description: '키 ㄹㅇ 개큼 엄지척' +
+			stories: [{content: '키 ㄹㅇ 개큼 엄지척' +
 			'노는거 좋아해씀ㅋㅋㅋㅋ' +
-			'105였음'
+			'105였음'}],
 		},
 		{
 			name: '장유진',
 			age: '1993',
 			gender: true,
-			description: '정확히는 모르겠는데, 알고 있기론 해외다녀와서 일년 낮춰 다닌거로 알고 있음' +
+			stories: [{content: '정확히는 모르겠는데, 알고 있기론 해외다녀와서 일년 낮춰 다닌거로 알고 있음' +
 			'정이 많았음' +
-			'맨날 웃고다녔고 친구들 많았음 ㅋㅋㅋㅋ'
+			'맨날 웃고다녔고 친구들 많았음 ㅋㅋㅋㅋ'}],
 		}
 	],
 
@@ -281,42 +281,42 @@ module.exports = {
 
 	testProfileList : [
 		{
-			firstClass: 107,
-			secondClass: 212,
-			thirdClass: 314,
+			highClass: [107, 200, 300],
+			middleClass: [100, 212, 300],
+			elementaryClass: [101, 211, 314, 411, 511, 600],
 			name: '임태환',
 			age: '1993',
 			gender: true,
-			description: '전교부회장 역임' +
+			stories: [ {content: '전교부회장 역임' +
 			'지조로 유명했음' +
 			'공부를 열심히 했음' +
-			'관련일화: 반전체 눈치게임을 하는데, 끝까지 일어나지 않아서 45번으로 벌칙에 걸렸다는 일화..',
+			'관련일화: 반전체 눈치게임을 하는데, 끝까지 일어나지 않아서 45번으로 벌칙에 걸렸다는 일화..'}],
 			replies : [{user: '21jij234', content: '역시 임지조.'}, 
 			{user: '42qjk455', content: '최근에 태환이랑 연락되는 사람 있나요? 보고싶네ㅋㅋㅋ'}],
 		}, 
 		{
-			firstClass: 107,
-			secondClass: 212,
-			thirdClass: 314,
+			highClass: [107, 200, 300],
+			middleClass: [100, 212, 300],
+			elementaryClass: [101, 211, 314, 411, 511, 600],
 			name: '김인경',
 			age: '1993',
 			gender: false,
-			description: '털털하고 시원한 성격의 인구' +
+			stories: [ {content: '털털하고 시원한 성격의 인구' +
 			'별명이 인구였는데 왜 인구가 되었는지는 아무도 모르고 있음.' +
-			'아는사람 업데이트 바람.',
+			'아는사람 업데이트 바람.'}],
 			replies : [{user: '49kik5k9', content: '인경이 요즘 뭐하고 지내나ㅋㅋㅋ'}, 
 			{user: '89828sk', content: '분명히 이거 보고 모른척 했을듯 인구'}],
 		}, 
 		{
-			firstClass: 107,
-			secondClass: 212,
-			thirdClass: 314,
+			highClass: [107, 200, 300],
+			middleClass: [100, 212, 300],
+			elementaryClass: [100, 200, 314, 400, 500, 600],
 			name: '김재환',
 			age: '1991',
 			gender: true,
-			description: '성격 좋고 노래 잘함' +
+			stories: [ {content: '성격 좋고 노래 잘함' +
 			'얼굴이 큰 편이여서 대두, 대갈장군 등의 이름을 가지고 있었음.' +
-			'3학년때 장난기가 많은 편이였음.',
+			'3학년때 장난기가 많은 편이였음.'}],
 			replies : [{user: '8391eifk', content: '동생이 아마 백영고 였을걸?'}, 
 			{user: '6726001', content: '장수현쌤일때 같은반이였는데 성격 ㄱㅊ'}],
 		},

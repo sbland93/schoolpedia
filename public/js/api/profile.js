@@ -42,6 +42,7 @@ var addProfile = function(data){
 				resolve(rtnData);
 			},
 			fail: function(rtnData){
+				alert('Error Occured Here');
 				reject(rtnData);
 			},
 		});

@@ -35,10 +35,4 @@ describe('MongooseTest', function(){
 		}
 	});
 
-	it('test For RegExp', function(done){
-		School.find({'name':new RegExp('^평촌')}, function(err, school){
-			console.log(school);
-			done();
-		});
-	});
 });

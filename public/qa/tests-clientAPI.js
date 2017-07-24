@@ -13,15 +13,15 @@ var boardData = 	{
 };
 
 var profileData = {
-	firstclass: 107,
-	secondClass: 212,
-	thirdClass: 314,
+	highClass: [107],
+	middleClass: [212],
+	elementaryClass: [314],
 	name: '김승범',
 	age: '1993',
 	gender: true,
-	description: '1-7 반장, 2-12 반장, 3-14 반장' +
+	stories:[{content: '1-7 반장, 2-12 반장, 3-14 반장' +
 	'조금 극단적인 성격' +
-	'공부를 열심히 했음'
+	'공부를 열심히 했음'}] 
 };
 
 //School

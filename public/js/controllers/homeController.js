@@ -2,7 +2,7 @@
 //Home Controller
 $(document).ready(function(){
 
-	var searchedSchoolList = TPL.HMsearchedSchoolList;
+	var searchedSchoolList = TPL.HMsearchedSchools;
 
 	$('#searchSchool').submit(function(evt){
 		//stop Form from submitting normally

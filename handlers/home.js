@@ -28,17 +28,18 @@ module.exports = function(){
 		//profile 페이지 라우팅
 		profile: function(req, res, next){
 			Profile.findById(req.params.id)
-				.populate('highSchool middleSchool elementarySchol')
+				.populate('highSchool middleSchool elementarySchool')
 				.exec(function(err, profile){
 				if(err) next(err);
 				if(!profile){
 					res.locals.message404 = '해당학생 페이지는 존재하지 않아요ㅠㅠ';
 					return next();
+				}else{
+					res.render('profile', {
+						profile: profileViewModel(profile),		
+						pageTestScript: '/qa/tests-profile.js'
+					});
 				}
-				res.render('profile', {
-					profile: profileViewModel(profile),		
-					pageTestScript: '/qa/tests-profile.js'
-				});
 			})
 		},
 
@@ -188,8 +189,8 @@ module.exports = function(){
 					return next();
 				}
 				res.render('newProfile', {
-					newSchoolPage: true,
-					schoolInfo: schoolViewModel(school),
+					newSchool: true,
+					schoolInfo: schoolViewModel(school, true),
 					pageTestScript: '/qa/tests-newSchool.js'
 				});
 			});
@@ -200,6 +201,24 @@ module.exports = function(){
 				pageTestScript: '/qa/tests-clientAPI.js',
 				showTests: true,
 				testAPI: true,
+			});
+		},
+
+		//rendering Create Profile Form
+		//DOLATER 404보여주고 리다이렉트 시키기.
+		updateProfile: function(req, res, next){
+			Profile.findById(req.params.id)
+				.populate('highSchool middleSchool elementarySchol')
+				.exec(function(err, profile){
+				if(err) next(err);
+				if(!profile){
+					res.locals.message404 = '잘못된 경로이거나, 수정하려는 학생이 없어졌어요ㅠㅠ';
+					return next();
+				}
+				res.render('updateProfile', {
+					profile: profileViewModel(profile),		
+					pageTestScript: '/qa/tests-updateProfile.js'
+				});
 			});
 		},
 	}

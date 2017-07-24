@@ -1,30 +1,37 @@
+<!--NameSpace: PP -->
 <h1>Profile Page, This page include profile and sorting TODO</h1>
 
 <div class="profile">
 	<p><b>{{profile.name}}</b></p>
 	<p>{{profile.highSchool.name}}</p>
+	{{#each profile.highClass}}
+		학급 {{.}}
+	{{/each}}
 	<p>{{profile.middleSchool.name}}</p>
+	{{#each profile.middleClass}}
+		학급 {{.}}
+	{{/each}}
 	<p>{{profile.elementarySchool.name}}</p>
-	<p>{{profile.description}}</p>
+	{{#each profile.elementaryClass}}
+		학급 {{.}}
+	{{/each}}
+	<div id="profileStories">
+		{{#each profile.stories}}
+			<p class="storyContents">{{content}}</p>
+		{{/each}}
+	</div>
 	<p class="updated_at">{{profile.updated_at}}</p>	
 </div>
+<textarea class="form-control stories" name="stories" rows="20" placeholder="이 학생에 대한 설명, 함께 있었던 일, 일화, 성격, 특징 등" id="newStory"></textarea>
+<button class="btn btn-default" id="addStory">이야기추가</button>
+<input type="hidden" id="PPdefaultValue" profileId={{profile.id}}>
 
-<a class="btn btn-default" href="/school/{{schoolInfo.id}}/update" id="updateProfile">수정</a>
+<a class="btn btn-default" href="/profile/{{profile.id}}/update" id="updateProfile">수정</a>
 <button class="btn btn-default" id="removeProfile">삭제</button>
 
 
 
 {{#section 'jquery'}}
 	<script type="text/javascript" src="/js/api/profile.js"></script>
-	<script type="text/javascript">
-	$('#removeProfile').on('click', function(evt){
-		evt.preventDefault();
-		deleteProfile('{{profile.id}}').then(function(data){
-			if(data.success) location.href = document.referrer;
-			else alert('Error occured');
-		}).catch(function(){
-			alert('Error occured')
-		});
-	});
-	</script>
+	<script type="text/javascript" src="/js/controllers/profileController.js"></script>
 {{/section}}

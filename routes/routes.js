@@ -28,6 +28,9 @@ module.exports = function(app){
 	//DOLATER !profile
 	app.get('/profile/:id', homeHandlers.profile);
 
+	//rendering Update Profile Form
+	app.get('/profile/:id/update', homeHandlers.updateProfile);
+
 	//board 페이지 라우팅
 	//DOLATER !board
 	app.get('/board/:id', homeHandlers.board);
@@ -50,6 +53,7 @@ module.exports = function(app){
 
 	//rendering Create Profile Form
 	app.get('/school/:id/profile/new', homeHandlers.newProfile);
+
 
 	//Client Test Page (API)
 	app.get('/test', homeHandlers.clientTest);

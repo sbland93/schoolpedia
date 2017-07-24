@@ -9,7 +9,9 @@
 			<p>고등학교: {{highSchool.name}}</p>
 			<p>중학교: {{middleSchool.name}}</p>
 			<p>초등학교: {{elementarySchool.name}}</p>
-			<p>내용: {{description}}</p>
+			{{#each stories}}
+				<p>{{content}}</p>
+			{{/each}}
 			<p class="updated_at">updated_at: {{updated_at}}</p>
 			</li>
 		</a>
