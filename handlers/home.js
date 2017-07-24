@@ -212,7 +212,7 @@ module.exports = function(){
 				.exec(function(err, profile){
 				if(err) next(err);
 				if(!profile){
-					res.locals.message404 = '잘못된 경로이거나, 수정하려는 학생이 없어졌어요ㅠㅠ';
+					res.locals.message404 = '잘못된 경로이거나, 수정하려는 학생이 없어졌거나 이동했어요ㅠㅠ';
 					return next();
 				}
 				res.render('updateProfile', {
@@ -221,6 +221,26 @@ module.exports = function(){
 				});
 			});
 		},
+
+		//rendering update Board Form
+		//DOLATER 404보여주고 리다이렉트 시키기.
+		updateBoard: function(req, res, next){
+			Board.findById(req.params.id)
+				.populate('school')
+				.exec(function(err, board){
+				if(err) next(err);
+				if(!board){
+					res.locals.message404 = '잘못된 경로이거나, 수정하려는 그 글은 없어졌거나 이동했어요ㅠㅠ';
+					return next();
+				}
+				res.render('updateBoard', {
+					board: boardViewModel(board),		
+					pageTestScript: '/qa/tests-updateBoard.js'
+				});
+			});
+		},
+
+
 	}
 	
 }

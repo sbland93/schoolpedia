@@ -92,7 +92,7 @@ describe('client API Test', function(){
 		});
 
 		it('should be able to update Board', function(done){
-			updateBoard(id, {available: true}).then(function(data){
+			updateBoard(id, {content: 'change'}).then(function(data){
 				expect(data.success).to.be.equal(true);
 				done();
 			});
@@ -142,7 +142,7 @@ describe('client API Test', function(){
 		});
 
 		it('should be able to update Profile', function(done){
-			updateProfile(id, {available: true}).then(function(data){
+			updateProfile(id, {gender: false}).then(function(data){
 				expect(data.success).to.be.equal(true);
 				done();
 			});

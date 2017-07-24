@@ -135,10 +135,17 @@ module.exports = function(app){
 		//DOLATER - 업데이트 메커니즘 적용 및 업데이트 검증.
 		Profile.update({_id: req.params.id}, req.body, function(err, response){
 			if(err) return next(err);
-			res.json({
-				success: true,
-				id: req.params.id,
-			});
+			if(response.nModified === 1){
+				res.json({
+					success: true,
+					id: req.params.id,
+				});
+			} else {
+				res.json({
+					success: false,
+					message: ''
+				});
+			}
 		})
 
 	})

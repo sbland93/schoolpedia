@@ -35,6 +35,8 @@ module.exports = function(app){
 	//DOLATER !board
 	app.get('/board/:id', homeHandlers.board);
 
+	app.get('/board/:id/update', homeHandlers.updateBoard);
+
 	//:id에 해당하는 school의 Board, Profile을 5개씩 리턴한다.
 	//DOLATER
 	app.get('/school/:id', homeHandlers.school);
