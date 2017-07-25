@@ -26,6 +26,8 @@ module.exports = function(app){
 
 	//profile 페이지 라우팅
 	//DOLATER !profile
+	app.get('/profile/search', homeHandlers.searchProfiles);
+
 	app.get('/profile/:id', homeHandlers.profile);
 
 	//rendering Update Profile Form

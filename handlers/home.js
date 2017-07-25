@@ -241,8 +241,9 @@ module.exports = function(){
 		},
 
 		//fields("school, fields, q")
-		//"school" => 'all', 'schoolObjectId' / "fields" => 'title', 'content', 'all'
+		//"school" => 'all', 'only' / "fields" => 'title', 'content', 'all'
 		//"q" => searchString
+		//DOLATER 'content'
 		searchBoards: function(req, res, next){
 			var query = req.query
 			var stringQ = query.q;
@@ -303,6 +304,84 @@ module.exports = function(){
 			});
 			//DOLATER schoolBoards
 			//DOLATER searchedBoards view.
+		},
+
+
+		//fields("school, fields, q")
+		//"school" => 'all', 'only' / "fields" => 'name', 'all', 'stories'
+		//"age" => 그대로활용  / "class" => schoolCategory를 통해서 활용
+		//"q" => searchString
+		//DOLATER 'stories'
+		searchProfiles: function(req, res, next){
+			console.log('req.query From searchProfiles', req.query);
+
+			var query = req.query
+			var stringQ = query.q;
+			var data1 = {}, data2 = {}, data3 = {}, data4 = {}, queryObject;
+
+			//DOLATER !School
+			var schoolPromise = new Promise(function(resolve, reject){
+				School.findById(query.schoolId, function(err, school){
+					if(err) reject(err);
+					resolve(school);
+				});
+			});
+
+			if(stringQ !== ""){
+				if(query.fields === "only"){
+					data1 = {"name" : new RegExp(stringQ)};
+				}else if(query.fields === "all"){
+					data1 = {$or: [{"name" : new RegExp(stringQ)}, {'stories.content' : new RegExp(stringQ)}]};
+				}
+			}
+
+			if(query.age !== ""){
+				data2 = {"age" : query.age};
+			}
+
+			schoolPromise.then(function(school){
+				if(query.school === "only"){
+					data3[school.category] = school._id;
+				}
+				//school이 all일때랑 all이아닐때랑 class검색구별해야하는거 아닌가?
+				if(query.classNum !== ""){
+					switch(school.category){
+						case 'highSchool' :
+							data4 = {"highClass": query.classNum};
+							break;
+						case 'middleSchool' :
+							data4 = {"middleClass": query.classNum};
+							break;
+						case 'elementarySchool' :
+							data4 = {"elementaryClass": query.classNum};
+							break;
+					};
+				}
+
+				console.log("data1", data1);
+				console.log("data2", data2);
+				console.log("data3", data3);
+				console.log("data4", data4);
+				queryObject = {$and : [data1, data2, data3, data4]}
+				console.log(queryObject);
+				Profile.find(queryObject, function(err, profiles){
+					var context;
+					if(!profiles.length){
+						context = {
+							empty: true,
+							schoolInfo: schoolViewModel(school),
+						}
+					}else{
+						context = {
+							profileList : profiles.map(profileViewModel),
+							schoolInfo : schoolViewModel(school),
+						}
+					}
+					res.render('searchedProfiles', context);
+				});
+			});
+
+
 		}
 
 	}
