@@ -1,7 +1,10 @@
 <!-- NameSpace: SB -->
 
-<h1>Board Page, This page include board and sorting TODO</h1>
+<h1>searched Board Page, This page include board and sorting TODO</h1>
 
+{{#if empty}}
+	그런글 없습니다.	
+{{/if}}
 
 <ul class="boardList">
 	{{#each boardList}}
@@ -15,15 +18,13 @@
 	{{/each}}
 </ul>
 
-<a href="/school/{{schoolInfo.id}}/board/new" class="btn btn-primary">글쓰기</a>
-
 <form class="form-horizontal searchBoardForm" id="searchBoardForm" role="form" action="/board/search" method="GET">
-
-	<input type="hidden" name="schoolId" value="{{schoolInfo.id}}">
 	
+	<input type="hidden" name="schoolId" value="{{schoolInfo.id}}">
+
 	<div class="form-group">
 		<label for="schoolDetail" class="col-sm-1 control-label">학교</label>
-		<input type="radio" name="school" value="only" id="schoolDetail" checked> {{schoolInfo.name}}내에서
+		<input type="radio" name="school" value="only" id="schoolDetail" checked>{{schoolInfo.name}}내에서
 		<input type="radio" name="school" value="all" id="schoolDetail"> 모든학교에서
 	</div>
 

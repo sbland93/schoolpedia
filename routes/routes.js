@@ -33,9 +33,12 @@ module.exports = function(app){
 
 	//board 페이지 라우팅
 	//DOLATER !board
+	app.get('/board/search', homeHandlers.searchBoards);
+	
 	app.get('/board/:id', homeHandlers.board);
 
 	app.get('/board/:id/update', homeHandlers.updateBoard);
+
 
 	//:id에 해당하는 school의 Board, Profile을 5개씩 리턴한다.
 	//DOLATER

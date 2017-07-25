@@ -240,6 +240,70 @@ module.exports = function(){
 			});
 		},
 
+		//fields("school, fields, q")
+		//"school" => 'all', 'schoolObjectId' / "fields" => 'title', 'content', 'all'
+		//"q" => searchString
+		searchBoards: function(req, res, next){
+			var query = req.query
+			var stringQ = query.q;
+			var data, queryObject;
+
+			if(query.fields === "title"){
+
+				data = {"title" : new RegExp(stringQ)};
+			
+			}else if(query.fields === "all"){
+			
+				data = {$or: [{"title" : new RegExp(stringQ)}, {"content" : new RegExp(stringQ)}]};
+			
+			}
+			console.log("data", data);
+
+			if(query.school === "only"){
+				queryObject = {$and : [{"school" : query.schoolId}, data]}
+			}else if(query.school === "all"){
+				queryObject = data;
+			}
+
+			console.log("queryObject", queryObject);
+
+			//DOLATER !School
+			var schoolPromise = new Promise(function(resolve, reject){
+					School.findById(query.schoolId, function(err, school){
+						if(err) reject(err);
+						resolve(school);
+					});
+				});
+
+			var boardPromise = new Promise(function(resolve, reject){
+				Board.find(queryObject, function(err, boards){
+					if(err) reject(err);
+					resolve(boards);
+				});
+			});
+
+			//DOLATER !school
+			Promise.all([schoolPromise, boardPromise]).then(function(rtnArr){
+				var schoolDoc = rtnArr[0];
+				var boards = rtnArr[1];
+				if(!boards.length){
+					var context = {
+						empty: true,
+						schoolInfo : schoolViewModel(schoolDoc), 
+					}
+				}else{
+					var context = {
+						boardList : boards.map(boardViewModel),
+						schoolInfo : schoolViewModel(schoolDoc), 
+					};
+				}
+				res.render('searchedBoards', context);
+			}).catch(function(err){
+				next(err);
+			});
+			//DOLATER schoolBoards
+			//DOLATER searchedBoards view.
+		}
 
 	}
 	
