@@ -1,5 +1,5 @@
 var schoolData = {
-	name: '백영고등학교',
+	name: '테스트고등학교',
 	location: '경기도교육청',
 	category: 'highSchool',
 	available: false,
@@ -7,21 +7,19 @@ var schoolData = {
 };
 
 var boardData = 	{
-	title: '추억이네요ㅋㅋㅋㅋ',
-	content: '다들 졸업하고 잘 지내시는지 궁금합니다 저는 고등학교 시절이 제일 궁금하네요ㅋㅋ',
+	title: '테스트 입니다',
+	content: '테스트컨텐츠입니다.',
 	updated: Date.now(),
 };
 
 var profileData = {
-	highClass: [107],
-	middleClass: [212],
-	elementaryClass: [314],
-	name: '김승범',
+	highClass: [107, 200, 300],
+	middleClass: [100,212,300],
+	elementaryClass: [100,200,314,400,500,600],
+	name: '테스터',
 	age: '1993',
 	gender: true,
-	stories:[{content: '1-7 반장, 2-12 반장, 3-14 반장' +
-	'조금 극단적인 성격' +
-	'공부를 열심히 했음'}] 
+	stories:[{content: '테스트입니다'}] 
 };
 
 //School
@@ -107,7 +105,7 @@ describe('client API Test', function(){
 		});
 
 		it('should be able to get by query', function(done){
-			getBoards({name: boardData.name}).then(function(data){
+			getBoards({title: boardData.title}).then(function(data){
 				console.log(data);
 				expect(data.length === 1).to.be.equal(true);
 				expect(data[0].name).to.be.equal(boardData.name);

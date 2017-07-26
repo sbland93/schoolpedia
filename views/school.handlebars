@@ -5,9 +5,17 @@
 	{{#each profileList}}
 		<li>
 		<p>이름: {{name}}</p>
-		<p>고등학교: {{highSchool.name}}</p>
-		<p>중학교: {{middleSchool.name}}</p>
-		<p>초등학교: {{elementarySchool.name}}</p>
+		{{#each highClass}}
+			학급 {{.}}
+		{{/each}}
+		<p>{{middleSchool.name}}</p>
+		{{#each middleClass}}
+			학급 {{.}}
+		{{/each}}
+		<p>{{elementarySchool.name}}</p>
+		{{#each elementaryClass}}
+			학급 {{.}}
+		{{/each}}
 		{{#each stories}}
 			<p>{{content}}</p>
 		{{/each}}

@@ -46,7 +46,7 @@ describe('School API tests', function(){
 		//mongoose가  disconnect(0)이면 연결시키고, connected(1)상태이면 넘어간다.
 		if(mongoose.connection.readyState === 0){
 			mongoose.Promise = global.Promise;
-			mongoose.connect(credentials.mongo.test.connectionString, credentials.mongo.options);
+			mongoose.connect(credentials.mongo.development.connectionString, credentials.mongo.options);
 
 			mongoose.connection.on("open", function(ref) {
 				console.log("Connected to mongo server.");

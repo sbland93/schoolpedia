@@ -33,7 +33,15 @@ $(document).ready(function(){
 
 		addProfile(profileData).then(function(data){
 			if(data.success){
-				location.href = '/profile/' + data.id;	
+				updateSchool(defaultSchoolId, {available: true})
+				.then(function(data){
+					if(data.success){
+						alert(defaultSchoolName + '교문이 열렸어요. 더많은 친구들의 정보를 업데이트하고 함께 즐겨요.');
+						location.href = '/school/' + defaultSchoolId;	
+					} else {
+						alert('Error Occured UPDATESCHOOL');
+					}
+				});	
 			} else{
 				console.log('Some Error');
 			}
