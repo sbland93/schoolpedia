@@ -111,10 +111,10 @@ module.exports = function(){
 				});
 			});
 			profilePromise.then(function(profiles){
-				res.render('schoolProfile', {
+				res.render('schoolProfiles', {
 					profileList : profiles.map(profileViewModel),
 					schoolInfo : schoolViewModel(schoolDocument),
-					pageTestScript: '/qa/tests-schoolProfile.js'
+					pageTestScript: '/qa/tests-schoolProfiles.js'
 				});
 			}).catch(function(err){	return next(err); });
 		},
@@ -141,10 +141,10 @@ module.exports = function(){
 			Promise.all([boardPromise , schoolPromise]).then(function(rtnArr){
 				var boards = rtnArr[0];
 				var school = rtnArr[1];
-				res.render('schoolBoard', {
+				res.render('schoolBoards', {
 					boardList : boards.map(boardViewModel),
 					schoolInfo: schoolViewModel(school),
-					pageTestScript: '/qa/tests-schoolBoard.js'
+					pageTestScript: '/qa/tests-schoolBoards.js'
 				});
 			}).catch(function(err){ next(err); });
 		},
@@ -261,9 +261,13 @@ module.exports = function(){
 			console.log("data", data);
 
 			if(query.school === "only"){
+
 				queryObject = {$and : [{"school" : query.schoolId}, data]}
+
 			}else if(query.school === "all"){
+
 				queryObject = data;
+
 			}
 
 			console.log("queryObject", queryObject);
@@ -287,6 +291,10 @@ module.exports = function(){
 			Promise.all([schoolPromise, boardPromise]).then(function(rtnArr){
 				var schoolDoc = rtnArr[0];
 				var boards = rtnArr[1];
+				if(!schoolDoc){
+					res.locals.message404 = '해당학교 페이지는 존재하지 않아요ㅠㅠ';
+					return next();
+				}
 				if(!boards.length){
 					var context = {
 						empty: true,
@@ -302,8 +310,7 @@ module.exports = function(){
 			}).catch(function(err){
 				next(err);
 			});
-			//DOLATER schoolBoards
-			//DOLATER searchedBoards view.
+
 		},
 
 
@@ -340,6 +347,11 @@ module.exports = function(){
 			}
 
 			schoolPromise.then(function(school){
+				if(!school){
+					res.locals.message404 = '잘못된 주소이거나, 페이지가 이동했을거에요ㅠㅠ';
+					return next();
+				}
+
 				if(query.school === "only"){
 					data3[school.category] = school._id;
 				}
@@ -358,12 +370,8 @@ module.exports = function(){
 					};
 				}
 
-				console.log("data1", data1);
-				console.log("data2", data2);
-				console.log("data3", data3);
-				console.log("data4", data4);
 				queryObject = {$and : [data1, data2, data3, data4]}
-				console.log(queryObject);
+
 				Profile.find(queryObject, function(err, profiles){
 					var context;
 					if(!profiles.length){
