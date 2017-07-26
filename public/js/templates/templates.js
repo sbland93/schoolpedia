@@ -28,6 +28,44 @@ this["TPL"]["HMsearchedSchools"] = Handlebars.template({"1":function(container,d
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.noData : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 },"useData":true});
 
+this["TPL"]["NPdynamicInput"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "	<div class=\"form-group\">\r\n		<label for=\"class"
+    + alias4(((helper = (helper = helpers.classIndex || (depth0 != null ? depth0.classIndex : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"classIndex","hash":{},"data":data}) : helper)))
+    + "\" class=\"col-sm-2 control-label\">"
+    + alias4(((helper = (helper = helpers.classIndex || (depth0 != null ? depth0.classIndex : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"classIndex","hash":{},"data":data}) : helper)))
+    + "학년 학급</label>\r\n		<div class=\"col-sm-4\">\r\n			<select class=\"form-control\" name=\""
+    + alias4(container.lambda((depths[1] != null ? depths[1].classCategory : depths[1]), depth0))
+    + "\" id=\"class"
+    + alias4(((helper = (helper = helpers.classIndex || (depth0 != null ? depth0.classIndex : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"classIndex","hash":{},"data":data}) : helper)))
+    + "\">\r\n				<option value=\""
+    + alias4(((helper = (helper = helpers.gradeNumber || (depth0 != null ? depth0.gradeNumber : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"gradeNumber","hash":{},"data":data}) : helper)))
+    + "\" selected>기억이 잘안나요</option>\r\n"
+    + ((stack1 = (helpers.iterateWithPlus || (depth0 && depth0.iterateWithPlus) || alias2).call(alias1,20,(depth0 != null ? depth0.gradeNumber : depth0),{"name":"iterateWithPlus","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "			</select>\r\n		</div>\r\n	</div>\r\n";
+},"2":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "					<option value=\""
+    + alias2(alias1(depth0, depth0))
+    + "\">"
+    + alias2(alias1(depth0, depth0))
+    + "</option>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "<!--classCategory, n이 필요 -->\r\n<!--schoolCategory, schoolId가 필요 -->\r\n<input type=\"hidden\" value=\""
+    + alias4(((helper = (helper = helpers.schoolId || (depth0 != null ? depth0.schoolId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"schoolId","hash":{},"data":data}) : helper)))
+    + "\" name=\""
+    + alias4(((helper = (helper = helpers.schoolCategory || (depth0 != null ? depth0.schoolCategory : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"schoolCategory","hash":{},"data":data}) : helper)))
+    + "\">\r\n<div class=\""
+    + alias4(((helper = (helper = helpers.classCategory || (depth0 != null ? depth0.classCategory : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"classCategory","hash":{},"data":data}) : helper)))
+    + "\">\r\n"
+    + ((stack1 = (helpers.iterateForClass || (depth0 && depth0.iterateForClass) || alias2).call(alias1,(depth0 != null ? depth0.n : depth0),null,{"name":"iterateForClass","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "</div>";
+},"useData":true,"useDepths":true});
+
 this["TPL"]["NPsearchedSchools"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 

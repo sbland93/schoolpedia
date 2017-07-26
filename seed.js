@@ -5,9 +5,6 @@ var koreaSchoolData = require('../koreaSchoolData.js')
 var seedData = require('./seedData.js');
 var getRandomInt = require('./utils/testUtils.js')().getRandomInt;
 
-
-
-
 //Seed All Data From seedData.
 var seedDev = function(){
 

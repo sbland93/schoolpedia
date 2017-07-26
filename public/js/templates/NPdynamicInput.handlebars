@@ -1,0 +1,18 @@
+<!--classCategory, n이 필요 -->
+<!--schoolCategory, schoolId가 필요 -->
+<input type="hidden" value="{{schoolId}}" name="{{schoolCategory}}">
+<div class="{{classCategory}}">
+	{{#iterateForClass n null}}
+	<div class="form-group">
+		<label for="class{{classIndex}}" class="col-sm-2 control-label">{{classIndex}}학년 학급</label>
+		<div class="col-sm-4">
+			<select class="form-control" name="{{../classCategory}}" id="class{{classIndex}}">
+				<option value="{{gradeNumber}}" selected>기억이 잘안나요</option>
+				{{#iterateWithPlus 20 gradeNumber}}
+					<option value="{{this}}">{{this}}</option>
+				{{/iterateWithPlus}}
+			</select>
+		</div>
+	</div>
+	{{/iterateForClass}}
+</div>
