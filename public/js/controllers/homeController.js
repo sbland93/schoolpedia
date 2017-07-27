@@ -18,4 +18,7 @@ $(document).ready(function(){
 			if(!data.success) return $('#searchResult').html(searchedSchoolList({noData : true}));
 		});
 	});
+
+
+	console.log($('#idea').innerText);
 });

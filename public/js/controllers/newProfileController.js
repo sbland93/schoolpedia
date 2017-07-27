@@ -83,7 +83,7 @@ $(document).ready(function(){
 				//Input에 해당학교의 이름을 넣고
 				$(selector).val($(this).html());
 				//Hidden SchoolId input과, 학교의 학급 Input을 만들어 넣는다.
-				makeDynamicInput(_this, $(this).attr('id'));
+				makeDynamicInput(_this, $(this).attr('schoolId'));
 			});
 		});
 	});

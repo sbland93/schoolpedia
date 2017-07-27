@@ -48,7 +48,7 @@ module.exports = function(){
 		//DOLATER 404보여주고 리다이렉트 시키기.
 		updateProfile: function(req, res, next){
 			Profile.findById(req.params.id)
-				.populate('highSchool middleSchool elementarySchol')
+				.populate('highSchool middleSchool elementarySchool')
 				.exec(function(err, profile){
 				if(err) next(err);
 				if(!profile){

@@ -1,19 +1,37 @@
 	
 $(document).ready(function(){
 
+	//makeArrayFrom classValue
+	//var classArr = JSON.parse("[" + $('.checkSchool:disabled').attr('classValue') + "]");
+
+	var UPdynamicInput = TPL.UPdynamicInput;
+
+	var makeDynamicInput = function(buttonJQs, schoolId){
+		$.each(buttonJQs, function(index, value){
+			var eachButtonJQ = $(value);
+			var eachSchoolId = schoolId || eachButtonJQ.attr('schoolId');
+			eachButtonJQ.parent().after(UPdynamicInput({
+			schoolCategory: eachButtonJQ.attr('category'),
+			schoolId: eachSchoolId,
+			classCategory: eachButtonJQ.attr('classCategory'),
+			n: eachButtonJQ.attr('classNum'),
+			classArray: JSON.parse("[" + eachButtonJQ.attr('classArray') + "]"),
+			}));
+		});
+	};
+
+	var defaultButtons = $('.checkSchool:disabled');
+	makeDynamicInput(defaultButtons);
+
+
 	//취소버튼을 누르면 뒤로 가는 controller
 	$('.goBack').on('click', function(evt){
 		evt.preventDefault();
 		location.href = document.referrer;
 	});
 
-
 	var profileId = $('#updateProfileForm').attr('profileId');
 
-	/*var classSelect = $('select .highClass');
-	var selectedValue = classSelect.value('value');
-	classSelect.find('option value=selectedValue').attr('selected', true);
-	*/
 	//Form Submit Event Controller
 	$('#updateProfileForm').on('submit', function(evt){
 		evt.preventDefault();
@@ -69,11 +87,9 @@ $(document).ready(function(){
 			$('.NPsearchResult').on('click', function(evt){
 				evt.preventDefault();
 				$(selector).val($(this).html());
-				_this.next().text('확인되었어용');
-				_this.next().html('	<input type="hidden" value="'+$(this).attr('id')+'" name="'+ category +'">');
+				makeDynamicInput(_this, $(this).attr('schoolId'));				
 			});
 		});
-		
 	});
 
 });
