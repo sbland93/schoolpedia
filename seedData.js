@@ -8,8 +8,8 @@ module.exports = {
 			elementaryClass: [100, 200, 314, 400, 500, 600],
 			gender: true,
 			stories: [{content: '1-7 반장, 2-12 반장, 3-14 반장' +
-			'ㄹㅇ 공부 개열심히함' +
-			'그리고 지금도 공부 열심히 하고 있는거로 알고 있음' + ' 김승범'}],
+			'김승범임' +
+			'반장 많이함' + '김승범'}],
 			updated_at: Date.now() + 10000,
 		},
 		{

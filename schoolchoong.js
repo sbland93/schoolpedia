@@ -155,6 +155,23 @@ var handlebars = require('express-handlebars').create({
 			}
 			return accum;
 		},
+		classIterator : function(classArray, block){
+			var accum = '';
+			var defaultClass = [100, 200, 300, 400, 500, 600];
+			var isDefault = function(wannaCheck){
+				return defaultClass.some(function(el){
+					return el === wannaCheck;
+				});
+			};
+			for(var i = 0; i < classArray.length; i++){
+				accum+=block.fn({
+					isDefault: isDefault(classArray[i]),
+					classValue: classArray[i],
+					classIndex: i+1,
+				});
+			}
+			return accum;
+		}
 	},
 });
 
