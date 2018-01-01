@@ -1,12 +1,7 @@
 module.exports = function(profile){
 	return {
 		id: profile._id,
-		highSchool: profile.highSchool,
-		middleSchool: profile.middleSchool,
-		elementarySchool: profile.elementarySchool,
-		highClass: profile.highClass,
-		middleClass: profile.middleClass,
-		elementaryClass: profile.elementaryClass,
+		schools: profile.schools,
 		name: profile.name,
 		age: profile.age,
 		gender: profile.gender,

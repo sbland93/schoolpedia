@@ -10,12 +10,9 @@
 			<li>
 			<p>이름: {{name}}</p>
 			<p>나이(출생년도): {{age}}</p>
-			<p>고등학교: {{highSchool.name}}</p>
-			<p>고등학교 학급: {{#each highClass}} {{.}} {{/each}}</p>
-			<p>중학교: {{middleSchool.name}}</p>
-			<p>중학교 학급: {{#each middleClass}} {{.}} {{/each}}</p>
-			<p>초등학교: {{elementarySchool.name}}</p>
-			<p>초등학교 학급: {{#each elementaryClass}} {{.}} {{/each}}</p>
+			{{#each schools}}
+				{{school.name}}
+			{{/each}}
 			{{#each stories}}
 				<p>{{content}}</p>
 			{{/each}}

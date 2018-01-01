@@ -19,48 +19,98 @@
 		<label for="fieldAge" class="col-sm-2 control-label">나이</label>
 		<div class="col-sm-2">
 			<select name="age" class="form-control" id="fieldAge">
-				{{#iterateWithPlus 50 1950}}
+				{{#iterateFromTo 1960 1997}}
 					<option value="{{this}}">{{this}}</option>
 				{{/iterateWithPlus}}
 			</select>
 		</div>
 	</div>
+
 	<!--DOLATER Hidden -->
-	<input type="hidden" name="{{schoolInfo.category}}" value="{{schoolInfo.id}}" schoolName="{{schoolInfo.name}}" id="defaultSchool">
+	<input type="hidden" id="NPdefaultValue" schoolId="{{schoolInfo.id}}" schoolName="{{schoolInfo.name}}" category="{{schoolInfo.category}}">
 	
-	<div class="highSchoolDiv">
+	<div class="schoolDiv">
 		<div class="form-group">
-			<label for="highSchoolField" class="col-sm-2 control-label">고등학교</label>
-			<div class="col-sm-2" id="NPsearchHighResult">
-				<input class="form-control schoolInput" type="text" id="highSchoolField" placeholder="입력후 학교확인" value="{{schoolInfo.highSchool}}" {{#if schoolInfo.highSchool}} disabled {{/if}}>
-			</div>
-			<button class="btn btn-danger col-sm-1 checkSchool" classCategory="highClass" classNum="3" category="highSchool" {{#if schoolInfo.highSchool}} schoolId="{{schoolInfo.id}}" disabled {{/if}}>학교 확인</button>
-			<span class="dynamicInput"></span>
-		</div>
-	</div>
-	
-	<div class="middleSchoolDiv">
-		<div class="form-group">
-			<label for="middleSchoolField" class="col-sm-2 control-label">중학교</label>
+			<label for="schoolInput" class="col-sm-2 control-label">출신학교</label>
 			<div class="col-sm-2">
-				<input type="text" class="form-control schoolInput" id="middleSchoolField" placeholder="입력후 학교확인" value="{{schoolInfo.middleSchool}}" {{#if schoolInfo.middleSchool}} disabled {{/if}}>
+				<input class="form-control schoolInput" type="text" id="schoolInput" value="{{schoolInfo.name}}">
 			</div>
-			<button class="btn btn-danger col-sm-1 checkSchool" classCategory="middleClass" classNum="3" category="middleSchool" {{#if schoolInfo.middleSchool}} schoolId="{{schoolInfo.id}}" disabled {{/if}}>학교 확인</button>
-			<span class="dynamicInput"></span>
+			<button class="btn btn-danger col-sm-1 checkSchool" disabled>학교 확인</button>
 		</div>
-	</div>
-	
-	<div class="elementarySchoolDiv">
+		<!--schoolId필요, isElementary-->
+		<input type="hidden" value="{{schoolId}}" name="{{category}}">
 		<div class="form-group">
-			<label for="elementarySchoolField" class="col-sm-2 control-label">초등학교</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control schoolInput" id="elementarySchoolField" placeholder="입력후 학교확인" value="{{schoolInfo.elementarySchool}}" {{#if schoolInfo.elementarySchool}} disabled {{/if}}>
+			<label for="class" class="col-sm-2 control-label">1학년 학급</label>
+			<div class="col-sm-4">
+				<select class="form-control" name="{{category}}Class" id="class">
+					<option value="100">기억이 잘안나요</option>
+					{{#iterateFromTo 101 125}}
+						<option value="{{this}}">{{this}}</option>
+					{{/iterateFromTo}}
+				</select>
 			</div>
-			<button class="btn btn-danger col-sm-1 checkSchool" classCategory="elementaryClass" classNum="6" category="elementarySchool" {{#if schoolInfo.elementaryClass}} schoolId="{{schoolInfo.id}}" disabled {{/if}}>학교 확인</button>
-			<span class="dynamicInput"></span>
 		</div>
+		<div class="form-group">
+			<label for="class" class="col-sm-2 control-label">2학년 학급</label>
+			<div class="col-sm-4">
+				<select class="form-control" name="{{category}}Class" id="class">
+					<option value="100">기억이 잘안나요</option>
+					{{#iterateFromTo 201 225}}
+						<option value="{{this}}">{{this}}</option>
+					{{/iterateFromTo}}
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="class" class="col-sm-2 control-label">3학년 학급</label>
+			<div class="col-sm-4">
+				<select class="form-control" name="{{category}}Class" id="class">
+					<option value="300">기억이 잘안나요</option>
+					{{#iterateFromTo 301 325}}
+						<option value="{{this}}">{{this}}</option>
+					{{/iterateFromTo}}
+				</select>
+			</div>
+		</div>
+		{{#if isElementary}}
+		<div class="form-group">
+			<label for="class" class="col-sm-2 control-label">4학년 학급</label>
+			<div class="col-sm-4">
+				<select class="form-control" name="{{category}}Class" id="class">
+					<option value="400">기억이 잘안나요</option>
+					{{#iterateFromTo 401 425}}
+						<option value="{{this}}">{{this}}</option>
+					{{/iterateFromTo}}
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="class" class="col-sm-2 control-label">5학년 학급</label>
+			<div class="col-sm-4">
+				<select class="form-control" name="{{category}}Class" id="class">
+					<option value="500">기억이 잘안나요</option>
+					{{#iterateFromTo 501 525}}
+						<option value="{{this}}">{{this}}</option>
+					{{/iterateFromTo}}
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="class" class="col-sm-2 control-label">6학년 학급</label>
+			<div class="col-sm-4">
+				<select class="form-control" name="{{category}}Class" id="class">
+					<option value="600">기억이 잘안나요</option>
+					{{#iterateFromTo 601 625}}
+						<option value="{{this}}">{{this}}</option>
+					{{/iterateFromTo}}
+				</select>
+			</div>
+		</div>
+		{{/if}}
 	</div>
-	
+
+	<button id="addSchoolInput" class="btn btn-default">출신학교 추가</button>
+
 	<div class="form-group">
 		<label for="fieldStory" class="col-sm-2 control-label">이야기</label>
 		<div class="col-sm-4">

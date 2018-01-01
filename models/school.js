@@ -15,18 +15,7 @@ var schoolSchema = mongoose.Schema({
 
 //SchoolId를 이용해 Profile들을 가져온는 method.
 schoolSchema.methods.getProfiles = function(sortOptions, limitNumber, cb){
-	switch(this.category){
-		case 'highSchool' :
-			var query = {highSchool: this._id};
-			break;
-		case 'middleSchool' :
-			var query = {middleSchool: this._id};
-			break;
-		case 'elementarySchool' :
-			var query = {elementarySchool: this._id};
-			break;
-	};
-	Profile.find(query).sort(sortOptions)
+	Profile.find({"schools.school": this._id}).sort(sortOptions)
 		.limit(limitNumber).populate('highSchool middleSchool elementarySchool').exec(cb);
 };
 

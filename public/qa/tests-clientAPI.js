@@ -6,7 +6,7 @@ var schoolData = {
 	updated_at: Date.now() + 10000,
 };
 
-var boardData = 	{
+var boardData = {
 	title: '테스트 입니다',
 	content: '테스트컨텐츠입니다.',
 	updated: Date.now(),

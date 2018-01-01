@@ -3,33 +3,16 @@
 
 <div class="profile">
 	<p><b>{{profile.name}}</b></p>
-	{{#if profile.highSchool.name}}
-		<p>{{profile.highSchool.name}}</p>
-		{{#classIterator profile.highClass}}
+	{{#each profile.schools}}
+		{{profile.school.name}}
+		{{#classIterator profile.school.class}}
 			<p>
 				{{classIndex}}학급 :	{{#if isDefault}} 알려주세요! {{/if}}
 				{{#unless isDefault}} {{classValue}} {{/unless}}
 			</p>
 		{{/classIterator}}
-	{{/if}}
-	{{#if profile.middleSchool.name}}
-		<p>{{profile.middleSchool.name}}</p>
-		{{#classIterator profile.middleClass}}
-			<p>
-				{{classIndex}}학급 :	{{#if isDefault}} 알려주세요! {{/if}}
-				{{#unless isDefault}} {{classValue}} {{/unless}}
-			</p>
-		{{/classIterator}}
-	{{/if}}
-	{{#if profile.elementarySchool.name}}
-		<p>{{profile.elementarySchool.name}}</p>
-		{{#classIterator profile.elementaryClass}}
-			<p>
-				{{classIndex}}학급 :	{{#if isDefault}} 알려주세요! {{/if}}
-				{{#unless isDefault}} {{classValue}} {{/unless}}
-			</p>
-		{{/classIterator}}
-	{{/if}}
+	{{/each}}
+		
 	<div id="profileStories">
 		{{#each profile.stories}}
 			<p class="storyContents">{{content}}</p>

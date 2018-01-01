@@ -15,42 +15,17 @@ var replySchema = mongoose.Schema({
 	content: String,
 });
 
+//DOLATER validate array
+var schoolSchema = mongoose.Schema({
+	school: {type: mongoose.Schema.Types.ObjectId, ref: 'School', index: true},
+	class: {type: [Number], index: true}
+})
+
+
 //school의 reference.
 //DOLATER school required 함.
 var profileSchema = mongoose.Schema({
-	highSchool : { type: mongoose.Schema.Types.ObjectId, ref: 'School' , index: true},
-	middleSchool: { type: mongoose.Schema.Types.ObjectId, ref: 'School', index: true },
-	elementarySchool: { type: mongoose.Schema.Types.ObjectId, ref: 'School', index: true },
-	highClass: {
-		type: 
-	    [{
-			type: Number,
-			min: 100,
-			max: 325,
-	    }],
-	    validate: [arrayLimit(3), '{PATH} exceeds the limit of 3'],
-	    default: [100, 200, 300],
-	},
-  	middleClass : {
-	    type: 
-	    [{
-			type: Number,
-			min: 100,
-			max: 325,
-	    }],
-	    validate: [arrayLimit(3), '{PATH} exceeds the limit of 3'],
-	    default: [100, 200, 300],
-  	},
-  	elementaryClass : {
-	    type: 
-	    [{
-			type: Number,
-			min: 100,
-			max: 625,
-	    }],
-	    validate: [arrayLimit(6), '{PATH} exceeds the limit of 6'],
-	    default: [100, 200, 300, 400, 500, 600],
-  	},
+	schools : [schoolSchema],
 	name: String,
 	age: Number,
 	gender: Boolean,

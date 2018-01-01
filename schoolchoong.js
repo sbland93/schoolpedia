@@ -125,10 +125,47 @@ var handlebars = require('express-handlebars').create({
 			this._sections[name] = options.fn(this);
 			return null;
 		},
-		iterateOptionWithGrade: function(n, grade, selectedValue, block){
+		iterateSchools: function(n, block){
+			var schoolObjs = [
+				{
+					Kschool: "고등학교",
+					Eschool: "highSchool",
+					classNum: 3,
+				},
+				{
+					Kschool: "중학교",
+					Eschool: "middleSchool",
+					classNum: 3,
+				},
+				{
+					Kschool: "초등학교",
+					Eschool: "elementarySchool",
+					classNum: 6,
+				},
+			]
+			var accum = '';
+			for(var i=0; i<n; i++){
+				accum+=block.fn({
+					Kschool: schoolObjs[i].Kschool,
+					Eschool: schoolObjs[i].Eschool,
+					classNum: schoolObjs[i].classNum,
+				});
+			}
+			return accum;
+		},
+		iterateFromTo: function(from, to, block){
+			var accum = '';
+			for(var i=from; i<=to; i++){
+				accum+=block.fn({
+					index: i,
+				});
+			}
+			return accum;
+		},
+		iterateClassOptions: function(n, gradeValue, selectedValue, block){
 			var accum = '';
 			for(var i= 1; i < n; ++i){
-				var classNum = (grade*100) + i;
+				var classNum = (gradeValue) + i;
 				var data = {
 					optionValue : classNum,
 					selectedValue: classNum === selectedValue, 
@@ -137,25 +174,18 @@ var handlebars = require('express-handlebars').create({
 			}
 			return accum;
 		},
-		iterateWithPlus: function(n, plus, block){
+		iterate: function(n, block){
 			var accum = '';
 			for(var i=0; i<n; ++i){
-				accum+=block.fn(i+plus);
-			}
-			return accum;
-		},
-		iterateForClass: function(n, classArray, block){
-			var accum = '';
-			for(var i = 0; i < n; ++i){
 				accum+=block.fn({
-					classIndex: (i+1),
-					gradeValue: classArray ? classArray[i] : null,
-					gradeNumber: (i+1)*100,
+					index: i,
+					classIndex: i+1,
 				});
 			}
 			return accum;
 		},
 		classIterator : function(classArray, block){
+			if(!classArray || classArray.length === 0) return block.fn();
 			var accum = '';
 			var defaultClass = [100, 200, 300, 400, 500, 600];
 			var isDefault = function(wannaCheck){

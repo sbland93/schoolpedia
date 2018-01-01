@@ -12,7 +12,7 @@ module.exports = function(){
 		//profile 페이지 라우팅
 		profile: function(req, res, next){
 			Profile.findById(req.params.id)
-				.populate('highSchool middleSchool elementarySchool')
+				.populate('schools.school')
 				.exec(function(err, profile){
 				if(err) next(err);
 				if(!profile){
@@ -48,7 +48,7 @@ module.exports = function(){
 		//DOLATER 404보여주고 리다이렉트 시키기.
 		updateProfile: function(req, res, next){
 			Profile.findById(req.params.id)
-				.populate('highSchool middleSchool elementarySchool')
+				.populate('schools.school')
 				.exec(function(err, profile){
 				if(err) next(err);
 				if(!profile){
@@ -102,21 +102,12 @@ module.exports = function(){
 				}
 
 				if(query.school === "only"){
-					data3[school.category] = school._id;
+					data3 = {"schools.school" : school._id};
 				}
+
 				//school이 all일때랑 all이아닐때랑 class검색구별해야하는거 아닌가?
 				if(query.classNum !== ""){
-					switch(school.category){
-						case 'highSchool' :
-							data4 = {"highClass": query.classNum};
-							break;
-						case 'middleSchool' :
-							data4 = {"middleClass": query.classNum};
-							break;
-						case 'elementarySchool' :
-							data4 = {"elementaryClass": query.classNum};
-							break;
-					};
+					data4 = {"schools.class": query.classNum}
 				}
 
 				queryObject = {$and : [data1, data2, data3, data4]}

@@ -28,17 +28,8 @@ var seedDev = function(){
 		//profileList에 랜덤하게 학교를 배정시켜줌. 초, 중, 고에 따라서!
 		seedData.profileList.forEach(function(el){
 			var randomInt = getRandomInt(availableSchools.length);
-			switch(availableSchools[randomInt].category){
-				case 'highSchool' :
-					el.highSchool = availableSchools[randomInt]._id;
-					break;
-				case 'middleSchool' :
-					el.middleSchool = availableSchools[randomInt]._id;
-					break;
-				case 'elementarySchool' :
-					el.elementarySchool = availableSchools[randomInt]._id;
-					break;
-			}
+			//하나만저장함, DOLATER, Class도 없음.
+			el.schools = [availableSchools[randomInt]._id];
 		});
 		//boardList에 school을 채워줌.
 		seedData.boardList.forEach(function(el){

@@ -3,9 +3,6 @@ module.exports = {
 		{
 			name: '김승범',
 			age: '1993',
-			highClass: [107, 200, 300],
-			middleClass: [100, 212, 300],
-			elementaryClass: [100, 200, 314, 400, 500, 600],
 			gender: true,
 			stories: [{content: '1-7 반장, 2-12 반장, 3-14 반장' +
 			'김승범임' +
@@ -15,9 +12,6 @@ module.exports = {
 		{
 			name: '임태환',
 			age: '1993',
-			highClass: [107, 200, 300],
-			middleClass: [100, 212, 300],
-			elementaryClass: [101, 211, 314, 411, 511, 600],
 			gender: true,
 			stories: [{content: '전교부회장 역임' +
 			'지조로 유명했음' +
@@ -27,9 +21,6 @@ module.exports = {
 		},
 		{
 			name: '김인경',
-			highClass: [107, 200, 300],
-			middleClass: [100, 212, 300],
-			elementaryClass: [101, 211, 314, 411, 511, 600],
 			age: '1993',
 			gender: false,
 			stories: [{content: '털털하고 시원한 성격의 인구' +
@@ -48,9 +39,6 @@ module.exports = {
 		},
 		{
 			name: '강성식',
-			highClass: [107, 200, 300],
-			middleClass: [100, 212, 300],
-			elementaryClass: [101, 211, 314, 411, 511, 600],
 			age: '1993',
 			gender: true,
 			stories: [{content: '성식이 1학년때 1번이여씀ㅋㅋㅋㅋ' +
@@ -60,9 +48,6 @@ module.exports = {
 		},
 		{
 			name: '김용준',
-			highClass: [107, 200, 300],
-			middleClass: [100, 212, 300],
-			elementaryClass: [101, 211, 314, 411, 511, 600],
 			age: '1993',
 			gender: true,
 			stories: [{content: '별명 용꼬임' +
@@ -71,9 +56,6 @@ module.exports = {
 		},
 		{
 			name: '유호규',
-			highClass: [107, 200, 300],
-			middleClass: [100, 212, 300],
-			elementaryClass: [101, 211, 314, 411, 511, 600],
 			age: '1993',
 			gender: true,
 			stories: [{content: '키 ㄹㅇ 개큼 엄지척' +
@@ -281,9 +263,6 @@ module.exports = {
 
 	testProfileList : [
 		{
-			highClass: [107, 200, 300],
-			middleClass: [100, 212, 300],
-			elementaryClass: [101, 211, 314, 411, 511, 600],
 			name: '임태환',
 			age: '1993',
 			gender: true,
@@ -295,9 +274,6 @@ module.exports = {
 			{user: '42qjk455', content: '최근에 태환이랑 연락되는 사람 있나요? 보고싶네ㅋㅋㅋ'}],
 		}, 
 		{
-			highClass: [107, 200, 300],
-			middleClass: [100, 212, 300],
-			elementaryClass: [101, 211, 314, 411, 511, 600],
 			name: '김인경',
 			age: '1993',
 			gender: false,
@@ -308,9 +284,6 @@ module.exports = {
 			{user: '89828sk', content: '분명히 이거 보고 모른척 했을듯 인구'}],
 		}, 
 		{
-			highClass: [107, 200, 300],
-			middleClass: [100, 212, 300],
-			elementaryClass: [100, 200, 314, 400, 500, 600],
 			name: '김재환',
 			age: '1991',
 			gender: true,

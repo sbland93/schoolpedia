@@ -6,18 +6,33 @@ $(document).ready(function(){
 	var NPsearchedSchools = TPL.NPsearchedSchools;
 	var NPdynamicInput = TPL.NPdynamicInput;
 
+	$('#addSchoolInput').on('click', function(evt){
+		evt.preventDefault();
+
+		$(this).prepend(NPdynamicInput({
+			
+		}));
+		
+	})
+
+
+	//해당버튼을 disabled로 만들고, dynamicInput을 추가한다(hiddenSchoolId, CLassValue)
 	var makeDynamicInput = function(buttonJQ, schoolId){
+		buttonJQ.attr("disabled", "disabled");
 		buttonJQ.parent().after(NPdynamicInput({
-			schoolCategory: buttonJQ.attr('category'),
 			schoolId: schoolId,
-			classCategory: buttonJQ.attr('classCategory'),
-			n: buttonJQ.attr('classNum'),
+			isElementary: (buttonJQ.attr('classNum') === "6");
+			category: buttonJQ.attr('category');
 		}));
 	};
 
+	//각페이지 DefaultValue.
+	var NPdefaultValue = $('#NPdefaultValue');
+
 	//disabled가 있는(default school의) button을 찾아내서, 뒤에 다이나믹인풋을 붙인다.
-	var disabledButton = $('.checkSchool:disabled');
-	makeDynamicInput(disabledButton, disabledButton.attr('schoolId'));
+	var defaultButton = $('#'+NPdefaultValue.attr('category')+'btn');
+	makeDynamicInput(defaultButton, NPdefaultValue.attr('schoolId'));
+
 
 	//취소버튼을 누르면 뒤로 가는 controller
 	//DOLATER 단순히 뒤로가면 안될거 같은데..
@@ -31,13 +46,14 @@ $(document).ready(function(){
 		evt.preventDefault();
 		var profileData = { 
 			stories: [],
-			elementaryClass: [],
-			middleClass: [],
-			highClass: [], 
+			schools: [],
 		};
 
+		var schoolObjs = {};
+
 		$(this).serializeArray().map(function(a){
-			if((a.name === 'elementaryClass') || (a.name === 'middleClass') || (a.name === 'highClass'))return  profileData[a.name].push(a.value);
+			if((a.name === 'elementarySchool') || (a.name === 'middleSchool') || (a.name === 'highSchool')) return schoolObjs[a.name].school = a.value
+			if((a.name === 'elementarySchoolClass') || (a.name === 'middleSchoolClass') || (a.name === 'highSchoolClass'))return  schoolObjs[a.name]
 			if(a.name === 'stories') return profileData.stories.push({content: a.value});
 			profileData[a.name] = a.value;
 		});
