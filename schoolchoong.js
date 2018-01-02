@@ -1,9 +1,14 @@
 //credentials보안파일 로드
 var credentials = require('./credentials.js');
-
 var express = require('express');
 
+var fs = require('fs');
+
 var app = express();
+//Model들 로드.
+var Boards = require('./models/board.js');
+var Profiles = require('./models/profile.js');
+var Schools = require('./models/school.js');
 
 
 //uncaughtError를 처리하기 위해서 domain생성 후 연결.
@@ -80,33 +85,35 @@ var opts = {
 		socketOptions: { keepAlive: 1 }
 	}
 };
+mongoose.Promise = global.Promise;
 
 //개발 환경에 따른 몽구스 연결.
+//DOLATER
 switch(app.get('env')){
-
+	
 	case 'development' : 
 		mongoose.connect(credentials.mongo.development.connectionString, opts);
+		//데이터 초기화 및 생성.
+		//매번 독립적으로 같은 데이터를 생성하기위해, 모두 삭제후 생성.
+		require('./seed.js').development();
 		break;
 	case 'production' :
 		mongoose.connect(credentials.mongo.production.connectionString, opts);
 		break;
+	//test환경에서는, 완전히 독립적이게 유지하는게 좋을것이다.
 	case 'test' :
 		mongoose.connect(credentials.mongo.test.connectionString, opts);
+		require('./seed.js').test();
 		break;
 	default:
 		throw new Error('Unknown execution environment: ' + app.get('env'));
 }
-
-//개발용 데이터 만들기.
-require('./seed.js')();
-
 
 
 //static 미들우어는 정적 자원을 담고 있는 하나 이상의 디렉터리를 지목해서
 //특별한 처리 없이 클라이언트에 전송 할 수 있도록 해준다.
 //여기선 퍼블릭 디렉토리 지정.
 app.use(express.static(__dirname + '/public'));
-
 
 
 //핸들바 뷰 엔진 설정.
@@ -117,11 +124,89 @@ var handlebars = require('express-handlebars').create({
 			if(!this._sections) this._sections = {};
 			this._sections[name] = options.fn(this);
 			return null;
+		},
+		iterateSchools: function(n, block){
+			var schoolObjs = [
+				{
+					Kschool: "고등학교",
+					Eschool: "highSchool",
+					classNum: 3,
+				},
+				{
+					Kschool: "중학교",
+					Eschool: "middleSchool",
+					classNum: 3,
+				},
+				{
+					Kschool: "초등학교",
+					Eschool: "elementarySchool",
+					classNum: 6,
+				},
+			]
+			var accum = '';
+			for(var i=0; i<n; i++){
+				accum+=block.fn({
+					Kschool: schoolObjs[i].Kschool,
+					Eschool: schoolObjs[i].Eschool,
+					classNum: schoolObjs[i].classNum,
+				});
+			}
+			return accum;
+		},
+		iterateFromTo: function(from, to, block){
+			var accum = '';
+			for(var i=from; i<=to; i++){
+				accum+=block.fn({
+					index: i,
+				});
+			}
+			return accum;
+		},
+		iterateClassOptions: function(n, gradeValue, selectedValue, block){
+			var accum = '';
+			for(var i= 1; i < n; ++i){
+				var classNum = (gradeValue) + i;
+				var data = {
+					optionValue : classNum,
+					selectedValue: classNum === selectedValue, 
+				};
+				accum += block.fn(data);
+			}
+			return accum;
+		},
+		iterate: function(n, block){
+			var accum = '';
+			for(var i=0; i<n; ++i){
+				accum+=block.fn({
+					index: i,
+					classIndex: i+1,
+				});
+			}
+			return accum;
+		},
+		classIterator : function(classArray, block){
+			if(!classArray || classArray.length === 0) return block.fn();
+			var accum = '';
+			var defaultClass = [100, 200, 300, 400, 500, 600];
+			var isDefault = function(wannaCheck){
+				return defaultClass.some(function(el){
+					return el === wannaCheck;
+				});
+			};
+			for(var i = 0; i < classArray.length; i++){
+				accum+=block.fn({
+					isDefault: isDefault(classArray[i]),
+					classValue: classArray[i],
+					classIndex: i+1,
+				});
+			}
+			return accum;
 		}
-	}
-
-
+	},
 });
+
+
+
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
@@ -153,9 +238,6 @@ app.use(function(req, res, next){
 	next();
 });
 
-
-
-
 //세션에 플레시 메시지가 있으면, 뷰컨텍스트에 전달하고, 삭제한다.
 //없으면 자동으로 null이되므로, 맞다.
 //무언가 잘못된게 있으면 session에 flash메세지를 담아서 보낸다.
@@ -165,12 +247,9 @@ app.use(function(req, res, next){
 	next();
 });
 
-
-
 //요청본문 파싱을 위한 바디파서 링크
 //req.body를 확장시킨다
 app.use(require('body-parser').urlencoded({extended: true}));
-
 
 //URL매개변수로, 쿼리스트링에 test=1이 있으면
 //페이지 테스트 실시 'production'모드에선 미실시.
@@ -180,69 +259,11 @@ app.use(function(req, res, next){
 	next();
 });
 
-
-//개발용으로, 데이터베이스를 활용해본다.
-/*app.use(function(req, res, next){
-	if(res.locals.seedData) res.locals.seedData = {};
-	res.locals.seedData = require('./seed.js')();
-	next(); 
-});*/
-
-
-require('./routes/api/school.js')(app);
-require('./routes/api/profile.js')(app);
-require('./routes/api/board.js')(app);
-
-
-//Test epic fail uncaught Error
-app.get('/makeError', function(req, res){
-	process.nextTick(function(){
-		throw new Error('kaboom');	
-	});
-});
-
-
-
-//home 페이지 라우팅.
-app.get('/', function(req, res){
-	res.render('home', {
-		pageTestScript: '/qa/tests-home.js'
-	});
-});
-
-//school 페이지 라우팅
-app.get('/school', function(req, res){
-	res.render('school', {
-		pageTestScript: 'qa/tests-school.js'
-	});
-});
-
-//profile 페이지 라우팅
-app.get('/profile', function(req, res){
-	res.render('profile', {
-		pageTestScript: 'qa/tests-profile.js'
-	});
-});
-
-//board 페이지 라우팅
-app.get('/board', function(req, res){
-	res.render('board', {
-		pageTestScript: 'qa/tests-board.js'
-	});
-});
-
-
-//api 라우팅
-var Boards = require('./models/board.js');
-var Profiles = require('./models/profile.js');
-var Schools = require('./models/school.js');
-
-
-
-
+//모든 routing 로드.
+require('./routes/routes.js')(app);
 
 //커스텀 404페이지.
-app.use(function(req, res){
+app.use(function(req, res, next){
 	//200이 default이므로 바꿔준다.
 	res.status(404);
 	res.render('404');
@@ -256,9 +277,7 @@ app.use(function(err, req, res, next){
 	res.render('500');
 });
 
-
 //clustering을 대비한 서버 시작 설정
-
 function startServer() {
 	//해당 미들웨어들을 연결한 후, 서버 실행.
 	var server = app.listen(app.get('port'), function(){

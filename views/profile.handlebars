@@ -1,11 +1,35 @@
+<!--NameSpace: PP -->
 <h1>Profile Page, This page include profile and sorting TODO</h1>
 
+<div class="profile">
+	<p><b>{{profile.name}}</b></p>
+	{{#each profile.schools}}
+		{{profile.school.name}}
+		{{#classIterator profile.school.class}}
+			<p>
+				{{classIndex}}학급 :	{{#if isDefault}} 알려주세요! {{/if}}
+				{{#unless isDefault}} {{classValue}} {{/unless}}
+			</p>
+		{{/classIterator}}
+	{{/each}}
+		
+	<div id="profileStories">
+		{{#each profile.stories}}
+			<p class="storyContents">{{content}}</p>
+		{{/each}}
+	</div>
+	<p class="updated_at">{{profile.updated_at}}</p>	
+</div>
+<textarea class="form-control stories" name="stories" rows="20" placeholder="이 학생에 대한 설명, 함께 있었던 일, 일화, 성격, 특징 등" id="newStory"></textarea>
+<button class="btn btn-default" id="addStory">이야기추가</button>
+<input type="hidden" id="PPdefaultValue" profileId={{profile.id}}>
 
-<ul class="profileList">
-{{#each seedData.profiles}}
-	<li>
-	이름 : {{name}}<br>
-	내용: {{description}}<br>
-	</li>
-{{/each}}
-</ul>
+<a class="btn btn-default" href="/profile/{{profile.id}}/update" id="updateProfile">수정</a>
+<button class="btn btn-default" id="removeProfile">삭제</button>
+
+
+
+{{#section 'jquery'}}
+	<script type="text/javascript" src="/js/api/profile.js"></script>
+	<script type="text/javascript" src="/js/controllers/profileController.js"></script>
+{{/section}}

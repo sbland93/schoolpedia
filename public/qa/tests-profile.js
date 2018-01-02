@@ -1,6 +1,9 @@
-//profileList class안에 li들이 여러개 존재 해야한다.
+//Board Page Test
 describe('"profile"page Tests', function() {
-	it('page should contain list of profiles', function(){
-		expect($('.profileList li').length >= 1).to.be.equal(true);
+	it('page should contain a profile', function(){
+		expect($('.profile').length).to.be.equal(1);
+		expect($('.profile .name').html().length > 0).to.be.equal(true);
+		expect($('.profile .description').html().length > 0).to.be.equal(true);
+		expect($('.profile .updated_at').html().length > 0).to.be.equal(true);
 	});
 });

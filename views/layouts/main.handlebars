@@ -5,16 +5,19 @@
 	{{#if showTests}}
 		<link rel="stylesheet" type="text/css" href="/vendor/mocha.css">
 	{{/if}}
-	{{_sections.head}}
-
+	<script type="text/javascript" src="/vendor/jquery-3.2.1.js"></script>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.0/handlebars.min.js"></script>
+	<script type="text/javascript" src="/js/templates/clientHelper.js"></script>
+	{{{_sections.head}}}
+
 
 </head>
 <body>
-	<header><img src="/img/logo.png" alt="Meadowlark Travel Logo"></header>
+	<header><!--img src="/img/logo.png.jpg" alt="Meadowlark Travel Logo"--></header>
 	
 	{{#if flash}}
 		<div class="alert alert-dismissible alert-{{flash.type}}">
@@ -45,13 +48,19 @@
 		{{#if pageTestScript}}
 			<script type="text/javascript" src="{{pageTestScript}}"></script>
 		{{/if}}
+		{{#if testAPI}}
+			<script type="text/javascript" src="/js/api/customAjax.js"></script>
+			<script type="text/javascript" src="/js/api/board.js"></script>
+			<script type="text/javascript" src="/js/api/profile.js"></script>
+			<script type="text/javascript" src="/js/api/school.js"></script>
+		{{/if}}
 		<script type="text/javascript">mocha.run();</script>
 	{{/if}}
 
 	{{{body}}}
 
 	<!--DOLATER : 제이쿼리 -->
-	<script type="text/javascript" src="/vendor/jquery-3.2.1.js"></script>
-	{{_sections.jquery}}
+
+	{{{_sections.jquery}}}
 </body>
 </html>

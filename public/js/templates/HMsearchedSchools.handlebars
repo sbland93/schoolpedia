@@ -1,0 +1,15 @@
+
+<ul class="schoolList">
+	{{#each searchedList}}
+		<a href="/school/{{id}}">
+			<li>{{name}} / {{location}}</li>
+		</a>
+		{{#unless available}}
+			아직 학교문을 열지 않았어요! 학교 문을 열어주세용
+			<a class="btn btn-default" href="/school/{{id}}/new">교문열기</a>
+		{{/unless}}
+	{{/each}}
+</ul>
+{{#if noData}}
+	그런학교가 없는거 같아요ㅠ_ㅠㅠ.
+{{/if}}

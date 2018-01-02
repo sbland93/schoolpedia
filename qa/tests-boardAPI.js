@@ -5,6 +5,8 @@ var mongoose = require('mongoose');
 var School = require('../models/school.js');
 var Board = require('../models/board.js');
 var credentials = require('../credentials.js');
+var getRandomInt = require('../utils/testUtils.js')().getRandomInt;
+var seedData = require('../seedData.js');
 /******
 
 	api 계획
@@ -35,13 +37,6 @@ var credentials = require('../credentials.js');
 	});
 
 	******/
-var schoolLists = [
-		'평촌초등학교',
-		'평촌중학교',
-		'백영고등학교',
-		'삼성초등학교',
-		'귀인중학교',
-	];
 
 var boardData = 	{
 	title: '추억이네요ㅋㅋㅋㅋ',
@@ -50,87 +45,77 @@ var boardData = 	{
 };
 
 
-var boardLists = [		
-	{
-		title: '1학년때 김준선생님 담임이였는데..',
-		content: '잘계시는지 궁금하네요ㅋㅋㅋㅋ 이상한 애니메이션 보여주던 기억이 납니다.',
-		updated: Date.now(),
-	},
-	{
-		title: '체육대회 3일이던 시절 분들 여기 계신가요? 기수로는..',
-		content: '기수로는 언젠지 모르겠는데, 한창 저희 체육대회 겸 축제 재밌다고 주변 학교에 소문났던시절인데....',
-		updated: Date.now(),
-	},
-	{
-		title: '이페이지는 누가 만든건가요',
-		content: '짐작가는 사람이 있긴한데 ㅅㅂ... 누구지...ㅅㅂ?',
-		updated: Date.now(),
-	},
-
-
-];
-
 
 describe('Board API Tests', function(){
-
-	var opts = {
-		server: {
-			socketOptions: { keepAlive: 1 }
-		}
-	};
-
-	mongoose.connect(credentials.mongo.test.connectionString, opts);
-
+	console.log('Please Ensure Make Node_env = "test"');
 
 	//School의 objectId를 위해서, school의 restler를 이용한다.
 	//이곳은 좀 refactoring이 필요. profileAPI의 test가 schoolAPI에 의존적 성격을 가지고 있음.
 	var schoolDocs, boardDocs;
+	var db;
 
-	//SchoolList를 Model에서 찾아낸 후, schoolDocs를 초기화한다.
+	//mongoose 연결을 확실시 하고, schoolDocs를 초기화시킨다.
 	before(function(done){
-		this.timeout(4000);
-		var schoolListsArray = schoolLists.map(function(el){
-			return {
-				"name" : el,
-			};
-		});
-		var queryObj = {
-			"$or" : schoolListsArray
-		};
-		School.find(queryObj, function(err, schools){
-			schoolDocs = schools;
-			expect(schools.length > 1).to.be.equal(true);
-			done();
-		});
+		this.timeout(1000 * 10);
+		//mongoose가  disconnect(0)이면 연결시키고, connected(1)상태이면 넘어간다.
+		if(mongoose.connection.readyState === 0){
+			mongoose.connect(credentials.mongo.development.connectionString, credentials.mongo.options);
+
+			mongoose.connection.on("open", function(ref) {
+				console.log("Connected to mongo server.");
+				School.remove({}, function(err){
+					expect(err).to.be.equal(null);
+					School.create(seedData.testSchoolList, function(err, schools){
+						schoolDocs = schools;
+						done();
+					});
+				});
+			});
+		} else if (mongoose.connection.readyState === 1){
+			School.remove({}, function(err){
+				expect(err).to.be.equal(null);
+				School.create(seedData.testSchoolList, function(err, schools){
+					schoolDocs = schools;
+					done();
+				});
+			});
+		}
 	});
 
 	//우선 school부분을 채워줘야한다.
-	//매 Test 전마다, Board모델을 통해서 board들을 만들고
+	//매 Test 전마다, Board모델을통해 documents를 완전삭제후,
 	//boardDocs 전역변수를 초기화한다.
 	beforeEach(function(done){
-		this.timeout(4000);
-		//단순히좀더 다양한 학교를 넣어 보고 싶어서!
-		boardLists.forEach(function(el, index){
-			if(schoolDocs[index]){
-				el.school = schoolDocs[index]._id;
-				return;
-			} 
-			el.school = schoolDocs[0]._id;
+		this.timeout(1000 * 5);
+		Board.remove({}, function(err){
+			Board.create(seedData.testBoardList, function(err, boards){
+				expect(err).to.be.equal(null);
+				boardDocs = boards;
+				done();
+			});
 		});
-		Board.create(boardLists, function(err, boards){
-			expect(err).to.be.equal(null);
-			boardDocs = boards;
+	});
+
+
+	//테스트 독립성 확실을 위해, 다큐먼트들을 클리어한다.
+	after(function(done){
+		var p1 = new Promise(function(resolve , reject){
+			School.remove({}, function(err){
+				if(err) reject(err);
+				resolve();
+			});	
+		});
+		var p2 = new Promise(function(resolve , reject){
+			Board.remove({}, function(err){
+				if(err) reject(err);
+				resolve();
+			});	
+		});
+		Promise.all([p1, p2]).then(function(){
 			done();
 		});
 	});
 
-	//매 Test가 끝난 후, Board모델을 통해서 board들을 삭제한다.
-	afterEach(function(done){
-		Board.remove({}, function(err){
-			expect(err).to.be.equal(null);
-			done();
-		});
-	});
 
 
 	var base = "http://localhost:3000";
@@ -151,14 +136,11 @@ describe('Board API Tests', function(){
 
 	//api/board- get -> query에 해당하는 board를 가져온다.
 	//query가 없으면 모든 board를 가져온다.
-	//data.length가 boardLists의 개수와 같은지 확인힌다.
-	//school Schema가 populate되어있는지 확인한다.
+	//data.length가 boardList의 개수와 같은지 확인힌다.
 	it('should be able to get all boards', function(done){
 		rest.get(base + '/api/board').on('success',
 			function(data){
-				expect(data.length).to.be.equal(boardLists.length);
-				//DOLATER -refactoring below line.
-				expect(!data[0].school.name).to.be.equal(false);
+				expect(data.length).to.be.equal(seedData.testBoardList.length);
 				done();
 			}
 		);

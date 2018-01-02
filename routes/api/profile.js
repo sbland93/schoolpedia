@@ -48,7 +48,6 @@ module.exports = function(app){
 	//Query를 보내면,쿼리에 해당하는 profile에 해당하는 것들을 내보내고
 	//Query가 없으면 모든 profile을 내보낸다.
 	app.get('/api/profile', function(req, res, next){
-		console.log('req.query', req.query);
 		Profile.find(req.query)
 			.populate('school')
 			.exec(function(err, profiles){
@@ -70,8 +69,8 @@ module.exports = function(app){
 
 	//요청본문에 해당하는 profile을 새로 생성한다.
 	//검증과정이 있어야하는데, 어떤게 필수일까 name, age, gender은 필수로 하자!
+	//DOLATER school중 하나도 있어야한다.
 	app.post('/api/profile', function(req, res, next){
-		console.log('req.body', req.body);
 		if(req.body.name && req.body.age && req.body.gender){
 			Profile.create(req.body, function(err, profile){
 				if(err) return next(err);
@@ -134,17 +133,19 @@ module.exports = function(app){
 	app.put('/api/profile/:id', function(req, res, next){
 		if(!req.params.id) return next('No Id');
 		//DOLATER - 업데이트 메커니즘 적용 및 업데이트 검증.
-		if(req.session.upCnt > 10){
-			return res.json({
-				success: false,
-				message: "죄송합니다 이미 단일 연결 업데이트 제한 횟수를 넘어갔습니다. 가입을 통해 제한 없는 더 자유로운 활동을 해보세요!"
-			});
-		}
 		Profile.update({_id: req.params.id}, req.body, function(err, response){
 			if(err) return next(err);
-			res.json({
-				success: true
-			});
+			if(response.nModified === 1){
+				res.json({
+					success: true,
+					id: req.params.id,
+				});
+			} else {
+				res.json({
+					success: false,
+					message: ''
+				});
+			}
 		})
 
 	})

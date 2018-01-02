@@ -1,0 +1,38 @@
+
+
+<h3>한줄게시판 글수정</h3>
+
+<form class="form-horizontal updateBoardForm" role="form" action="/api/board/{{board.id}}" boardId="{{board.id}}" id="updateBoardForm" method="PUT">
+	<div class="form-group">
+		<label for="fieldTitle" class="col-sm-2 control-label">제목</label>
+		<div class="col-sm-4">
+			<input type="text" class="form-control" required name="title" id="fieldTitle" value={{board.title}}>
+		</div>
+	</div>
+	<!--DOLATER Hidden -->
+	<div class="form-group">
+		<label for="fieldSchool" class="col-sm-2 control-label">학교</label>
+		<div class="col-sm-4" id="fieldSchool">
+			<b>{{board.school.name}}</b>
+		</div>
+	</div>
+
+	<input type="hidden" class="form-control" required name="school" value="{{board.school.id}}">
+	
+	<div class="form-group">
+		<label for="fieldContent" class="col-sm-2 control-label">내용</label>
+		<div class="col-sm-4">
+			<textarea class="form-control" required name="content" id="fieldContent" rows="10">{{board.content}}</textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-4">
+			<button type="submit" class="btn btn-default">글수정완료</button>
+		</div>
+	</div>
+</form>
+
+{{#section 'jquery'}}
+	<script type="text/javascript" src="/js/api/board.js"></script>
+	<script type="text/javascript" src="/js/controllers/updateBoardController.js"></script>
+{{/section}}

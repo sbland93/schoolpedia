@@ -1,0 +1,50 @@
+<!-- NameSpace: SB -->
+
+<h1>Board Page, This page include board and sorting TODO</h1>
+
+
+<ul class="boardList">
+	{{#each boardList}}
+		<a href="/board/{{id}}">
+			<li>
+			<p>제목: {{title}}</p>
+			<p>내용: {{content}}</p>
+			<p class="updated_at">updated_at: {{updated_at}}</p>
+			</li>
+		</a>
+	{{/each}}
+</ul>
+
+<a href="/school/{{schoolInfo.id}}/board/new" class="btn btn-primary">글쓰기</a>
+
+<form class="form-horizontal searchBoardForm" id="searchBoardForm" role="form" action="/board/search" method="GET">
+
+	<input type="hidden" name="schoolId" value="{{schoolInfo.id}}">
+	
+	<div class="form-group">
+		<label for="schoolDetail" class="col-sm-1 control-label">학교</label>
+		<input type="radio" name="school" value="only" id="schoolDetail" checked> {{schoolInfo.name}}내에서
+		<input type="radio" name="school" value="all" id="schoolDetail"> 모든학교에서
+	</div>
+
+	<div class="form-group">
+		<label for="fields" class="col-sm-1 control-label">제목/내용</label>
+		<input type="radio" name="fields" value="all" id="fields" checked> 제목 + 본문
+		<input type="radio" name="fields" value="title" id="fields"> 제목
+		<input type="radio" name="fields" value="content" id="fields"> 본문
+	</div>
+
+	<div class="form-group">
+		<label for="searchField" class="col-sm-1 control-label">검색내용</label>
+		<div class="col-sm-4">
+			<input type="text" class="form-control" name="q" id="searchField" placeholder="검색..." required>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-4">
+			<button type="submit" class="btn btn-default">검색</button>
+		</div>
+	</div>
+
+</form>

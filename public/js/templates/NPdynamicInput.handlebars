@@ -1,0 +1,77 @@
+<div class="form-group">
+	<label for="schoolInput" class="col-sm-2 control-label">출신학교</label>
+	<div class="col-sm-2">
+		<input class="form-control schoolInput" type="text" id="schoolInput" value="{{schoolInfo.name}}">
+	</div>
+	<button class="btn btn-danger col-sm-1 checkSchool" disabled>학교 확인</button>
+</div>
+<!--schoolId필요, isElementary-->
+<input type="hidden" name="{{hash}}">
+<div class="form-group">
+	<label for="class" class="col-sm-2 control-label">1학년 학급</label>
+	<div class="col-sm-4">
+		<select class="form-control" name="{{category}}Class" id="class">
+			<option value="100">기억이 잘안나요</option>
+			{{#iterateFromTo 101 125}}
+				<option value="{{this}}">{{this}}</option>
+			{{/iterateFromTo}}
+		</select>
+	</div>
+</div>
+<div class="form-group">
+	<label for="class" class="col-sm-2 control-label">2학년 학급</label>
+	<div class="col-sm-4">
+		<select class="form-control" name="{{category}}Class" id="class">
+			<option value="100">기억이 잘안나요</option>
+			{{#iterateFromTo 201 225}}
+				<option value="{{this}}">{{this}}</option>
+			{{/iterateFromTo}}
+		</select>
+	</div>
+</div>
+<div class="form-group">
+	<label for="class" class="col-sm-2 control-label">3학년 학급</label>
+	<div class="col-sm-4">
+		<select class="form-control" name="{{category}}Class" id="class">
+			<option value="300">기억이 잘안나요</option>
+			{{#iterateFromTo 301 325}}
+				<option value="{{this}}">{{this}}</option>
+			{{/iterateFromTo}}
+		</select>
+	</div>
+</div>
+{{#if isElementary}}
+<div class="form-group">
+	<label for="class" class="col-sm-2 control-label">4학년 학급</label>
+	<div class="col-sm-4">
+		<select class="form-control" name="{{category}}Class" id="class">
+			<option value="400">기억이 잘안나요</option>
+			{{#iterateFromTo 401 425}}
+				<option value="{{this}}">{{this}}</option>
+			{{/iterateFromTo}}
+		</select>
+	</div>
+</div>
+<div class="form-group">
+	<label for="class" class="col-sm-2 control-label">5학년 학급</label>
+	<div class="col-sm-4">
+		<select class="form-control" name="{{category}}Class" id="class">
+			<option value="500">기억이 잘안나요</option>
+			{{#iterateFromTo 501 525}}
+				<option value="{{this}}">{{this}}</option>
+			{{/iterateFromTo}}
+		</select>
+	</div>
+</div>
+<div class="form-group">
+	<label for="class" class="col-sm-2 control-label">6학년 학급</label>
+	<div class="col-sm-4">
+		<select class="form-control" name="{{category}}Class" id="class">
+			<option value="600">기억이 잘안나요</option>
+			{{#iterateFromTo 601 625}}
+				<option value="{{this}}">{{this}}</option>
+			{{/iterateFromTo}}
+		</select>
+	</div>
+</div>
+{{/if}}

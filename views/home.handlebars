@@ -1,8 +1,34 @@
+
+<!--NameSpace : HM -->
 <h1>SC home page, It will include School List. TODO</h1>
 
 
+<form action="/api/school" id="searchSchool">
+	<input type="text" name="name" placeholder="Search...">
+	<input type="submit">
+</form>
+
+<div id="searchResult"></div>
+
+
 <ul class="schoolList">
-{{#each seedData.schools}}
-	<li>{{.}}</li>	
+{{#each schoolList}}
+	<a href="/school/{{id}}">
+		<li>{{name}} / {{location}} - <p class="updated_at">{{updated_at}}</p></li>
+	</a>
 {{/each}}
 </ul>
+
+<script type="text/javascript" id="idea">
+	"{{{this}}}"
+</script>>
+
+{{#section 'head'}}
+	<script type="text/javascript" src="/js/templates/templates.js"></script>
+{{/section}}
+
+
+{{#section 'jquery'}}
+	<script type="text/javascript" src="/js/api/school.js"></script>
+	<script src="/js/controllers/homeController.js"></script>
+{{/section}}

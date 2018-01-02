@@ -1,19 +1,40 @@
 <h1>School Page, It will include Board and Profile TODO</h1>
 
+<a href="/school/{{schoolInfo.id}}/profile"><h2>{{schoolInfo.name}}의 ProfileList</h2></a>
 <ul class="profileList">
-{{#each seedData.profiles}}
-	<li>
-	이름 : {{name}}<br>
-	설명: {{description}}<br>
-	</li>
-{{/each}}
+	{{#each profileList}}
+		<li>
+		<p>이름: {{name}}</p>
+		<p>{{highSchool.name}}</p>
+		{{#each highClass}}
+			학급 {{.}}
+		{{/each}}
+		<p>{{middleSchool.name}}</p>
+		{{#each middleClass}}
+			학급 {{.}}
+		{{/each}}
+		<p>{{elementarySchool.name}}</p>
+		{{#each elementaryClass}}
+			학급 {{.}}
+		{{/each}}
+		{{#each stories}}
+			<p>{{content}}</p>
+		{{/each}}
+		<p class="updated_at">updated_at: {{updated_at}}</p>
+		</li>
+	{{/each}}
 </ul>
+<a href="/school/{{schoolInfo.id}}/profile/new" class="btn btn-primary">글쓰기</a>
 
+<a href="/school/{{schoolInfo.id}}/board"><h2>{{schoolInfo.name}}의 BoardList</h2></a>
 <ul class="boardList">
-{{#each seedData.boards}}
-	<li>
-	제목: {{title}}<br>
-	내용: {{content}}<br>
-	</li>
-{{/each}}
+	{{#each boardList}}
+		<li>
+		<p>제목: {{title}}</p>
+		<p>학교: {{school.name}}</p>
+		<p>내용: {{content}}</p>
+		<p class="updated_at">updated_at: {{updated_at}}</p>
+		</li>
+	{{/each}}
 </ul>
+<a href="/school/{{schoolInfo.id}}/board/new" class="btn btn-primary">글쓰기</a>
