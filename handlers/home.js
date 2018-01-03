@@ -6,7 +6,6 @@ var boardViewModel = require('../viewModels/board.js');
 var profileViewModel = require('../viewModels/profile.js');
 
 
-
 module.exports = function(){
 
 
@@ -32,7 +31,6 @@ module.exports = function(){
 				testAPI: true,
 			});
 		},
-
 
 	}
 	

@@ -201,6 +201,18 @@ var handlebars = require('express-handlebars').create({
 				});
 			}
 			return accum;
+		},
+
+		//home.handlebars에서 사용할 함수.
+		//n-for-Loop의 역할, context는 index는 1부터.
+		forLoop : function(n, block){
+			var accum = '';
+			for(var i = 0; i < n; i++){
+				accum+=block.fn({
+					index: i+1,
+				})
+			}
+			return accum;
 		}
 	},
 });

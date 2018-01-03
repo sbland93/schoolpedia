@@ -8,78 +8,29 @@ $(document).ready(function(){
 		location.href = document.referrer;
 	});
 
-	//사용자경험을 위해 자동으로 입력되는 HiddenInput에 Object들을 특성으로 함께 넣어두고, 핸들링.
-	var defaultHiddenInput = $('#defaultSchool');
-	var defaultSchoolId = defaultHiddenInput.attr('value');
-	var defaultSchoolName = defaultHiddenInput.attr('schoolName');
 
 	//Form Submit Event Controller
-	$('.newProfileForm').on('submit', function(evt){
+	//교문열기 버튼을 클릭시에 해당하는 이벤트.
+	$('.newSchoolForm').on('submit', function(evt){
 		evt.preventDefault();
-		var profileData = { 
-			stories: [],
-			elementaryClass: [],
-			middleClass: [],
-			highClass: [], 
-		};
-
-		$(this).serializeArray().map(function(a){
-			if((a.name === 'elementaryClass') || (a.name === 'middleClass') || (a.name === 'highClass'))return  profileData[a.name].push(a.value);
-			if(a.name === 'stories') return profileData.stories.push({content: a.value});
-			profileData[a.name] = a.value;
-		});
-
-		console.log(profileData);
-
-		addProfile(profileData).then(function(data){
+		//기본적으로 열려는 학교의 아이디를 가져오고, 교문을 연다는 것은, 학교의 avilable을 true로 만든다는것이므로, 추가해준다.
+		var defaultSchoolId = $('#schoolId').val();
+		var sendingData = $(this).serialize() + "&available="+true;
+		
+		//업데이트 성공시에(교문생성시) 열린 학교의 게시판 페이지로 옮겨준다.
+		updateSchool(defaultSchoolId, sendingData).then(function(data){
 			if(data.success){
-				updateSchool(defaultSchoolId, {available: true})
-				.then(function(data){
-					if(data.success){
-						alert(defaultSchoolName + '교문이 열렸어요. 더많은 친구들의 정보를 업데이트하고 함께 즐겨요.');
-						location.href = '/school/' + defaultSchoolId;	
-					} else {
-						alert('Error Occured UPDATESCHOOL');
-					}
-				});	
-			} else{
-				console.log('Some Error');
+				alert('교문이 열렸어요. 더많은 친구들의 정보를 업데이트하고 함께 즐겨요.');
+				location.href = '/school/' + defaultSchoolId;
+			} 
+			else{
+				alert('Error Occured1');
 			}
 		}).catch(function(err){
 			alert(err);
-			console.error(err);
-			alert('Error Occured');
 		});
+
 	});
 
-	//SearchSchoolResult Template Compile
-	var NPsearchedSchools = TPL.NPsearchedSchools;
-
-	//Check School Event Controller
-	$('.checkSchool').on('click', function(evt){
-		evt.preventDefault();
-
-		var _this = $(this);
-		_this.next().text('');
-		
-		var category = _this.attr('category');
-		//display Input Field의 select연산자.
-		var selector = '#' + category + 'Field';
-		//공백제거한 selector Input Field의 value.(schoolName)
-		var schoolName = $(selector).val().split(' ').join('');
-		if(schoolName === '') return _this.next().html('<b>학교이름을 입력해주세용</b>');
-		
-		//DOLATER no school.
-		getSchools({name: schoolName}).then(function(data){
-			var response = { schools : data };
-			_this.next().html(NPsearchedSchools(response));
-			//After Search School Controller
-			$('.NPsearchResult').on('click', function(evt){
-				evt.preventDefault();
-				$(selector).val($(this).html());
-				_this.next().text('확인되었어용');
-				_this.next().html('	<input type="hidden" value="'+$(this).attr('id')+'" name="'+ category +'">');
-			});
-		});
-	});
 });
+

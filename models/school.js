@@ -5,6 +5,7 @@ var Profile = require('./profile.js');
 var schoolSchema = mongoose.Schema({
 	name: String,
 	location: String,
+	description: String,
 	category: { type: String, enum: ['elementarySchool', 'middleSchool', 'highSchool'] },
 	available: { type: Boolean, default: false },
 	up: { type: Number, default: 0 },

@@ -113,9 +113,7 @@ module.exports = function(){
 				});
 			}).catch(function(err){ return next(err); });
 		},
-
+		
 	}
-
-
 
 }
