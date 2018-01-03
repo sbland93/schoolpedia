@@ -43,6 +43,7 @@ module.exports = function(app){
 					location: a.location,
 					category: a.category,
 					updated_at: a.updated_at,
+					available: a.available,
 				}
 			}));
 		});

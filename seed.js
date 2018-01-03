@@ -29,7 +29,7 @@ var seedDev = function(){
 		seedData.profileList.forEach(function(el){
 			var randomInt = getRandomInt(availableSchools.length);
 			//하나만저장함, DOLATER, Class도 없음.
-			el.schools = [availableSchools[randomInt]._id];
+			el.schools = availableSchools[randomInt]._id;
 		});
 		//boardList에 school을 채워줌.
 		seedData.boardList.forEach(function(el){

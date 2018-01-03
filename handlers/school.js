@@ -80,11 +80,11 @@ module.exports = function(){
 			}).catch(function(err){ next(err); });
 		},
 
-			//:id에 해당하는 school의 Board, Profile을 5개씩 리턴한다.
+		//:id에 해당하는 school의 Board, Profile을 5개씩 리턴한다.
 		//DOLATER 학교글이 부족할경우.
 		school: function(req, res, next){
 			var schoolDocument;
-			var profilePromise = new Promise(function(resolve, reject){
+			/*var profilePromise = new Promise(function(resolve, reject){
 				School.findById(req.params.id, function(err, school){
 					if(err) return reject(err);
 					schoolDocument = school;
@@ -97,21 +97,47 @@ module.exports = function(){
 						resolve(profiles);
 					});
 				});
-			});
-			var boardPromise = new Promise(function(resolve, reject){
-				Board.find({school : req.params.id}).sort({updated_at : '-1'})
-				.limit(5).populate('school').exec(function(err, boards){
+			});*/
+			//학교 아이디를 통해서, 학교의 정보를 가져온다.
+			var schoolPromise = new Promise(function(resolve, reject){
+				School.findById(req.params.id, function(err, school){
 					if(err) reject(err);
-					resolve(boards);
+					if(!school){
+						res.locals.message404 = '해당학교 페이지는 존재하지 않아요ㅠㅠ';
+						return next();
+					}
+					resolve(school)
+				});
+			})
+
+			//최신게시판 글을 가져온다
+			var boardRecent = new Promise(function(resolve, reject){
+				Board.find({school : req.params.id}).sort({updated_at : '-1'})
+				.limit(5).populate('school').exec(function(err, recentBoards){
+					if(err) reject(err);
+					resolve(recentBoards);
 				});
 			});
-			Promise.all([profilePromise, boardPromise]).then(function(rtnArr){
+
+			//베스트 글들을 가져온다.
+			var boardBest = new Promise(function(resolve, reject){
+				Board.find({school : req.params.id}).sort({up : '-1'})
+				.limit(5).populate('school').exec(function(err,bestBoards){
+					if(err) reject(err);
+					resolve(bestBoards);
+				})
+			})
+
+			//학교정보, 최신글, Hot게시물들을 데이터베이스에서 가져오는것을 완료하면, 응답한다.
+			//TODO : 여기도 MAP을 해서 ViewModel을 입혀야한다.
+			Promise.all([schoolPromise, boardRecent, boardBest]).then(function(rtnArr){
 				res.render('school', {
-					schoolInfo: schoolViewModel(schoolDocument),
-					profileList : rtnArr[0],
-					boardList : rtnArr[1],
+					schoolInfo: schoolViewModel(rtnArr[0]),
+					recentList : rtnArr[1],
+					bestList : rtnArr[2],
 				});
 			}).catch(function(err){ return next(err); });
+
 		},
 		
 	}
