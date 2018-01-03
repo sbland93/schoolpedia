@@ -14,6 +14,7 @@ $(document).ready(function(){
 			url = $form.attr('action');
 
 		getSchools({name: nameOfSchool}).then(function(data){
+			console.log('here');
 			if(data.length) return $('#searchResult').html(searchedSchoolList({searchedList : data}));
 			if(!data.success) return $('#searchResult').html(searchedSchoolList({noData : true}));
 		});

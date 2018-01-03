@@ -1,23 +1,19 @@
 
 <!--NameSpace : HM -->
-<h1>SC home page, It will include School List. TODO</h1>
-
-
+<h1>학교명을 입력하세요.!!</h1>
+<link rel="stylesheet" type="text/css" href="/css/home.css">
+<!-- -->
 <form action="/api/school" id="searchSchool">
-	<input type="text" name="name" placeholder="Search...">
-	<input type="submit">
+	<div class="input-append">
+		<input class="span2" id="appendedInputButton" type="text" name="name" placeholder="Search...">
+		<button class="btn btn-primary" type="submit">Go!</button>
+	</div>
 </form>
 
 <div id="searchResult"></div>
 
 
-<ul class="schoolList">
-{{#each schoolList}}
-	<a href="/school/{{id}}">
-		<li>{{name}} / {{location}} - <p class="updated_at">{{updated_at}}</p></li>
-	</a>
-{{/each}}
-</ul>
+
 
 <script type="text/javascript" id="idea">
 	"{{{this}}}"
