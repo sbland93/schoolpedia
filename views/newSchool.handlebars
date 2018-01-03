@@ -1,20 +1,18 @@
 
-안녕하세요, {{schoolInfo.name}}의 교문을 함께 열어봐요!<br>
-
-{{schoolInfo.name}}의 학교페이지를 열기 위해 학교 소개문구를 적어주세요.
+<h1>{{schoolInfo.name}}의 학교페이지를 열기 위해 학교 소개문구를 적어주세요.</h1>
 
 <form class="form-horizontal newSchoolForm" id="newProfileForm" role="form" action="/api/school" method="POST">
 	
 	<!--DOLATER Hidden -->
 	<input type="hidden" name="id" value="{{schoolInfo.id}}" id="schoolId">
+	<!-- 소개글!-->
+	<div class="descrip">
+		<textarea name="description" placeholder="학교소개글 (무조건5자!!)" cols="1" rows="4"></textarea>
+	</div>
 	
-	<input type="textarea" name="description" placeholder="학교소개글">
-
-	<div class="form-group">
-		<div class="col-sm-offset-5 col-sm-3">
-			<button type="submit" class="btn btn-default">학교페이지 생성</button>
-			<button class="btn btn-default goBack">취소</button>
-		</div>
+	<div class="submitbutton">
+		<button type="submit" class="btn btn-primary">학교페이지 생성</button>
+		<button class="btn btn-default goBack">취소</button>
 	</div>
 </form>
 
@@ -28,3 +26,4 @@
 	<script type="text/javascript" src="/js/api/school.js"></script>
 	<script type="text/javascript" src="/js/controllers/newSchoolController.js"></script>
 {{/section}}
+<link rel="stylesheet" type="text/css" href="/css/newschool.css">
