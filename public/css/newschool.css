@@ -1,0 +1,24 @@
+h1{
+	padding:10pt;
+	margin-top:20pt;
+	font-size:20pt;
+	font-weight:bold;
+	text-align:center;
+
+}
+form{
+	
+	margin-top:20pt;
+}
+.descrip{
+	margin-top:50pt;
+	
+}
+.submitbutton{
+	float:right;
+	text-align:right;
+}
+
+button{
+	text-align:right;
+}
