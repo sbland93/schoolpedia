@@ -5,7 +5,6 @@ var schoolViewModel = require('../viewModels/school.js');
 var boardViewModel = require('../viewModels/board.js');
 var profileViewModel = require('../viewModels/profile.js');
 
-
 module.exports = function(){
 
 

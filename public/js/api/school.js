@@ -64,7 +64,10 @@ var deleteSchool = function(id){
 };
 
 var updateSchool = function(id, data){
+<<<<<<< HEAD
 	console.log('data:', data);
+=======
+>>>>>>> 180102home
 	return new Promise(function(resolve, reject){
 		$.ajax({
 			url: baseSchool + '/' + id,

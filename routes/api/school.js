@@ -52,8 +52,6 @@ module.exports = function(app){
 	app.put('/api/school/:id', function(req, res, next){
 		if(!req.params.id) return next('No Id');
 		//DOLATER req.body를 그대로 신뢰해서는 안된다.
-		console.log("@@@@@@@@@@@@@@@@");
-		console.log(req.body);
 		School.update({_id: req.params.id}, req.body ,function(err, response){
 			if(err) console.error(err);
 			if(response.nModified === 1){

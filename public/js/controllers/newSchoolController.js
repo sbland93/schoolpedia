@@ -8,7 +8,6 @@ $(document).ready(function(){
 		location.href = document.referrer;
 	});
 
-
 	//Form Submit Event Controller
 	//교문열기 버튼을 클릭시에 해당하는 이벤트.
 	$('.newSchoolForm').on('submit', function(evt){
@@ -33,4 +32,3 @@ $(document).ready(function(){
 	});
 
 });
-
