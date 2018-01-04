@@ -149,6 +149,7 @@ module.exports = {
 		{
 			name: '평촌중학교',
 			location: '경기도교육청',
+			description: '소개글이다',
 			category: 'middleSchool',
 			available: true,
 			updated_at : Date.now() + 20000,
