@@ -1,5 +1,6 @@
+/*메인페이지 body 모두 적용*/
 body{
-	
+	margin-top:30pt;
 	width:70%;
 	margin-left:auto;
 	margin-right:auto;
@@ -7,6 +8,6 @@ body{
 .imge{
 	position:fixed;
 	top:0px;
-	left:0px;
+	right:0px;
 
 }

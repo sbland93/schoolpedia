@@ -1,31 +1,53 @@
+<h1>{{schoolInfo.description}}</h1>
+<link rel="stylesheet" type="text/css" href="/css/school.css">
 
+<div id="maindiv">
+	<!--최근게시물 div !-->
+	<div class="left">
+		<a href="/school/{{schoolInfo.id}}/board"><h2>ㅋㅋ최근게시물ㅋㅋ</h2></a>
+		<ul class="boardList">
+			{{#each recentList}}
+				<li>
+				<span><p>{{title}}</p></span>
+				
+				<p>내용: {{content}}</p>
+				<p>추천: {{up}}</p>
+				</li>
+			{{/each}}
+		</ul>
+	</div>
+	<!--베스트게시물 div !-->
+	<div class="right">
+		<a href="/school/{{schoolInfo.id}}/board"><h2>ㅋㅋBest게시물ㅋㅋ</h2></a>
+		<ul class="boardList">
+			{{#each bestList}}
+				<li>
+				<span><p>{{title}}</p></span>
+				
+				<p>내용: {{content}}</p>
+				<p>추천: {{up}}</p>
+				</li>
+			{{/each}}
+		</ul>
+	</div>
+</div>
 
-<a href="/school/{{schoolInfo.id}}/board"><h2>{{schoolInfo.name}}의 최근게시물ㅋㅋ</h2></a>
-<ul class="boardList">
-	{{#each recentList}}
-		<li>
-		<p>제목: {{title}}</p>
-		<p>학교: {{school.name}}</p>
-		<p>내용: {{content}}</p>
-		<p>추천: {{up}}</p>
-		<p class="updated_at">updated_at: {{updated_at}}</p>
-		</li>
-	{{/each}}
-</ul>
-
-
-
-<a href="/school/{{schoolInfo.id}}/board"><h2>{{schoolInfo.name}}의 Best게시물ㅋㅋ</h2></a>
-<ul class="boardList">
-	{{#each bestList}}
-		<li>
-		<p>제목: {{title}}</p>
-		<p>학교: {{school.name}}</p>
-		<p>내용: {{content}}</p>
-		<p>추천: {{up}}</p>
-		<p class="updated_at">updated_at: {{updated_at}}</p>
-		</li>
-	{{/each}}
-</ul>
-
-<a href="/school/{{schoolInfo.id}}/board/new" class="btn btn-primary">글쓰기</a>
+<!--글쓰기 버튼 !-->
+<div class="middle">
+	<a href="/school/{{schoolInfo.id}}/board/new" class="btn btn-primary">글쓰기</a>
+</div>
+<!--검색 !-->
+<div class="bottom">
+	<div class="input-append">
+		<input class="span2" id="appendedInputButton" type="text" name="name" placeholder="친구이름.!!">
+		<button class="btn btn-primary" type="submit">검색!</button>
+	</div>
+</div>
+<!--검색리스트 목록 !-->
+<div id="searchlist">
+	<ul>
+		<li>충호 한용희 2012</li>
+		<li>한용희 2012</li>
+		<li>한용희 2010</li>
+	</ul>
+</div>
