@@ -35,7 +35,7 @@ module.exports = function(app){
 		school:[{ type: mongoose.Schema.Types.ObjectId, ref: 'School' }],
 		class: [Number],
 		name: String,
-		age: Number,
+		graduation: Number,
 		gender: Boolean,
 		description: String,
 		replies : [replySchema],
@@ -48,17 +48,23 @@ module.exports = function(app){
 	//Query를 보내면,쿼리에 해당하는 profile에 해당하는 것들을 내보내고
 	//Query가 없으면 모든 profile을 내보낸다.
 	app.get('/api/profile', function(req, res, next){
-		Profile.find(req.query)
+		var query = req.query;
+		if(req.query.name) query.name = new RegExp('^'+req.query.name);
+		Profile.find(query)
 			.populate('school')
 			.exec(function(err, profiles){
 				if(err) return next(err);
+				if(profiles.length === 0) return res.json({
+					success: false,
+					message: 'NO DATA',
+				});
 				res.json(profiles.map(function(a){
 					return {
 						id: a._id,
 						school: a.school,
 						class: a.class,
 						name: a.name,
-						age: a.age,
+						graduation: a.graduation,
 						gender: a.gender,
 						description: a.description,
 						replies : a.replies,
@@ -68,10 +74,10 @@ module.exports = function(app){
 	});
 
 	//요청본문에 해당하는 profile을 새로 생성한다.
-	//검증과정이 있어야하는데, 어떤게 필수일까 name, age, gender은 필수로 하자!
+	//검증과정이 있어야하는데, 어떤게 필수일까 name, graduation, gender은 필수로 하자!
 	//DOLATER school중 하나도 있어야한다.
 	app.post('/api/profile', function(req, res, next){
-		if(req.body.name && req.body.age && req.body.gender){
+		if(req.body.name && req.body.graduation && req.body.gender){
 			Profile.create(req.body, function(err, profile){
 				if(err) return next(err);
 				res.json({
@@ -80,7 +86,7 @@ module.exports = function(app){
 					school: profile.school,
 					class: profile.class,
 					name: profile.name,
-					age: profile.age,
+					graduation: profile.graduation,
 					gender: profile.gender,
 					description: profile.description,
 					replies : profile.replies,
@@ -108,7 +114,7 @@ module.exports = function(app){
 				school: profile.school,
 				class: profile.class,
 				name: profile.name,
-				age: profile.age,
+				graduation: profile.graduation,
 				gender: profile.gender,
 				description: profile.description,
 				replies : profile.replies,

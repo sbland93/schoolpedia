@@ -1,9 +1,10 @@
 
 <link rel="stylesheet" type="text/css" href="/css/school.css">
-<h1>{{schoolInfo.description}}<button id="updateDescription">학교 소개글 수정</button></h1> 
+<h1><span id="schoolDescription">{{schoolInfo.description}}</span><button id="updateDescription">학교 소개글 수정</button></h1> 
+<input type="hidden" value="{{schoolInfo.id}}" id="schoolId">
 
 <!--수정버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
-<div id="updateDescription"></div>
+<div id="updateDescriptionDiv"></div>
 
 <div id="maindiv">
 	<!--최근게시물 div !-->
@@ -43,22 +44,23 @@
 <!--검색 !-->
 <div class="bottom">
 	<div class="input-append">
-		<input class="span2" id="appendedInputButton" type="text" name="name" placeholder="친구이름.!!">
-		<button class="btn btn-primary" type="submit">검색!</button>
+		<form class="form-horizontal searchProfileForm" role="form" action="/api/profile" method="GET">
+			<input class="span2" id="appendedInputButton" type="text" name="name" placeholder="친구이름.!!">
+			<button class="btn btn-primary" type="submit">검색!</button>
+		</form>
 	</div>
 </div>
+
 <!--검색리스트 목록 !-->
-<div id="searchlist">
-	<ul>
-		<li>충호 한용희 2012</li>
-		<li>한용희 2012</li>
-		<li>한용희 2010</li>
-	</ul>
-</div>
+<div id="searchResult"></div>
+
+{{#section 'head'}}
+	<script type="text/javascript" src="/js/templates/templates.js"></script>
+{{/section}}
 
 {{#section 'jquery'}}
-	<script type="text/javascript">
-		
-	</script>
+	<script type="text/javascript" src="/js/api/school.js"></script>
+	<script type="text/javascript" src="/js/api/profile.js"></script>
+	<script type="text/javascript" src="/js/controllers/schoolController.js"></script>
 {{/section}}
 

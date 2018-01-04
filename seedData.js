@@ -2,7 +2,8 @@ module.exports = {
 	profileList : [
 		{
 			name: '김승범',
-			age: '1993',
+			birth: 930312,
+			graduation: 2012,
 			gender: true,
 			stories: [{content: '1-7 반장, 2-12 반장, 3-14 반장' +
 			'김승범임' +
@@ -11,7 +12,8 @@ module.exports = {
 		},
 		{
 			name: '임태환',
-			age: '1993',
+			birth: 930312,
+			graduation: 2012,
 			gender: true,
 			stories: [{content: '전교부회장 역임' +
 			'지조로 유명했음' +
@@ -21,7 +23,8 @@ module.exports = {
 		},
 		{
 			name: '김인경',
-			age: '1993',
+			birth: 930312,
+			graduation: 2012,
 			gender: false,
 			stories: [{content: '털털하고 시원한 성격의 인구' +
 			'별명이 인구였는데 왜 인구가 되었는지는 아무도 모르고 있음.' +
@@ -30,7 +33,8 @@ module.exports = {
 		},
 		{
 			name: '김재환',
-			age: '1991',
+			birth: 930312,
+			graduation: 2012,
 			gender: true,
 			stories: [{content: '성격 좋고 노래 잘함' +
 			'얼굴이 큰 편이여서 대두, 대갈장군 등의 이름을 가지고 있었음.' +
@@ -39,7 +43,8 @@ module.exports = {
 		},
 		{
 			name: '강성식',
-			age: '1993',
+			birth: 930312,
+			graduation: 2012,
 			gender: true,
 			stories: [{content: '성식이 1학년때 1번이여씀ㅋㅋㅋㅋ' +
 			'성식이 과학수학 개잘함 천재여씀' +
@@ -48,7 +53,8 @@ module.exports = {
 		},
 		{
 			name: '김용준',
-			age: '1993',
+			birth: 930312,
+			graduation: 2012,
 			gender: true,
 			stories: [{content: '별명 용꼬임' +
 			'노는거 좋아해씀ㅋㅋㅋㅋ' +
@@ -56,7 +62,8 @@ module.exports = {
 		},
 		{
 			name: '유호규',
-			age: '1993',
+			birth: 930312,
+			graduation: 2012,
 			gender: true,
 			stories: [{content: '키 ㄹㅇ 개큼 엄지척' +
 			'노는거 좋아해씀ㅋㅋㅋㅋ' +
@@ -64,7 +71,8 @@ module.exports = {
 		},
 		{
 			name: '장유진',
-			age: '1993',
+			birth: 930312,
+			graduation: 2012,
 			gender: true,
 			stories: [{content: '정확히는 모르겠는데, 알고 있기론 해외다녀와서 일년 낮춰 다닌거로 알고 있음' +
 			'정이 많았음' +
@@ -72,7 +80,8 @@ module.exports = {
 		},
 		{
 			name: '한용희',
-			age: '1993',
+			birth: 930312,
+			graduation: 2012,
 			gender: true,
 			stories: [{content: '한용희임ㅋㅋ' +
 			'용카이' +
@@ -283,7 +292,8 @@ module.exports = {
 	testProfileList : [
 		{
 			name: '임태환',
-			age: '1993',
+			birth: 930312,
+			graduation: 2012,
 			gender: true,
 			stories: [ {content: '전교부회장 역임' +
 			'지조로 유명했음' +
@@ -294,7 +304,8 @@ module.exports = {
 		}, 
 		{
 			name: '김인경',
-			age: '1993',
+			birth: 930312,
+			graduation: 2012,
 			gender: false,
 			stories: [ {content: '털털하고 시원한 성격의 인구' +
 			'별명이 인구였는데 왜 인구가 되었는지는 아무도 모르고 있음.' +
@@ -304,7 +315,8 @@ module.exports = {
 		}, 
 		{
 			name: '김재환',
-			age: '1991',
+			birth: 930312,
+			graduation: 2012,
 			gender: true,
 			stories: [ {content: '성격 좋고 노래 잘함' +
 			'얼굴이 큰 편이여서 대두, 대갈장군 등의 이름을 가지고 있었음.' +

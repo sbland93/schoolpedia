@@ -25,9 +25,11 @@ var schoolSchema = mongoose.Schema({
 //school의 reference.
 //DOLATER school required 함.
 var profileSchema = mongoose.Schema({
-	schools : [schoolSchema],
+	schools : [ schoolSchema ],
+	bugName: { type: String, default: "벌레" },
 	name: String,
-	age: Number,
+	birth: { type: Number, min: 000000, max: 999999 },
+	graduation: { type: Number, min: 1900, max: 2050 },
 	gender: Boolean,
 	description: String,
 	stories: [ storySchema ],
@@ -43,6 +45,10 @@ function arrayLimit(number){
 		return val.length <= number;
 	}
 }
+
+profileSchema.path('bugName').validate(function (v) {
+    return v.length == 2;
+}, 'The bugName should be length of 2');
 
 var Profile = mongoose.model('Profile', profileSchema);
 module.exports = Profile;

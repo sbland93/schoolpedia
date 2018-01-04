@@ -31,7 +31,9 @@ var seedData = require('../seedData.js');
 var profileData = {
 	highClass: [107, 212, 314],
 	name: '김승범',
-	age: '1993',
+	graduation: 2012,
+	birth: 1993,
+	bugName: '도산',
 	gender: true,
 	stories: [{content: '1-7 반장, 2-12 반장, 3-14 반장' +
 	'조금 극단적인 성격' +

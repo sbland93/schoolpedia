@@ -1,0 +1,10 @@
+
+<ul class="profileList">
+	{{#each searchedList}}
+		<li><a href="/profile/{{id}}"><p>{{bugName}} {{name}}</p></a></li>
+	{{/each}}
+</ul>
+
+{{#if noData}}
+	그런학생 아직 없다 ㅠㅠ.. 만들기 <button>만들기</button>
+{{/if}}

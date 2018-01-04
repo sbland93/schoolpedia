@@ -17,7 +17,8 @@ var profileData = {
 	middleClass: [100,212,300],
 	elementaryClass: [100,200,314,400,500,600],
 	name: '테스터',
-	age: '1993',
+	graduation: 2012,
+	birth: 1993,
 	gender: true,
 	stories:[{content: '테스트입니다'}] 
 };
