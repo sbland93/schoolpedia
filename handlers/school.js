@@ -133,8 +133,8 @@ module.exports = function(){
 			Promise.all([schoolPromise, boardRecent, boardBest]).then(function(rtnArr){
 				res.render('school', {
 					schoolInfo: schoolViewModel(rtnArr[0]),
-					recentList : rtnArr[1],
-					bestList : rtnArr[2],
+					recentList : rtnArr[1].map(boardViewModel),
+					bestList : rtnArr[2].map(boardViewModel),
 				});
 			}).catch(function(err){ return next(err); });
 

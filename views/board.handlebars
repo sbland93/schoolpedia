@@ -1,9 +1,8 @@
-<h1>Board Page, This page include board and sorting TODO</h1>
-
 <div class="board" id="eachBoard" boardId="{{board.id}}">
 	<b><p class="title">{{board.title}}</p></b>
 	<p class="content">{{board.content}}</p>
 	<p class="updated_at">{{board.updated_at}}</p>
+	<p>추천: {{board.up}}</p>
 </div>
 <button class="btn btn-default" id="removeEachBoard">삭제</button>
 <a href="/board/{{board.id}}/update" class="btn btn-default">수정</a>
@@ -11,20 +10,5 @@
 
 {{#section 'jquery'}}
 	<script type="text/javascript" src="/js/api/board.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function(){
-		var boardId = $('#eachBoard').attr('boardId');
-		$('#removeEachBoard').on('click', function(evt){
-			evt.preventDefault();
-
-			deleteBoard(boardId).then(function(data){
-				if(data.success) location.href = document.referrer;
-				else alert('Error Occured');
-			}).catch(function(){
-				alert('Error occured');
-			});
-		});
-	})
-		
-	</script>
+	<script type="text/javascript" src="/js/controllers/boardController.js"></script>
 {{/section}}

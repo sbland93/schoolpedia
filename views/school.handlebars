@@ -1,10 +1,14 @@
+{{schoolInfo.description}} <button id="updateDescription">학교 소개글 수정</button>
 
+<!--수정버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
+<div id="updateDescription"></div>
 
 <a href="/school/{{schoolInfo.id}}/board"><h2>{{schoolInfo.name}}의 최근게시물ㅋㅋ</h2></a>
+
 <ul class="boardList">
 	{{#each recentList}}
 		<li>
-		<p>제목: {{title}}</p>
+		<a href="/board/{{id}}"><p>제목: {{title}}</p></a>
 		<p>학교: {{school.name}}</p>
 		<p>내용: {{content}}</p>
 		<p>추천: {{up}}</p>
@@ -29,3 +33,9 @@
 </ul>
 
 <a href="/school/{{schoolInfo.id}}/board/new" class="btn btn-primary">글쓰기</a>
+
+{{#section 'jquery'}}
+	<script type="text/javascript">
+		
+	</script>
+{{/section}}
