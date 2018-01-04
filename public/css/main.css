@@ -1,12 +1,14 @@
 /*메인페이지 body 모두 적용*/
 body{
-	margin-top:30pt;
-	width:70%;
+	/*width:70%;
 	margin-left:auto;
 	margin-right:auto;
+	*/
+	margin-top:30pt;
 }
+
 .imge{
-	position:fixed;
+	position:absolute;
 	top:0px;
 	right:0px;
 
