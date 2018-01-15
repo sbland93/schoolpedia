@@ -1,21 +1,9 @@
 
-/*최근 게시물 div */
-.left{
-	
-	width:47%;
-	float:left;
-	
-}
-/*베스트 게시물 div */
-.right{
-	
-	width:47%;
-	float:right;
-	
-}
 
-h2{
-	color:red;
+
+button#updateDescription{
+	float:right;
+	color:black;
 }
 /*글쓰기 버튼 */
 .middle{
@@ -25,13 +13,11 @@ h2{
 }
 /*검색칸 */
 .bottom{
-	margin-top:30pt;
+	margin-top:25pt;
+}
+input{
+	font-size:15pt;
 }
 span{
 	font-weight:bold;
-
-}
-#searchlist{
-	padding:5px;
-	margin:5px;
 }

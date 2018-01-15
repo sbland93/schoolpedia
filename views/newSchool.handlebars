@@ -1,19 +1,27 @@
+<header>
+	<h1>{{schoolInfo.name}}의 학교페이지를 열기 위해 학교 소개문구를 적어주세요.</h1>
+</header>
 
-<h1>{{schoolInfo.name}}의 학교페이지를 열기 위해 학교 소개문구를 적어주세요.</h1>
 
 <form class="form-horizontal newSchoolForm" id="newProfileForm" role="form" action="/api/school" method="POST">
 	
 	<!--DOLATER Hidden -->
 	<input type="hidden" name="id" value="{{schoolInfo.id}}" id="schoolId">
 	<!-- 소개글!-->
-	<div class="descrip">
-		<textarea name="description" placeholder="학교소개글 (무조건5자!!)" cols="100" rows="4"></textarea>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="descrip">
+				<textarea name="description" placeholder="학교소개글 (무조건5자!!)"></textarea>
+			</div>
+		</div>
+		<div class="col-md-12">	
+			<div class="submitbutton">
+				<button type="submit" class="btn btn-primary">학교페이지 생성</button>
+				<button class="btn btn-default goBack">취소</button>
+			</div>
+		</div>
 	</div>
 	
-	<div class="submitbutton">
-		<button type="submit" class="btn btn-primary">학교페이지 생성</button>
-		<button class="btn btn-default goBack">취소</button>
-	</div>
 </form>
 
 
