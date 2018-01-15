@@ -1,30 +1,29 @@
 
 <!--NameSpace : HM -->
-<h1>스 쿨 충</h1>
+<header>
+	스 쿨 충
+</header>
+
 
 <link rel="stylesheet" type="text/css" href="/css/home.css">
 <!--학교 검색  -->
 <form action="/api/school" id="searchSchool">
-	<div class="input-append">
-		<input class="span2" id="appendedInputButton" type="text" name="name" placeholder="학교명을 입력하세요.!!">
-		<button class="btn btn-primary" type="submit">검색!</button>
+	<div>
+		<input type="text" name="name" placeholder="학교명을 입력하세요.!!">
+		<button class="btn btn-default" type="submit">검색!</button>
 	</div>
 </form>
 
 <!--학교 리스트 목록 !-->
-<div class="row-fluid">
-	<div class="span8 offset2">
+<div class="row">
+	<div>
 		<div id="searchResult"></div>
 	</div>
 </div>
-
-
-
-
-			
+<!--
 <script type="text/javascript" id="idea">
 	"{{{this}}}"
-</script>>
+</script>> -->
 
 {{#section 'head'}}
 	<script type="text/javascript" src="/js/templates/templates.js"></script>

@@ -1,15 +1,14 @@
-/*메인페이지 body 모두 적용*/
 body{
-	/*width:70%;
-	margin-left:auto;
-	margin-right:auto;
-	*/
-	margin-top:30pt;
+	background-color:#cd5c5c;
+	color:white;
 }
-
-.imge{
-	position:absolute;
-	top:0px;
-	right:0px;
-
+header{
+	text-align:center;
+	margin-top:20pt;
+	font-size:27pt;
+	font-weight:bold;
+	margin:40pt;
+}
+a{
+	color:white;
 }
