@@ -58,14 +58,16 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="bottom">
-			<div>
+			<form class="searchProfileForm">
 				<input type="text" name="name" placeholder="친구이름!!">
 				<button class="btn btn-primary" type="submit">검색!</button>
-			</div>
+			</form>
 		</div>
 	</div>
 </div>
-	<!--검색리스트 목록 !-->
+	
+<!--검색리스트 목록 !-->
+
 
 <div class="row">
 	<div class="col-xs-6">
@@ -74,7 +76,9 @@
 </div>
 
 
-
+{{#section 'head'}}
+	<script type="text/javascript" src="/js/templates/templates.js"></script>
+{{/section}}
 
 {{#section 'jquery'}}
 	<script type="text/javascript" src="/js/api/school.js"></script>
