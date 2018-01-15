@@ -28,15 +28,30 @@ module.exports = function(){
 		},	
 
 
-		//rendering Create Profile Form
-		newProfile: function(req, res, next){
+		//rendering Create Profile Form(Step1)
+		newProfileOne: function(req, res, next){
 			School.findById(req.params.id, function(err, school){
 				if(err) next(err);
 				if(!school){
 					res.locals.message404 = '해당학교 페이지는 존재하지 않아요ㅠㅠ';
 					return next();
 				}
-				res.render('newProfile', {
+				res.render('newProfileOne', {
+					schoolInfo: schoolViewModel(school, true),
+					pageTestScript: '/qa/tests-newProfile.js'
+				});
+			});
+		},
+
+		//rendering Create Profile Form(Step2)
+		newProfileTwo: function(req, res, next){
+			School.findById(req.params.id, function(err, school){
+				if(err) next(err);
+				if(!school){
+					res.locals.message404 = '해당학교 페이지는 존재하지 않아요ㅠㅠ';
+					return next();
+				}
+				res.render('newProfileTwo', {
 					schoolInfo: schoolViewModel(school, true),
 					pageTestScript: '/qa/tests-newProfile.js'
 				});

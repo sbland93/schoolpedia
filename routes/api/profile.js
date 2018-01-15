@@ -1,5 +1,6 @@
 var Profile = require('../../models/profile.js');
 
+var profileViewModel = require('../../viewModels/profile.js');
 
 
 module.exports = function(app){
@@ -51,25 +52,14 @@ module.exports = function(app){
 		var query = req.query;
 		if(req.query.name) query.name = new RegExp('^'+req.query.name);
 		Profile.find(query)
-			.populate('school')
+			.populate('schools.school')
 			.exec(function(err, profiles){
 				if(err) return next(err);
 				if(profiles.length === 0) return res.json({
 					success: false,
 					message: 'NO DATA',
 				});
-				res.json(profiles.map(function(a){
-					return {
-						id: a._id,
-						school: a.school,
-						class: a.class,
-						name: a.name,
-						graduation: a.graduation,
-						gender: a.gender,
-						description: a.description,
-						replies : a.replies,
-					};
-				}));
+				res.json(profiles.map(profileViewModel));
 			});
 	});
 
@@ -91,6 +81,10 @@ module.exports = function(app){
 					description: profile.description,
 					replies : profile.replies,
 				});
+			});
+		}else{
+			res.json({
+				success: false
 			});
 		}
 	})

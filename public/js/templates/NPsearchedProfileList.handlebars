@@ -1,0 +1,14 @@
+{{#unless noData}}
+	<p>혹시 이중에 만드려는 학생의 프로필이 이미 있는지 확인해 보세요.</p>
+	<ul class="profileList">
+		{{#each searchedList}}
+			<li><a href="/profile/{{id}}"><p>{{bugName}} {{name}} {{#each schools}} {{school.category}} {{school.name}} {{/each}} {{graduation}}</p></a></li>
+		{{/each}}
+	</ul>
+	<p> 위의 학생들중에 존재하지 않으면 쉽게 학생을 생성해봐요 <button><a href="/school/{{schoolId}}/profile/newTwo">만들기</a></button>
+{{/unless}}
+
+
+{{#if noData}}
+	만드려는 학생이 현재 존재하지 않는게 맞는거 같아요 <button><a href="/school/{{schoolId}}/profile/newTwo">만들기</a></button>
+{{/if}}

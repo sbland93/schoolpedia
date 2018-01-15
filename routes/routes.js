@@ -38,8 +38,11 @@ module.exports = function(app){
 	//rendering Update Profile Form
 	app.get('/profile/:id/update', profileHandlers.updateProfile);
 
-	//rendering Create Profile Form
-	app.get('/school/:id/profile/new', profileHandlers.newProfile);
+	//rendering Create Profile Form(Step1)
+	app.get('/school/:id/profile/newOne', profileHandlers.newProfileOne);
+
+	//rendering Create Profile Form(Step2)
+	app.get('/school/:id/profile/newTwo', profileHandlers.newProfileTwo);
 
 	//board 페이지 라우팅
 	//DOLATER !board

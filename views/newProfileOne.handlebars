@@ -1,0 +1,28 @@
+
+<!--DOLATER Hidden -->
+<input type="hidden" name="id" value="{{schoolInfo.id}}" id="schoolId">
+
+
+Step1. 먼저, 이미 찾으려는 학생이 다른학교에 만들어져 있는지 확인해 볼까요.
+
+<form class="form-horizontal searchProfileForm" role="form" action="/api/profile" method="GET">
+	<input class="span2" id="appendedInputButton" type="text" name="name" placeholder="친구이름.!!">
+	<button class="btn btn-primary" type="submit">검색!</button>
+</form>
+
+
+
+<!--검색리스트 목록 !-->
+<div id="searchResult"></div>
+
+
+
+
+{{#section 'head'}}
+	<script type="text/javascript" src="/js/templates/templates.js"></script>
+{{/section}}
+
+{{#section 'jquery'}}
+	<script type="text/javascript" src="/js/api/profile.js"></script>
+	<script type="text/javascript" src="/js/controllers/newProfileOneController.js"></script>
+{{/section}}

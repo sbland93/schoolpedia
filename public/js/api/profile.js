@@ -32,7 +32,6 @@ var getProfile = function(id){
 };
 
 var addProfile = function(data){
-	console.log('ADDPROFILE');
 	return new Promise(function(resolve, reject){
 		$.ajax({
 			url: baseProfile,

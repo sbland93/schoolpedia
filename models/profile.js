@@ -19,8 +19,7 @@ var replySchema = mongoose.Schema({
 var schoolSchema = mongoose.Schema({
 	school: {type: mongoose.Schema.Types.ObjectId, ref: 'School', index: true},
 	class: {type: [Number], index: true}
-})
-
+});
 
 //school의 reference.
 //DOLATER school required 함.
@@ -32,6 +31,7 @@ var profileSchema = mongoose.Schema({
 	graduation: { type: Number, min: 1900, max: 2050 },
 	gender: Boolean,
 	description: String,
+	feature: [ { type: String } ],
 	stories: [ storySchema ],
 	replies : [ replySchema ],
 	up: { type: Number, default: 0 },

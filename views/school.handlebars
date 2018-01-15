@@ -1,3 +1,5 @@
+<!--DOLATER Hidden -->
+<input type="hidden" name="id" value="{{schoolInfo.id}}" id="schoolId">
 
 <link rel="stylesheet" type="text/css" href="/css/school.css">
 
@@ -15,7 +17,6 @@
 			{{#each recentList}}
 				<li>
 				<span><a href="/board/{{id}}"><p>{{title}}</p></a></span>
-				
 				<p>내용: {{content}}</p>
 				<p>추천: {{up}}</p>
 				</li>
@@ -51,6 +52,8 @@
 		</form>
 	</div>
 </div>
+
+
 
 <!--검색리스트 목록 !-->
 <div id="searchResult"></div>

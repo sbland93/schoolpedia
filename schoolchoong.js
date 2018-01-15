@@ -153,15 +153,7 @@ var handlebars = require('express-handlebars').create({
 			}
 			return accum;
 		},
-		iterateFromTo: function(from, to, block){
-			var accum = '';
-			for(var i=from; i<=to; i++){
-				accum+=block.fn({
-					index: i,
-				});
-			}
-			return accum;
-		},
+		
 		iterateClassOptions: function(n, gradeValue, selectedValue, block){
 			var accum = '';
 			for(var i= 1; i < n; ++i){
@@ -213,7 +205,27 @@ var handlebars = require('express-handlebars').create({
 				})
 			}
 			return accum;
-		}
+		},
+
+		//학교의 category가 'elementary'인지를 확인하는 helper함수.
+		isEquals: function(a, b, block){
+			
+			if( a === b){
+				return block.fn(this);
+			}
+
+			return block.inverse(this);
+		},
+		
+		iterateFromTo: function(from, to, block){
+			var accum = '';
+			for(var i=from; i<=to; i++){
+				accum+=block.fn({
+					index: i,
+				});
+			}
+			return accum;
+		},
 	},
 });
 

@@ -2,6 +2,8 @@ module.exports = function(profile){
 	return {
 		id: profile._id,
 		schools: profile.schools,
+		graduation: profile.graduation,
+		bugName: profile.bugName,
 		name: profile.name,
 		age: profile.age,
 		gender: profile.gender,
