@@ -5,7 +5,6 @@
 </header>
 
 
-<link rel="stylesheet" type="text/css" href="/css/home.css">
 <!--학교 검색  -->
 <form action="/api/school" id="searchSchool">
 	<div>
@@ -16,7 +15,7 @@
 
 <!--학교 리스트 목록 !-->
 <div class="row">
-	<div>
+	<div class="col-xs-10 col-xs-offset-1">
 		<div id="searchResult"></div>
 	</div>
 </div>
@@ -27,6 +26,7 @@
 
 {{#section 'head'}}
 	<script type="text/javascript" src="/js/templates/templates.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/home.css">
 {{/section}}
 
 

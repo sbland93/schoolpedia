@@ -1,17 +1,20 @@
-step2. 학생의 정보를 적어주세요 (이름/학교/(반)/졸업년도/특징)<br/><br/>
+<header>
+	학생의 정보를 적어주세요<br/>
+</header>
+
 
 <form class="form-horizontal newProfileForm" id="newProfileForm" role="form" action="/api/profile" method="POST">
 	
 	<div class="form-group">
 		<label for="fieldName" class="col-sm-2 control-label">이름</label>
-		<div class="col-sm-4">
+		<div class="col-sm-6 col-md-4">
 			<input type="text" class="form-control" name="name" id="fieldName" required>
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label for="gender" class="col-sm-2 control-label">성별</label>
-		<div class="col-sm-4">
+		<div class="col-sm-6 col-md-4">
 			<input type="radio" name="gender" value="true" id="gender" checked> 남자
   			<input type="radio" name="gender" value="false" id="gender"> 여자<br>
 		</div>
@@ -20,7 +23,7 @@ step2. 학생의 정보를 적어주세요 (이름/학교/(반)/졸업년도/특
 	<div class="form-group">
 		<label for="graduation" class="col-sm-2 control-label">고등학교 졸업(예정)년도</label>
 		
-		<div class="col-sm-4">
+		<div class="col-sm-6 col-md-4">
 			<select class="form-control" name="graduation" id="graduation">
 				<option value="0">졸업(예정)년</option>
 				{{#iterateFromTo 1990 2020}}
@@ -39,7 +42,7 @@ step2. 학생의 정보를 적어주세요 (이름/학교/(반)/졸업년도/특
 	<!-- 학교이름 / input으로 처리하지말것 -->
 	<div class="form-group">
 		<label for="school" class="col-sm-2 control-label">학교</label>
-		<div class="col-sm-4">
+		<div class="col-sm-6 col-md-4">
 			{{schoolInfo.name}}
 		</div>
 	</div>
@@ -49,7 +52,7 @@ step2. 학생의 정보를 적어주세요 (이름/학교/(반)/졸업년도/특
 		{{#forLoop 6}}
 		<div class="form-group">
 			<label for="class" class="col-sm-2 control-label">{{index}}학년 학급</label>
-			<div class="col-sm-4">
+			<div class="col-sm-6 col-md-4">
 				<select class="form-control" name="class{{index}}" id="class">
 					<option value="0">기억이 잘안나요</option>
 					{{#forLoop 20}}
@@ -64,7 +67,7 @@ step2. 학생의 정보를 적어주세요 (이름/학교/(반)/졸업년도/특
 		{{#forLoop 3}}
 		<div class="form-group">
 			<label for="class" class="col-sm-2 control-label">{{index}}학년 학급</label>
-			<div class="col-sm-4">
+			<div class="col-sm-6 col-md-4">
 				<select class="form-control" name="class{{index}}" id="class">
 					<option value="0">기억이 잘안나요</option>
 					{{#forLoop 20}}
@@ -79,13 +82,13 @@ step2. 학생의 정보를 적어주세요 (이름/학교/(반)/졸업년도/특
 
 	<div class="form-group">
 		<label for="fieldStory" class="col-sm-2 control-label">특징</label>
-		<div class="col-sm-4">
+		<div class="col-sm-6 col-md-4">
 			<textarea class="form-control stories" name="feature" required></textarea>
 		</div>
 	</div>
 
 	<div class="form-group">
-		<div class="col-sm-offset-5 col-sm-3">
+		<div class="col-sm-offset-2 col-sm-3">
 			<button type="submit" class="btn btn-default">글생성</button>
 			<button class="btn btn-default goBack">취소</button>
 		</div>

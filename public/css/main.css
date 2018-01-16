@@ -1,17 +1,20 @@
 body{
-	background-color:#cd5c5c;
+	padding:20pt;
+	background-color:#ffa07a;
 	font-weight:bold;
+	font-size:12pt;
 }
 header{
 	text-align:center;
 	margin-top:20pt;
-	font-size:27pt;
+	font-size:24pt;
 	font-weight:bold;
 	margin:40pt;
 }
 a{
-	color:white;
+	color:#483d8b;
 }
+
 input{
 	color:black;
 }

@@ -1,11 +1,37 @@
-<div class="board" id="eachBoard" boardId="{{board.id}}">
-	<b><p class="title">{{board.title}}</p></b>
-	<p class="content">{{board.content}}</p>
-	<p class="updated_at">{{board.updated_at}}</p>
-	<p>추천: {{board.up}}</p>
+<link rel="stylesheet" type="text/css" href="/css/board.css">
+<header>{{board.title}}</header>
+<div class="row">
+	<div class="col-md-offset-1 col-md-4">
+		<div class="board" id="eachBoard" boardId="{{board.id}}">
+			<div class="content">{{board.content}}</div>
+			<div class="updated_at">{{board.updated_at}}</div>	
+		</div>	
+		<div class="btn-group" role="group" aria-label="...">
+			<button type="button" class="btn btn-default">+{{board.up}}</button>
+			<button type="button" class="btn btn-default">-{{board.down}}</button>
+			<button class="btn btn-default" id="removeEachBoard">삭제</button>
+			<a href="/board/{{board.id}}/update" class="btn btn-default">수정</a>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="text">
+			<div class="form-group">
+			  <label for="comment">Comment:</label>
+			  <textarea class="form-control" rows="5" id="comment"></textarea>
+			</div>
+			<button type="button" class="btn btn-default">입력</button>
+		</div>
+
+		<div>
+			<ul>
+				<li>맞아</li>
+				<li>아닌듯</li>
+			</ul>
+		</div>
+	</div>
 </div>
-<button class="btn btn-default" id="removeEachBoard">삭제</button>
-<a href="/board/{{board.id}}/update" class="btn btn-default">수정</a>
+
+
 
 
 {{#section 'jquery'}}
