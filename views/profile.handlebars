@@ -3,11 +3,9 @@
 
 <div class="profile">
 	<p><b>충호{{profile.bugName}}이름{{profile.name}}</b></p><button>충호수정하기</button>
-	{{#each profile.feature}}
-	<ul>
-		<li>특징: {{feature}} up: {{up}} down: {{down}}</li>
-	</ul>
-	{{/each}}
+	
+
+	<div id="features"></div>
 	<button>특징추가하기</button>
 
 	{{#each profile.schools}}
@@ -17,35 +15,15 @@
 		{{/each}}
 	{{/each}}
 		
-	<div id="profileStories">
-		{{#each profile.stories}}
-			<p class="storyContents">관련일화: {{content}}</p>
-			up: {{up}} down: {{down}}
-		{{/each}}
-	</div>
+	<div id="stories"></div>
 	<button>관련일화쓰기</button>
 
-	{{#each profile.replies}}
-		<ul>
-			<li>유저: {{user}} / 방명록: {{content}}</li>
-		</ul>
-	{{/each}}
+	<div id="replies"></div>
 	<button>방명록쓰기</button>
 
 	<p class="updated_at">프로필 생성시간:{{profile.updated_at}}</p>	
 
 </div>
-
-
-
-
-<!-- Pagination Test -->
-
-<div id="features"></div>
-
-<div id="stories"></div>
-
-<div id="replies"></div>
 
 
 

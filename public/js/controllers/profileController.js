@@ -37,6 +37,7 @@ $(document).ready(function(){
 			contextFn : function(A){
 				var self = A;
 				return {
+					user: self.user,
 					feature: self.feature,
 				};
 			},
@@ -153,6 +154,22 @@ $(document).ready(function(){
     }
 
 
+    var makePosts = function(data, dataObj){
+    	var dataCount = data.length;
+
+        storyPageCount = Math.ceil(dataCount / opts.pageMax);
+        //console.log(storyPageCount);
+
+        if (dataCount > opts.pageMax) {
+            paginate(data, 1, storyPageCount, dataObj.postsDiv, dataObj.template, dataObj.contextFn, dataObj.dynamicClass, dataObj.gotoPageNumber);
+            posts = data.slice(0, opts.pageMax);
+            console.log(posts);
+        } else {
+            posts = data;
+        }
+        loadPosts(posts, dataObj.postsDiv, dataObj.template, dataObj.contextFn);
+    }
+
 
 
     $.ajax({
@@ -161,36 +178,11 @@ $(document).ready(function(){
     	success: function(response_json){
     		var storyData = $(response_json.stories);
     		var featureData = $(response_json.features);
-    		console.log(response_json);
+    		var replyData = $(response_json.replies);
 
-    		storyCount = storyData.length;
-    		featureCount = featureData.length;
-
-            storyPageCount = Math.ceil(storyCount / opts.pageMax);
-            featurePageCount = Math.ceil(featureCount / opts.pageMax);
-            //console.log(storyPageCount);
-
-            var storyObj = tplAndContext.stories;
-            var featureObj = tplAndContext.features;
-
-            if (storyCount > opts.pageMax) {
-                paginate(storyData, 1, storyPageCount, storyObj.postsDiv, storyObj.template, storyObj.contextFn, storyObj.dynamicClass, storyObj.gotoPageNumber);
-                posts = storyData.slice(0, opts.pageMax);
-                console.log(posts);
-            } else {
-                posts = storyData;
-            }
-            loadPosts(posts, storyObj.postsDiv, storyObj.template, storyObj.contextFn);
-    	
-        	if (featureCount > opts.pageMax) {
-                paginate(featureData, 1, featurePageCount, featureObj.postsDiv, featureObj.template, featureObj.contextFn, featureObj.dynamicClass, featureObj.gotoPageNumber);
-                posts = featureData.slice(0, opts.pageMax);
-                console.log(posts);
-            } else {
-                posts = featureData;
-            }
-            loadPosts(posts, featureObj.postsDiv, featureObj.template, featureObj.contextFn);
-    	    
+    		makePosts(storyData, tplAndContext.stories);
+    		makePosts(featureData, tplAndContext.features);
+    		makePosts(replyData, tplAndContext.replies);
 
     	}
     });
