@@ -5,7 +5,7 @@ module.exports = function(profile){
 		schools: profile.schools,
 		graduation: profile.graduation,
 		bugName: profile.bugName,
-		feature: profile.feature,
+		features: profile.features,
 		name: profile.name,
 		age: profile.age,
 		gender: profile.gender,

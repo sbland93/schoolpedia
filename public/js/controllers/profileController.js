@@ -37,11 +37,12 @@ $(document).ready(function(){
 			contextFn : function(A){
 				var self = A;
 				return {
-					user: self.content,
 					feature: self.feature,
 				};
 			},
-			postsDiv : $('#stories'),
+			postsDiv : $('#features'),
+			dynamicClass : "featuresPG",
+			gotoPageNumber: undefined,
 		},
 
 		stories: {
@@ -53,14 +54,28 @@ $(document).ready(function(){
 				};
 			},
 			postsDiv : $('#stories'),
+			dynamicClass : "storiesPG",
+			gotoPageNumber: undefined,
 		},
+
+		replies: {
+			template: TPL.EPreplies,
+			contextFn: function(A){
+				var self = A;
+				return {
+					user: self.user,
+					content: self.content,
+				};
+			},
+			postsDiv : $('#replies'),
+			dynamicClass : "repliesPG",
+			gotoPageNumber: undefined,			
+		}
 	}
 
-	var gotoPageNumber;
 
     var opts = {
         pageMax: 3,
-        postsDiv: $('#stories'),
     }
     
     function loadPosts(posts, postsDiv, postsTemplate, contextFn) {
@@ -80,27 +95,29 @@ $(document).ready(function(){
     function hideNext() { $('.pagination .pagination-next').hide(); }
     function showNext() { $('.pagination .pagination-next').show(); }
 
-    function paginate(data, page, pageCount, postsDiv, postsTemplate, postsContext) {
+    function paginate(data, page, pageCount, postsDiv, postsTemplate, postsContext, dynamicClass, gotoPageNumber) {
         var template = TPL.EPpagination;
-        var context = { pages: range(page,pageCount)};
-        //console.log(range(page,pageCount));
+        var context = { pages: range(page,pageCount), dynamicClass: dynamicClass};
+        console.log(range(page,pageCount));
         var html = template(context);
-        //console.log(html);
-        var paginationTag = postsDiv.parent().find(".pagination");
+        console.log(html);
+        var paginationTag = postsDiv.parent().find("."+dynamicClass);
+        console.log("."+dynamicClass);
+        console.log(paginationTag);
         paginationTag.length > 0 ? paginationTag.replaceWith(html) : postsDiv.after(html);
 
         function changePage(page) {
             pageItems.removeClass('active');
             pageItems.filter('[d-page="' + page + '"]').addClass('active');
-            loadPosts(data.slice(page * opts.pageMax - opts.pageMax, page * opts.pageMax), opts.postsDiv, postsTemplate, postsContext);
-            paginate(data, page, pageCount, postsDiv, postsTemplate, postsContext);
+            loadPosts(data.slice(page * opts.pageMax - opts.pageMax, page * opts.pageMax), postsDiv, postsTemplate, postsContext);
+            paginate(data, page, pageCount, postsDiv, postsTemplate, postsContext, dynamicClass);
             if (gotoPageNumber <= 1) {
                 hidePrev();
             }
         }
 
-        var pageItems = $('.pagination>li.pagination-page');
-        var pageItemsLastPage = $('.pagination li').length - 2;
+        var pageItems = $('.'+dynamicClass+'>li.pagination-page');
+        var pageItemsLastPage = $('.'+dynamicClass+' li').length - 2;
         pageItems.removeClass('active');
         pageItems.filter('[d-page="' + page + '"]').addClass('active');
 
@@ -120,13 +137,13 @@ $(document).ready(function(){
             }
         });
 
-        $('.pagination>li.pagination-prev').on('click', function () {
-            gotoPageNumber = parseInt($('.pagination>li.active').attr('d-page')) - 1;
+        $('.'+dynamicClass+'>li.pagination-prev').on('click', function () {
+            gotoPageNumber = parseInt($('.'+dynamicClass+'>li.active').attr('d-page')) - 1;
             changePage(gotoPageNumber);
         });
 
-        $('.pagination>li.pagination-next').on('click', function () {
-            gotoPageNumber = parseInt($('.pagination>li.active').attr('d-page')) + 1;
+        $('.'+dynamicClass+'>li.pagination-next').on('click', function () {
+            gotoPageNumber = parseInt($('.'+dynamicClass+'>li.active').attr('d-page')) + 1;
             if (gotoPageNumber > pageCount) {
                 gotoPageNumber = 1;
                 showPrev();
@@ -135,25 +152,46 @@ $(document).ready(function(){
         });
     }
 
+
+
+
     $.ajax({
     	dataType: 'json',
     	url: '/api/profile/'+$('#PPdefaultValue').val(),
     	success: function(response_json){
     		var storyData = $(response_json.stories);
+    		var featureData = $(response_json.features);
+    		console.log(response_json);
 
-    		sotriesCount = storyData.length;
+    		storyCount = storyData.length;
+    		featureCount = featureData.length;
 
-            pageCount = Math.ceil(sotriesCount / opts.pageMax);
-            console.log(pageCount);
+            storyPageCount = Math.ceil(storyCount / opts.pageMax);
+            featurePageCount = Math.ceil(featureCount / opts.pageMax);
+            //console.log(storyPageCount);
 
-            if (sotriesCount > opts.pageMax) {
-                paginate(storyData, 1, pageCount, tplAndContext.stories.postsDiv, tplAndContext.stories.template, tplAndContext.stories.contextFn);
+            var storyObj = tplAndContext.stories;
+            var featureObj = tplAndContext.features;
+
+            if (storyCount > opts.pageMax) {
+                paginate(storyData, 1, storyPageCount, storyObj.postsDiv, storyObj.template, storyObj.contextFn, storyObj.dynamicClass, storyObj.gotoPageNumber);
                 posts = storyData.slice(0, opts.pageMax);
                 console.log(posts);
             } else {
                 posts = storyData;
             }
-            loadPosts(posts, tplAndContext.stories.postsDiv, tplAndContext.stories.template, tplAndContext.stories.contextFn);
+            loadPosts(posts, storyObj.postsDiv, storyObj.template, storyObj.contextFn);
+    	
+        	if (featureCount > opts.pageMax) {
+                paginate(featureData, 1, featurePageCount, featureObj.postsDiv, featureObj.template, featureObj.contextFn, featureObj.dynamicClass, featureObj.gotoPageNumber);
+                posts = featureData.slice(0, opts.pageMax);
+                console.log(posts);
+            } else {
+                posts = featureData;
+            }
+            loadPosts(posts, featureObj.postsDiv, featureObj.template, featureObj.contextFn);
+    	    
+
     	}
     });
 
