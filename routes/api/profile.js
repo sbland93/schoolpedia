@@ -102,17 +102,7 @@ module.exports = function(app){
 					message: 'NO DATA',
 				});
 			};
-			return res.json({
-				success: true,
-				id: profile._id,
-				school: profile.school,
-				class: profile.class,
-				name: profile.name,
-				graduation: profile.graduation,
-				gender: profile.gender,
-				description: profile.description,
-				replies : profile.replies,
-			});
+			return res.json(profileViewModel(profile));
 		});
 	});
 

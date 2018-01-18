@@ -83,9 +83,44 @@ module.exports = {
 			birth: 930312,
 			graduation: 2012,
 			gender: true,
-			stories: [{content: '한용희임ㅋㅋ' +
-			'용카이' +
-			'맨날 웃고다녔고 친구들 많았음 ㅋㅋㅋㅋ'}],
+			stories: [
+				{content: '이야기1', up: 7, down: 1},
+				{content: '이야기2', up: 6, down:1},
+				{content: '이야기3', up: 5, down: 1},
+				{content: '이야기4', up: 4, down: 1},
+				{content: '이야기5', up: 3, down: 1},
+				{content: '이야기6', up: 2, down: 1},
+				{content: '이야기6', up: 2, down: 1},
+				{content: '이야기6', up: 2, down: 1},
+				{content: '이야기6', up: 2, down: 1},
+				{content: '이야기6', up: 2, down: 1},
+				{content: '이야기6', up: 2, down: 1},
+				{content: '이야기6', up: 2, down: 1},
+				{content: '이야기6', up: 2, down: 1},
+				{content: '이야기6', up: 2, down: 1},
+				{content: '이야기6', up: 2, down: 1},
+				{content: '이야기6', up: 2, down: 1},
+				{content: '이야기6', up: 2, down: 1},
+				{content: '이야기6', up: 2, down: 1},
+				{content: '이야기7', up: 1, down: 1},
+			],
+			replies: [
+				{user: '유저1' , content: '이야기1'},
+				{user: '유저2' , content: '이야기2'},
+				{user: '유저3' , content: '이야기3'},
+				{user: '유저4' , content: '이야기4'},
+				{user: '유저5' , content: '이야기5'},
+				{user: '유저6' , content: '이야기6'},
+				{user: '유저7' , content: '이야기7'},
+			],
+			feature: [
+				{feature: '특징1', up: 7, down: 3},
+				{feature: '특징2', up: 6, down: 3},
+				{feature: '특징3', up: 5, down: 3},
+				{feature: '특징4', up: 4, down: 3},
+				{feature: '특징5', up: 3, down: 3},
+				{feature: '특징6', up: 2, down: 3},
+			]
 		}
 	],
 

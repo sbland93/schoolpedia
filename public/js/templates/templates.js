@@ -190,6 +190,22 @@ this["TPL"]["searchedProfileList"] = Handlebars.template({"1":function(container
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.noData : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 },"useData":true});
 
+this["TPL"]["testTemplate"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "	    <li class=\"pagination-page\" d-page=\""
+    + alias2(alias1(depth0, depth0))
+    + "\"><a href=\"#\">"
+    + alias2(alias1(depth0, depth0))
+    + "</a></li>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<ul class=\"pagination\">\r\n    <li class=\"pagination-prev\"><a href=\"#\">&laquo;</a></li>\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.pages : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    <li class=\"pagination-next\"><a href=\"#\">&raquo;</a></li>\r\n</ul>";
+},"useData":true});
+
 this["TPL"]["updateDescription"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "\r\n<form class=\"form-horizontal updateSchoolForm\" role=\"form\" action=\"/api/school\" method=\"PUT\">\r\n	<!--controller에서 id를 가져오기 위해 추가된 From-->\r\n\r\n	<!--제목부분-->\r\n	<div class=\"form-group\">\r\n\r\n		<label for=\"fieldDescription\" class=\"col-sm-2 control-label\">소개글수정</label>\r\n		<div class=\"col-sm-4\">\r\n			<input type=\"text\" class=\"form-control\" required name=\"description\" id=\"fieldDescription\">\r\n		</div>\r\n	\r\n	</div>\r\n\r\n	<!--수정, 취소 버튼-->\r\n	<div class=\"form-group\">\r\n	\r\n		<div class=\"col-sm-offset-2 col-sm-1\">\r\n			<button type=\"submit\" class=\"btn btn-default\">수정</button>\r\n		</div>\r\n\r\n	</div>\r\n</form>\r\n<div class=\"col-sm-offset-2 col-sm-1\">\r\n	<button class=\"btn btn-default\" id=\"cancelUpdateDescription\">취소</button>\r\n</div>";
 },"useData":true});

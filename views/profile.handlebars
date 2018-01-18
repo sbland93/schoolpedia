@@ -2,31 +2,59 @@
 <h1>Profile Page, This page include profile and sorting TODO</h1>
 
 <div class="profile">
-	<p><b>{{profile.name}}</b></p>
+	<p><b>충호{{profile.bugName}}이름{{profile.name}}</b></p><button>충호수정하기</button>
+	{{#each profile.feature}}
+	<ul>
+		<li>특징: {{feature}} up: {{up}} down: {{down}}</li>
+	</ul>
+	{{/each}}
+	<button>특징추가하기</button>
+
 	{{#each profile.schools}}
-		{{profile.school.name}}
-		{{#classIterator profile.school.class}}
-			<p>
-				{{classIndex}}학급 :	{{#if isDefault}} 알려주세요! {{/if}}
-				{{#unless isDefault}} {{classValue}} {{/unless}}
-			</p>
-		{{/classIterator}}
+		학교: {{school.name}}
+		{{#each class}}
+			학급: {{this}}반
+		{{/each}}
 	{{/each}}
 		
 	<div id="profileStories">
 		{{#each profile.stories}}
-			<p class="storyContents">{{content}}</p>
+			<p class="storyContents">관련일화: {{content}}</p>
+			up: {{up}} down: {{down}}
 		{{/each}}
 	</div>
-	<p class="updated_at">{{profile.updated_at}}</p>	
+	<button>관련일화쓰기</button>
+
+	{{#each profile.replies}}
+		<ul>
+			<li>유저: {{user}} / 방명록: {{content}}</li>
+		</ul>
+	{{/each}}
+	<button>방명록쓰기</button>
+
+	<p class="updated_at">프로필 생성시간:{{profile.updated_at}}</p>	
+
 </div>
-<textarea class="form-control stories" name="stories" rows="20" placeholder="이 학생에 대한 설명, 함께 있었던 일, 일화, 성격, 특징 등" id="newStory"></textarea>
+
+
+
+
+<!--
+<textarea class="form-control stories" name="stories" rows="10" placeholder="이 학생에 대한 설명, 함께 있었던 일, 일화, 성격, 특징 등" id="newStory"></textarea>
+
 <button class="btn btn-default" id="addStory">이야기추가</button>
-<input type="hidden" id="PPdefaultValue" profileId={{profile.id}}>
+-->
+
+<input type="hidden" id="PPdefaultValue" value={{profile.id}} profileId={{profile.id}}>
 
 <a class="btn btn-default" href="/profile/{{profile.id}}/update" id="updateProfile">수정</a>
 <button class="btn btn-default" id="removeProfile">삭제</button>
 
+
+{{#section 'head'}}
+	<script type="text/javascript" src="/js/templates/templates.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/test.css">
+{{/section}}
 
 
 {{#section 'jquery'}}

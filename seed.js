@@ -31,7 +31,7 @@ var seedDev = function(){
 			//하나만저장함, DOLATER, Class도 없음.
 			el.schools = [];
 	
-			el.schools.push({school : availableSchools[randomInt]._id});
+			el.schools.push({school : availableSchools[randomInt]._id, class: [101, 202, 303]});
 		});
 		//boardList에 school을 채워줌.
 		seedData.boardList.forEach(function(el){
