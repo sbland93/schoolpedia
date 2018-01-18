@@ -1,15 +1,28 @@
+@font-face{
+    font-family:'Prime';
+    src:url("/font/PrimeRegular.otf");
+}
 body{
 	padding:20pt;
 	background-color:#ffa07a;
 	font-weight:bold;
 	font-size:12pt;
 }
+.img{
+	position:absolute;
+	left:0;
+	top:0;
+	font-size:15pt;
+	padding:10pt;
+}
+
 header{
+	font-family:Prime;
 	text-align:center;
 	margin-top:20pt;
-	font-size:24pt;
+	font-size:30pt;
 	font-weight:bold;
-	margin:40pt;
+	margin:35pt;
 }
 a{
 	color:#483d8b;

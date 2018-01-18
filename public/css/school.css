@@ -3,10 +3,7 @@
 button{
 	color:black;
 }
-#updateDescription{
-	float:right;
-	margin-bottom:10pt;
-}
+
 /*글쓰기 버튼 */
 .middle{
 	margin-top:10pt;
@@ -14,9 +11,7 @@ button{
 	text-align:center;
 }
 /*검색칸 */
-.bottom{
-	margin-top:5pt;
-}
+
 input{
 	font-size:15pt;
 }

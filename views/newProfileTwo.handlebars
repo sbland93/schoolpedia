@@ -2,99 +2,102 @@
 	학생의 정보를 적어주세요<br/>
 </header>
 
-
-<form class="form-horizontal newProfileForm" id="newProfileForm" role="form" action="/api/profile" method="POST">
-	
-	<div class="form-group">
-		<label for="fieldName" class="col-sm-2 control-label">이름</label>
-		<div class="col-sm-6 col-md-4">
-			<input type="text" class="form-control" name="name" id="fieldName" required>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label for="gender" class="col-sm-2 control-label">성별</label>
-		<div class="col-sm-6 col-md-4">
-			<input type="radio" name="gender" value="true" id="gender" checked> 남자
-  			<input type="radio" name="gender" value="false" id="gender"> 여자<br>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label for="graduation" class="col-sm-2 control-label">고등학교 졸업(예정)년도</label>
-		
-		<div class="col-sm-6 col-md-4">
-			<select class="form-control" name="graduation" id="graduation">
-				<option value="0">졸업(예정)년</option>
-				{{#iterateFromTo 1990 2020}}
-					<option value="{{index}}">{{index}}</option>
-				{{/iterateFromTo}}
-			</select>
-		</div>
-	</div>
-
-	
-
-	<!--DOLATER Hidden -->
-	<input type="hidden" id="defaultSchoolId" name="schoolId" value="{{schoolInfo.id}}" schoolName="{{schoolInfo.name}}" category="{{schoolInfo.category}}">
-	
-
-	<!-- 학교이름 / input으로 처리하지말것 -->
-	<div class="form-group">
-		<label for="school" class="col-sm-2 control-label">학교</label>
-		<div class="col-sm-6 col-md-4">
-			{{schoolInfo.name}}
-		</div>
-	</div>
-
-	<!-- 학교 category가 elementarySchool이면6번 interate 그렇지 않으면 3번 iterate-->
-	{{#isEquals schoolInfo.category 'elementarySchool'}}
-		{{#forLoop 6}}
-		<div class="form-group">
-			<label for="class" class="col-sm-2 control-label">{{index}}학년 학급</label>
-			<div class="col-sm-6 col-md-4">
-				<select class="form-control" name="class{{index}}" id="class">
-					<option value="0">기억이 잘안나요</option>
-					{{#forLoop 20}}
-						<option value="{{index}}">{{index}}</option>
-					{{/forLoop}}
-				</select>
+<div class="row">
+	<div class="col-xs-offset-2">
+		<form class="form-horizontal newProfileForm" id="newProfileForm" role="form" action="/api/profile" method="POST">
+			
+			<div class="form-group">
+				<label for="fieldName" class="col-xs-12 col-sm-2 control-label">이름</label>
+				<div class="col-xs-9 col-sm-6 col-md-5">
+					<input type="text" class="form-control" name="name" id="fieldName" required>
+				</div>
 			</div>
-		</div>
-		{{/forLoop}}
 
-	{{else}}
-		{{#forLoop 3}}
-		<div class="form-group">
-			<label for="class" class="col-sm-2 control-label">{{index}}학년 학급</label>
-			<div class="col-sm-6 col-md-4">
-				<select class="form-control" name="class{{index}}" id="class">
-					<option value="0">기억이 잘안나요</option>
-					{{#forLoop 20}}
-						<option value="{{index}}">{{index}}</option>
-					{{/forLoop}}
-				</select>
+			<div class="form-group">
+				<label for="gender" class="col-xs-12 col-sm-2 control-label">성별</label>
+				<div class="col-xs-9 col-sm-6 col-md-5">
+					<input type="radio" name="gender" value="true" id="gender" checked> 남자
+		  			<input type="radio" name="gender" value="false" id="gender"> 여자<br>
+				</div>
 			</div>
-		</div>
-		{{/forLoop}}
-	{{/isEquals}}
+
+			<div class="form-group">
+				<label for="graduation" class="col-xs-12 col-sm-2 control-label">고등학교 졸업(예정)년도</label>
+				
+				<div class="col-xs-9 col-sm-6 col-md-5">
+					<select class="form-control" name="graduation" id="graduation">
+						<option value="0">졸업(예정)년</option>
+						{{#iterateFromTo 1990 2020}}
+							<option value="{{index}}">{{index}}</option>
+						{{/iterateFromTo}}
+					</select>
+				</div>
+			</div>
+
+			
+
+			<!--DOLATER Hidden -->
+			<input type="hidden" id="defaultSchoolId" name="schoolId" value="{{schoolInfo.id}}" schoolName="{{schoolInfo.name}}" category="{{schoolInfo.category}}">
+			
+
+			<!-- 학교이름 / input으로 처리하지말것 -->
+			<div class="form-group">
+				<label for="school" class="col-xs-12 col-sm-2 control-label">학교</label>
+				<div class="col-xs-9 col-sm-6 col-md-5">
+					{{schoolInfo.name}}
+				</div>
+			</div>
+
+			<!-- 학교 category가 elementarySchool이면6번 interate 그렇지 않으면 3번 iterate-->
+			{{#isEquals schoolInfo.category 'elementarySchool'}}
+				{{#forLoop 6}}
+				<div class="form-group">
+					<label for="class" class="col-xs-12 col-sm-2 control-label">{{index}}학년 학급</label>
+					<div class="col-xs-9 col-sm-6 col-md-5">
+						<select class="form-control" name="class{{index}}" id="class">
+							<option value="0">기억이 잘안나요</option>
+							{{#forLoop 20}}
+								<option value="{{index}}">{{index}}</option>
+							{{/forLoop}}
+						</select>
+					</div>
+				</div>
+				{{/forLoop}}
+
+			{{else}}
+				{{#forLoop 3}}
+				<div class="form-group">
+					<label for="class" class="col-xs-12 col-sm-2 control-label">{{index}}학년 학급</label>
+					<div class="col-xs-9 col-sm-6 col-md-5">
+						<select class="form-control" name="class{{index}}" id="class">
+							<option value="0">기억이 잘안나요</option>
+							{{#forLoop 20}}
+								<option value="{{index}}">{{index}}</option>
+							{{/forLoop}}
+						</select>
+					</div>
+				</div>
+				{{/forLoop}}
+			{{/isEquals}}
 
 
-	<div class="form-group">
-		<label for="fieldStory" class="col-sm-2 control-label">특징</label>
-		<div class="col-sm-6 col-md-4">
-			<textarea class="form-control stories" name="feature" required></textarea>
-		</div>
+			<div class="form-group">
+				<label for="fieldStory" class="col-xs-12 col-sm-2 control-label">특징</label>
+				<div class="col-xs-9 col-sm-6 col-md-5">
+					<textarea class="form-control stories" name="feature" required></textarea>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-3">
+					<button type="submit" class="btn btn-default">글생성</button>
+					<button class="btn btn-default goBack">취소</button>
+				</div>
+			</div>
+
+		</form>
 	</div>
-
-	<div class="form-group">
-		<div class="col-sm-offset-2 col-sm-3">
-			<button type="submit" class="btn btn-default">글생성</button>
-			<button class="btn btn-default goBack">취소</button>
-		</div>
-	</div>
-
-</form>
+</div>
 
 
 {{#section 'jquery'}}

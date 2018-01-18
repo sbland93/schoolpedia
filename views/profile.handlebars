@@ -2,7 +2,8 @@
 <h1>Profile Page, This page include profile and sorting TODO</h1>
 
 <div class="profile">
-	<p><b>충호{{profile.bugName}}이름{{profile.name}}</b></p><button>충호수정하기</button>
+	충호:<em>{{profile.bugName}}</em> 이름:<em>{{profile.name}}</em>
+	<button>충호수정하기</button>
 	{{#each profile.feature}}
 	<ul>
 		<li>특징: {{feature}} up: {{up}} down: {{down}}</li>
