@@ -1,5 +1,31 @@
 this["TPL"] = this["TPL"] || {};
 
+this["TPL"]["EPpagination"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "    <li class=\"pagination-page\" d-page=\""
+    + alias2(alias1(depth0, depth0))
+    + "\"><a href=\"#\">"
+    + alias2(alias1(depth0, depth0))
+    + "</a></li>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "\r\n<ul class=\"pagination\">\r\n    <li class=\"pagination-prev\"><a href=\"#\">&laquo;</a></li>\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.pages : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    <li class=\"pagination-next\"><a href=\"#\">&raquo;</a></li>\r\n</ul>\r\n";
+},"useData":true});
+
+this["TPL"]["EPstories"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "<div class=\"score-structural score-column2-wideright search-listings post\">\r\n    <div class=\"score-right\">\r\n        <h5 style=\"z-index: 1;\">\r\n            <a href=\"#\"> "
+    + alias4(((helper = (helper = helpers.user || (depth0 != null ? depth0.user : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"user","hash":{},"data":data}) : helper)))
+    + "</a>\r\n        </h5>\r\n        <p style=\"z-index: 1;\">"
+    + alias4(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"content","hash":{},"data":data}) : helper)))
+    + "</p>\r\n    </div>\r\n</div>\r\n<hr>\r\n";
+},"useData":true});
+
 this["TPL"]["HMsearchedSchools"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
@@ -151,7 +177,7 @@ this["TPL"]["searchedProfileList"] = Handlebars.template({"1":function(container
 
   return "	<ul class=\"profileList\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.searchedList : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "	</ul>\r\n	원하시는 학생 프로필이 아직 만들어져있지 않으면 마음껏 만들어주세요 <button><a href=\"/school/"
+    + "	</ul>\r\n	프로필이 만들어져있지 않으면 마음껏 만들어주세요 <button><a href=\"/school/"
     + container.escapeExpression(((helper = (helper = helpers.schoolId || (depth0 != null ? depth0.schoolId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"schoolId","hash":{},"data":data}) : helper)))
     + "/profile/newOne\">만들기</a></button>\r\n";
 },"2":function(container,depth0,helpers,partials,data) {
@@ -188,22 +214,6 @@ this["TPL"]["searchedProfileList"] = Handlebars.template({"1":function(container
   return ((stack1 = helpers.unless.call(alias1,(depth0 != null ? depth0.noData : depth0),{"name":"unless","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\r\n\r\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.noData : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"useData":true});
-
-this["TPL"]["testTemplate"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression;
-
-  return "	    <li class=\"pagination-page\" d-page=\""
-    + alias2(alias1(depth0, depth0))
-    + "\"><a href=\"#\">"
-    + alias2(alias1(depth0, depth0))
-    + "</a></li>\r\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "<ul class=\"pagination\">\r\n    <li class=\"pagination-prev\"><a href=\"#\">&laquo;</a></li>\r\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.pages : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    <li class=\"pagination-next\"><a href=\"#\">&raquo;</a></li>\r\n</ul>";
 },"useData":true});
 
 this["TPL"]["updateDescription"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {

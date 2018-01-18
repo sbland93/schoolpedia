@@ -26,4 +26,138 @@ $(document).ready(function(){
 		});
 		$('#newStory').val("");
 	});
+
+
+
+
+	var tplAndContext = {
+		
+		features: {
+			template: TPL.EPfeatures,
+			contextFn : function(A){
+				var self = A;
+				return {
+					user: self.content,
+					feature: self.feature,
+				};
+			},
+			postsDiv : $('#stories'),
+		},
+
+		stories: {
+			template: TPL.EPstories,
+			contextFn: function(A){
+				var self = A;
+				return {
+					content: self.content,
+				};
+			},
+			postsDiv : $('#stories'),
+		},
+	}
+
+	var gotoPageNumber;
+
+    var opts = {
+        pageMax: 3,
+        postsDiv: $('#stories'),
+    }
+    
+    function loadPosts(posts, postsDiv, postsTemplate, contextFn) {
+        postsDiv.empty();
+        posts.each(function () {
+            var template = postsTemplate;
+            var context = contextFn(this);
+            var html = template(context);
+            postsDiv.append(html);
+        });
+        hidePrev();
+    }
+
+    function hidePrev() { $('.pagination .pagination-prev').hide(); }
+    function showPrev() { $('.pagination .pagination-prev').show(); }
+
+    function hideNext() { $('.pagination .pagination-next').hide(); }
+    function showNext() { $('.pagination .pagination-next').show(); }
+
+    function paginate(data, page, pageCount, postsDiv, postsTemplate, postsContext) {
+        var template = TPL.EPpagination;
+        var context = { pages: range(page,pageCount)};
+        //console.log(range(page,pageCount));
+        var html = template(context);
+        //console.log(html);
+        var paginationTag = postsDiv.parent().find(".pagination");
+        paginationTag.length > 0 ? paginationTag.replaceWith(html) : postsDiv.after(html);
+
+        function changePage(page) {
+            pageItems.removeClass('active');
+            pageItems.filter('[d-page="' + page + '"]').addClass('active');
+            loadPosts(data.slice(page * opts.pageMax - opts.pageMax, page * opts.pageMax), opts.postsDiv, postsTemplate, postsContext);
+            paginate(data, page, pageCount, postsDiv, postsTemplate, postsContext);
+            if (gotoPageNumber <= 1) {
+                hidePrev();
+            }
+        }
+
+        var pageItems = $('.pagination>li.pagination-page');
+        var pageItemsLastPage = $('.pagination li').length - 2;
+        pageItems.removeClass('active');
+        pageItems.filter('[d-page="' + page + '"]').addClass('active');
+
+        pageItems.on('click', function () {
+            getDataPageNo = this.getAttribute('d-page')
+            //console.log(getDataPageNo)
+            changePage(getDataPageNo);
+            if (getDataPageNo == 1) {
+                hidePrev()
+            }
+            else if (getDataPageNo == pageItemsLastPage) {
+                hideNext();
+            }
+            else {
+                showPrev();
+                showNext();
+            }
+        });
+
+        $('.pagination>li.pagination-prev').on('click', function () {
+            gotoPageNumber = parseInt($('.pagination>li.active').attr('d-page')) - 1;
+            changePage(gotoPageNumber);
+        });
+
+        $('.pagination>li.pagination-next').on('click', function () {
+            gotoPageNumber = parseInt($('.pagination>li.active').attr('d-page')) + 1;
+            if (gotoPageNumber > pageCount) {
+                gotoPageNumber = 1;
+                showPrev();
+            }
+            changePage(gotoPageNumber);
+        });
+    }
+
+    $.ajax({
+    	dataType: 'json',
+    	url: '/api/profile/'+$('#PPdefaultValue').val(),
+    	success: function(response_json){
+    		var storyData = $(response_json.stories);
+
+    		sotriesCount = storyData.length;
+
+            pageCount = Math.ceil(sotriesCount / opts.pageMax);
+            console.log(pageCount);
+
+            if (sotriesCount > opts.pageMax) {
+                paginate(storyData, 1, pageCount, tplAndContext.stories.postsDiv, tplAndContext.stories.template, tplAndContext.stories.contextFn);
+                posts = storyData.slice(0, opts.pageMax);
+                console.log(posts);
+            } else {
+                posts = storyData;
+            }
+            loadPosts(posts, tplAndContext.stories.postsDiv, tplAndContext.stories.template, tplAndContext.stories.contextFn);
+    	}
+    });
+
+
+
+
 });

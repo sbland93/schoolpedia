@@ -113,7 +113,7 @@ module.exports = {
 				{user: '유저6' , content: '이야기6'},
 				{user: '유저7' , content: '이야기7'},
 			],
-			feature: [
+			features: [
 				{feature: '특징1', up: 7, down: 3},
 				{feature: '특징2', up: 6, down: 3},
 				{feature: '특징3', up: 5, down: 3},

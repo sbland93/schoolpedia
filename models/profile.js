@@ -38,7 +38,7 @@ var profileSchema = mongoose.Schema({
 	graduation: { type: Number, min: 1900, max: 2050 },
 	gender: Boolean,
 	description: String,
-	feature: [ featureSchema ],
+	features: [ featureSchema ],
 	stories: [ storySchema ],
 	replies : [ replySchema ],
 	updated_at: {type: Date, default: Date.now },
