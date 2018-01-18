@@ -139,7 +139,7 @@ this["TPL"]["NPsearchedProfileList"] = Handlebars.template({"1":function(contain
 
   return "	<p>혹시 이중에 만드려는 학생의 프로필이 이미 있는지 확인해 보세요.</p>\r\n	<ul class=\"profileList\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.searchedList : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "	</ul>\r\n	<p> 위의 학생들중에 존재하지 않으면 쉽게 학생을 생성해봐요 <button><a href=\"/school/"
+    + "	</ul>\r\n	<p> 위의 학생들중에 존재하지 않으면 쉽게 학생을 생성해봐요 <button class=\"btn btn-default\"><a href=\"/school/"
     + container.escapeExpression(((helper = (helper = helpers.schoolId || (depth0 != null ? depth0.schoolId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"schoolId","hash":{},"data":data}) : helper)))
     + "/profile/newTwo\">만들기</a></button>\r\n";
 },"2":function(container,depth0,helpers,partials,data) {
@@ -157,17 +157,15 @@ this["TPL"]["NPsearchedProfileList"] = Handlebars.template({"1":function(contain
     + alias4(((helper = (helper = helpers.graduation || (depth0 != null ? depth0.graduation : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"graduation","hash":{},"data":data}) : helper)))
     + "</p></a></li>\r\n";
 },"3":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+    var stack1;
 
   return " "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.school : depth0)) != null ? stack1.category : stack1), depth0))
-    + " "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.school : depth0)) != null ? stack1.name : stack1), depth0))
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.school : depth0)) != null ? stack1.name : stack1), depth0))
     + " ";
 },"5":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "	만드려는 학생이 현재 존재하지 않는게 맞는거 같아요 <button><a href=\"/school/"
+  return "	만드려는 학생이 현재 존재하지 않는게 맞는거 같아요 <button class=\"btn btn-default\"><a href=\"/school/"
     + container.escapeExpression(((helper = (helper = helpers.schoolId || (depth0 != null ? depth0.schoolId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"schoolId","hash":{},"data":data}) : helper)))
     + "/profile/newTwo\">만들기</a></button>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -199,7 +197,7 @@ this["TPL"]["searchedProfileList"] = Handlebars.template({"1":function(container
 
   return "	<ul class=\"profileList\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.searchedList : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "	</ul>\r\n	프로필이 만들어져있지 않으면 마음껏 만들어주세요 <button><a href=\"/school/"
+    + "	</ul>\r\n	프로필이 만들어져있지 않으면 마음껏 만들어주세요 <button class=\"btn btn-default\"><a href=\"/school/"
     + container.escapeExpression(((helper = (helper = helpers.schoolId || (depth0 != null ? depth0.schoolId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"schoolId","hash":{},"data":data}) : helper)))
     + "/profile/newOne\">만들기</a></button>\r\n";
 },"2":function(container,depth0,helpers,partials,data) {
@@ -217,17 +215,15 @@ this["TPL"]["searchedProfileList"] = Handlebars.template({"1":function(container
     + alias4(((helper = (helper = helpers.graduation || (depth0 != null ? depth0.graduation : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"graduation","hash":{},"data":data}) : helper)))
     + "</p></a></li>\r\n";
 },"3":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+    var stack1;
 
   return " "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.school : depth0)) != null ? stack1.category : stack1), depth0))
-    + " "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.school : depth0)) != null ? stack1.name : stack1), depth0))
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.school : depth0)) != null ? stack1.name : stack1), depth0))
     + " ";
 },"5":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "	그런학생 아직 없다 만들기 <button><a href=\"/school/"
+  return "	그런학생 아직 없다 만들기 <button class=\"btn btn-default\"><a href=\"/school/"
     + container.escapeExpression(((helper = (helper = helpers.schoolId || (depth0 != null ? depth0.schoolId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"schoolId","hash":{},"data":data}) : helper)))
     + "/profile/newOne\">만들기</a></button>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
