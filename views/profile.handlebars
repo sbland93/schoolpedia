@@ -1,31 +1,38 @@
 <!--NameSpace: PP -->
-<h1>Profile Page, This page include profile and sorting TODO</h1>
+<header>개인페이지</header>
 
 <div class="profile">
 
-	충호:<em>{{profile.bugName}}</em> 이름:<em>{{profile.name}}</em>	
-
-	<div id="features"></div>
-	<button>특징추가하기</button>
-
-	{{#each profile.schools}}
-		학교: {{school.name}}
-		{{#each class}}
-			학급: {{this}}반
-		{{/each}}
-	{{/each}}
-
-	<div id="schools"></div>
-	<button>학급고치기</button>
-		
-	<div id="stories"></div>
-	<button>관련일화쓰기</button>
-
-	<div id="replies"></div>
-	<button>방명록쓰기</button>
-
-	<p class="updated_at">프로필 생성시간:{{profile.updated_at}}</p>	
-
+	<div class="row">
+		<div class="col-md-offset-7 col-md-5">
+			<div class="prof">
+				<span>충호</span>: <em>{{profile.bugName}}</em> <span>이름</span>: <em>{{profile.name}}</em>
+				{{#each profile.schools}}
+					<span>학교</span>: <em>{{school.name}}</em>
+					<span>학급</span>:
+					{{#each class}}
+						 <em>{{this}}반</em>
+					{{/each}}
+				{{/each}}
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-4">
+			<div id="features"></div>
+			<button class="btn btn-default">특징추가하기</button>
+		</div>
+		<div class="col-md-4">
+			<div id="stories"></div>
+			<button class="btn btn-default">관련일화쓰기</button>
+		</div>
+		<div class="col-md-4">
+			<div id="replies"></div>
+			<button class="btn btn-default">방명록쓰기</button>
+		</div>
+	</div>
+	
 </div>
 
 
@@ -45,6 +52,7 @@
 {{#section 'head'}}
 	<script type="text/javascript" src="/js/templates/templates.js"></script>
 	<link rel="stylesheet" type="text/css" href="/css/test.css">
+	<link rel="stylesheet" type="text/css" href="/css/profile.css">
 {{/section}}
 
 
