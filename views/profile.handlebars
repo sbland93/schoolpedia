@@ -1,41 +1,22 @@
-<!--NameSpace: PP -->
-<header>개인페이지</header>
+<!--NameSpace: EP -->
 
-<div class="profile">
 
-	<div class="row">
-		<div class="col-md-offset-7 col-md-5">
-			<div class="prof">
-				<span>충호</span>: <em>{{profile.bugName}}</em> <span>이름</span>: <em>{{profile.name}}</em>
-				{{#each profile.schools}}
-					<span>학교</span>: <em>{{school.name}}</em>
-					<span>학급</span>:
-					{{#each class}}
-						 <em>{{this}}반</em>
-					{{/each}}
-				{{/each}}
-			</div>
-		</div>
+<div id="profileTemplate"></div>
+
+<div class="row">
+	<div class="col-md-4">
+		<div id="features"></div>
+		<button class="btn btn-default">특징추가하기</button>
 	</div>
-	
-	<div class="row">
-		<div class="col-md-4">
-			<div id="features"></div>
-			<button class="btn btn-default">특징추가하기</button>
-		</div>
-		<div class="col-md-4">
-			<div id="stories"></div>
-			<button class="btn btn-default">관련일화쓰기</button>
-		</div>
-		<div class="col-md-4">
-			<div id="replies"></div>
-			<button class="btn btn-default">방명록쓰기</button>
-		</div>
+	<div class="col-md-4">
+		<div id="stories"></div>
+		<button class="btn btn-default">관련일화쓰기</button>
 	</div>
-	
+	<div class="col-md-4">
+		<div id="replies"></div>
+		<button class="btn btn-default">방명록쓰기</button>
+	</div>
 </div>
-
-
 
 <!--
 <textarea class="form-control stories" name="stories" rows="10" placeholder="이 학생에 대한 설명, 함께 있었던 일, 일화, 성격, 특징 등" id="newStory"></textarea>
@@ -43,9 +24,9 @@
 <button class="btn btn-default" id="addStory">이야기추가</button>
 -->
 
-<input type="hidden" id="PPdefaultValue" value={{profile.id}} profileId={{profileId}}>
+<input type="hidden" id="PPdefaultValue" value={{profileId}} profileId={{profileId}}>
 
-<a class="btn btn-default" href="/profile/{{profile.id}}/update" id="updateProfile">수정</a>
+<a class="btn btn-default" href="/profile/{{profileId}}/update" id="updateProfile">수정</a>
 <button class="btn btn-default" id="removeProfile">삭제</button>
 
 

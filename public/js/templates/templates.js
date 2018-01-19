@@ -19,7 +19,7 @@ this["TPL"]["EPpagination"] = Handlebars.template({"1":function(container,depth0
 
   return "    			<li class=\"pagination-page\" d-page=\""
     + alias2(alias1(depth0, depth0))
-    + "\"><a href=\"/\" onclick=\"return false;\">"
+    + "\"><a id=\"preventHrefTag\">"
     + alias2(alias1(depth0, depth0))
     + "</a></li>\r\n";
 },"4":function(container,depth0,helpers,partials,data) {
@@ -38,6 +38,31 @@ this["TPL"]["EPpagination"] = Handlebars.template({"1":function(container,depth0
     + "\">\r\n    <li class=\"pagination-prev\"><a href=\"#\">&laquo;</a></li>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.pages : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    <li class=\"pagination-next\"><a href=\"#\">&raquo;</a></li>\r\n</ul>";
+},"useData":true});
+
+this["TPL"]["EPprofile"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "				<span>학교</span>: <em>"
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.school : depth0)) != null ? stack1.name : stack1), depth0))
+    + "</em>\r\n				<span>학급</span>:\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0["class"] : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"2":function(container,depth0,helpers,partials,data) {
+    return "					 <em>"
+    + container.escapeExpression(container.lambda(depth0, depth0))
+    + "반</em>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "<header>"
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.bugName : stack1), depth0))
+    + "</header>\r\n\r\n<div class=\"row\">\r\n	<div class=\"col-md-offset-7 col-md-5\">\r\n		<div class=\"prof\">\r\n			<span>충호</span>: <em>"
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.bugName : stack1), depth0))
+    + "</em> <span>이름</span>: <em>"
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.name : stack1), depth0))
+    + "</em>\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.schools : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "		</div>\r\n	</div>\r\n</div>";
 },"useData":true});
 
 this["TPL"]["EPreplies"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {

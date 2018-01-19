@@ -179,7 +179,12 @@ $(document).ready(function(){
     $.ajax({
     	dataType: 'json',
     	url: '/api/profile/'+$('#PPdefaultValue').val(),
-    	success: function(response_json){
+    	success: function(response_json){		
+    		var profileTemplate = TPL.EPprofile;
+    		$('#profileTemplate').html(profileTemplate({
+				profile : response_json, 
+			}))
+
     		var storyData = $(response_json.stories);
     		var featureData = $(response_json.features);
     		var replyData = $(response_json.replies);
