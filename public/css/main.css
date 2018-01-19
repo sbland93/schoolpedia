@@ -1,23 +1,22 @@
-@font-face{
-    font-family:'Prime';
-    src:url("/font/PrimeRegular.otf");
-}
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 body{
 	padding:20pt;
-	background-color:#ffa07a;
+	background-color:#F0F8FF;
 	font-weight:bold;
+	font-family: 'Jeju Gothic', serif;
 	font-size:12pt;
 }
 .img{
 	position:absolute;
 	left:0;
 	top:0;
-	font-size:15pt;
+	font-size:17pt;
 	padding:10pt;
 }
 
 header{
-	font-family:Prime;
+	font-family: 'Hanna', serif;
 	text-align:center;
 	margin-top:20pt;
 	font-size:30pt;
