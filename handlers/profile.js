@@ -20,11 +20,12 @@ module.exports = function(){
 					return next();
 				}else{
 					res.render('profile', {
+						profileId: req.params.id,
 						profile: profileViewModel(profile),		
 						pageTestScript: '/qa/tests-profile.js'
 					});
 				}
-			})
+			});
 		},	
 
 
