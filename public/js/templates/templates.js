@@ -11,9 +11,21 @@ this["TPL"]["EPfeatures"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main
 },"useData":true});
 
 this["TPL"]["EPpagination"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = (helpers.isEquals || (depth0 && depth0.isEquals) || helpers.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,"...",{"name":"isEquals","hash":{},"fn":container.program(2, data, 0),"inverse":container.program(4, data, 0),"data":data})) != null ? stack1 : "");
+},"2":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "    <li class=\"pagination-page\" d-page=\""
+  return "    			<li class=\"pagination-page\" d-page=\""
+    + alias2(alias1(depth0, depth0))
+    + "\"><a href=\"/\" onclick=\"return false;\">"
+    + alias2(alias1(depth0, depth0))
+    + "</a></li>\r\n";
+},"4":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "    			<li class=\"pagination-page\" d-page=\""
     + alias2(alias1(depth0, depth0))
     + "\"><a href=\"#\">"
     + alias2(alias1(depth0, depth0))
@@ -25,7 +37,7 @@ this["TPL"]["EPpagination"] = Handlebars.template({"1":function(container,depth0
     + container.escapeExpression(((helper = (helper = helpers.dynamicClass || (depth0 != null ? depth0.dynamicClass : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"dynamicClass","hash":{},"data":data}) : helper)))
     + "\">\r\n    <li class=\"pagination-prev\"><a href=\"#\">&laquo;</a></li>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.pages : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    <li class=\"pagination-next\"><a href=\"#\">&raquo;</a></li>\r\n</ul>\r\n\r\n<hr>";
+    + "    <li class=\"pagination-next\"><a href=\"#\">&raquo;</a></li>\r\n</ul>";
 },"useData":true});
 
 this["TPL"]["EPreplies"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {

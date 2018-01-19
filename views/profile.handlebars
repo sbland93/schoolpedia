@@ -3,11 +3,9 @@
 
 <div class="profile">
 
-	충호:<em>{{profile.bugName}}</em> 이름:<em>{{profile.name}}</em>
-	
+	충호:<em>{{profile.bugName}}</em> 이름:<em>{{profile.name}}</em>	
 
 	<div id="features"></div>
-
 	<button>특징추가하기</button>
 
 	{{#each profile.schools}}
@@ -16,6 +14,9 @@
 			학급: {{this}}반
 		{{/each}}
 	{{/each}}
+
+	<div id="schools"></div>
+	<button>학급고치기</button>
 		
 	<div id="stories"></div>
 	<button>관련일화쓰기</button>

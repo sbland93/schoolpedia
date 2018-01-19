@@ -79,7 +79,7 @@ $(document).ready(function(){
         pageMax: 3,
     }
     
-    function loadPosts(posts, postsDiv, postsTemplate, contextFn) {
+    function loadPosts(posts, postsDiv, postsTemplate, contextFn, dynamicClass) {
         postsDiv.empty();
         posts.each(function () {
             var template = postsTemplate;
@@ -87,14 +87,14 @@ $(document).ready(function(){
             var html = template(context);
             postsDiv.append(html);
         });
-        hidePrev();
+        hidePrev(dynamicClass);
     }
 
-    function hidePrev() { $('.pagination .pagination-prev').hide(); }
-    function showPrev() { $('.pagination .pagination-prev').show(); }
+    function hidePrev(dynamicClass) { $('.pagination '+dynamicClass+' .pagination-prev').hide(); }
+    function showPrev(dynamicClass) { $('.pagination '+dynamicClass+' .pagination-prev').show(); }
 
-    function hideNext() { $('.pagination .pagination-next').hide(); }
-    function showNext() { $('.pagination .pagination-next').show(); }
+    function hideNext(dynamicClass) { $('.pagination '+dynamicClass+' .pagination-next').hide(); }
+    function showNext(dynamicClass) { $('.pagination '+dynamicClass+' .pagination-next').show(); }
 
     function paginate(data, page, pageCount, postsDiv, postsTemplate, postsContext, dynamicClass, gotoPageNumber) {
         var template = TPL.EPpagination;
@@ -110,10 +110,10 @@ $(document).ready(function(){
         function changePage(page) {
             pageItems.removeClass('active');
             pageItems.filter('[d-page="' + page + '"]').addClass('active');
-            loadPosts(data.slice(page * opts.pageMax - opts.pageMax, page * opts.pageMax), postsDiv, postsTemplate, postsContext);
+            loadPosts(data.slice(page * opts.pageMax - opts.pageMax, page * opts.pageMax), postsDiv, postsTemplate, postsContext, dynamicClass);
             paginate(data, page, pageCount, postsDiv, postsTemplate, postsContext, dynamicClass);
             if (gotoPageNumber <= 1) {
-                hidePrev();
+                hidePrev(dynamicClass);
             }
         }
 
@@ -122,24 +122,28 @@ $(document).ready(function(){
         pageItems.removeClass('active');
         pageItems.filter('[d-page="' + page + '"]').addClass('active');
 
-        pageItems.on('click', function () {
+        pageItems.on('click', function (evt) {
             getDataPageNo = this.getAttribute('d-page')
-            //console.log(getDataPageNo)
+            if(getDataPageNo === "..."){
+                getDataPageNo = parseInt($('.'+dynamicClass+'>li.active').attr('d-page')) + 1;
+            }
+            console.log(getDataPageNo)
             changePage(getDataPageNo);
             if (getDataPageNo == 1) {
-                hidePrev()
+                hidePrev(dynamicClass)
             }
             else if (getDataPageNo == pageItemsLastPage) {
-                hideNext();
+                hideNext(dynamicClass);
             }
             else {
-                showPrev();
-                showNext();
+				/*showPrev(dynamicClass);
+                showNext(dynamicClass);*/
             }
         });
 
         $('.'+dynamicClass+'>li.pagination-prev').on('click', function () {
             gotoPageNumber = parseInt($('.'+dynamicClass+'>li.active').attr('d-page')) - 1;
+            console.log(gotoPageNumber);
             changePage(gotoPageNumber);
         });
 
@@ -147,7 +151,7 @@ $(document).ready(function(){
             gotoPageNumber = parseInt($('.'+dynamicClass+'>li.active').attr('d-page')) + 1;
             if (gotoPageNumber > pageCount) {
                 gotoPageNumber = 1;
-                showPrev();
+                showPrev(dynamicClass);
             }
             changePage(gotoPageNumber);
         });
@@ -167,7 +171,7 @@ $(document).ready(function(){
         } else {
             posts = data;
         }
-        loadPosts(posts, dataObj.postsDiv, dataObj.template, dataObj.contextFn);
+        loadPosts(posts, dataObj.postsDiv, dataObj.template, dataObj.contextFn, dataObj.dynamicClass);
     }
 
 
