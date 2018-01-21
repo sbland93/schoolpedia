@@ -94,14 +94,7 @@ module.exports = function(app){
 	app.get('/api/profile/:id', function(req, res, next){
 		if(!req.params.id) return next('No Id');
 		Profile.findById({_id: req.params.id}, function(err, profile){
-			if(err) console.error(err);
-			/*DOLATER err 처리 */
-			if(!profile){
-				return res.json({
-					success: false,
-					message: 'NO DATA',
-				});
-			};
+			if(err) return next(err);
 			return res.json(profileViewModel(profile));
 		});
 	});

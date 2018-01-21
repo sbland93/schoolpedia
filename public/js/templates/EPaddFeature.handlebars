@@ -1,0 +1,29 @@
+
+
+<!--EP에서 특징추가하기를 누르면 나오는 template -->
+
+<form class="form-horizontal addFeatureForm" role="form" action="/api/profile/{{profileId}}" method="PUT">
+
+	<!--특징추가 form-->
+	<div class="form-group">
+
+		<label for="fieldFeature" class="col-sm-2 control-label">소개글수정</label>
+		<div class="col-sm-4">
+			<input type="text" class="form-control" name="feature" id="fieldFeature" required>
+		</div>
+	
+	</div>
+
+	<!--추가 버튼-->
+	<div class="form-group">
+	
+		<div class="col-sm-offset-2 col-sm-1">
+			<button type="submit" class="btn btn-default">추가</button>
+		</div>
+
+	</div>
+</form>
+
+<div class="col-sm-offset-2 col-sm-1">
+	<button class="btn btn-default" id="cancelAddFeature">취소</button>
+</div>

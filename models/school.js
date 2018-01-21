@@ -27,5 +27,11 @@ schoolSchema.methods.getBoards = function(sortOptions, limitNumber, cb){
 };
 
 
+//학교 소개글은 다섯글자여야 한다.
+schoolSchema.path('description').validate(function(v) {
+	return v.length === 5;
+}, 'School description length should be 5');
+
+
 var School = mongoose.model('School', schoolSchema);
 module.exports = School;

@@ -1,4 +1,10 @@
 module.exports = function(profile){
+	if(!profile){
+		return {
+			success: false,
+			message: 'No Data',
+		};
+	}
 	return {
 		success: true,
 		id: profile._id,
