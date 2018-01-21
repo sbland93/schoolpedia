@@ -1,0 +1,44 @@
+<header>로그인</header>
+<div class="row">
+	<!-- 안내사항 column-->
+	<div class="col-md-6">
+		<ul>
+			<legend>안내사항</legend>
+			<li>로그인을 할 경우 개인페이지를 본인이 관리 가능</li>
+			<li>타인 페이지에 방명록 가능</li>
+			<li>악의적인 댓글 혹은 음란물 유포 시 강력하게 제제</li>
+			<li>문의사항은 schoolchoong@gmail.com</li>
+
+		</ul>
+	</div>
+	<!-- 로그인 column-->
+	<div class="col-xs-offset-1 col-md-5">
+		<div>
+			<a id="kakao-login-btn"></a>
+		    <a href="http://developers.kakao.com/logout"></a>
+		    <script type='text/javascript'>
+
+		      //<![CDATA[
+		        // 사용할 앱의 JavaScript 키를 설정해 주세요.
+		        Kakao.init('a0db802c56943303ccd3bed0a045123c');
+		        // 카카오 로그인 버튼을 생성합니다.
+		        Kakao.Auth.createLoginButton({
+		          container: '#kakao-login-btn',
+		          success: function(authObj) {
+		            alert(JSON.stringify(authObj));
+		          },
+		          fail: function(err) {
+		             alert(JSON.stringify(err));
+		          }
+		        });
+		      //]]>
+	    	</script>
+		</div>
+		<div>
+			<button>회원가입</button>
+		</div>
+		<p>* 모든사용자는 카카오톡 로그인을 이용해주시기 바람</p>
+	</div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="/css/login.css">
