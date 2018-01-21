@@ -4,7 +4,7 @@ var schoolHandlers = require('../handlers/school.js')();
 var profileHandlers = require('../handlers/profile.js')();
 var boardHandlers = require('../handlers/board.js')();
 var mongoose = require('mongoose');
-
+var loginHandlers = require('../handlers/auth.js')();
 
 module.exports = function(app){
 
@@ -16,6 +16,9 @@ module.exports = function(app){
 	//home 페이지 라우팅.
 	//schoolList가 필요.
 	app.get('/', homeHandlers.home);
+
+	//login 페이지 라우팅.
+	app.get('/login',loginHandlers.login);
 
 	//:id에 해당하는 school의 Board, Profile을 5개씩 리턴한다.
 	//DOLATER

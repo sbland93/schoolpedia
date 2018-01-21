@@ -14,6 +14,12 @@ body{
 	font-size:17pt;
 	padding:10pt;
 }
+.log{
+	position:absolute;
+	top:0;
+	right:0;
+	padding:10pt; 
+}
 
 header{
 	font-family: 'Hanna', serif;
