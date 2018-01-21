@@ -34,13 +34,13 @@ module.exports = function(grunt){
 			options: {
 			    namespace: 'TPL',
 			    processName: function(filePath) {
-			        return filePath.replace(/^public\//, '').replace(/^js\//, '')
-			        .replace(/^templates\//, '').replace(/\.handlebars$/, '');
+			        return filePath.replace(/^public\//, '').replace(/^js\//, '').replace(/^templates\//, '').replace(/^views\//, '').replace(/\.handlebars$/, '')
+			        .replace(/^profile_EP\//, 'EP').replace(/^newProfileOne_NPO\//, 'NPO').replace(/^school_SC\//, 'SC').replace(/^home_HM\//, 'HM');
 			    },
 			},
 			all : {
 				files: {
-					"public/js/templates/templates.js" : ["public/js/templates/**/*.handlebars"],
+					"public/js/templates/templates.js" : ["public/js/templates/views/**/*.handlebars", "!public/js/templates/controllers/**/*.js"],
 				}
 			}
 		}

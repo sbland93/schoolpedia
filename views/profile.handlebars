@@ -4,12 +4,16 @@
 
 <div class="row">
 	<div class="col-md-4">
+	
 		<div id="features"></div>
 		<button class="btn btn-default" id="addFeature">특징추가하기</button>
+	
+		<!--특징추가 버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
+		<div id="addFeatureTPL"></div>
+	
 	</div>
 
-	<!--특징추가 버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
-	<div id="addFeatureTPL"></div> 
+	 
 	
 	<div class="col-md-4">
 		<div id="stories"></div>
@@ -50,6 +54,7 @@
 
 {{#section 'jquery'}}
 	<script type="text/javascript" src="/js/api/profile.js"></script>
-	<script type="text/javascript" src="/js/controllers/utils.js"></script>
+	<script type="text/javascript" src="/js/controllers/profileUtils.js"></script>
+	<script type="text/javascript" src="/js/templates/controllers/profileTPLC.js"></script>
 	<script type="text/javascript" src="/js/controllers/profileController.js"></script>
 {{/section}}

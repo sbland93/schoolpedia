@@ -184,7 +184,7 @@ describe('Profile API Tests', function(){
 				rest.get(base + '/api/profile/' + profileDocs[0]._id).on('success',
 					function(data){
 						expect(data.success).to.be.equal(false);
-						expect(data.message).to.be.equal('NO DATA');
+						expect(data.message).to.be.equal('No Data');
 						done();
 					}
 				);

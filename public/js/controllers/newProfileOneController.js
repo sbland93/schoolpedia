@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 	
-	var NPsearchedProfileList = TPL.NPsearchedProfileList;
+	var NPsearchedProfileList = TPL.NPOsearchedProfileList;
 
 	//학생검색을 위한 Form 검증.
 	$(".searchProfileForm").validate({
@@ -26,12 +26,12 @@ $(document).ready(function(){
 				//기본학교아이디를, 가지고, 템플릿으로 보내야 학생프로필 생성에, 학교 아이디를 가지고 들어갈 수 있다.
 				var defaultSchoolId = $('#schoolId').val();
 				if(data.length){
-					return $('#searchResult').html(NPsearchedProfileList({
+					return $('#searchedProfileListTPL').html(NPsearchedProfileList({
 						searchedList : data,
 						schoolId : defaultSchoolId, 
 					}));
 				} 
-				if(!data.success) return $('#searchResult').html(NPsearchedProfileList({
+				if(!data.success) return $('#searchedProfileListTPL').html(NPsearchedProfileList({
 					noData : true,
 					schoolId : defaultSchoolId, 
 				}));

@@ -9,11 +9,9 @@
 	<button id="updateDescription" class="btn btn-default">학교 소개글 수정</button>
 </div>
 
-
-
 <!--수정버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
 
-<div id="updateDescription"></div> 
+<div id="updateDescriptionTPL"></div> 
 
 	<!--최근게시물 div !-->
 	<div class="row">
@@ -52,7 +50,8 @@
 					<button class="btn btn-default" type="submit">검색!</button>
 				</form>
 			</div>
-			<div id="searchResult"></div>
+			<!--친구검색결과가 들어갈 TPL -->
+			<div id="searchedProfileListTPL"></div>
 		</div>	
 	</div>
 	
@@ -94,5 +93,6 @@
 	<script type="text/javascript" src="/js/api/school.js"></script>
 	<script type="text/javascript" src="/js/api/profile.js"></script>
 	<script type="text/javascript" src="/js/controllers/schoolController.js"></script>
+	<script type="text/javascript" src="/js/templates/controllers/schoolTPLC.js"></script>
 {{/section}}
 
