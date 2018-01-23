@@ -75,6 +75,8 @@ $(document).ready(function(){
 				profile : response,
 			}))
 
+			console.log(response.features);
+
 			var storyData = $(response.stories);
 			var featureData = $(response.features);
 			var replyData = $(response.replies);
@@ -83,17 +85,34 @@ $(document).ready(function(){
 			makePosts(featureData, tplAndContext.features);
 			makePosts(replyData, tplAndContext.replies);
 
+			var context = {
+				profileId : profileId
+			};
+
 			//특징추가하기 버튼을 클릭시에 동적으로 특징 추가 폼을 추가한다.
 			$("#addFeature").on('click', function(evt){
 				evt.preventDefault();
 				var template = TPL.EPaddFeature;
-				var context = {
-					profileId : profileId
-				};
-				//$("#addFeatureTPL").html(template(context));
 				//특징추가 위한 Form 검증.
-				makeDynamicTPL("#addFeatureTPL", TPL.EPaddFeature, context, profileTPLC.addFeature);				
+				makeDynamicTPL("#addFeatureTPL", TPL.EPaddFeature, context, profileTPLC.addFeature(profileId, response, tplAndContext));				
 			});
+
+
+			//썰추가 버튼은 클릭시에 동적으로 썰 추가 폼을 생성한다.
+			$("#addStory").on('click', function(evt){
+				evt.preventDefault();
+				var template = TPL.EPaddStory;
+				//썰추가 위한 Form 검증.
+				makeDynamicTPL("#addStoryTPL", TPL.EPaddStory, context, profileTPLC.addStory(profileId, response, tplAndContext));
+			});
+
+			//방명록추가 버튼은 클릭시에 동적으로 썰 추가 폼을 생성한다.
+			$("#addReply").on('click', function(evt){
+				evt.preventDefault();
+				var template = TPL.EPaddReply;
+				//방명록추가 위한 Form 검증.
+				makeDynamicTPL("#addReplyTPL", TPL.EPaddReply, context, profileTPLC.addReply(profileId, response, tplAndContext));
+			});			
 
     	} else{
     		//페이지 이동시.
@@ -104,7 +123,8 @@ $(document).ready(function(){
     }).catch(function(err){
     	console.log(err);
     	location.href = "/";
-    })
+    });
+
 
 
 

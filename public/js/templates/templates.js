@@ -82,11 +82,29 @@ this["TPL"]["NPOsearchedProfileList"] = Handlebars.template({"1":function(contai
 },"useData":true});
 
 this["TPL"]["EPaddFeature"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var helper;
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "\r\n\r\n<!--EP에서 특징추가하기를 누르면 나오는 template -->\r\n\r\n<form class=\"form-horizontal addFeatureForm\" role=\"form\" action=\"/api/profile/"
+    + alias4(((helper = (helper = helpers.profileId || (depth0 != null ? depth0.profileId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"profileId","hash":{},"data":data}) : helper)))
+    + "\" method=\"PUT\" profileId=\""
+    + alias4(((helper = (helper = helpers.profileId || (depth0 != null ? depth0.profileId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"profileId","hash":{},"data":data}) : helper)))
+    + "\">\r\n\r\n	<!--특징추가 form-->\r\n	<div class=\"form-group\">\r\n\r\n		<label for=\"fieldFeature\" class=\"col-sm-2 control-label\">특징추가하기</label>\r\n		<div class=\"col-sm-4\">\r\n			<input type=\"text\" class=\"form-control\" name=\"feature\" id=\"fieldFeature\" required>\r\n		</div>\r\n	\r\n	</div>\r\n\r\n	<!--추가 버튼-->\r\n	<div class=\"form-group\">\r\n	\r\n		<div class=\"col-sm-offset-2 col-sm-1\">\r\n			<button type=\"submit\" class=\"btn btn-default\">추가</button>\r\n		</div>\r\n\r\n	</div>\r\n</form>\r\n\r\n<div class=\"col-sm-offset-2 col-sm-1\">\r\n	<button class=\"btn btn-default\" id=\"cancelAddFeature\">취소</button>\r\n</div>\r\n";
+},"useData":true});
+
+this["TPL"]["EPaddReply"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return "\r\n\r\n<!--EP에서 특징추가하기를 누르면 나오는 template -->\r\n\r\n<form class=\"form-horizontal addReplyForm\" role=\"form\" action=\"/api/profile/"
     + container.escapeExpression(((helper = (helper = helpers.profileId || (depth0 != null ? depth0.profileId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"profileId","hash":{},"data":data}) : helper)))
-    + "\" method=\"PUT\">\r\n\r\n	<!--특징추가 form-->\r\n	<div class=\"form-group\">\r\n\r\n		<label for=\"fieldFeature\" class=\"col-sm-2 control-label\">특징추가하기</label>\r\n		<div class=\"col-sm-4\">\r\n			<input type=\"text\" class=\"form-control\" name=\"feature\" id=\"fieldFeature\" required>\r\n		</div>\r\n	\r\n	</div>\r\n\r\n	<!--추가 버튼-->\r\n	<div class=\"form-group\">\r\n	\r\n		<div class=\"col-sm-offset-2 col-sm-1\">\r\n			<button type=\"submit\" class=\"btn btn-default\">추가</button>\r\n		</div>\r\n\r\n	</div>\r\n</form>\r\n\r\n<div class=\"col-sm-offset-2 col-sm-1\">\r\n	<button class=\"btn btn-default\" id=\"cancelAddFeature\">취소</button>\r\n</div>\r\n";
+    + "\" method=\"PUT\">\r\n\r\n	<!--특징추가 form-->\r\n	<div class=\"form-group\">\r\n\r\n		<label for=\"fieldReply\" class=\"col-sm-2 control-label\">썰추가하기</label>\r\n		<div class=\"col-sm-4\">\r\n			<input type=\"text\" class=\"form-control\" name=\"reply\" id=\"fieldReply\" required>\r\n		</div>\r\n	\r\n	</div>\r\n\r\n	<!--추가 버튼-->\r\n	<div class=\"form-group\">\r\n	\r\n		<div class=\"col-sm-offset-2 col-sm-1\">\r\n			<button type=\"submit\" class=\"btn btn-default\">추가</button>\r\n		</div>\r\n\r\n	</div>\r\n</form>\r\n\r\n<div class=\"col-sm-offset-2 col-sm-1\">\r\n	<button class=\"btn btn-default\" id=\"cancelAddReply\">취소</button>\r\n</div>\r\n";
+},"useData":true});
+
+this["TPL"]["EPaddStory"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return "\r\n\r\n<!--EP에서 특징추가하기를 누르면 나오는 template -->\r\n\r\n<form class=\"form-horizontal addStoryForm\" role=\"form\" action=\"/api/profile/"
+    + container.escapeExpression(((helper = (helper = helpers.profileId || (depth0 != null ? depth0.profileId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"profileId","hash":{},"data":data}) : helper)))
+    + "\" method=\"PUT\">\r\n\r\n	<!--특징추가 form-->\r\n	<div class=\"form-group\">\r\n\r\n		<label for=\"fieldStory\" class=\"col-sm-2 control-label\">썰추가하기</label>\r\n		<div class=\"col-sm-4\">\r\n			<input type=\"text\" class=\"form-control\" name=\"story\" id=\"fieldStory\" required>\r\n		</div>\r\n	\r\n	</div>\r\n\r\n	<!--추가 버튼-->\r\n	<div class=\"form-group\">\r\n	\r\n		<div class=\"col-sm-offset-2 col-sm-1\">\r\n			<button type=\"submit\" class=\"btn btn-default\">추가</button>\r\n		</div>\r\n\r\n	</div>\r\n</form>\r\n\r\n<div class=\"col-sm-offset-2 col-sm-1\">\r\n	<button class=\"btn btn-default\" id=\"cancelAddStory\">취소</button>\r\n</div>\r\n";
 },"useData":true});
 
 this["TPL"]["EPfeatures"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
