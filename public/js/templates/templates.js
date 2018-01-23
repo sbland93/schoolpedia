@@ -15,7 +15,7 @@ this["TPL"]["HMsearchedSchools"] = Handlebars.template({"1":function(container,d
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\">\r\n				<li>"
     + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
-    + " ///// "
+    + " "
     + alias4(((helper = (helper = helpers.location || (depth0 != null ? depth0.location : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"location","hash":{},"data":data}) : helper)))
     + "</li>\r\n			</a>\r\n";
 },"4":function(container,depth0,helpers,partials,data) {
@@ -235,5 +235,5 @@ this["TPL"]["SCsearchedProfileList"] = Handlebars.template({"1":function(contain
 },"useData":true});
 
 this["TPL"]["SCupdateDescription"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "\r\n<form class=\"form-horizontal updateSchoolForm\" role=\"form\" action=\"/api/school\" method=\"PUT\">\r\n	<!--controller에서 id를 가져오기 위해 추가된 From-->\r\n\r\n	<!--제목부분-->\r\n	<div class=\"form-group\">\r\n\r\n		<label for=\"fieldDescription\" class=\"col-sm-2 control-label\">소개글수정</label>\r\n		<div class=\"col-sm-4\">\r\n			<input type=\"text\" class=\"form-control\" required name=\"description\" id=\"fieldDescription\">\r\n		</div>\r\n	\r\n	</div>\r\n\r\n	<!--수정, 취소 버튼-->\r\n	<div class=\"form-group\">\r\n	\r\n		<div class=\"col-sm-offset-2 col-sm-1\">\r\n			<button type=\"submit\" class=\"btn btn-default\">수정</button>\r\n		</div>\r\n\r\n	</div>\r\n</form>\r\n<div class=\"col-sm-offset-2 col-sm-1\">\r\n	<button class=\"btn btn-default\" id=\"cancelUpdateDescription\">취소</button>\r\n</div>";
+    return "\r\n<form class=\"form-horizontal updateSchoolForm\" role=\"form\" action=\"/api/school\" method=\"PUT\">\r\n	<!--controller에서 id를 가져오기 위해 추가된 From-->\r\n\r\n	<!--제목부분-->\r\n	<div class=\"form-group\">\r\n\r\n		<label for=\"fieldDescription\" class=\"col-xs-4 col-sm-2 col-md-2 control-label\">소개글수정</label>\r\n		<div class=\"col-xs-10 col-sm-6 col-md-6\">\r\n			<input type=\"text\" class=\"form-control\" required name=\"description\" id=\"fieldDescription\">\r\n		</div>\r\n	\r\n	</div>\r\n\r\n	<!--수정, 취소 버튼-->\r\n	<div class=\"col-sm-offset-2 col-md-offset-2\">\r\n		<button type=\"submit\" class=\"btn btn-default\">수정</button>\r\n		<button class=\"btn btn-default\" id=\"cancelUpdateDescription\">취소</button>\r\n	</div>\r\n		\r\n</form>\r\n";
 },"useData":true});
