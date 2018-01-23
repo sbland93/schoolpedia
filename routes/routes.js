@@ -19,7 +19,8 @@ module.exports = function(app){
 
 	//login 페이지 라우팅.
 	app.get('/login',loginHandlers.login);
-
+	//회원가입 페이지 라우팅.
+	app.get('/register',loginHandlers.register);
 	//:id에 해당하는 school의 Board, Profile을 5개씩 리턴한다.
 	//DOLATER
 	app.get('/school/:id', schoolHandlers.school);
