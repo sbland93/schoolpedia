@@ -148,12 +148,12 @@ this["TPL"]["EPpagination"] = Handlebars.template({"1":function(container,depth0
 },"useData":true});
 
 this["TPL"]["EPprofile"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1;
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
   return "				<span>학교</span>: <em>"
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.school : depth0)) != null ? stack1.name : stack1), depth0))
+    + container.escapeExpression(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
     + "</em>\r\n				<span>학급</span>:\r\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0["class"] : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0["class"] : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 },"2":function(container,depth0,helpers,partials,data) {
     return "					 <em>"
     + container.escapeExpression(container.lambda(depth0, depth0))
@@ -190,6 +190,10 @@ this["TPL"]["EPstories"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main"
     + "</a>\r\n        </h5>\r\n        <p style=\"z-index: 1;\">"
     + alias4(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"content","hash":{},"data":data}) : helper)))
     + "</p>\r\n    </div>\r\n</div>\r\n<hr>";
+},"useData":true});
+
+this["TPL"]["EPupdateProfile"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "";
 },"useData":true});
 
 this["TPL"]["SCsearchedProfileList"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -236,4 +240,22 @@ this["TPL"]["SCsearchedProfileList"] = Handlebars.template({"1":function(contain
 
 this["TPL"]["SCupdateDescription"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "\r\n<form class=\"form-horizontal updateSchoolForm\" role=\"form\" action=\"/api/school\" method=\"PUT\">\r\n	<!--controller에서 id를 가져오기 위해 추가된 From-->\r\n\r\n	<!--제목부분-->\r\n	<div class=\"form-group\">\r\n\r\n		<label for=\"fieldDescription\" class=\"col-xs-4 col-sm-2 col-md-2 control-label\">소개글수정</label>\r\n		<div class=\"col-xs-10 col-sm-6 col-md-6\">\r\n			<input type=\"text\" class=\"form-control\" required name=\"description\" id=\"fieldDescription\">\r\n		</div>\r\n	\r\n	</div>\r\n\r\n	<!--수정, 취소 버튼-->\r\n	<div class=\"col-sm-offset-2 col-md-offset-2\">\r\n		<button type=\"submit\" class=\"btn btn-default\">수정</button>\r\n		<button class=\"btn btn-default\" id=\"cancelUpdateDescription\">취소</button>\r\n	</div>\r\n		\r\n</form>\r\n";
+},"useData":true});
+
+this["TPL"]["SBsearchedBoards"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "			<a href=\"/board/"
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\">\r\n				<li>\r\n					제목: "
+    + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
+    + "\r\n					<p>내용: "
+    + alias4(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"content","hash":{},"data":data}) : helper)))
+    + "</p>\r\n				</li>\r\n			</a>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<div class=\"col-sm-9 col-md-6\">\r\n	<ul class=\"boardList\">\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.boardList : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\r\n	</ul>\r\n</div>";
 },"useData":true});

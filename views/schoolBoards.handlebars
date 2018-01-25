@@ -12,7 +12,6 @@
 						<li>
 							제목: {{title}}
 							<p>내용: {{content}}</p>
-						
 						</li>
 					</a>
 				{{/each}}
@@ -20,26 +19,23 @@
 			</ul>
 		</div>
 		<div class="col-sm-12 col-md-5">
-			<form class="form-horizontal searchBoardForm" id="searchBoardForm" role="form" action="/board/search" method="GET">
-				<input type="hidden" name="schoolId" value="{{schoolInfo.id}}">
+			<form class="form-horizontal searchBoardForm" id="searchBoardForm" role="form" action="/api/board" method="GET">
+				<input type="hidden" name="schoolId" value="{{schoolInfo.id}}" id="defaultSchoolId">
 				
 				<div class="form-group">
 					<label for="schoolDetail" class="col-sm-3 col-md-3 control-label">학교</label>
 					<div class="col-sm-9 col-md-9">
-						<input type="radio" name="school" value="only" id="schoolDetail" checked>{{schoolInfo.name}}내에서
+						<input type="radio" name="school" value="here" id="schoolDetail" checked>{{schoolInfo.name}}내에서
 						<input type="radio" name="school" value="all" id="schoolDetail"> 모든학교에서
 					</div>
-					
 				</div>
 
 				<div class="form-group">
-					<label for="fields" class="col-sm-3 col-md-3 control-label">제목/내용</label>
+					<label for="field" class="col-sm-3 col-md-3 control-label">제목/내용</label>
 					<div class="col-sm-9 col-md-9">
-						<input type="radio" name="fields" value="all" id="fields" checked> 제목 + 본문
-						<input type="radio" name="fields" value="title" id="fields"> 제목
-						<input type="radio" name="fields" value="content" id="fields"> 본문
+						<input type="radio" name="field" value="title" id="field" checked> 제목
+						<input type="radio" name="field" value="all" id="field"> 제목 + 본문
 					</div>
-					
 				</div>
 
 				<div class="form-group">
@@ -52,8 +48,21 @@
 			</form>
 		</div>
 	</div>
+
+	<div id="searchedBoardsTPL"></div>
 	
 </div>
 <div class="col-xs-offset-4">
 	<a href="/school/{{schoolInfo.id}}/board/new" class="btn btn-default">글쓰기</a>
 </div>
+
+{{#section 'head'}}
+	<script type="text/javascript" src="/js/templates/templates.js"></script>
+{{/section}}
+
+
+
+{{#section 'jquery'}}
+	<script type="text/javascript" src="/js/api/board.js"></script>
+	<script type="text/javascript" src="/js/controllers/schoolBoardController.js"></script>
+{{/section}}

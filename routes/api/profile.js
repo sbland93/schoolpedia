@@ -50,6 +50,7 @@ module.exports = function(app){
 	//Query가 없으면 모든 profile을 내보낸다.
 	app.get('/api/profile', function(req, res, next){
 		var query = req.query;
+		console.log(query);
 		if(req.query.name) query.name = new RegExp('^'+req.query.name);
 		Profile.find(query)
 			.populate('schools.school')

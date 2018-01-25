@@ -43,16 +43,43 @@ module.exports = function(app){
 ******/
 
 
+/*app.User.find().or([{ 'firstName': { $regex: re }}, { 'lastName': { $regex: re }}]).sort('title', 1).exec(function(err, users) {
+    res.json(JSON.stringify(users));
+});
+Test.find()
+      .and([
+          { $or: [{a: 1}, {b: 1}] },
+          { $or: [{c: 1}, {d: 1}] }
+      ])*/
+
 	//Query를 보내면,쿼리에 해당하는 board에 해당하는 것들을 내보내고
 	//Query가 없으면 모든 board을 내보낸다.
+	/*query에 options가 담겨오는데, school: here or all 이고 fields: title or all 이다.*/
 	app.get('/api/board', function(req, res, next){
-		Board.find(req.query)
+		console.log(req.query);
+		//options가 있으면, 해당하는 option로 query로 변경해주고 검색해준다.
+		var re = new RegExp('^'+req.query.q);
+		var query = [ { $or: [{title: re}]} ];
+		
+		if(req.query.field == "all"){
+			query[0].$or.push({content: re});
+		}
+
+		if(req.query.school == "here"){
+			query.push({school : req.query.schoolId});	
+		}
+		
+		console.log(query);	
+		console.log(query[0].$or);	
+
+		Board.find().and(query)
 			.populate('school')
 			.exec(function(err, boards){
 				if(err) return next(err);
 				res.json(boards.map(function(a){
 					return {
 						id: a._id,
+						title: a.title,
 						school: a.school,
 						content: a.content,
 						replies : a.replies,
