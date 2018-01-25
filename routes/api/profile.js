@@ -93,7 +93,7 @@ module.exports = function(app){
 	//해당 id의 profile을 available상태로 만들고 응답은 success를 담아준다.
 	app.get('/api/profile/:id', function(req, res, next){
 		if(!req.params.id) return next('No Id');
-		Profile.findById({_id: req.params.id}, function(err, profile){
+		Profile.findById({_id: req.params.id}).populate('schools.school').exec(function(err, profile){
 			if(err) return next(err);
 			return res.json(profileViewModel(profile));
 		});
@@ -115,9 +115,13 @@ module.exports = function(app){
 	//id에 해당하는 profile을 요청본문을 토대로 업데이트한다.
 	app.put('/api/profile/:id', function(req, res, next){
 		if(!req.params.id) return next('No Id');
+		console.log(req.params.id);
+		console.log(req.body);
 		//DOLATER - 업데이트 메커니즘 적용 및 업데이트 검증.
 		Profile.update({_id: req.params.id}, req.body, function(err, response){
 			if(err) return next(err);
+			console.log("here");
+			console.log(response);
 			if(response.nModified === 1){
 				res.json({
 					success: true,

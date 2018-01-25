@@ -12,5 +12,25 @@
       <input type="password" class="form-control" id="inputPassword3" placeholder="비밀번호">
     </div>
   </div>
+  <div class="col-md-offset-3">
+    <a id="kakao-login-btn"></a>
+    <a href="http://developers.kakao.com/logout"></a>
+  </div> 
+    <script type='text/javascript'>
+      //<![CDATA[
+        // 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('a0db802c56943303ccd3bed0a045123c');
+        // 카카오 로그인 버튼을 생성합니다.
+        Kakao.Auth.createLoginButton({
+          container: '#kakao-login-btn',
+          success: function(authObj) {
+            alert(JSON.stringify(authObj));
+          },
+          fail: function(err) {
+             alert(JSON.stringify(err));
+          }
+        });
+      //]]>
+    </script>
   
 </form>

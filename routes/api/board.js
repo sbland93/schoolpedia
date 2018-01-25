@@ -46,12 +46,14 @@ module.exports = function(app){
 	//Query를 보내면,쿼리에 해당하는 board에 해당하는 것들을 내보내고
 	//Query가 없으면 모든 board을 내보낸다.
 	app.get('/api/board', function(req, res, next){
+		if(req.query.title) req.query.title = new RegExp('^'+req.query.title);
 		Board.find(req.query)
 			.populate('school')
 			.exec(function(err, boards){
 				if(err) return next(err);
 				res.json(boards.map(function(a){
 					return {
+						title: a.title,
 						id: a._id,
 						school: a.school,
 						content: a.content,

@@ -112,9 +112,94 @@ $(document).ready(function(){
 				var template = TPL.EPaddReply;
 				//방명록추가 위한 Form 검증.
 				makeDynamicTPL("#addReplyTPL", TPL.EPaddReply, context, profileTPLC.addReply(profileId, response, tplAndContext));
-			});			
+			});
+			$("#updateSchool").on('click',function(evt){
+				evt.preventDefault();
+				var template = TPL.EPupdateSchool;
+				$("#updateSchoolTPL").html(template(context));
+				$("#cancelUpdateSchool").on('click',function(evt){
+					evt.preventDefault();
+					$("#updateSchoolTPL").html("");
+					
+				});
+				$("#searchSchool").validate({
+					rules:{
+						name:{
+							required:true,
+							minlength:1,
+							maxlength:10,
+						}
+					},
+					messages:{
+						name:"한글자 이상입니다."
+					},
+					submitHandler:function(form,evt){
+						evt.preventDefault();
+						var sendingData = $(form).serialize();
+						getSchools(sendingData).then(function(data){
+							if(data.length){
+								var template2 = TPL.EPsearchedSchools;
+								$("#searchedSchoolsTPL").html(template2({searchedList:data}));
+								$(".sendData").on('click',function(evt){
+									evt.preventDefault();
+									var schoolIds = $(this).attr("schoolId");
+									updateProfile(profileId, {$push: { schools: { school: schoolIds }}}).then(function(data){
+										alert("수정되었습니다.");
+										$("#updateSchoolTPL").html("");
 
-    	} else{
+									})
+								});
+							}
+						});
+
+						
+
+					}
+				});
+
+			});
+			$("#updateBugName").on('click',function(evt){
+				evt.preventDefault();
+				var template = TPL.EPupdateBugName;
+				
+				$("#updateBugNameTPL").html(template(context));
+
+				$("#cancelUpdateBugName").on('click',function(evt){
+					
+					$("#updateBugNameTPL").html("");
+				});
+
+				$(".updateBugName").validate({
+					rules:{
+						bugName:{
+							required:true,
+							minlength:2,
+							maxlength:2,
+						}
+					},
+					messages:{
+						bugName:"충호는 두글자 입니다"
+					},
+					submitHandler:function(form,evt){
+						evt.preventDefault();
+						var sendingData = $(form).serialize();
+						var bugName = $("#bugName").val();
+						console.log(bugName);
+						updateProfile(profileId, sendingData).then(function(data){
+							console.log(data);
+							if(data.success){
+								alert("수정되었습니다.")
+								$("#bugNameTPL").html("");
+								console.log(sendingData);
+								$(".bugName").html(bugName);
+							}
+						});
+					}
+				});
+			});
+			
+
+    	} else {
     		//페이지 이동시.
     		alert("현재 없는 페이지 같아요, 학생정보가 이동했거나, 삭제된거 같아요ㅠㅠ");
 			location.href = "/";

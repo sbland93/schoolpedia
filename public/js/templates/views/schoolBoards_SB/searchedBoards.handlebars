@@ -1,0 +1,14 @@
+<div class="col-sm-9 col-md-6">
+	<ul class="boardList">
+		{{#each boardList}}
+			<a href="/board/{{id}}">
+				<li>
+					제목: {{title}}
+					<p>내용: {{content}}</p>
+				
+				</li>
+			</a>
+		{{/each}}
+
+	</ul>
+</div>
