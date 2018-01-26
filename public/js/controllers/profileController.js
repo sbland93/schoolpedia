@@ -75,7 +75,7 @@ $(document).ready(function(){
 				profile : response,
 			}))
 
-			console.log(response.features);
+			console.log(response);
 
 			var storyData = $(response.stories);
 			var featureData = $(response.features);
@@ -144,9 +144,22 @@ $(document).ready(function(){
 									evt.preventDefault();
 									var schoolIds = $(this).attr("schoolId");
 									updateProfile(profileId, {$push: { schools: { school: schoolIds }}}).then(function(data){
-										alert("수정되었습니다.");
-										$("#updateSchoolTPL").html("");
-
+										if (data.success){
+											alert("수정되었습니다.");
+											var inputName = $(".inputName").val();
+											response.schools.push({school:{
+												name:inputName,
+												_id:data.id,
+											}});
+									
+											$("#updateSchoolTPL").html("");
+											$("#profileTemplate").html(profileTemplate({
+												profile: response,
+													
+												
+											}));
+										}
+										
 									})
 								});
 							}
@@ -190,7 +203,6 @@ $(document).ready(function(){
 							if(data.success){
 								alert("수정되었습니다.")
 								$("#bugNameTPL").html("");
-								console.log(sendingData);
 								$(".bugName").html(bugName);
 							}
 						});

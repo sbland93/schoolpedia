@@ -1,62 +1,60 @@
 <!--NameSpace: EP -->
 
 <div id="profileTemplate"></div>
-<div class="row">
-	<div class="col-md-offset-10">
+<div class="pull-right col-xs-12 col-md-4">
+	<div class="col-md-offset-5">
 		<button id="updateBugName" class="btn btn-default">충호변경</button>
-		<button id="updateSchool" class="btn btn-default">학교수정</button>
+		<button id="updateSchool" class="btn btn-default">학교추가</button>
 	</div>
-</div>
-<div class="row">
-	<div class="col-md-offset-8 col-xs-8 col-sm-6 col-md-4">
-		<div id="updateBugNameTPL"></div>
-	</div>
-	
-</div>
-<div class="row">
-	<div class="col-md-offset-8 col-xs-8 col-sm-6 col-md-4">
-		<div id="updateSchoolTPL"></div>
-	</div>
-</div>
+	<!-- 충호변경-->
+	<div id="updateBugNameTPL"></div>
+	<!-- 학교수정-->
+	<div id="updateSchoolTPL"></div>
 
+	<!-- 방명록 기록칸-->
+	<div id="replies"></div>
+	<button class="btn btn-default" id="addReply">방명록쓰기</button>
 
-<div class="row">
-	<div class="col-md-4">
-	
-		<div id="features"></div>
-		<button class="btn btn-default" id="addFeature">특징추가하기</button>
-	
-		<!--특징추가 버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
-		<div id="addFeatureTPL"></div>
-	
-	</div>
+	<!--방명록추가 버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
+	<div id="addReplyTPL"></div> 
 
-	
-	<div class="col-md-4">
-	
-		<div id="stories"></div>
-		<button class="btn btn-default" id="addStory">썰쓰기</button>
-
-		<!--특징추가 버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
-		<div id="addStoryTPL"></div> 
-	
-	</div>
-	
-
-
-	<div class="col-md-4">
-
-		<div id="replies"></div>
-		<button class="btn btn-default" id="addReply">방명록쓰기</button>
-	
-		<!--특징추가 버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
-		<div id="addReplyTPL"></div> 
-
-
-	</div>
 
 	
 </div>
+
+
+
+	
+
+
+<!-- 특징, 이야기 column-->
+<div class="pull-left col-xs-12 col-sm-10 col-md-8">
+	<div id="features"></div>
+	<button class="btn btn-default" id="addFeature">특징추가하기</button>
+
+	<!--특징추가 버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
+	<div id="addFeatureTPL"></div>
+
+
+
+
+	<!-- 썰 div-->
+	<div id="stories"></div>
+	<button class="btn btn-default" id="addStory">썰쓰기</button>
+
+	<!--썰추가 버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
+	<div id="addStoryTPL"></div> 
+
+
+	
+	
+</div>	
+
+
+	
+
+	
+
 
 <!--
 <textarea class="form-control stories" name="stories" rows="10" placeholder="이 학생에 대한 설명, 함께 있었던 일, 일화, 성격, 특징 등" id="newStory"></textarea>
@@ -64,10 +62,13 @@
 <button class="btn btn-default" id="addStory">이야기추가</button>
 -->
 
-<input type="hidden" id="PPdefaultValue" value={{profileId}} profileId={{profileId}}>
 
-<a class="btn btn-default" href="/profile/{{profileId}}/update" id="updateProfile">수정</a>
-<button class="btn btn-default" id="removeProfile">삭제</button>
+<div class="col-xs-12 col-sm-12 col-md-12">
+	<input type="hidden" id="PPdefaultValue" value={{profileId}} profileId={{profileId}}>
+	<a class="btn btn-default" href="/profile/{{profileId}}/update" id="updateProfile">수정</a>
+	<button class="btn btn-default" id="removeProfile">삭제</button>
+
+</div>
 
 
 {{#section 'head'}}
