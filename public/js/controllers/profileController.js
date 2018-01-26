@@ -15,6 +15,8 @@ $(document).ready(function(){
 	});
 	
 
+
+
 	//pagination을 실행할, template들과, 그에 따라 필요한 context와, Div의 Tag들의 모음 객체.
 	var tplAndContext = {
 		
@@ -113,6 +115,7 @@ $(document).ready(function(){
 				//방명록추가 위한 Form 검증.
 				makeDynamicTPL("#addReplyTPL", TPL.EPaddReply, context, profileTPLC.addReply(profileId, response, tplAndContext));
 			});
+<<<<<<< HEAD
 			$("#updateClass").on('click',function(evt){
 				evt.preventDefault();
 				var updateClassTPL = TPL.EPupdateClass;
@@ -123,6 +126,9 @@ $(document).ready(function(){
 				})
 			})
 			//학교 추가버튼을 클릭시 학교 검색 폼 
+=======
+
+>>>>>>> master
 			$("#updateSchool").on('click',function(evt){
 				evt.preventDefault();
 				var template = TPL.EPupdateSchool;
@@ -220,7 +226,6 @@ $(document).ready(function(){
 				});
 			});
 			
-
     	} else {
     		//페이지 이동시.
     		alert("현재 없는 페이지 같아요, 학생정보가 이동했거나, 삭제된거 같아요ㅠㅠ");

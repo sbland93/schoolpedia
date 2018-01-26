@@ -27,10 +27,14 @@ $(document).ready(function(){
 		messages: {
 			name: "이름은 한글자 이상 다섯글자 이하 입니다리",
 		},
-		submitHandler: function(form) {
+		submitHandler: function(form, evt) {
+			//form전송을 막는다.
+			evt.preventDefault();
+
 			//검색내용을 serialize 한다.
 			var sendingData = $(form).serialize();
 			
+
 			//검색내용에 해당하는 프로필을 ajax로 가져오고 결과에 해당하는 템플릿을 동적생성.
 			getProfiles(sendingData).then(function(data){
 				console.log("data:", data);
