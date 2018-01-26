@@ -1,16 +1,20 @@
-<header>{{profile.bugName}}</header>
+<header class="bugName">{{profile.bugName}}</header>
 
 <div class="row">
+	<div class="col-md-offset-10">
+		
+			<span>충호</span>: <em class="bugName">{{profile.bugName}}</em> <span>이름</span>: <em>{{profile.name}}</em>
+	</div>
+</div>
+<div class="row">
 	<div class="col-md-offset-8">
-		<div class="prof">
-			<span>충호</span>: <em>{{profile.bugName}}</em> <span>이름</span>: <em>{{profile.name}}</em>
-			{{#each profile.schools}}
-				<span>학교</span>: <em>{{name}}</em>
-				<span>학급</span>:
-				{{#each class}}
-					 <em>{{this}}반</em>
-				{{/each}}
+		{{#each profile.schools}}
+			<span>학교</span>: <a><em>{{school.name}}</em></a>
+			<span>학급</span>:
+			{{#each class}}
+				 <em>{{this}}반</em>
 			{{/each}}
-		</div>
+			</br>
+		{{/each}}
 	</div>
 </div>

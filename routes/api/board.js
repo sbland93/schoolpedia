@@ -56,7 +56,6 @@ Test.find()
 	//Query가 없으면 모든 board을 내보낸다.
 	/*query에 options가 담겨오는데, school: here or all 이고 fields: title or all 이다.*/
 	app.get('/api/board', function(req, res, next){
-		console.log(req.query);
 		//options가 있으면, 해당하는 option로 query로 변경해주고 검색해준다.
 		var re = new RegExp('^'+req.query.q);
 		var query = [ { $or: [{title: re}]} ];
@@ -78,6 +77,7 @@ Test.find()
 				if(err) return next(err);
 				res.json(boards.map(function(a){
 					return {
+						title: a.title,
 						id: a._id,
 						title: a.title,
 						school: a.school,

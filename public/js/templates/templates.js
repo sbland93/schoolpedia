@@ -88,7 +88,7 @@ this["TPL"]["EPaddFeature"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"ma
     + alias4(((helper = (helper = helpers.profileId || (depth0 != null ? depth0.profileId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"profileId","hash":{},"data":data}) : helper)))
     + "\" method=\"PUT\" profileId=\""
     + alias4(((helper = (helper = helpers.profileId || (depth0 != null ? depth0.profileId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"profileId","hash":{},"data":data}) : helper)))
-    + "\">\r\n\r\n	<!--특징추가 form-->\r\n	<div class=\"form-group\">\r\n\r\n		<label for=\"fieldFeature\" class=\"col-sm-2 control-label\">특징추가하기</label>\r\n		<div class=\"col-sm-4\">\r\n			<input type=\"text\" class=\"form-control\" name=\"feature\" id=\"fieldFeature\" required>\r\n		</div>\r\n	\r\n	</div>\r\n\r\n	<!--추가 버튼-->\r\n	<div class=\"form-group\">\r\n	\r\n		<div class=\"col-sm-offset-2 col-sm-1\">\r\n			<button type=\"submit\" class=\"btn btn-default\">추가</button>\r\n		</div>\r\n\r\n	</div>\r\n</form>\r\n\r\n<div class=\"col-sm-offset-2 col-sm-1\">\r\n	<button class=\"btn btn-default\" id=\"cancelAddFeature\">취소</button>\r\n</div>\r\n";
+    + "\">\r\n\r\n	<!--특징추가 form-->\r\n	<div class=\"form-group\">\r\n\r\n		<div class=\"col-xs-12 col-sm-11 col-md-12\">\r\n			<textarea class=\"form-control\" name=\"feature\" id=\"fieldFeature\" required></textarea>\r\n		</div>\r\n		<!--추가 버튼-->\r\n		<div class=\"col-xs-12 col-md-12\">\r\n			<button type=\"submit\" class=\"btn btn-default btn-sm\">추가</button>\r\n			<button class=\"btn btn-default btn-sm\" id=\"cancelAddFeature\">취소</button>\r\n		</div>	\r\n	</div>\r\n</form>\r\n";
 },"useData":true});
 
 this["TPL"]["EPaddReply"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -96,7 +96,7 @@ this["TPL"]["EPaddReply"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main
 
   return "\r\n\r\n<!--EP에서 특징추가하기를 누르면 나오는 template -->\r\n\r\n<form class=\"form-horizontal addReplyForm\" role=\"form\" action=\"/api/profile/"
     + container.escapeExpression(((helper = (helper = helpers.profileId || (depth0 != null ? depth0.profileId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"profileId","hash":{},"data":data}) : helper)))
-    + "\" method=\"PUT\">\r\n\r\n	<!--특징추가 form-->\r\n	<div class=\"form-group\">\r\n\r\n		<label for=\"fieldReply\" class=\"col-sm-2 control-label\">썰추가하기</label>\r\n		<div class=\"col-sm-4\">\r\n			<input type=\"text\" class=\"form-control\" name=\"reply\" id=\"fieldReply\" required>\r\n		</div>\r\n	\r\n	</div>\r\n\r\n	<!--추가 버튼-->\r\n	<div class=\"form-group\">\r\n	\r\n		<div class=\"col-sm-offset-2 col-sm-1\">\r\n			<button type=\"submit\" class=\"btn btn-default\">추가</button>\r\n		</div>\r\n\r\n	</div>\r\n</form>\r\n\r\n<div class=\"col-sm-offset-2 col-sm-1\">\r\n	<button class=\"btn btn-default\" id=\"cancelAddReply\">취소</button>\r\n</div>\r\n";
+    + "\" method=\"PUT\">\r\n\r\n	<!--특징추가 form-->\r\n	<div class=\"form-group\">\r\n\r\n		<div class=\"col-xs-10 col-sm-10 col-md-12\">\r\n			<textarea class=\"form-control\" name=\"reply\" id=\"fieldReply\" required></textarea>\r\n		</div>\r\n		<!--추가 버튼-->\r\n		<div class=\"col-xs-12 col-md-12\">\r\n			<button type=\"submit\" class=\"btn btn-default btn-sm\">추가</button>\r\n			<button class=\"btn btn-default btn-sm\" id=\"cancelAddReply\">취소</button>\r\n		</div>	\r\n	</div>\r\n	\r\n</form>\r\n\r\n";
 },"useData":true});
 
 this["TPL"]["EPaddStory"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -104,7 +104,7 @@ this["TPL"]["EPaddStory"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main
 
   return "\r\n\r\n<!--EP에서 특징추가하기를 누르면 나오는 template -->\r\n\r\n<form class=\"form-horizontal addStoryForm\" role=\"form\" action=\"/api/profile/"
     + container.escapeExpression(((helper = (helper = helpers.profileId || (depth0 != null ? depth0.profileId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"profileId","hash":{},"data":data}) : helper)))
-    + "\" method=\"PUT\">\r\n\r\n	<!--특징추가 form-->\r\n	<div class=\"form-group\">\r\n\r\n		<label for=\"fieldStory\" class=\"col-sm-2 control-label\">썰추가하기</label>\r\n		<div class=\"col-sm-4\">\r\n			<input type=\"text\" class=\"form-control\" name=\"story\" id=\"fieldStory\" required>\r\n		</div>\r\n	\r\n	</div>\r\n\r\n	<!--추가 버튼-->\r\n	<div class=\"form-group\">\r\n	\r\n		<div class=\"col-sm-offset-2 col-sm-1\">\r\n			<button type=\"submit\" class=\"btn btn-default\">추가</button>\r\n		</div>\r\n\r\n	</div>\r\n</form>\r\n\r\n<div class=\"col-sm-offset-2 col-sm-1\">\r\n	<button class=\"btn btn-default\" id=\"cancelAddStory\">취소</button>\r\n</div>\r\n";
+    + "\" method=\"PUT\">\r\n\r\n	<!--특징추가 form-->\r\n	<div class=\"form-group\">\r\n		<div class=\"col-xs-12 col-sm-11 col-md-12\">\r\n			<textarea class=\"form-control\" name=\"story\" id=\"fieldStory\" required></textarea>\r\n		</div>\r\n		<!--추가 버튼-->\r\n		<div class=\"col-xs-12 col-md-12\">\r\n			<button type=\"submit\" class=\"btn btn-default btn-sm\">추가</button>\r\n			<button class=\"btn btn-default btn-sm\" id=\"cancelAddStory\">취소</button>\r\n		</div>	\r\n\r\n	</div>\r\n</form>\r\n\r\n";
 },"useData":true});
 
 this["TPL"]["EPfeatures"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -148,28 +148,29 @@ this["TPL"]["EPpagination"] = Handlebars.template({"1":function(container,depth0
 },"useData":true});
 
 this["TPL"]["EPprofile"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+    var stack1;
 
-  return "				<span>학교</span>: <em>"
-    + container.escapeExpression(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
-    + "</em>\r\n				<span>학급</span>:\r\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0["class"] : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+  return "			<span>학교</span>: <a><em>"
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.school : depth0)) != null ? stack1.name : stack1), depth0))
+    + "</em></a>\r\n			<span>학급</span>:\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0["class"] : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "			</br>\r\n";
 },"2":function(container,depth0,helpers,partials,data) {
-    return "					 <em>"
+    return "				 <em>"
     + container.escapeExpression(container.lambda(depth0, depth0))
     + "반</em>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "<header>"
+  return "<header class=\"bugName\">"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.bugName : stack1), depth0))
-    + "</header>\r\n\r\n<div class=\"row\">\r\n	<div class=\"col-md-offset-8\">\r\n		<div class=\"prof\">\r\n			<span>충호</span>: <em>"
+    + "</header>\r\n\r\n<div class=\"row\">\r\n	<div class=\"col-md-offset-10\">\r\n		\r\n			<span>충호</span>: <em class=\"bugName\">"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.bugName : stack1), depth0))
     + "</em> <span>이름</span>: <em>"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.name : stack1), depth0))
-    + "</em>\r\n"
+    + "</em>\r\n	</div>\r\n</div>\r\n<div class=\"row\">\r\n	<div class=\"col-md-offset-8\">\r\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.schools : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "		</div>\r\n	</div>\r\n</div>";
+    + "	</div>\r\n</div>";
 },"useData":true});
 
 this["TPL"]["EPreplies"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -182,6 +183,29 @@ this["TPL"]["EPreplies"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main"
     + "</p>\r\n    </div>\r\n</div>\r\n<hr>";
 },"useData":true});
 
+this["TPL"]["EPsearchedSchools"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "		<!-- 열려있든, 안열려있든 공통의경우는 아래-->\r\n		<li>"
+    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
+    + " "
+    + alias4(((helper = (helper = helpers.location || (depth0 != null ? depth0.location : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"location","hash":{},"data":data}) : helper)))
+    + "</li><button class=\"sendData btn btn-default btn-sm\" schoolId="
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + ">확인</button></br>\r\n		<input class=\"inputName\" type=\"hidden\" name=\"school\" value="
+    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
+    + ">\r\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    return "	그런학교 없다 ㄹㅇㅠㅠ.\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "\r\n<ul class=\"schoolList\">\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.searchedList : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "</ul>\r\n\r\n"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.noData : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"useData":true});
+
 this["TPL"]["EPstories"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
@@ -192,8 +216,20 @@ this["TPL"]["EPstories"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main"
     + "</p>\r\n    </div>\r\n</div>\r\n<hr>";
 },"useData":true});
 
+this["TPL"]["EPupdateBugName"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return "<form class=\"form-horizontal updateBugName\" role=\"form\" method=\"PUT\" action=\"/api/profile/"
+    + container.escapeExpression(((helper = (helper = helpers.profileId || (depth0 != null ? depth0.profileId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"profileId","hash":{},"data":data}) : helper)))
+    + "\">\r\n	<div class=\"form-group\">\r\n		<label>충호변경</label>\r\n		<input type=\"text\" class=\"form-control\" name=\"bugName\" id=\"bugName\">\r\n		<button class=\"btn btn-default\">추가</button>\r\n		<button class=\"btn btn-default\" id=\"cancelUpdateBugName\">취소</button>\r\n	</div>\r\n	\r\n</form>\r\n	\r\n";
+},"useData":true});
+
 this["TPL"]["EPupdateProfile"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "";
+},"useData":true});
+
+this["TPL"]["EPupdateSchool"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<form class=\"form-horizontal\" action=\"/api/school\" id=\"searchSchool\">\r\n	<div class=\"form-group\">\r\n		<label>학교수정</label>\r\n		<input type=\"text\" class=\"form-control\" name=\"name\" placeholder=\"학교명을 입력하세요!!\">\r\n		<button class=\"btn btn-default\" type=\"submit\">검색!</button>\r\n		<button class=\"btn btn-default\" id=\"cancelUpdateSchool\">취소</button>\r\n	</div>\r\n</form>\r\n\r\n<div id=\"searchedSchoolsTPL\"></div>\r\n\r\n\r\n\r\n";
 },"useData":true});
 
 this["TPL"]["SCsearchedProfileList"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -257,5 +293,5 @@ this["TPL"]["SBsearchedBoards"] = Handlebars.template({"1":function(container,de
 
   return "<div class=\"col-sm-9 col-md-6\">\r\n	<ul class=\"boardList\">\r\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.boardList : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\r\n	</ul>\r\n</div>";
+    + "	</ul>\r\n</div>";
 },"useData":true});

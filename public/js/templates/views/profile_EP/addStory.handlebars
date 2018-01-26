@@ -6,24 +6,15 @@
 
 	<!--특징추가 form-->
 	<div class="form-group">
-
-		<label for="fieldStory" class="col-sm-2 control-label">썰추가하기</label>
-		<div class="col-sm-4">
-			<input type="text" class="form-control" name="story" id="fieldStory" required>
+		<div class="col-xs-12 col-sm-11 col-md-12">
+			<textarea class="form-control" name="story" id="fieldStory" required></textarea>
 		</div>
-	
-	</div>
-
-	<!--추가 버튼-->
-	<div class="form-group">
-	
-		<div class="col-sm-offset-2 col-sm-1">
-			<button type="submit" class="btn btn-default">추가</button>
-		</div>
+		<!--추가 버튼-->
+		<div class="col-xs-12 col-md-12">
+			<button type="submit" class="btn btn-default btn-sm">추가</button>
+			<button class="btn btn-default btn-sm" id="cancelAddStory">취소</button>
+		</div>	
 
 	</div>
 </form>
 
-<div class="col-sm-offset-2 col-sm-1">
-	<button class="btn btn-default" id="cancelAddStory">취소</button>
-</div>

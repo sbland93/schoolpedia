@@ -77,7 +77,7 @@ $(document).ready(function(){
 				profile : response,
 			}))
 
-			console.log(response.features);
+			console.log(response);
 
 			var storyData = $(response.stories);
 			var featureData = $(response.features);
@@ -116,56 +116,104 @@ $(document).ready(function(){
 				makeDynamicTPL("#addReplyTPL", TPL.EPaddReply, context, profileTPLC.addReply(profileId, response, tplAndContext));
 			});
 
-
-
-			
-
-
-			//학교확인 버튼을 클릭시에 동적으로 정보를 수정할 수 있는 폼을 생성한다.
-			$('.checkSchool').on('click', function(evt){
+			$("#updateSchool").on('click',function(evt){
 				evt.preventDefault();
-
-				//동적으로 생성된 checkSchoolForm 검증
-				$(".checkSchoolForm").validate({
-					// Specify validation rules
-					rules: {
-						schoolName:{
-							required: true,
-							minlength: 1,
-							maxlength: 10,
+				var template = TPL.EPupdateSchool;
+				$("#updateSchoolTPL").html(template(context));
+				$("#cancelUpdateSchool").on('click',function(evt){
+					evt.preventDefault();
+					$("#updateSchoolTPL").html("");
+					
+				});
+				$("#searchSchool").validate({
+					rules:{
+						name:{
+							required:true,
+							minlength:1,
+							maxlength:10,
 						}
 					},
-					// Specify validation error messages
-					messages: {
-						schoolName: "학교이름을 필수로 한글자이상 열글자 이하로 적어주세요ㅠㅠ",
+					messages:{
+						name:"한글자 이상입니다."
 					},
-
-					//추가성공시에, 특징추가 동적생성 Form을 없앤다.
-					submitHandler: function(form, evt) {
+					submitHandler:function(form,evt){
 						evt.preventDefault();
-						var schoolName = $('#fieldSchool').val();
-						//DOLATER no school.
-						getSchools({name: schoolName}).then(function(data){
-							var response = { schools : data };
-							//검색된 학교들을 버튼 옆에 붙인다.
-							/*_this.next().html(NPsearchedSchools(response));
-							//After Search School Controller
-							$('.NPsearchResult').on('click', function(evt){
-								evt.preventDefault();
-								_this.next().html("");
-								//Input에 해당학교의 이름을 넣고
-								$(selector).val($(this).html());
-								//Hidden SchoolId input과, 학교의 학급 Input을 만들어 넣는다.
-								makeDynamicInput(_this, $(this).attr('schoolId'));
-							});*/
-							console.log(response);
+						var sendingData = $(form).serialize();
+						getSchools(sendingData).then(function(data){
+							if(data.length){
+								var template2 = TPL.EPsearchedSchools;
+								$("#searchedSchoolsTPL").html(template2({searchedList:data}));
+								$(".sendData").on('click',function(evt){
+									evt.preventDefault();
+									var schoolIds = $(this).attr("schoolId");
+									updateProfile(profileId, {$push: { schools: { school: schoolIds }}}).then(function(data){
+										if (data.success){
+											alert("수정되었습니다.");
+											var inputName = $(".inputName").val();
+											response.schools.push({school:{
+												name:inputName,
+												_id:data.id,
+											}});
+									
+											$("#updateSchoolTPL").html("");
+											$("#profileTemplate").html(profileTemplate({
+												profile: response,
+													
+												
+											}));
+										}
+										
+									})
+								});
+							}
+						});
+
+						
+
+					}
+				});
+
+			});
+			$("#updateBugName").on('click',function(evt){
+				evt.preventDefault();
+				var template = TPL.EPupdateBugName;
+				
+				$("#updateBugNameTPL").html(template(context));
+
+				$("#cancelUpdateBugName").on('click',function(evt){
+					
+					$("#updateBugNameTPL").html("");
+				});
+
+				$(".updateBugName").validate({
+					rules:{
+						bugName:{
+							required:true,
+							minlength:2,
+							maxlength:2,
+						}
+					},
+					messages:{
+						bugName:"충호는 두글자 입니다"
+					},
+					submitHandler:function(form,evt){
+						evt.preventDefault();
+						var sendingData = $(form).serialize();
+						var bugName = $("#bugName").val();
+						console.log(bugName);
+						updateProfile(profileId, sendingData).then(function(data){
+							console.log(data);
+							if(data.success){
+								alert("수정되었습니다.")
+								$("#bugNameTPL").html("");
+								$(".bugName").html(bugName);
+							}
 						});
 					}
 				});
-				
-				
 			});
-    	} else{
+			
+    	} else {
     		//페이지 이동시.
     		alert("현재 없는 페이지 같아요, 학생정보가 이동했거나, 삭제된거 같아요ㅠㅠ");
 			location.href = "/";

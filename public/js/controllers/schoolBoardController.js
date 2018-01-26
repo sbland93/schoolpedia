@@ -30,6 +30,4 @@ $(".searchBoardForm").validate({
 
 	}
 
-
-
 })
