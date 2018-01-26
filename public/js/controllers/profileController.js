@@ -113,6 +113,16 @@ $(document).ready(function(){
 				//방명록추가 위한 Form 검증.
 				makeDynamicTPL("#addReplyTPL", TPL.EPaddReply, context, profileTPLC.addReply(profileId, response, tplAndContext));
 			});
+			$("#updateClass").on('click',function(evt){
+				evt.preventDefault();
+				var updateClassTPL = TPL.EPupdateClass;
+				$("#updateClassTPL").html(updateClassTPL(context));
+				$("#cancelUpdateClass").on('click',function(evt){
+					evt.preventDefault();
+					$("#updateClassTPL").html("");
+				})
+			})
+			//학교 추가버튼을 클릭시 학교 검색 폼 
 			$("#updateSchool").on('click',function(evt){
 				evt.preventDefault();
 				var template = TPL.EPupdateSchool;

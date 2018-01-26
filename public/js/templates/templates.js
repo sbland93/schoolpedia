@@ -150,9 +150,9 @@ this["TPL"]["EPpagination"] = Handlebars.template({"1":function(container,depth0
 this["TPL"]["EPprofile"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "			<span>학교</span>: <a><em>"
+  return "			<span>학교</span>: <a id=\"updateClass\"><em>"
     + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.school : depth0)) != null ? stack1.name : stack1), depth0))
-    + "</em><a>\n			<span>학급</span>:\n"
+    + "</em></a>\n			<span>학급</span>:\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0["class"] : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "			</br>\n";
 },"2":function(container,depth0,helpers,partials,data) {
@@ -222,6 +222,14 @@ this["TPL"]["EPupdateBugName"] = Handlebars.template({"compiler":[7,">= 4.0.0"],
   return "<form class=\"form-horizontal updateBugName\" role=\"form\" method=\"PUT\" action=\"/api/profile/"
     + container.escapeExpression(((helper = (helper = helpers.profileId || (depth0 != null ? depth0.profileId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"profileId","hash":{},"data":data}) : helper)))
     + "\">\n	<div class=\"form-group\">\n		<label>충호변경</label>\n		<input type=\"text\" class=\"form-control\" name=\"bugName\" id=\"bugName\">\n		<button class=\"btn btn-default\">추가</button>\n		<button class=\"btn btn-default\" id=\"cancelUpdateBugName\">취소</button>\n	</div>\n	\n</form>\n	\n";
+},"useData":true});
+
+this["TPL"]["EPupdateClass"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return "<form class=\"form-horizontal updateClass\" role=\"form\" method=\"PUT\" action=\"/api/profile/"
+    + container.escapeExpression(((helper = (helper = helpers.profileId || (depth0 != null ? depth0.profileId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"profileId","hash":{},"data":data}) : helper)))
+    + "\">\n	<div class=\"form-group\">\n		<label>반 수정</label>\n		<div class=\"row\">\n			<input type=\"text\" class=\"form-control\" name=\"first\" id=\"firstClass\">\n			<button class=\"btn btn-default btn-sm\">수정</button>\n		\n		</div>\n		\n		<input type=\"text\" class=\"form-control\" name=\"second\" id=\"secondClass\">\n		<button class=\"btn btn-default btn-sm\">수정</button>\n		\n		<input type=\"text\" class=\"form-control\" name=\"third\" id=\"thirdClass\">\n		<button class=\"btn btn-default btn-sm\">수정</button>\n		<button class=\"btn btn-default btn-sm\" id=\"cancelUpdateClass\">취소</button>\n	</div>\n	\n</form>\n	";
 },"useData":true});
 
 this["TPL"]["EPupdateSchool"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
