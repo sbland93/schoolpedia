@@ -5,6 +5,8 @@ var profileHandlers = require('../handlers/profile.js')();
 var boardHandlers = require('../handlers/board.js')();
 var mongoose = require('mongoose');
 var loginHandlers = require('../handlers/auth.js')();
+var passport = require('passport');
+
 
 module.exports = function(app){
 
@@ -19,8 +21,45 @@ module.exports = function(app){
 
 	//login 페이지 라우팅.
 	app.get('/login',loginHandlers.login);
+	
+	app.post('/signupTest', function(req, res, next){ console.log("req:", req.body); next();}, passport.authenticate('local', {
+		successRedirect: '/profile',
+		failureRedirect: '/',
+	}));
+
+	app.post('/loginTest', passport.authenticate('login', {
+		successRedirect: '/profile',
+		failureRedirect: '/',
+	}));
+
+	function isLoggedIn(req, res, next){
+		console.log("Test is Logged In", req.isAuthenticated);
+		if(req.isAuthenticated()){
+			return next();
+		} else {
+			console.log("not pass!");
+			res.redirect('/login');
+		}
+	}
+
+	app.get('/profile', function(req, res, next){
+		res.render("index");
+	})
+
+	app.get('/profileTest', isLoggedIn, function(req, res, next){
+		res.render("index");
+	})
+
+
 	//회원가입 페이지 라우팅.
 	app.get('/register',loginHandlers.register);
+	
+	//oauth(카카오로그인 redirect)페이지 라우팅.
+	app.get('/oauth', function(req, res, next){
+		console.log(req.body);
+	});
+
+
 	//:id에 해당하는 school의 Board, Profile을 5개씩 리턴한다.
 	//DOLATER
 	app.get('/school/:id', schoolHandlers.school);

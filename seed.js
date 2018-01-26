@@ -1,6 +1,7 @@
 var School = require('./models/school.js');
 var Profile = require('./models/profile.js');
 var Board = require('./models/board.js');
+var User = require('./models/user.js');
 var koreaSchoolData = require('../koreaSchoolData.js')
 var seedData = require('./seedData.js');
 var getRandomInt = require('./utils/testUtils.js')().getRandomInt;
@@ -8,7 +9,7 @@ var getRandomInt = require('./utils/testUtils.js')().getRandomInt;
 //Seed All Data From seedData.
 var seedDev = function(){
 
-	var p1,p2,p3;
+	var p1,p2,p3,p4;
 
 	//p1. School remove -> School create by SeedData
 	p1 = new Promise(function(resolve, reject){
@@ -21,6 +22,9 @@ var seedDev = function(){
 	});
 
 	p1.then(function(schools){
+
+
+
 		//available한 school만 리스트를 새로 뽑음.
 		var availableSchools = schools.filter(function(el){
 			return el.available === true;
@@ -38,6 +42,7 @@ var seedDev = function(){
 			var randomInt = getRandomInt(availableSchools.length);
 			el.school = availableSchools[randomInt]._id;
 		});
+
 		//p2 -> Profile remove - 위에서 채워진 profileList를 바탕으로, profile create
 		p2 = new Promise(function(resolve, reject){
 			Profile.remove({}, function(err){
@@ -47,6 +52,7 @@ var seedDev = function(){
 				});
 			});
 		});
+
 		//p3 -> Profile remove - 위에서 채워진 profileList를 바탕으로, profile create
 		p3 = new Promise(function(resolve, reject){
 			Board.remove({}, function(err){
@@ -56,7 +62,16 @@ var seedDev = function(){
 				});
 			});	
 		});
-		return Promise.all([p2,p3])
+
+		//userData모두 삭제.
+		p4 = new Promise(function(resolve, reject){
+			User.remove({}, function(err){
+				if(err) reject(err);
+				resolve();
+			});
+		});
+
+		return Promise.all([p2,p3,p4])
 	})
 	.then(function(){
 		console.log("Data initiating All, Success");

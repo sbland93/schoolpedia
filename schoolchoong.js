@@ -4,11 +4,15 @@ var express = require('express');
 
 var fs = require('fs');
 
+//passport 관련 설정
+var passport = require("passport");
+
 var app = express();
 //Model들 로드.
 var Boards = require('./models/board.js');
 var Profiles = require('./models/profile.js');
 var Schools = require('./models/school.js');
+var Users = require('./models/user.js')
 
 
 //uncaughtError를 처리하기 위해서 domain생성 후 연결.
@@ -110,6 +114,9 @@ switch(app.get('env')){
 }
 
 
+
+
+
 //static 미들우어는 정적 자원을 담고 있는 하나 이상의 디렉터리를 지목해서
 //특별한 처리 없이 클라이언트에 전송 할 수 있도록 해준다.
 //여기선 퍼블릭 디렉토리 지정.
@@ -177,6 +184,15 @@ app.use(require('express-session')({
 	saveUninitialized: false,
 	secret: credentials.cookieSecret
 }));
+
+
+
+//PassPort(Authentication관련 설정) - 이것은 express-session을 이용하기 때문에
+app.use(passport.initialize());
+app.use(passport.session());
+
+require("./config/passport")(passport);
+
 
 //세션에 업데이트 카운팅이 없으면 초기화 시킨다.
 //10회 이상 업데이트 카운팅이 되어있으면 매번 flash메세지를 만든다.
