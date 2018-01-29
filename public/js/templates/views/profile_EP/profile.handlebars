@@ -9,7 +9,7 @@
 <div class="row">
 	<div class="col-md-offset-8">
 		{{#each profile.schools}}
-			<span>학교</span>: <a><em>{{school.name}}</em></a>
+			<span>학교</span>: <a class="updateClass" schoolId={{school._id}}><em>{{school.name}}</em></a>
 			<span>학급</span>:
 			{{#each class}}
 				 <em>{{this}}반</em>

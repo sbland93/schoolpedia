@@ -108,13 +108,99 @@ $(document).ready(function(){
 				makeDynamicTPL("#addStoryTPL", TPL.EPaddStory, context, profileTPLC.addStory(profileId, response, tplAndContext));
 			});
 
-			//방명록추가 버튼은 클릭시에 동적으로 썰 추가 폼을 생성한다.
+			//방명록추가 버튼은 클릭시에 동적으로 방명록 추가 폼을 생성한다.
 			$("#addReply").on('click', function(evt){
 				evt.preventDefault();
 				var template = TPL.EPaddReply;
 				//방명록추가 위한 Form 검증.
 				makeDynamicTPL("#addReplyTPL", TPL.EPaddReply, context, profileTPLC.addReply(profileId, response, tplAndContext));
 			});
+			//학교링크 클릭시 템플릿 생성.
+			$(".updateClass").on('click',function(evt){
+				console.log('hi');
+				evt.preventDefault();
+				var updateClassTPL = TPL.EPupdateClass;
+				var schoolId = $(this).attr("schoolId")
+				console.log(schoolId);
+
+				var schoolObj;
+				response.schools.map(function(el){
+					if(el.school._id === schoolId){
+						schoolObj = el;
+					}
+				})
+
+				$("#updateClassTPL").html(updateClassTPL({
+					schoolObj:schoolObj,
+					profileId:profileId,
+				}));
+
+				$("#cancelUpdateClass").on('click',function(evt){
+					evt.preventDefault();
+					$("#updateClassTPL").html("");
+				})
+				
+				$(".updateClassForm").validate({
+					rules:{
+						class:{
+							required:true,
+							range:[100,699],
+						}
+					},
+					messages:{
+						class:"해당하는 반이 없습니다."
+					},
+					submitHandler:function(form,evt){
+						evt.preventDefault();
+						var first = $(".1").val();
+						var second = $(".2").val();
+						var third = $(".3").val();
+ 						//수정된 반 정보를 보낼 데이터 안에 입력.
+ 						var classData = { 
+ 						
+ 							$set: {
+									"schools.$.class.0" : first,
+									"schools.$.class.1" : second,
+									"schools.$.class.2" : third
+								} ,
+
+							schoolId: schoolId,
+
+							options: "class",
+							
+						}
+						var updateSchool;
+						updateProfile(profileId,classData).then(function(data){
+							response.schools.map(function(ele){
+								if (ele.school._id === schoolId){
+									updateSchool = ele;
+								}
+							})
+							console.log(updateSchool.class);
+							updateSchool.class[0]=first;
+							updateSchool.class[1]=second;
+							updateSchool.class[2]=third;
+							
+							if (data.success){
+								alert("수정되었습니다.");
+								$("#updateClassTPL").html("");
+								/*response.schools.set({school:{
+									"schools.$.class.0" : first,
+									"schools.$.class.1" : second,
+									"schools.$.class.2" : third
+								}});
+								*/
+								
+								$("#profileTemplate").html(profileTemplate({
+									profile:response,
+								}))
+							}
+						})
+					}
+				})
+				
+			})
+			//학교 추가버튼을 클릭시 학교 검색 폼 
 
 			$("#updateSchool").on('click',function(evt){
 				evt.preventDefault();
