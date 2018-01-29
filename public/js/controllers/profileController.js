@@ -115,13 +115,11 @@ $(document).ready(function(){
 				//방명록추가 위한 Form 검증.
 				makeDynamicTPL("#addReplyTPL", TPL.EPaddReply, context, profileTPLC.addReply(profileId, response, tplAndContext));
 			});
+
 			//학교링크 클릭시 템플릿 생성.
 			$(".updateClass").on('click',function(evt){
-				console.log('hi');
 				evt.preventDefault();
-				var updateClassTPL = TPL.EPupdateClass;
 				var schoolId = $(this).attr("schoolId")
-				console.log(schoolId);
 
 				var schoolObj;
 				response.schools.map(function(el){
@@ -130,173 +128,24 @@ $(document).ready(function(){
 					}
 				})
 
-				$("#updateClassTPL").html(updateClassTPL({
+				var contextHere = {
 					schoolObj:schoolObj,
 					profileId:profileId,
-				}));
+				};
 
-				$("#cancelUpdateClass").on('click',function(evt){
-					evt.preventDefault();
-					$("#updateClassTPL").html("");
-				})
-				
-				$(".updateClassForm").validate({
-					rules:{
-						class:{
-							required:true,
-							range:[100,699],
-						}
-					},
-					messages:{
-						class:"해당하는 반이 없습니다."
-					},
-					submitHandler:function(form,evt){
-						evt.preventDefault();
-						var first = $(".1").val();
-						var second = $(".2").val();
-						var third = $(".3").val();
- 						//수정된 반 정보를 보낼 데이터 안에 입력.
- 						var classData = { 
- 						
- 							$set: {
-									"schools.$.class.0" : first,
-									"schools.$.class.1" : second,
-									"schools.$.class.2" : third
-								} ,
+				makeDynamicTPL("#updateClassTPL", TPL.EPupdateClass, contextHere, profileTPLC.updateClass(profileId, response, schoolId));
 
-							schoolId: schoolId,
-
-							options: "class",
-							
-						}
-						var updateSchool;
-						updateProfile(profileId,classData).then(function(data){
-							response.schools.map(function(ele){
-								if (ele.school._id === schoolId){
-									updateSchool = ele;
-								}
-							})
-							console.log(updateSchool.class);
-							updateSchool.class[0]=first;
-							updateSchool.class[1]=second;
-							updateSchool.class[2]=third;
-							
-							if (data.success){
-								alert("수정되었습니다.");
-								$("#updateClassTPL").html("");
-								/*response.schools.set({school:{
-									"schools.$.class.0" : first,
-									"schools.$.class.1" : second,
-									"schools.$.class.2" : third
-								}});
-								*/
-								
-								$("#profileTemplate").html(profileTemplate({
-									profile:response,
-								}))
-							}
-						})
-					}
-				})
-				
 			})
 			//학교 추가버튼을 클릭시 학교 검색 폼 
-
 			$("#updateSchool").on('click',function(evt){
 				evt.preventDefault();
-				var template = TPL.EPupdateSchool;
-				$("#updateSchoolTPL").html(template(context));
-				$("#cancelUpdateSchool").on('click',function(evt){
-					evt.preventDefault();
-					$("#updateSchoolTPL").html("");
-					
-				});
-				$("#searchSchool").validate({
-					rules:{
-						name:{
-							required:true,
-							minlength:1,
-							maxlength:10,
-						}
-					},
-					messages:{
-						name:"한글자 이상입니다."
-					},
-					submitHandler:function(form,evt){
-						evt.preventDefault();
-						var sendingData = $(form).serialize();
-						getSchools(sendingData).then(function(data){
-							if(data.length){
-								var template2 = TPL.EPsearchedSchools;
-								$("#searchedSchoolsTPL").html(template2({searchedList:data}));
-								$(".sendData").on('click',function(evt){
-									evt.preventDefault();
-									var schoolIds = $(this).attr("schoolId");
-									updateProfile(profileId, {$push: { schools: { school: schoolIds }}}).then(function(data){
-										if (data.success){
-											alert("수정되었습니다.");
-											var inputName = $(".inputName").val();
-											response.schools.push({school:{
-												name:inputName,
-												_id:data.id,
-											}});
-									
-											$("#updateSchoolTPL").html("");
-											$("#profileTemplate").html(profileTemplate({
-												profile: response,
-													
-												
-											}));
-										}
-										
-									})
-								});
-							}
-						});
-
-						
-
-					}
-				});
-
+				
+				makeDynamicTPL("#updateSchoolTPL", TPL.EPupdateSchool, context, profileTPLC.updateSchool(profileId, response));
 			});
+
 			$("#updateBugName").on('click',function(evt){
 				evt.preventDefault();
-				var template = TPL.EPupdateBugName;
-				
-				$("#updateBugNameTPL").html(template(context));
-
-				$("#cancelUpdateBugName").on('click',function(evt){
-					
-					$("#updateBugNameTPL").html("");
-				});
-
-				$(".updateBugName").validate({
-					rules:{
-						bugName:{
-							required:true,
-							minlength:2,
-							maxlength:2,
-						}
-					},
-					messages:{
-						bugName:"충호는 두글자 입니다"
-					},
-					submitHandler:function(form,evt){
-						evt.preventDefault();
-						var sendingData = $(form).serialize();
-						var bugName = $("#bugName").val();
-						console.log(bugName);
-						updateProfile(profileId, sendingData).then(function(data){
-							console.log(data);
-							if(data.success){
-								alert("수정되었습니다.")
-								$("#bugNameTPL").html("");
-								$(".bugName").html(bugName);
-							}
-						});
-					}
-				});
+				makeDynamicTPL("#updateBugNameTPL", TPL.EPupdateBugName, context, profileTPLC.updateBugName(profileId));
 			});
 			
     	} else {

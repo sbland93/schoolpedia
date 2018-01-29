@@ -31,8 +31,6 @@ module.exports = function(app){
 		failureRedirect: '/login',
 	}));
 
-	
-
 	app.get('/profile', function(req, res, next){
 		res.render("index");
 	})

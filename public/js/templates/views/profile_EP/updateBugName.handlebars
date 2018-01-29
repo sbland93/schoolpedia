@@ -1,10 +1,11 @@
-<form class="form-horizontal updateBugName" role="form" method="PUT" action="/api/profile/{{profileId}}">
+<form class="form-horizontal updateBugNameForm" role="form" method="PUT" action="/api/profile/{{profileId}}">
 	<div class="form-group">
-		<label>충호변경</label>
-		<input type="text" class="form-control" name="bugName" id="bugName">
-		<button class="btn btn-default">추가</button>
-		<button class="btn btn-default" id="cancelUpdateBugName">취소</button>
+		<div class="col-xs-12 col-sm-11 col-md-12">
+			<input type="text" class="form-control" name="bugName" id="fieldBugName">
+		</div>
+		<div class="col-xs-12 col-md-12">	
+			<button type="submit" class="btn btn-default btn-sm">추가</button>
+			<button class="btn btn-default btn-sm" id="cancelUpdateBugName">취소</button>
+		</div>
 	</div>
-	
 </form>
-	

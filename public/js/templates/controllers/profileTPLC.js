@@ -138,9 +138,170 @@ var profileTPLC = {
 	},
 
 
+	updateSchool : function(profileId, response){
+
+		return function(){
+			$("#searchSchool").validate({
+				rules:{
+					name:{
+						required:true,
+						minlength:1,
+						maxlength:10,
+					}
+				},
+				messages:{
+					name:"한글자 이상입니다."
+				},
+				submitHandler:function(form,evt){
+					evt.preventDefault();
+					var sendingData = $(form).serialize();
+					getSchools(sendingData).then(function(data){
+						if(data.length){
+							var template2 = TPL.EPsearchedSchools;
+							$("#searchedSchoolsTPL").html(template2({searchedList:data}));
+							$(".sendData").on('click',function(evt){
+								evt.preventDefault();
+								var schoolIds = $(this).attr("schoolId");
+								updateProfile(profileId, {$push: { schools: { school: schoolIds }}}).then(function(data){
+									if (data.success){
+										alert("수정되었습니다.");
+										var inputName = $(".inputName").val();
+										response.schools.push({school:{
+											name:inputName,
+											_id:data.id,
+										}});
+								
+										$("#updateSchoolTPL").html("");
+										$("#profileTemplate").html(TPL.EPprofile({
+											profile: response,
+										}));
+									}
+									
+								})
+							});
+						}
+					});
+
+					
+
+				}
+			});
 
 
+			$("#cancelUpdateSchool").on('click',function(evt){
+				evt.preventDefault();
+				$("#updateSchoolTPL").html("");
+				
+			});
+		}
+		
+	},
 
+	updateBugName: function(profileId){
+		return function(){
+			console.log("Here");
+			$(".updateBugNameForm").validate({
+				rules:{
+					bugName:{
+						required:true,
+						minlength:2,
+						maxlength:2,
+					}
+				},
+				messages:{
+					bugName:"충호는 두글자 입니다"
+				},
+				submitHandler:function(form,evt){
+					evt.preventDefault();
+					var sendingData = $(form).serialize();
+					var bugName = $("#fieldBugName").val();
+					updateProfile(profileId, sendingData).then(function(data){
+						console.log(data);
+						if(data.success){
+							alert("수정되었습니다.")
+							$("#updateBugNameTPL").html("");
+							$(".bugName").html(bugName);
+						}
+					});
+				}
+			});
+
+			$("#cancelUpdateBugName").on('click',function(evt){
+				$("#updateBugNameTPL").html("");
+			});
+		}
+	},
+
+	updateClass : function(profileId, response, schoolId){
+
+		return function(){
+			$(".updateClassForm").validate({
+				rules:{
+					class:{
+						required:true,
+						range:[100,699],
+					}
+				},
+				messages:{
+					class:"해당하는 반이 없습니다."
+				},
+				submitHandler:function(form,evt){
+					evt.preventDefault();
+					var first = $(".1").val();
+					var second = $(".2").val();
+					var third = $(".3").val();
+						//수정된 반 정보를 보낼 데이터 안에 입력.
+						var classData = { 
+						
+							$set: {
+								"schools.$.class.0" : first,
+								"schools.$.class.1" : second,
+								"schools.$.class.2" : third
+							} ,
+
+						schoolId: schoolId,
+
+						options: "class",
+						
+					}
+					var updateSchool;
+					updateProfile(profileId,classData).then(function(data){
+						response.schools.map(function(ele){
+							if (ele.school._id === schoolId){
+								updateSchool = ele;
+							}
+						})
+						console.log(updateSchool.class);
+						updateSchool.class[0]=first;
+						updateSchool.class[1]=second;
+						updateSchool.class[2]=third;
+						
+						if (data.success){
+							alert("수정되었습니다.");
+							$("#updateClassTPL").html("");
+							/*response.schools.set({school:{
+								"schools.$.class.0" : first,
+								"schools.$.class.1" : second,
+								"schools.$.class.2" : third
+							}});
+							*/
+							
+							$("#profileTemplate").html(TPL.EPprofile({
+								profile:response,
+							}));
+						}
+					})
+				}
+			});
+
+			$("#cancelUpdateClass").on('click',function(evt){
+				evt.preventDefault();
+				$("#updateClassTPL").html("");
+			});	
+
+
+		}
+	}
 
 
 }
