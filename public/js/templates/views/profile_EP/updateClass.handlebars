@@ -1,17 +1,48 @@
-<form class="form-horizontal updateClass" role="form" method="PUT" action="/api/profile/{{profileId}}">
+<form class="form-horizontal updateClassForm" role="form" method="PUT" action="/api/profile/{{profileId}}">
 	<div class="form-group">
 		<label>반 수정</label>
-		<div class="row">
-			<input type="text" class="form-control" name="first" id="firstClass">
-			<button class="btn btn-default btn-sm">수정</button>
 		
-		</div>
-		
-		<input type="text" class="form-control" name="second" id="secondClass">
-		<button class="btn btn-default btn-sm">수정</button>
-		
-		<input type="text" class="form-control" name="third" id="thirdClass">
-		<button class="btn btn-default btn-sm">수정</button>
+				{{#indexLoop schoolObj.class}}
+				<div class="row">
+					
+						<div class="form-group">
+							<div class="col-xs-2 col-sm-2 col-md-2">
+						    	<label for="exampleFormControlSelect1">{{index}}학년</label>
+						    </div>
+						    <div class="col-xs-7 col-sm-7 col-md-7">
+						    	<select class= "form-control {{index}}" id="exampleFormControlSelect1">
+							      <option value="1">1</option>
+							      <option value="2">2</option>
+							      <option value="3">3</option>
+							      <option value="4">4</option>
+							      <option value="5">5</option>
+							      <option value="6">6</option>
+							      <option value="7">7</option>
+							      <option value="8">8</option>
+							      <option value="9">9</option>
+							      <option value="10">10</option>
+							      <option value="11">11</option>
+							      <option value="12">12</option>
+							      <option value="13">13</option>
+							      <option value="14">14</option>
+							      <option value="15">15</option>
+							      <option value="16">16</option>
+							      <option value="17">17</option>
+							      <option value="18">18</option>
+							      <option value="19">19</option>
+							      <option value="20">20</option>
+							    </select>
+						    </div>
+						    
+						</div>
+					
+					
+				</div>
+				
+				{{/indexLoop}}
+				<input type="hidden" class="schoolname" name="schoolname" value={{name}}>
+				<input type="hidden" class="schoolId" name="schooid" value={{schoolObj.school._id}}>
+		<button class="btn btn-default btn-sm" id="updateClassButton">수정</button>
 		<button class="btn btn-default btn-sm" id="cancelUpdateClass">취소</button>
 	</div>
 	
