@@ -116,10 +116,30 @@ module.exports = function(app){
 	//id에 해당하는 profile을 요청본문을 토대로 업데이트한다.
 	app.put('/api/profile/:id', function(req, res, next){
 		if(!req.params.id) return next('No Id');
+
 		console.log(req.params.id);
 		console.log(req.body);
+		//수정할것이 담겨있는것.
+		var query = req.body;
+		//수정할 그 document를 가져오기위함
+		var target = {_id: req.params.id};
+		
+		//options == "class"
+		if(query.options){
+			//options == "class"인지 확인 후.
+			if(query.options === "class"){
+				//쿼리에 스쿨아이디를 추가하는거야.
+				target["schools.school"] = query.schoolId;
+			}
+			//options는 담기면 안되기 때문에 이건 삭제.
+			delete query["options"];
+		}
+
+		console.log("query:", query);
+		console.log("target:", target);
+
 		//DOLATER - 업데이트 메커니즘 적용 및 업데이트 검증.
-		Profile.update({_id: req.params.id}, req.body, function(err, response){
+		Profile.update(target, query, function(err, response){
 			if(err) return next(err);
 			console.log("here");
 			console.log(response);
@@ -134,9 +154,8 @@ module.exports = function(app){
 					message: ''
 				});
 			}
-		})
-
-	})
+		});
+	});
 
 
 

@@ -39,6 +39,9 @@
 			<!-- 로그인 버튼-->
 			<div class="log">
 				<button class="btn btn-default"><a href="/login">로그인</a></button>
+				{{#if isLoggedIn}}
+				<button class="btn btn-default"><a href="/logout">로그아웃</a></button>
+				{{/if}}
 			</div>
 			{{#if flash}}
 				<div class="alert alert-dismissible alert-{{flash.type}}">

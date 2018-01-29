@@ -4,7 +4,7 @@ var schoolHandlers = require('../handlers/school.js')();
 var profileHandlers = require('../handlers/profile.js')();
 var boardHandlers = require('../handlers/board.js')();
 var mongoose = require('mongoose');
-var loginHandlers = require('../handlers/auth.js')();
+var authHandlers = require('../handlers/auth.js')();
 var passport = require('passport');
 
 
@@ -14,45 +14,41 @@ module.exports = function(app){
 	require('./api/school.js')(app);
 	require('./api/profile.js')(app);
 	require('./api/board.js')(app);
+	require('./api/user.js')(app);
 
 	//home 페이지 라우팅.
 	//schoolList가 필요.
 	app.get('/', homeHandlers.home);
 
 	//login 페이지 라우팅.
-	app.get('/login',loginHandlers.login);
+	app.get('/login',authHandlers.login);
 	
-	app.post('/signupTest', function(req, res, next){ console.log("req:", req.body); next();}, passport.authenticate('local', {
-		successRedirect: '/profile',
-		failureRedirect: '/',
+	//ajax통신부분.
+	app.post('/register', authHandlers.signUp, authHandlers.afterSignUp);
+
+	app.post('/loginTest', passport.authenticate('local', {
+		//successRedirect: '/profile',
+		failureRedirect: '/login',
 	}));
 
-	app.post('/loginTest', passport.authenticate('login', {
-		successRedirect: '/profile',
-		failureRedirect: '/',
-	}));
-
-	function isLoggedIn(req, res, next){
-		console.log("Test is Logged In", req.isAuthenticated);
-		if(req.isAuthenticated()){
-			return next();
-		} else {
-			console.log("not pass!");
-			res.redirect('/login');
-		}
-	}
+	
 
 	app.get('/profile', function(req, res, next){
 		res.render("index");
 	})
 
-	app.get('/profileTest', isLoggedIn, function(req, res, next){
+	app.get('/profileTest', authHandlers.isLoggedIn, function(req, res, next){
 		res.render("index");
 	})
 
+	app.get('/logout', function(req, res, next){
+		req.logout();
+		delete res.locals.isLoggedIn;
+		res.redirect("/");
+	})
 
 	//회원가입 페이지 라우팅.
-	app.get('/register',loginHandlers.register);
+	app.get('/register',authHandlers.register);
 	
 	//oauth(카카오로그인 redirect)페이지 라우팅.
 	app.get('/oauth', function(req, res, next){

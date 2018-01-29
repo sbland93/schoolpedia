@@ -1,22 +1,15 @@
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../models/user.js');
 
-
 module.exports = function(passport){
-
-	console.log("PassPortHere");
 
 	//serialize시킬때의 passport
 	passport.serializeUser(function(user, done){
-		console.log("Serialize User");
-		console.log("Serialize User:", user)
 		done(null, user._id);
 	});
 
 	//deserialize시킬때 어떤 함수를 거칠지.
 	passport.deserializeUser(function(id, done){
-		console.log("Deserialize User");
-		console.log("Deserialize User id:", id);
 		User.findById(id, function(err, user){
 			done(err, user);
 		});
@@ -38,11 +31,16 @@ module.exports = function(passport){
 					return done(null, user);
 				}
 			} else{
+				//카카오이메일인증이 제대로 되지 않은경우 로그인은 실패한다.
+				if(!req.body.kakaoEmail || !req.body.verified){
+					//TODO
+					return done("error");
+				}
 				var newUser = new User();
-
 				newUser.name = req.body.name;
 				newUser.email = email;
 				newUser.password = newUser.generateHash(password);
+				newUser.kakaoEmail = req.body.kakaoEmail;
 
 				newUser.save(function(err){
 					if(err) throw err;
@@ -50,8 +48,7 @@ module.exports = function(passport){
 				});
 
 			}
-		})
-	
+		});
 	}
 	));
 

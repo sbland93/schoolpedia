@@ -199,7 +199,7 @@ require("./config/passport")(passport);
 app.use(function(req, res, next){
 	if(!req.session.upCnt) req.session.upCnt = 0;
 	if(req.session.upCnt > 10){
-		req.locals.updateFlash = {
+		res.locals.updateFlash = {
 			type: 'danger',
 			intro: '웁스!',
 			message: '단일 연결 업데이트 개수 제한에 도달하셨습니다. ' +
@@ -208,6 +208,7 @@ app.use(function(req, res, next){
 	}
 	next();
 });
+
 
 //세션에 플레시 메시지가 있으면, 뷰컨텍스트에 전달하고, 삭제한다.
 //없으면 자동으로 null이되므로, 맞다.
@@ -230,6 +231,11 @@ app.use(function(req, res, next){
 	next();
 });
 
+app.use(function(req, res, next){
+	res.locals.isLoggedIn = true;
+	console.log("req.user: ", req.user);
+	next();
+});
 //모든 routing 로드.
 require('./routes/routes.js')(app);
 
