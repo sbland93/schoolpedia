@@ -85,9 +85,7 @@ switch(app.get('env')){
 //몽구스 설정.
 var mongoose = require('mongoose');
 var opts = {
-	server: {
-		socketOptions: { keepAlive: 1 }
-	}
+	keepAlive: 1,
 };
 mongoose.Promise = global.Promise;
 
@@ -232,7 +230,10 @@ app.use(function(req, res, next){
 });
 
 app.use(function(req, res, next){
-	res.locals.isLoggedIn = true;
+	//로그인 되어있는 상태라면, isLoggedIn(Handlebar context)에 true를 담아준다.
+	if(req.user){
+		res.locals.isLoggedIn = true;
+	}
 	console.log("req.user: ", req.user);
 	next();
 });

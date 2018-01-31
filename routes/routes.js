@@ -23,36 +23,15 @@ module.exports = function(app){
 	//login 페이지 라우팅.
 	app.get('/login',authHandlers.login);
 	
-	//ajax통신부분.
-	app.post('/register', authHandlers.signUp, authHandlers.afterSignUp);
-
-	app.post('/loginTest', passport.authenticate('local', {
-		//successRedirect: '/profile',
-		failureRedirect: '/login',
-	}));
-
-	app.get('/profile', function(req, res, next){
-		res.render("index");
-	})
-
-	app.get('/profileTest', authHandlers.isLoggedIn, function(req, res, next){
-		res.render("index");
-	})
-
-	app.get('/logout', function(req, res, next){
-		req.logout();
-		delete res.locals.isLoggedIn;
-		res.redirect("/");
-	})
-
 	//회원가입 페이지 라우팅.
 	app.get('/register',authHandlers.register);
-	
-	//oauth(카카오로그인 redirect)페이지 라우팅.
-	app.get('/oauth', function(req, res, next){
-		console.log(req.body);
-	});
 
+	//ajax통신부분.
+	app.post('/register', authHandlers.localSignup);
+
+	app.post('/login', authHandlers.localLogin);
+
+	app.get('/logout', authHandlers.logout)
 
 	//:id에 해당하는 school의 Board, Profile을 5개씩 리턴한다.
 	//DOLATER
@@ -92,10 +71,6 @@ module.exports = function(app){
 	//School활용을 위해!
 	//rendering Create Board Form
 	app.get('/school/:id/board/new', boardHandlers.newBoard);
-
-
-
-
 
 
 	//Client Test Page (API)

@@ -39,9 +39,11 @@
 			<div class="img"><a href="/"><em>스쿨충</em></a></div>
 			<!-- 로그인 버튼-->
 			<div class="log">
-				<button class="btn btn-default"><a href="/login">로그인</a></button>
 				{{#if isLoggedIn}}
-				<button class="btn btn-default"><a href="/logout">로그아웃</a></button>
+					<button class="btn btn-default"><a href="/logout">로그아웃</a></button>
+				{{else}}
+					<span><a href="/login">로그인</a></span>
+					<a href="/register">회원가입</a>
 				{{/if}}
 			</div>
 			{{#if flash}}

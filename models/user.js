@@ -17,8 +17,8 @@ userSchema.methods.generateHash = function(password){
 };
 
 //user저장시에, password가 맞는지 확인.
-userSchema.methods.validPassword = function(password){
-	return bcrypt.compareSync(password, this.local.password);
+userSchema.methods.validatePassword = function(password){
+	return bcrypt.compareSync(password, this.password);
 }
 
 

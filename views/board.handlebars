@@ -24,6 +24,9 @@
 
 		<div>
 			<ul>
+				{{#each board.replies}}
+					<li>{{user}} : {{content}}</li>
+				{{/each}}
 				<li>맞아</li>
 				<li>아닌듯</li>
 			</ul>

@@ -13,19 +13,19 @@ module.exports = function(){
 			res.render('register',{});
 		},
 
-		signUp : passport.authenticate('local', {
+		localSignup : passport.authenticate('local', {
+			successRedirect: '/',
 			failureRedirect: '/register',
 		}),
 
-		afterSignUp : function(req, res, next){
-			res.locals.isLoggedIn = true;
-			req.session.flash = {
-				message: "success Sign up!"
-			};
-			res.locals.flash = {
-				message: "Success Sign Up!",
-			};
-			res.json({success: true});
+		localLogin : passport.authenticate('local', {
+			successRedirect: '/',
+			failureRedirect: '/login',
+		}),
+
+		logout : function(req, res, next){
+			req.logout();
+			res.redirect("/");
 		},
 
 		isLoggedIn : function (req, res, next){

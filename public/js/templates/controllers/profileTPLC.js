@@ -88,7 +88,6 @@ var profileTPLC = {
 			});
 
 		}
-	
 	},
 
 
@@ -134,7 +133,6 @@ var profileTPLC = {
 			});
 
 		}
-	
 	},
 
 
@@ -194,8 +192,8 @@ var profileTPLC = {
 				
 			});
 		}
-		
 	},
+	
 
 	updateBugName: function(profileId){
 		return function(){
@@ -231,6 +229,7 @@ var profileTPLC = {
 			});
 		}
 	},
+
 
 	updateClass : function(profileId, response, schoolId){
 
@@ -301,7 +300,7 @@ var profileTPLC = {
 
 
 		}
-	}
+	},
 
 
 }

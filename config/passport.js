@@ -27,29 +27,55 @@ module.exports = function(passport){
 		User.findOne({'email': email}, function(err, user){
 			if(err) return done(err);
 			if(user){
-				if(user.validatePassword(password)){
-					return done(null, user);
+				//로그인 중이면서, 유저가 있고, 비밀번호가 맞다면 로그인 시킨다.
+				if(req.body.login){
+					if(user.validatePassword(password)) return done(null, user);
+					else{ //로그인 중이면서, 비밀번호가 틀리다면
+						req.session.flash = {
+							type: "info",
+							intro: "알림: ",
+							message: "비밀번호가 틀립니다.",
+						};
+						return done(null, false);
+					}
+				
+				}else if(req.body.register){ //회원가입 중에, 유저가 이미 있다면
+					req.session.flash = {
+						type: "warning",
+						intro: "중복알림: ",
+						message: "아이디(이메일) 중복입니다."
+					};
+					return done(null, false);
 				}
-			} else{
-				//카카오이메일인증이 제대로 되지 않은경우 로그인은 실패한다.
-				if(!req.body.kakaoEmail || !req.body.verified){
-					//TODO
-					return done("error");
+			} else{ //유저가 없고 로그인중이라면
+				if(req.body.login){
+					req.session.flash = {
+						type: "info",
+						intro: "알림: ",
+						message: "등록된 이메일이 아닙니다."
+					};
+					return done(null, false);
 				}
-				var newUser = new User();
-				newUser.name = req.body.name;
-				newUser.email = email;
-				newUser.password = newUser.generateHash(password);
-				newUser.kakaoEmail = req.body.kakaoEmail;
+				else if(req.body.register){ //회원가입중이고, 이메일 중복이 아니라면
+					//카카오이메일인증이 제대로 되지 않은경우 로그인은 실패한다.
+					if(!req.body.kakaoEmail || !req.body.verified){
+						return done("error");
+					}
+					var newUser = new User();
+					newUser.name = req.body.name;
+					newUser.email = email;
+					newUser.password = newUser.generateHash(password);
+					newUser.kakaoEmail = req.body.kakaoEmail;
 
-				newUser.save(function(err){
-					if(err) throw err;
-					return done(null, newUser);
-				});
-
+					newUser.save(function(err){
+						if(err) throw err;
+						return done(null, newUser);
+					});
+				}
 			}
 		});
 	}
 	));
+
 
 };
