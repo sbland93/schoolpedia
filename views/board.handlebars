@@ -14,25 +14,32 @@
 		</div>
 	</div>
 	<div class="col-md-6">
-		<div class="text">
-			<div class="form-group">
-			  <label for="comment">Comment:</label>
-			  <textarea class="form-control" rows="5" id="comment"></textarea>
+		<form class="form-horizontal updateReplyForm" role="form" method="PUT" action="/api/board/{{board.id}}">
+			<div class="text">
+			
+				<div class="form-group">
+				  <label for="comment">Comment:</label>
+				  <textarea class="form-control newReply" rows="5" id="comment"></textarea>
+				</div>
+				<button type="submit" class="btn btn-default">입력</button>
 			</div>
-			<button type="button" class="btn btn-default">입력</button>
-		</div>
 
-		<div>
-			<ul>
-				<li>맞아</li>
-				<li>아닌듯</li>
-			</ul>
-		</div>
+			<div>
+				{{#each board.replies}}
+					<ul>
+						<li>{{content}}</li>
+					</ul>
+				{{/each}}
+				<ul id="replyList"></ul>
+			</div>
+		</form>
 	</div>
 </div>
 
-
-
+{{#section 'head'}}
+	<script type="text/javascript" src="/js/templates/templates.js"></script>
+	
+{{/section}}
 
 {{#section 'jquery'}}
 	<script type="text/javascript" src="/js/api/board.js"></script>
