@@ -40,7 +40,7 @@ module.exports = function(){
 			if(req.isAuthenticated()){
 				return next();
 			} else {
-				res.json({success: false});
+				res.json({success: false, type:"Login"});
 			}
 		} 
 

@@ -204,8 +204,8 @@ Test.find()
 						});
 					} else {
 						res.json({
-							success: false,
 							type: "Login",
+							success: false,
 						});
 					}
 				});
