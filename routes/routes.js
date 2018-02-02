@@ -61,17 +61,13 @@ module.exports = function(app){
 	app.get('/school/:id/profile/newTwo', profileHandlers.newProfileTwo);
 
 	//board 페이지 라우팅
-	//DOLATER !board
 	app.get('/board/search', boardHandlers.searchBoards);
 	
 	app.get('/board/:id', boardHandlers.board);
 
-	app.get('/board/:id/update', boardHandlers.updateBoard);
-
-	//School활용을 위해!
+	app.get('/board/:id/update', authHandlers.isLoggedIn, boardHandlers.updateBoard);
 	//rendering Create Board Form
-	app.get('/school/:id/board/new', boardHandlers.newBoard);
-
+	app.get('/school/:id/board/new', authHandlers.isLoggedIn, boardHandlers.newBoard);
 
 	//Client Test Page (API)
 	app.get('/test', homeHandlers.clientTest);

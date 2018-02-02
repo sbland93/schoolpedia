@@ -1,4 +1,17 @@
+var bcrypt = require('bcrypt-nodejs');
+
+
 module.exports = {
+
+	userList: [
+		{
+			name: "김승범",
+			kakaoEmail: "rltmqj@gmail.com",
+			email: "rltmqj@gmail.com",
+			password: bcrypt.hashSync("123098", bcrypt.genSaltSync(8), null),
+		}
+	],
+
 	profileList : [
 		{
 			name: '김승범',
@@ -59,6 +72,15 @@ module.exports = {
 			stories: [{content: '별명 용꼬임' +
 			'노는거 좋아해씀ㅋㅋㅋㅋ' +
 			'낯가리는거 없고 장난치는거 좋아함ㅋㅋ'}],
+		},
+		{
+			name: '고근석',
+			birth: 930312,
+			graduation: 2012,
+			gender: true,
+			stories: [{content: '고근석임' +
+			'귀인중나와서 백영고등학교 다녔음' +
+			'뿔테안경꼈음'}],
 		},
 		{
 			name: '유호규',

@@ -1,6 +1,7 @@
 module.exports = function(board){
 	return {
 		id: board._id,
+		writer: board.writer,
 		title: board.title,
 		school: board.school,
 		content: board.content,

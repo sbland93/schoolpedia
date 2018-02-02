@@ -8,12 +8,14 @@
 		<div class="col-sm-9 col-md-6">
 			<ul class="boardList">
 				{{#each boardList}}
-					<a href="/board/{{id}}">
 						<li>
-							제목: {{title}}
+							<a href="/board/{{id}}">제목: {{title}}</a>
 							<p>내용: {{content}}</p>
+							<div class="btn-group" role="group" aria-label="...">
+								<button type="button" class="upBoard btn btn-sm btn-default" boardId={{id}}>+{{up}}</button>
+								<button type="button" class="downBoard btn btn-sm btn-default" boardId={{id}}>{{down}}</button>
+							</div>
 						</li>
-					</a>
 				{{/each}}
 
 			</ul>

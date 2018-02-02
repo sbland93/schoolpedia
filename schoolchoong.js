@@ -145,8 +145,17 @@ var handlebars = require('express-handlebars').create({
 
 		//학교의 category가 'elementary'인지를 확인하는 helper함수.
 		isEquals: function(a, b, block){
-			
-			if( a === b){
+			if(a === b){
+				return block.fn(this);
+			}
+
+			return block.inverse(this);
+		},
+
+
+		//Equal확인
+		isEqualTo: function(a, b, block){
+			if(a === b){
 				return block.fn(this);
 			}
 
@@ -192,22 +201,6 @@ app.use(passport.session());
 require("./config/passport")(passport);
 
 
-//세션에 업데이트 카운팅이 없으면 초기화 시킨다.
-//10회 이상 업데이트 카운팅이 되어있으면 매번 flash메세지를 만든다.
-app.use(function(req, res, next){
-	if(!req.session.upCnt) req.session.upCnt = 0;
-	if(req.session.upCnt > 10){
-		res.locals.updateFlash = {
-			type: 'danger',
-			intro: '웁스!',
-			message: '단일 연결 업데이트 개수 제한에 도달하셨습니다. ' +
-				'10초면 할 수 있는 회원가입을 통해서 제한없는 서비스를 이용하세요!!',
-		};	
-	}
-	next();
-});
-
-
 //세션에 플레시 메시지가 있으면, 뷰컨텍스트에 전달하고, 삭제한다.
 //없으면 자동으로 null이되므로, 맞다.
 //무언가 잘못된게 있으면 session에 flash메세지를 담아서 보낸다.
@@ -233,8 +226,8 @@ app.use(function(req, res, next){
 	//로그인 되어있는 상태라면, isLoggedIn(Handlebar context)에 true를 담아준다.
 	if(req.user){
 		res.locals.isLoggedIn = true;
+		res.locals.userInfo = req.user._id;
 	}
-	console.log("req.user: ", req.user);
 	next();
 });
 //모든 routing 로드.

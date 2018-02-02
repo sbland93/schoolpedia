@@ -13,12 +13,11 @@
 <div class="row">
 	<div>
 		<div id="updateDescriptionTPL"></div>
-	</div>
-	 
+	</div>	 
 </div>
 
 
-	<!--최근게시물 div !-->
+<!--최근게시물 div !-->
 <div class="row">
 	<div class="col-xs-11 col-md-4">
 		<a href="/school/{{schoolInfo.id}}/board"><h2>최근게시물</h2></a>
@@ -26,9 +25,11 @@
 			{{#each recentList}}
 				<li>
 				<span><a href="/board/{{id}}"><p>{{title}}</p></a></span>
-				
-				<p>내용: {{content}}</p>
-				<p>추천: {{up}}</p>
+				<p>{{content}}</p>
+				<div class="btn-group" role="group" aria-label="...">
+					<button type="button" class="upBoard btn btn-sm btn-default" boardId={{id}}>+{{up}}</button>
+					<button type="button" class="downBoard btn btn-sm btn-default" boardId={{id}}>{{down}}</button>
+				</div>
 				</li>
 			{{/each}}
 		</ul>
@@ -40,9 +41,11 @@
 			{{#each bestList}}
 				<li>
 				<span><a href="/board/{{id}}"><p>{{title}}</p></a></span>
-				
-				<p>내용: {{content}}</p>
-				<p>추천: {{up}}</p>
+				<p>{{content}}</p>
+				<div class="btn-group" role="group" aria-label="...">
+					<button type="button" class="upBoard btn btn-sm btn-default" boardId={{id}}>+{{up}}</button>
+					<button type="button" class="downBoard btn btn-sm btn-default" boardId={{id}}>{{down}}</button>
+				</div>
 				</li>
 			{{/each}}
 		</ul>
@@ -68,20 +71,6 @@
 <div class="middle">
 	<a href="/school/{{schoolInfo.id}}/board/new" class="btn btn-default">글쓰기</a>
 </div>
-<!--검색 !
-
-<div class="row">
-	<div class="col-md-12">
-		<div class="bottom">
-			<form class="searchProfileForm">
-				<input type="text" name="name" placeholder="친구이름!!">
-				<button class="btn btn-default" type="submit">검색!</button>
-			</form>
-		</div>
-	</div>
-</div> -->
-	
-<!--검색리스트 목록 !-->
 
 
 <div class="row">
@@ -103,3 +92,4 @@
 	<script type="text/javascript" src="/js/templates/controllers/schoolTPLC.js"></script>
 {{/section}}
 
+	

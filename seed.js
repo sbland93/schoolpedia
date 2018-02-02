@@ -66,8 +66,10 @@ var seedDev = function(){
 		//userData모두 삭제.
 		p4 = new Promise(function(resolve, reject){
 			User.remove({}, function(err){
-				if(err) reject(err);
-				resolve();
+				User.create(seedData.userList, function(err, users){
+					if(err) reject(err);
+					resolve();
+				})			
 			});
 		});
 

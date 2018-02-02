@@ -1,9 +1,15 @@
 
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
+var School = require('./school.js');
+var Board = require('./board.js');
+var Profile = require('./profile.js');
 
 
 var userSchema = mongoose.Schema({
+	profile: {type: mongoose.Schema.Types.ObjectId, ref: 'Profile'},
+	schools: [{type: mongoose.Schema.Types.ObjectId, ref: 'School'}],
+	boards: [{type: mongoose.Schema.Types.ObjectId, ref: 'Board'}],
 	name: String,
 	email: String,
 	password: String,
