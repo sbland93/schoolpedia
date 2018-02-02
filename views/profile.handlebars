@@ -1,12 +1,30 @@
 <!--NameSpace: EP -->
 
 <div id="profileTemplate"></div>
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+  <div class="btn-group" role="group">
+    <button id="updateBugName" class="btn btn-default buttonGroup">충호변경</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button id="updateSchool" class="btn btn-default buttonGroup">학교추가</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button class="btn btn-default buttonGroup" id="addReply">방명록</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button class="btn btn-default buttonGroup" id="addFeature">특징</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button class="btn btn-default buttonGroup" id="addStory">썰</button>
+  </div>
+</div>
+<div>
+	<div id="addReplyTPL"></div> 
+	<div id="addFeatureTPL"></div>
+	<div id="addStoryTPL"></div> 
+</div>
 <div class="pull-right col-xs-12 col-md-4">
 	<div id="updateClassTPL"></div>
-	<div class="col-md-offset-5">
-		<button id="updateBugName" class="btn btn-default">충호변경</button>
-		<button id="updateSchool" class="btn btn-default">학교추가</button>
-	</div>
 	<!-- 충호변경-->
 	<div id="updateBugNameTPL"></div>
 	<!-- 학교수정-->
@@ -14,10 +32,10 @@
 
 	<!-- 방명록 기록칸-->
 	<div id="replies"></div>
-	<button class="btn btn-default" id="addReply">방명록쓰기</button>
+	
 
 	<!--방명록추가 버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
-	<div id="addReplyTPL"></div> 
+	
 
 </div>
 
@@ -29,7 +47,7 @@
 <!-- 특징, 이야기 column-->
 <div class="pull-left col-xs-12 col-sm-10 col-md-8">
 	<div id="features"></div>
-	<button class="btn btn-default" id="addFeature">특징추가하기</button>
+	
 
 	<!--특징추가 버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
 	<div id="addFeatureTPL"></div>
@@ -39,7 +57,7 @@
 
 	<!-- 썰 div-->
 	<div id="stories"></div>
-	<button class="btn btn-default" id="addStory">썰쓰기</button>
+	
 
 	<!--썰추가 버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
 	<div id="addStoryTPL"></div> 
@@ -51,8 +69,8 @@
 
 <div class="col-xs-12 col-sm-12 col-md-12">
 	<input type="hidden" id="PPdefaultValue" value={{profileId}} profileId={{profileId}}>
-	<a class="btn btn-default" href="/profile/{{profileId}}/update" id="updateProfile">수정</a>
-	<button class="btn btn-default" id="removeProfile">삭제</button>
+	<a class="btn btn-default buttonGroup" href="/profile/{{profileId}}/update" id="updateProfile">수정</a>
+	<button class="btn btn-default buttonGroup" id="removeProfile">삭제</button>
 
 </div>
 

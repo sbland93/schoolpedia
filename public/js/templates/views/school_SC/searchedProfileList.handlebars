@@ -4,10 +4,10 @@
 			<li><a href="/profile/{{id}}"><p>{{bugName}} {{name}} {{#each schools}} {{school.name}} {{/each}} {{graduation}}</p></a></li>
 		{{/each}}
 	</ul>
-	프로필이 만들어져있지 않으면 마음껏 만들어주세요 <button class="btn btn-default"><a href="/school/{{schoolId}}/profile/newOne">만들기</a></button>
+	프로필이 만들어져있지 않으면 마음껏 만들어주세요 <button class="btn btn-default buttonGroup"><a href="/school/{{schoolId}}/profile/newOne">만들기</a></button>
 {{/unless}}
 
 
 {{#if noData}}
-	그런학생 아직 없다 만들기 <button class="btn btn-default"><a href="/school/{{schoolId}}/profile/newOne">만들기</a></button>
+	그런학생 아직 없다 만들기 <button class="btn btn-default buttonGroup"><a href="/school/{{schoolId}}/profile/newOne">만들기</a></button>
 {{/if}}

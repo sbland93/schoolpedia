@@ -1,6 +1,4 @@
-#updateDescription{
-	margin-bottom:5pt;
-}
+
 button{
 	color:black;
 }
@@ -10,7 +8,8 @@ button{
 /*글쓰기 버튼 */
 .middle{
 	margin-top:10pt;
-	clear:right;
+	clear:left;
+	clear:right;  
 	text-align:center;
 }
 /*검색칸 */

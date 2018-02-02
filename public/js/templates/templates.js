@@ -88,7 +88,7 @@ this["TPL"]["EPaddFeature"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"ma
     + alias4(((helper = (helper = helpers.profileId || (depth0 != null ? depth0.profileId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"profileId","hash":{},"data":data}) : helper)))
     + "\" method=\"PUT\" profileId=\""
     + alias4(((helper = (helper = helpers.profileId || (depth0 != null ? depth0.profileId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"profileId","hash":{},"data":data}) : helper)))
-    + "\">\n\n	<!--특징추가 form-->\n	<div class=\"form-group\">\n\n		<div class=\"col-xs-12 col-sm-11 col-md-12\">\n			<textarea class=\"form-control\" name=\"feature\" id=\"fieldFeature\" required></textarea>\n		</div>\n		<!--추가 버튼-->\n		<div class=\"col-xs-12 col-md-12\">\n			<button type=\"submit\" class=\"btn btn-default btn-sm\">추가</button>\n			<button class=\"btn btn-default btn-sm\" id=\"cancelAddFeature\">취소</button>\n		</div>	\n	</div>\n</form>\n";
+    + "\">\n\n	<!--특징추가 form-->\n	<div class=\"form-group\">\n		<label>특징추가하기</label>\n		<div class=\"col-xs-12 col-sm-8 col-md-7\">\n			<textarea class=\"form-control\" name=\"feature\" id=\"fieldFeature\" required></textarea>\n		</div>\n		<!--추가 버튼-->\n		<div class=\"col-xs-12 col-md-12\">\n			<button type=\"submit\" class=\"btn btn-default btn-sm buttonGroup\">추가</button>\n			<button class=\"btn btn-default btn-sm buttonGroup\" id=\"cancelAddFeature\">취소</button>\n		</div>	\n	</div>\n</form>\n";
 },"useData":true});
 
 this["TPL"]["EPaddReply"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -96,7 +96,7 @@ this["TPL"]["EPaddReply"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main
 
   return "\n\n<!--EP에서 특징추가하기를 누르면 나오는 template -->\n\n<form class=\"form-horizontal addReplyForm\" role=\"form\" action=\"/api/profile/"
     + container.escapeExpression(((helper = (helper = helpers.profileId || (depth0 != null ? depth0.profileId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"profileId","hash":{},"data":data}) : helper)))
-    + "\" method=\"PUT\">\n\n	<!--특징추가 form-->\n	<div class=\"form-group\">\n\n		<div class=\"col-xs-10 col-sm-10 col-md-12\">\n			<textarea class=\"form-control\" name=\"reply\" id=\"fieldReply\" required></textarea>\n		</div>\n		<!--추가 버튼-->\n		<div class=\"col-xs-12 col-md-12\">\n			<button type=\"submit\" class=\"btn btn-default btn-sm\">추가</button>\n			<button class=\"btn btn-default btn-sm\" id=\"cancelAddReply\">취소</button>\n		</div>	\n	</div>\n	\n</form>\n\n";
+    + "\" method=\"PUT\">\n\n	<!--특징추가 form-->\n	<div class=\"form-group\">\n		<label class=\"col-md-12 col-sm-12 col-xs-12\">방명록쓰기</label>\n		<div class=\"col-xs-12 col-sm-8 col-md-7\">\n			<textarea class=\"form-control\" name=\"reply\" id=\"fieldReply\" required></textarea>\n		</div>\n		<!--추가 버튼-->\n		<div class=\"col-xs-12 col-md-12\">\n			<button type=\"submit\" class=\"btn btn-default btn-sm buttonGroup\">추가</button>\n			<button class=\"btn btn-default btn-sm buttonGroup\" id=\"cancelAddReply\">취소</button>\n		</div>	\n	</div>\n	\n</form>\n\n";
 },"useData":true});
 
 this["TPL"]["EPaddStory"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -104,7 +104,7 @@ this["TPL"]["EPaddStory"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main
 
   return "\n\n<!--EP에서 특징추가하기를 누르면 나오는 template -->\n\n<form class=\"form-horizontal addStoryForm\" role=\"form\" action=\"/api/profile/"
     + container.escapeExpression(((helper = (helper = helpers.profileId || (depth0 != null ? depth0.profileId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"profileId","hash":{},"data":data}) : helper)))
-    + "\" method=\"PUT\">\n\n	<!--특징추가 form-->\n	<div class=\"form-group\">\n		<div class=\"col-xs-12 col-sm-11 col-md-12\">\n			<textarea class=\"form-control\" name=\"story\" id=\"fieldStory\" required></textarea>\n		</div>\n		<!--추가 버튼-->\n		<div class=\"col-xs-12 col-md-12\">\n			<button type=\"submit\" class=\"btn btn-default btn-sm\">추가</button>\n			<button class=\"btn btn-default btn-sm\" id=\"cancelAddStory\">취소</button>\n		</div>	\n\n	</div>\n</form>\n\n";
+    + "\" method=\"PUT\">\n\n	<!--특징추가 form-->\n	<div class=\"form-group\">\n		<label>썰쓰기</label>\n		<div class=\"col-xs-12 col-sm-11 col-md-7\">\n			<textarea class=\"form-control\" name=\"story\" id=\"fieldStory\" required></textarea>\n		</div>\n		<!--추가 버튼-->\n		<div class=\"col-xs-12 col-md-12\">\n			<button type=\"submit\" class=\"btn btn-default btn-sm buttonGroup\">추가</button>\n			<button class=\"btn btn-default btn-sm buttonGroup\" id=\"cancelAddStory\">취소</button>\n		</div>	\n\n	</div>\n</form>\n\n";
 },"useData":true});
 
 this["TPL"]["EPfeatures"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -166,11 +166,11 @@ this["TPL"]["EPprofile"] = Handlebars.template({"1":function(container,depth0,he
 
   return "<header class=\"bugName\">"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.bugName : stack1), depth0))
-    + "</header>\n\n<div class=\"row\">\n	<div class=\"col-md-offset-10\">\n		\n			<span>충호</span>: <em class=\"bugName\">"
+    + "</header>\n\n<div class=\"row\">\n	<div class=\"col-md-offset-10\">\n		\n			\n	</div>\n</div>\n<div class=\"row\">\n	<div class=\"col-md-offset-4\">\n		<span>충호</span>: <em class=\"bugName\">"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.bugName : stack1), depth0))
     + "</em> <span>이름</span>: <em>"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.name : stack1), depth0))
-    + "</em>\n	</div>\n</div>\n<div class=\"row\">\n	<div class=\"col-md-offset-9\">\n"
+    + "</em>\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.schools : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "	</div>\n</div>";
 },"useData":true});
@@ -261,7 +261,7 @@ this["TPL"]["SCsearchedProfileList"] = Handlebars.template({"1":function(contain
 
   return "	<ul class=\"profileList\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.searchedList : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "	</ul>\n	프로필이 만들어져있지 않으면 마음껏 만들어주세요 <button class=\"btn btn-default\"><a href=\"/school/"
+    + "	</ul>\n	프로필이 만들어져있지 않으면 마음껏 만들어주세요 <button class=\"btn btn-default buttonGroup\"><a href=\"/school/"
     + container.escapeExpression(((helper = (helper = helpers.schoolId || (depth0 != null ? depth0.schoolId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"schoolId","hash":{},"data":data}) : helper)))
     + "/profile/newOne\">만들기</a></button>\n";
 },"2":function(container,depth0,helpers,partials,data) {
@@ -287,7 +287,7 @@ this["TPL"]["SCsearchedProfileList"] = Handlebars.template({"1":function(contain
 },"5":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "	그런학생 아직 없다 만들기 <button class=\"btn btn-default\"><a href=\"/school/"
+  return "	그런학생 아직 없다 만들기 <button class=\"btn btn-default buttonGroup\"><a href=\"/school/"
     + container.escapeExpression(((helper = (helper = helpers.schoolId || (depth0 != null ? depth0.schoolId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"schoolId","hash":{},"data":data}) : helper)))
     + "/profile/newOne\">만들기</a></button>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {

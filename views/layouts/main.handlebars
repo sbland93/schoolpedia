@@ -40,19 +40,22 @@
 			<!-- 로그인 버튼-->
 			<div class="log">
 				{{#if isLoggedIn}}
-					<button class="btn btn-default"><a href="/logout">로그아웃</a></button>
+					<a href="/logout">로그아웃</a>
 				{{else}}
 					<span><a href="/login">로그인</a></span>
 					<a href="/register">회원가입</a>
 				{{/if}}
 			</div>
-			{{#if flash}}
-				<div class="alert alert-dismissible alert-{{flash.type}}">
-					<button type="button" class="close" data-dismiss="alert"
-					aria-hidden="true">&times;</button>
-					<strong>{{flash.intro}}</strong> {{{flash.message}}}
-				</div>
-			{{/if}}
+			<div>
+				{{#if flash}}
+					<div class="alert alert-dismissible alert-{{flash.type}}">
+						<button type="button" class="close" data-dismiss="alert"
+						aria-hidden="true">&times;</button>
+						<strong>{{flash.intro}}</strong> {{{flash.message}}}
+					</div>
+				{{/if}}
+			</div>
+			
 
 			{{#if showTests}}
 				<div id="mocha"></div>
@@ -81,6 +84,7 @@
 
 			{{{_sections.jquery}}}
 			<script type="text/javascript" src="/js/controllers/mainController.js"></script>
+			<link rel="stylesheet" type="text/css" href="/css/mainFont.css">
 	</div>
 </body>
 </html>

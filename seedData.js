@@ -9,6 +9,12 @@ module.exports = {
 			kakaoEmail: "rltmqj@gmail.com",
 			email: "rltmqj@gmail.com",
 			password: bcrypt.hashSync("123098", bcrypt.genSaltSync(8), null),
+		},
+		{
+			name: "한용희",
+			kakaoEmail: "hyh4829@naver.com",
+			email: "hyh4827@naver.com",
+			password: bcrypt.hashSync("930729", bcrypt.genSaltSync(8), null),
 		}
 	],
 
