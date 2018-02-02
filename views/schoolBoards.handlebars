@@ -5,7 +5,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="col-sm-9 col-md-6">
+		<div class="col-sm-12 col-md-6">
 			<ul class="boardList">
 				{{#each boardList}}
 						<li>
@@ -25,7 +25,7 @@
 				<input type="hidden" name="schoolId" value="{{schoolInfo.id}}" id="defaultSchoolId">
 				
 				<div class="form-group">
-					<label for="schoolDetail" class="col-sm-3 col-md-3 control-label">학교</label>
+					<label for="schoolDetail" class="col-xs-12 col-sm-2 col-md-3 control-label">학교</label>
 					<div class="col-sm-9 col-md-9">
 						<input type="radio" name="school" value="here" id="schoolDetail" checked>{{schoolInfo.name}}내에서
 						<input type="radio" name="school" value="all" id="schoolDetail"> 모든학교에서
@@ -33,7 +33,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="field" class="col-sm-3 col-md-3 control-label">제목/내용</label>
+					<label for="field" class="col-xs-12 col-sm-2 col-md-3 control-label">제목/내용</label>
 					<div class="col-sm-9 col-md-9">
 						<input type="radio" name="field" value="title" id="field" checked> 제목
 						<input type="radio" name="field" value="all" id="field"> 제목 + 본문
@@ -41,20 +41,21 @@
 				</div>
 
 				<div class="form-group">
-					<label for="searchField" class="col-sm-3 col-md-3 control-label">검색내용</label>
-					<div class="col-sm-8">
+					<label for="searchField" class="col-xs-12 col-sm-2 col-md-3 control-label">검색내용</label>
+					<div class="col-xs-9 col-sm-7 col-md-9">
 						<input type="text" class="form-control" name="q" id="searchField" placeholder="검색..." required>
 						<button type="submit" class="btn btn-default">검색</button>
 					</div>
 				</div>
 			</form>
+			<div id="searchedBoardsTPL"></div>
 		</div>
 	</div>
 
-	<div id="searchedBoardsTPL"></div>
+	
 	
 </div>
-<div class="col-xs-offset-4">
+<div class="bottom">
 	<a href="/school/{{schoolInfo.id}}/board/new" class="btn btn-default">글쓰기</a>
 </div>
 

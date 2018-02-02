@@ -238,7 +238,7 @@ var profileTPLC = {
 				rules:{
 					class:{
 						required:true,
-						range:[100,699],
+						
 					}
 				},
 				messages:{

@@ -28,6 +28,34 @@ $(document).ready(function(){
 		}
 	
 	});
+	//게시물 댓글 form 동적으로 댓글 보이게.
+	$(".updateReplyForm").validate({
+		rules:{
+			content:{
+				required:true,
+				minlength:5,
+				maxlength:100,
+			}
+		},
+		messages:{
+			content:"5글자 이상 써주시기 바랍니다.",
+		},
+		submitHandler:function(form,evt){
+			evt.preventDefault();
+			var newReply = $(".newReply").val();
+			var node = document.createElement("LI");                
+			var replynode = document.createTextNode(newReply);
+			node.appendChild(replynode);                              
+			updateBoard(boardId,{$push:{replies:{content:newReply}}}).then(function(data){
+				if (data.success){
+					console.log(newReply);
+					document.getElementById("replyList").appendChild(node);
+
+				}
+			})
+			
+		}
+	})
 
 
 
