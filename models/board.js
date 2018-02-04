@@ -23,5 +23,13 @@ var boardSchema = mongoose.Schema({
 });
 
 
+//userId를 받아서, writer와 같은지 확인해준다.
+boardSchema.methods.isWriter = function(userId){
+	console.log("same?", this.writer.equals(userId));
+	if(!this.writer) return false;
+	return this.writer.equals(userId);
+};
+
+
 var Board = mongoose.model('Board', boardSchema);
 module.exports = Board;

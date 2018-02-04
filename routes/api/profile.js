@@ -6,46 +6,6 @@ var profileViewModel = require('../../viewModels/profile.js');
 module.exports = function(app){
 
 
-/******
-
-
-	api 계획
-
-	api/profile?query - get -> if(!query) profile을 모두 가져온다.
-	if(query) 해당쿼리에 해당하는 모든 profile을 꺼내온다.(보통 이름으로 조사하게 될것.) 
-	(성공응답: data Array를 보낸다.)
-
-	api/profile- post -> 요청 본문의 profile을 추가한다.
-	(성공 응답: data.id를 보낸다./ data.success)
-	
-	api/profile/:id - get -> 해당 id의 profile을 하나 가져온다.
-	(성공 응답: 해당 data를 보낸다. / data.success)
-
-	api/profile/:id - delete -> 해당 id의 profile 삭제.
-	(성공 응답: data.success)
-
-
-	//replySchema의 subdocument.
-	var replySchema = mongoose.Schema({
-		user: String,
-		content: String,
-	});
-
-	//school의 reference.
-	var profileSchema = mongoose.Schema({
-		school:[{ type: mongoose.Schema.Types.ObjectId, ref: 'School' }],
-		class: [Number],
-		name: String,
-		graduation: Number,
-		gender: Boolean,
-		description: String,
-		replies : [replySchema],
-	});
-
-
-******/
-
-
 	//Query를 보내면,쿼리에 해당하는 profile에 해당하는 것들을 내보내고
 	//Query가 없으면 모든 profile을 내보낸다.
 	app.get('/api/profile', function(req, res, next){

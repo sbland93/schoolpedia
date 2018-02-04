@@ -6,27 +6,6 @@ var userViewModel = require('../../viewModels/user.js');
 module.exports = function(app){
 
 
-/******
-
-
-	api 계획
-
-	api/user?query - get -> if(!query) user를 모두 가져온다.
-	if(query) 해당쿼리에 해당하는 모든 user를 꺼내온다.(보통 이름으로 조사하게 될것.) 
-	(성공응답: data Array를 보낸다.)
-
-	api/user- post -> 요청 본문의 user를 추가한다.
-	(성공 응답: data.id를 보낸다./ data.success)
-	
-	api/user/:id - get -> 해당 id의 user를 하나 가져온다.
-	(성공 응답: 해당 data를 보낸다. / data.success)
-
-	api/user/:id - delete -> 해당 id의 user 삭제.
-	(성공 응답: data.success)
-
-******/
-
-
 	//Query를 보내면,쿼리에 해당하는 user에 해당하는 것들을 내보내고
 	//Query가 없으면 모든 User를 내보낸다.
 	app.get('/api/user', function(req, res, next){

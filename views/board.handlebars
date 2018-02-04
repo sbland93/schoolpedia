@@ -9,7 +9,7 @@
 		<div class="btn-group" role="group" aria-label="...">
 			<button type="button" class="upBoard btn btn-default" boardId={{board.id}}>+{{board.up}}</button>
 			<button type="button" class="downBoard btn btn-default" boardId={{board.id}}>{{board.down}}</button>
-			{{#isEquals board.writer userInfo}}
+			{{#isEquals board.writer userInfo.id}}
 				<button class="btn btn-default" id="removeEachBoard">삭제</button>
 				<a href="/board/{{board.id}}/update" class="btn btn-default">수정</a>
 			{{/isEquals}}

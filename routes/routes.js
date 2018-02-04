@@ -24,14 +24,14 @@ module.exports = function(app){
 	app.get('/login',authHandlers.login);
 	
 	//회원가입 페이지 라우팅.
-	app.get('/register',authHandlers.register);
+	app.get('/register', authHandlers.register);
 
 	//ajax통신부분.
 	app.post('/register', authHandlers.localSignup);
 
 	app.post('/login', authHandlers.localLogin);
 
-	app.get('/logout', authHandlers.logout)
+	app.get('/logout', authHandlers.logout);
 
 	//:id에 해당하는 school의 Board, Profile을 5개씩 리턴한다.
 	//DOLATER

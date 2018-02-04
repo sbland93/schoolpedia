@@ -37,7 +37,7 @@ module.exports = function(){
 		},
 
 		ajaxIsLoggedIn: function(req, res, next){
-			if(req.isAuthenticated()){
+			if(req.isAuthenticated()){ // 로그인되어있는지 확인!
 				return next();
 			} else {
 				res.json({success: false, type:"Login"});

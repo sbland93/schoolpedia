@@ -31,7 +31,7 @@ var schoolTPLC = {
 					if(data.success){
 						alert("수정되었습니다ㅎㅎ");
 						$('#schoolDescription').html($('#fieldDescription').val());
-						$('#updateDescriptionDiv').html('');
+						$('#updateDescriptionTPL').html('');
 					} 
 					else{
 						alert('Error Occured1');

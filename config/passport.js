@@ -23,7 +23,8 @@ module.exports = function(passport){
 		passReqToCallback: true,
 	},//done(에러인자, 성공시 user인자)
 	function(req, email, password, done){
-		//Email을 가지고, 유저를 찾기시작.		
+		//Email을 가지고, 유저를 찾기시작.
+		console.log("HERE!!!!!!");		
 		User.findOne({'email': email}, function(err, user){
 			if(err) return done(err);
 			if(user){
@@ -46,7 +47,9 @@ module.exports = function(passport){
 						message: "아이디(이메일) 중복입니다."
 					};
 					return done(null, false);
-				}
+				}else return done(null, false);
+
+				
 			} else{ //유저가 없고 로그인중이라면
 				if(req.body.login){
 					req.session.flash = {
@@ -71,7 +74,7 @@ module.exports = function(passport){
 						if(err) throw err;
 						return done(null, newUser);
 					});
-				}
+				}else return done(null, false);
 			}
 		});
 	}

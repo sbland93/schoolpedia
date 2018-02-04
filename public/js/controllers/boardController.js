@@ -17,6 +17,7 @@ $(document).ready(function(){
 		if(deleteConfirm){
 			deleteBoard(boardId).then(function(data){
 				if(data.success){
+					alert("삭제되었습니다");
 					location.href = document.referrer;	
 				}
 				else{

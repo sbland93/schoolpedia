@@ -4,6 +4,9 @@
             <a href="#"> {{ user }}</a>
         </h5>
         <p style="z-index: 1;">{{ content }}</p>
+        {{#if isMyPage}}
+        <button class="manageProfile btn btn-sm btn-default" target="stories" targetId="{{id}}">-</button>
+        {{/if}}
     </div>
 </div>
 <hr>

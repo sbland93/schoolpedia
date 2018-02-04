@@ -132,6 +132,8 @@ var profileTPLC = {
 				$('#addReplyTPL').html("");
 			});
 
+			ㅋ
+
 		}
 	},
 

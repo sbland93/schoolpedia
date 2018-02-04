@@ -94,18 +94,9 @@ $(document).ready(function(){
      
       },
       submitHandler: function(form, evt) {
+        console.log("Here");
         evt.preventDefault();
-       
         form.submit();
-
-        // var data = $(form).serialize();
-        
-        // ajaxSignup(data).then(function(data){
-        //   //회원가입 성공시에, 성공했다는 alert를 보내고 홈으로 이동시킨다.
-        //   alert("회원가입에 성공하셨습니다!");
-        //   location.href = '/';
-        // });
-
       }
     });
 

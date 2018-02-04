@@ -1,9 +1,9 @@
 <div class="score-structural score-column2-wideright search-listings post">
     <div class="score-right">
-        <h5 style="z-index: 1;">
-            <a href="#"> {{ user }}</a>
-        </h5>
         <p style="z-index: 1;">{{ feature }}</p>
+        {{#if isMyPage}}
+        <button class="manageProfile btn btn-sm btn-default" target="features" targetId="{{id}}">-</button>
+        {{/if}}
     </div>
 </div>
 <hr>

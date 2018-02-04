@@ -2,57 +2,7 @@ var Board = require('../../models/board.js');
 var User = require('../../models/user.js');
 var authHandlers = require('../../handlers/auth.js')();
 
-
-
 module.exports = function(app){
-
-
-/******
-
-
-	api 계획
-
-	api/board?query - get -> if(!query) board을 모두 가져온다.
-	if(query) 해당쿼리에 해당하는 모든 board을 꺼내온다.(보통 이름으로 조사하게 될것.) 
-	(성공응답: data Array를 보낸다.)
-
-	api/board- post -> 요청 본문의 board을 추가한다.
-	(성공 응답: data.id를 보낸다./ data.success)
-	
-	api/board/:id - get -> 해당 id의 board을 하나 가져온다.
-	(성공 응답: 해당 data를 보낸다. / data.success)
-
-	api/board/:id - delete -> 해당 id의 board 삭제.
-	(성공 응답: data.success)
-
-
-	//replySchema의 subdocument.
-	var replySchema = mongoose.Schema({
-		user: String,
-		content: String,
-	});
-
-	var boardSchema = mongoose.Schema({
-		user: String,
-		school: { type: mongoose.Schema.ObjectId, ref: 'School' },
-		title: String,
-		content: String,
-		updated: { type: Date, default: Date.now },
-		replies: [ replySchema ],
-	});
-
-
-******/
-
-
-/*app.User.find().or([{ 'firstName': { $regex: re }}, { 'lastName': { $regex: re }}]).sort('title', 1).exec(function(err, users) {
-    res.json(JSON.stringify(users));
-});
-Test.find()
-      .and([
-          { $or: [{a: 1}, {b: 1}] },
-          { $or: [{c: 1}, {d: 1}] }
-      ])*/
 
 	//Query를 보내면,쿼리에 해당하는 board에 해당하는 것들을 내보내고
 	//Query가 없으면 모든 board을 내보낸다.
@@ -127,7 +77,7 @@ Test.find()
 		if(!req.params.id) return next('No Id');
 		Board.findById({_id: req.params.id}, function(err, board){
 			if(err) console.error(err);
-			/*DOLATER err 처리 */
+			/* DOLATER err 처리 */
 			if(!board){
 				return res.json({
 					success: false,
@@ -146,36 +96,65 @@ Test.find()
 	});
 
 
-	//id에 해당하는 board을 삭제한다.
-	app.delete('/api/board/:id', authHandlers.ajaxIsLoggedIn ,function(req, res, next){
+	//로그인되어있는지 확인후, writer와 user가 일치하면
+	//1. 유저의 boards(내가 쓴글)에서 삭제한다.
+	//2. 유저의 boards에서 삭제가 된것을 확인한 후, 그 board를 삭제한다.
+	app.delete('/api/board/:id', authHandlers.ajaxIsLoggedIn, function(req, res, next){
 		if(!req.params.id) return next('No Id');
-		Board.remove({_id: req.params.id}, function(err){
+		
+		Board.findById(req.params.id, function(err, board){
 			if(err) return next(err);
-			res.json({
-				success: true,
-			});
+			if(!board) return res.json({type: "Empty", success : false });
+			if(board.isWriter(req.user._id)){
+				User.update({ $pull: {"boards": board._id} }, function(err, response){
+					if(err) return next(err);
+					if(response.nModified === 1){
+						board.remove(function(err){
+							if(err) return next(err);
+							res.json({
+								success: true,
+							});
+						});						
+					} else {
+						res.json({
+							type: "Mystery",
+							success: false,
+						});
+					}
+				});
+			}else{
+				res.json({ type: "Auth", success: false });
+			}
 		});
+
 	});
 
 
 	//id에 해당하는 board을 요청본문을 토대로 업데이트한다.
-	app.put('/api/board/:id', authHandlers.ajaxIsLoggedIn ,function(req, res, next){
+	app.put('/api/board/:id', authHandlers.ajaxIsLoggedIn , function(req, res, next){
 		if(!req.params.id) return next('No Id');
-		//DOLATER - 업데이트 메커니즘 적용 및 업데이트 검증.
-		Board.update({_id: req.params.id}, req.body, function(err, response){
+		Board.findById(req.params.id, function(err, board){
 			if(err) return next(err);
-			if(response.nModified === 1){
-				res.json({
-					success: true,
-					id: req.params.id,
+			if(!board) return res.json({type: "Empty", success: false});
+			if(board.isWriter(req.user._id)){
+				board.update(req.body, function(err, response){
+					if(err) return next(err);
+					if(response.nModified === 1){
+						res.json({
+							success: true,
+							id: req.params.id,
+						});
+					} else {
+						res.json({
+							success: false,
+							message: ''
+						});
+					}
 				});
-			} else {
-				res.json({
-					success: false,
-					message: ''
-				});
+			}else{
+				res.json({type: "Auth", success: false});
 			}
-		});
+		});		
 	});
 
 

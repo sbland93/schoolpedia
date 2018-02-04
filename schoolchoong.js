@@ -125,6 +125,7 @@ app.use(express.static(__dirname + '/public'));
 var handlebars = require('express-handlebars').create({
 	defaultLayout: 'main',
 	helpers: {
+		
 		section: function(name, options){
 			if(!this._sections) this._sections = {};
 			this._sections[name] = options.fn(this);
@@ -145,20 +146,16 @@ var handlebars = require('express-handlebars').create({
 
 		//학교의 category가 'elementary'인지를 확인하는 helper함수.
 		isEquals: function(a, b, block){
-			if(a === b){
-				return block.fn(this);
+			if((typeof(a) === "object") && (typeof(b)==="object")){
+				if(a.equals && a.equals(b)){
+					return block.fn(this);
+				}
+			} else{
+				if(a == b){
+					return block.fn(this);
+				}
 			}
-
-			return block.inverse(this);
-		},
-
-
-		//Equal확인
-		isEqualTo: function(a, b, block){
-			if(a === b){
-				return block.fn(this);
-			}
-
+			
 			return block.inverse(this);
 		},
 		
@@ -223,10 +220,15 @@ app.use(function(req, res, next){
 });
 
 app.use(function(req, res, next){
+	console.log(req.user);
 	//로그인 되어있는 상태라면, isLoggedIn(Handlebar context)에 true를 담아준다.
 	if(req.user){
 		res.locals.isLoggedIn = true;
-		res.locals.userInfo = req.user._id;
+		res.locals.userInfo = {
+			id: req.user._id,
+			name: req.user.name,
+			profile: req.user.profile,
+		};
 	}
 	next();
 });

@@ -7,13 +7,13 @@ var Profile = require('./profile.js');
 
 
 var userSchema = mongoose.Schema({
-	profile: {type: mongoose.Schema.Types.ObjectId, ref: 'Profile'},
-	schools: [{type: mongoose.Schema.Types.ObjectId, ref: 'School'}],
-	boards: [{type: mongoose.Schema.Types.ObjectId, ref: 'Board'}],
 	name: String,
 	email: String,
 	password: String,
 	kakaoEmail: String,
+	profile: {type: mongoose.Schema.Types.ObjectId, ref: 'Profile'},
+	schools: [{type: mongoose.Schema.Types.ObjectId, ref: 'School'}],
+	boards: [{type: mongoose.Schema.Types.ObjectId, ref: 'Board'}],
 });
 
 

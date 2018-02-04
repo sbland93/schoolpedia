@@ -6,8 +6,14 @@ module.exports = {
 	userList: [
 		{
 			name: "김승범",
-			kakaoEmail: "rltmqj@gmail.com",
+			kakaoEmail: "rltmqj12@gmail.com",
 			email: "rltmqj@gmail.com",
+			password: bcrypt.hashSync("123098", bcrypt.genSaltSync(8), null),
+		},
+		{
+			name: "한용희",
+			kakaoEmail: "rltmqj124@gmail.com",
+			email: "rltmqj1@gmail.com",
 			password: bcrypt.hashSync("123098", bcrypt.genSaltSync(8), null),
 		}
 	],
