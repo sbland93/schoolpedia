@@ -6,7 +6,7 @@ var boardHandlers = require('../handlers/board.js')();
 var mongoose = require('mongoose');
 var authHandlers = require('../handlers/auth.js')();
 var passport = require('passport');
-
+var Info = require('../models/info.js');
 
 module.exports = function(app){
 
@@ -15,6 +15,7 @@ module.exports = function(app){
 	require('./api/profile.js')(app);
 	require('./api/board.js')(app);
 	require('./api/user.js')(app);
+	require('./traditional/info.js')(app);
 
 	//home 페이지 라우팅.
 	//schoolList가 필요.

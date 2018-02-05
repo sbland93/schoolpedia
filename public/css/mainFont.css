@@ -1,0 +1,46 @@
+@media (min-width: 768px) and (max-width: 979px) {body{
+        font-size:70%;
+	}
+}
+@media (max-width: 767px) {body{
+	font-size:50%; 
+	}
+	header{
+		font-size:18pt;
+	}
+}
+@media (max-width: 480px) {
+	body{
+		font-size:0.04rem; 
+		padding:0.04em; 
+	}
+	header{
+		font-size:12pt; 
+
+	}
+	.buttonGroup{
+		font-size:0.003em;
+	}
+	span{
+		font-size:1px; 
+	}
+	a{
+		font-size:0.5em; 
+	}
+	form{
+		font-size:0.3em;
+	}
+	h2{
+		font-size:0.3em;
+	}
+	input{
+		font-size:0.3em;
+	}
+	.pagination{
+		font-size:0.05em; 
+	}
+	.form-control{
+		font-size:0.5em; 
+	}
+
+}

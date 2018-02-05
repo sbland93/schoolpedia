@@ -7,11 +7,11 @@
 			<div class="updated_at">{{board.updated_at}}</div>	
 		</div>	
 		<div class="btn-group" role="group" aria-label="...">
-			<button type="button" class="upBoard btn btn-default" boardId={{board.id}}>+{{board.up}}</button>
-			<button type="button" class="downBoard btn btn-default" boardId={{board.id}}>{{board.down}}</button>
-			{{#isEquals board.writer userInfo.id}}
-				<button class="btn btn-default" id="removeEachBoard">삭제</button>
-				<a href="/board/{{board.id}}/update" class="btn btn-default">수정</a>
+			<button type="button" class="upBoard btn btn-default buttonGroup" boardId={{board.id}}>+{{board.up}}</button>
+			<button type="button" class="downBoard btn btn-default buttonGroup" boardId={{board.id}}>{{board.down}}</button>
+			{{#isEquals board.writer userInfo}}
+				<button class="btn btn-default buttonGroup" id="removeEachBoard">삭제</button>
+				<a href="/board/{{board.id}}/update" class="btn btn-default buttonGroup">수정</a>
 			{{/isEquals}}
 		</div>
 	</div>
@@ -23,7 +23,7 @@
 				  <label for="comment">Comment:</label>
 				  <textarea class="form-control newReply" rows="5" id="comment"></textarea>
 				</div>
-				<button type="submit" class="btn btn-default">입력</button>
+				<button type="submit" class="btn btn-default buttonGroup">입력</button>
 			</div>
 			<div>
 				{{#each board.replies}}

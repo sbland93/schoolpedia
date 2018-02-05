@@ -2,35 +2,35 @@
 <form class="form-horizontal registerForm" action="/register" method="POST">
   
   <div class="form-group">
-      <label for="fieldEmail" class="col-xs-10 col-sm-2 col-md-3 control-label">이메일</label>
-      <div class="col-xs-9 col-sm-7 col-md-6">
+      <label for="fieldEmail" class="col-xs-11 col-sm-2 col-md-3 control-label">이메일</label>
+      <div class="col-xs-10 col-sm-7 col-md-6">
         <input type="email" class="form-control" id="fieldEmail" name="email" placeholder="로그인시 사용할 이메일">
       </div>
   </div>
 
   <div class="form-group">
-      <label for="fieldName" class="col-xs-10 col-sm-2 col-md-3 control-label">이름(실명)</label>
-      <div class="col-xs-9 col-sm-7 col-md-6">
+      <label for="fieldName" class="col-xs-11 col-sm-2 col-md-3 control-label">이름(실명)</label>
+      <div class="col-xs-10 col-sm-7 col-md-6">
         <input type="text" class="form-control" id="fieldName" name="name" placeholder="ex)홍길동">
       </div>
   </div>
 
   <div class="form-group">
-      <label for="fieldPassword" class="col-xs-10 col-sm-2 col-md-3 control-label">비밀번호</label>
-      <div class="col-xs-9 col-sm-7 col-md-6">
+      <label for="fieldPassword" class="col-xs-11 col-sm-2 col-md-3 control-label">비밀번호</label>
+      <div class="col-xs-10 col-sm-7 col-md-6">
         <input type="password" class="form-control" id="fieldPassword" name="password" placeholder="비밀번호">
       </div>
   </div>
   <div class="form-group">
-      <label for="fieldPasswordConf" class="col-xs-10 col-sm-2 col-md-3 control-label">비밀번호확인</label>
-      <div class="col-xs-9 col-sm-7 col-md-6">
+      <label for="fieldPasswordConf" class="col-xs-11 col-sm-2 col-md-3 control-label">비밀번호확인</label>
+      <div class="col-xs-10 col-sm-7 col-md-6">
         <input type="password" class="form-control" id="fieldPasswordConf" name="passwordConf" placeholder="비밀번호확인">
       </div>
   </div>
 
   <div class="form-group">
       <label for="kakaoButton" class="col-xs-10 col-sm-2 col-md-3 control-label">카카오인증</label>
-      <div class="col-xs-9 col-sm-7 col-md-6">
+      <div class="col-xs-10 col-sm-7 col-md-6">
           <a id="kakao-login-btn" id="kakaoButton"></a>
           <br/><span id="kakaoMessage">현재 미인증 상태입니다. 카카오인증은 필수입니다!</span>
       </div>
@@ -40,8 +40,8 @@
   <div class="col-sm-offset-2 col-md-offset-3">
     <input type="hidden" name="verified" id="verified" />
     <input type="hidden" id="fieldKakaoEmail" name="kakaoEmail" />
-    <button class="btn btn-default" id="register">회원가입</button>
-    <button class="btn btn-deafult goBack">취소</button>
+    <button class="btn btn-default buttonGroup" id="register">회원가입</button>
+    <button class="btn btn-deafult goBack buttonGroup">취소</button>
   </div>
 
   <input type="hidden" name="register" value="true" />

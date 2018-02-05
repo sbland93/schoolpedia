@@ -71,6 +71,7 @@ $(document).ready(function(){
 				return {
 					id: self._id,
 					content: self.content,
+					isMyPage: isMyPage,
 				};
 			},
 			postsDiv : $('#stories'),
@@ -86,6 +87,7 @@ $(document).ready(function(){
 					id: self._id,
 					user: self.user,
 					content: self.content,
+					isMyPage: isMyPage,
 				};
 			},
 			postsDiv : $('#replies'),

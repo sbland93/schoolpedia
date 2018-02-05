@@ -3,6 +3,17 @@ var bcrypt = require('bcrypt-nodejs');
 
 module.exports = {
 
+	infoList: [
+		{
+			title: "공지사항1",
+			content: "컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다",
+		},
+		{
+			title: "공지사항2",
+			content:"컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다 컨텐츠입니다",
+		}	
+	],
+
 	userList: [
 		{
 			name: "김승범",
@@ -12,9 +23,9 @@ module.exports = {
 		},
 		{
 			name: "한용희",
-			kakaoEmail: "rltmqj124@gmail.com",
-			email: "rltmqj1@gmail.com",
-			password: bcrypt.hashSync("123098", bcrypt.genSaltSync(8), null),
+			kakaoEmail: "hyh4829@naver.com",
+			email: "hyh4827@naver.com",
+			password: bcrypt.hashSync("930729", bcrypt.genSaltSync(8), null),
 		}
 	],
 

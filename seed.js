@@ -1,5 +1,6 @@
 var School = require('./models/school.js');
 var Profile = require('./models/profile.js');
+var Info = require('./models/info.js');
 var Board = require('./models/board.js');
 var User = require('./models/user.js');
 var koreaSchoolData = require('../koreaSchoolData.js')
@@ -9,7 +10,7 @@ var getRandomInt = require('./utils/testUtils.js')().getRandomInt;
 //Seed All Data From seedData.
 var seedDev = function(){
 
-	var p1,p2,p3,p4;
+	var p1,p2,p3,p4,p5;
 
 	//p1. School remove -> School create by SeedData
 	p1 = new Promise(function(resolve, reject){
@@ -63,10 +64,20 @@ var seedDev = function(){
 			});	
 		});
 
-		//userData모두 삭제.
+		//userData모두 삭제후 seedData기반 user생성.
 		p4 = new Promise(function(resolve, reject){
 			User.remove({}, function(err){
 				User.create(seedData.userList, function(err, users){
+					if(err) reject(err);
+					resolve();
+				})			
+			});
+		});
+
+		//infoData모두 삭제후 seedData기반 info생성.
+		p5 = new Promise(function(resolve, reject){
+			Info.remove({}, function(err){
+				Info.create(seedData.infoList, function(err, infos){
 					if(err) reject(err);
 					resolve();
 				})			

@@ -1,20 +1,24 @@
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 body{
-	padding:10pt;
+	
 	background-color:#F0F8FF;
 	font-weight:bold;
 	font-family: 'Jeju Gothic', serif;
 	font-size:12pt;
+	margin-bottom:20pt; 
 }
+
+
 div{
+	
 	margin-top:1px;
 }
 .img{
 	position:absolute;
 	left:0;
 	top:0;
-	font-size:17pt;
+	font-size:16pt;
 	padding:10pt;
 }
 .log{
@@ -35,7 +39,7 @@ header{
 a{
 	color:#483d8b;
 }
-
+input[type="password"] {font:small-caption;}
 input{
 	color:black;
 }

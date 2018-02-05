@@ -51,13 +51,16 @@
 					<a href="/register">회원가입</a>
 				{{/if}}
 			</div>
-			{{#if flash}}
-				<div class="alert alert-dismissible alert-{{flash.type}}">
-					<button type="button" class="close" data-dismiss="alert"
-					aria-hidden="true">&times;</button>
-					<strong>{{flash.intro}}</strong> {{{flash.message}}}
-				</div>
-			{{/if}}
+			<div>
+				{{#if flash}}
+					<div class="alert alert-dismissible alert-{{flash.type}}">
+						<button type="button" class="close" data-dismiss="alert"
+						aria-hidden="true">&times;</button>
+						<strong>{{flash.intro}}</strong> {{{flash.message}}}
+					</div>
+				{{/if}}
+			</div>
+			
 
 			{{#if showTests}}
 				<div id="mocha"></div>
@@ -86,6 +89,7 @@
 
 			{{{_sections.jquery}}}
 			<script type="text/javascript" src="/js/controllers/mainController.js"></script>
+			<link rel="stylesheet" type="text/css" href="/css/mainFont.css">
 	</div>
 </body>
 </html>

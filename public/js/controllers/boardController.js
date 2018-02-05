@@ -48,10 +48,19 @@ $(document).ready(function(){
 			var replynode = document.createTextNode(newReply);
 			node.appendChild(replynode);                              
 			updateBoard(boardId,{$push:{replies:{content:newReply}}}).then(function(data){
+				console.log('hi');
 				if (data.success){
+					console.log('hi');
 					console.log(newReply);
 					document.getElementById("replyList").appendChild(node);
 
+				}else{
+					if (data.type === "Login"){
+						alert("로그인이 필요한 서비스입니다.");
+						location.href = '/login';
+					}else{
+						alert("잘못된 정보입니다.");
+					}
 				}
 			})
 			
