@@ -1,18 +1,21 @@
 @media (min-width: 768px) and (max-width: 979px) {body{
-        font-size:70%;
+        font-size:1.5em;
 	}
 }
 @media (max-width: 767px) {body{
-	font-size:50%; 
+	font-size:1.5em; 
 	}
 	header{
 		font-size:18pt;
 	}
+	h2{
+		font-size:1.7em; 
+	}
 }
 @media (max-width: 480px) {
 	body{
-		font-size:0.04rem; 
-		padding:0.04em; 
+		font-size:1.3em; 
+		/*padding:0.04em; */
 	}
 	header{
 		font-size:12pt; 
@@ -22,24 +25,33 @@
 		font-size:0.003em;
 	}
 	span{
-		font-size:1px; 
+		font-size:1em; 
 	}
 	a{
-		font-size:0.5em; 
+		font-size:1em; 
 	}
 	form{
-		font-size:0.3em;
+		font-size:1em;
 	}
 	h2{
-		font-size:0.3em;
+		font-size:1.3em;
 	}
 	input{
-		font-size:0.3em;
+		font-size:1em;
 	}
 	.pagination{
 		font-size:0.05em; 
 	}
 	.form-control{
+		font-size:0.5em; 
+	}
+	.img{
+		font-size:1.3em; 
+	}
+	li>a{
+		font-size:0.5em; 
+	}
+	#takeProfile{
 		font-size:0.5em; 
 	}
 

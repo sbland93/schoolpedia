@@ -22,10 +22,8 @@ div{
 	padding:10pt;
 }
 .log{
-	position:absolute;
-	top:0;
-	right:0;
-	padding:10pt; 
+	/*position:absolute;*/
+	margin:5px;  
 }
 
 header{
