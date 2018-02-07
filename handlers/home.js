@@ -1,10 +1,11 @@
 var School = require('../models/school.js');
 var Profile = require('../models/profile.js');
 var Board = require('../models/board.js');
+var Info = require('../models/info.js');
 var schoolViewModel = require('../viewModels/school.js');
 var boardViewModel = require('../viewModels/board.js');
 var profileViewModel = require('../viewModels/profile.js');
-
+var infoViewModel = require('../viewModels/info.js');
 module.exports = function(){
 
 
@@ -16,10 +17,15 @@ module.exports = function(){
 			School.find({available: true}).sort({updated_at : '-1'})
 			.exec(function(err, schools){
 				if(err) next(err);
-				res.render('home', {
-					schoolList : schools.map(schoolViewModel),
-					pageTestScript: '/qa/tests-home.js'
-				});
+				Info.find(function(err,infos){
+					if(err) next(err);
+					res.render('home', {
+						schoolList : schools.map(schoolViewModel),
+						pageTestScript: '/qa/tests-home.js',
+						infoList: infos.map(infoViewModel),
+					});
+ 				})
+				
 			});
 		},
 		

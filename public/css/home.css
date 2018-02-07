@@ -8,7 +8,7 @@
 form{
 	color:black;
 	font-size:15pt;
-	margin-top:100pt;
+	margin-top:10pt;
 	text-align:center;
 	margin-bottom:10pt;
 }
@@ -17,11 +17,18 @@ li{
 	font-weight:bold;
 }
 /*검색리스트 div*/
-#searchResult{
+.resultDivision{
 	padding:10pt;
 	
-	height:300pt;
+	height:400pt;
 	border-radius:15px;
 	border:2px solid;
 
+}
+hr{
+	size:5px;  
+}
+/*
+h2{
+	text-align:center; 
 }

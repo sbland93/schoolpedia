@@ -34,23 +34,44 @@
 	
 </head>
 <body>
+	<div class="log">
+		<div class="dropdown pull-right">
+		  <button class="btn btn-default dropdown-toggle buttonGroup" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    메뉴
+		    <span class="caret"></span>
+		  </button>
+
+		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+		    {{#if isLoggedIn}}
+				{{#if userInfo.profile}}
+					<li><a href="/profile/{{userInfo.profile}}">마이페이지</a></li>
+				{{else}}
+					<li><a href="/info">아직 회원님은 마이페이지가 없어요(클릭!)</a><li>
+				{{/if}}
+				<li><a href="/logout">로그아웃</a></li>
+			{{else}}
+				<li><a href="/login">로그인</a></li>
+				<li><a href="/register">회원가입</a></li>
+			{{/if}}
+			<li><a href="/info">공지사항</a></li>
+		  </ul>
+		</div>
+		<!--{{#if isLoggedIn}}
+			{{#if userInfo.profile}}
+				<li><a href="/profile/{{userInfo.profile}}">마이페이지</a></li>
+			{{else}}
+				<a href="/info">아직 회원님은 마이페이지가 없어요(클릭!)</a>
+			{{/if}}
+			<li><a href="/logout">로그아웃</a></li>
+		{{else}}
+			<li><span><a href="/login">로그인</a></span></li>
+			<li><a href="/register">회원가입</a></li>
+		{{/if}}-->
+	</div>
 	<div class="container">
 			<!-- 메인페이지로 이동하는 링크-->
 			<div class="img"><a href="/"><em>스쿨충</em></a></div>
 			<!-- 로그인 버튼-->
-			<div class="log">
-				{{#if isLoggedIn}}
-					{{#if userInfo.profile}}
-						<a href="/profile/{{userInfo.profile}}">마이페이지</a>
-					{{else}}
-						<a href="/info">아직 회원님은 마이페이지가 없어요(클릭!)</a>
-					{{/if}}
-					<a href="/logout">로그아웃</a>
-				{{else}}
-					<span><a href="/login">로그인</a></span>
-					<a href="/register">회원가입</a>
-				{{/if}}
-			</div>
 			<div>
 				{{#if flash}}
 					<div class="alert alert-dismissible alert-{{flash.type}}">

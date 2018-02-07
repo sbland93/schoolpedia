@@ -25,6 +25,10 @@ module.exports = function(app){
 			//TODO
 		}
 	})
+	//공지사항 등록 페이지로 이동
+	app.get('/info/new',function(req,res,next){
+		res.render("newInfo");
+	})
 
 
 	//해당 id의 info를 가져온다.
@@ -38,11 +42,11 @@ module.exports = function(app){
 
 
 	//id에 해당하는 info를 삭제한다.
-	app.delete('/info/:id', function(req, res, next){
+	app.get('/info/:id/delete', function(req, res, next){
 		if(!req.params.id) return next('No Id');
 		Info.remove({_id: req.params.id}, function(err){
 			if(err) return next(err);
-			return res.redirect("/info/" + req.params.id);
+			return res.redirect("/info");
 		})
 	});
 
