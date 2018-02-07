@@ -11,7 +11,8 @@ var replySchema = mongoose.Schema({
 
 //School의 reference두기.
 var boardSchema = mongoose.Schema({
-	writer: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}, //글 작성자
+	owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}, //글 작성자
+	writer: String, //글 작성자
 	school: { type: mongoose.Schema.Types.ObjectId, ref: 'School' , index: true}, //학교게시물
 	title: String, //제목
 	content: String, //내용
@@ -25,9 +26,8 @@ var boardSchema = mongoose.Schema({
 
 //userId를 받아서, writer와 같은지 확인해준다.
 boardSchema.methods.isWriter = function(userId){
-	console.log("same?", this.writer.equals(userId));
-	if(!this.writer) return false;
-	return this.writer.equals(userId);
+	if(!this.owner) return false;
+	return this.owner.equals(userId);
 };
 
 

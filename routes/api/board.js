@@ -1,5 +1,6 @@
 var Board = require('../../models/board.js');
 var User = require('../../models/user.js');
+var boardViewModel = require('../../viewModels/board.js');
 var authHandlers = require('../../handlers/auth.js')();
 
 module.exports = function(app){
@@ -27,16 +28,7 @@ module.exports = function(app){
 			.populate('school')
 			.exec(function(err, boards){
 				if(err) return next(err);
-				res.json(boards.map(function(a){
-					return {
-						title: a.title,
-						id: a._id,
-						title: a.title,
-						school: a.school,
-						content: a.content,
-						replies : a.replies,
-					};
-				}));
+				res.json(boards.map(boardViewModel));
 			});
 	});
 
@@ -45,7 +37,15 @@ module.exports = function(app){
 	//또한, user의 데이터베이스에 그 게시글 id를 넣어두어야 한다.
 	app.post('/api/board', authHandlers.ajaxIsLoggedIn , function(req, res, next){
 		if(req.body.title && req.body.content && req.body.school && req.user){
-			req.body.writer = req.user._id; //글작성 유저를 추가한다.
+			req.body.owner = req.user._id; //글작성 유저를 추가한다.
+			console.log(req.body.anonym);
+			if(req.body.anonym === "on"){ //글이 익명이라면 user의 anonym(익명 식별자)를 적어주고,
+				req.body.writer = req.user.anonym;
+			}else{ //글이 익명이 아니라면 실명을 담아준다.
+				req.body.writer = req.user.name;
+			}
+			delete req.body.anonym;
+			
 			Board.create(req.body, function(err, board){
 				if(err) return next(err);
 				User.update({_id: req.user._id}, {$push: {boards : board._id }}, function(err, response){
@@ -84,14 +84,7 @@ module.exports = function(app){
 					message: 'NO DATA',
 				});
 			};
-			return res.json({
-				success: true,
-				id: board._id,
-				title: board.title,
-				school: board.school,
-				content: board.content,
-				replies : board.replies,
-			});
+			return res.json(boardViewModel(board));
 		});
 	});
 
@@ -191,22 +184,6 @@ module.exports = function(app){
 			}
 
 		});
-
-
-		/*Board.update({_id: req.params.id}, req.body, function(err, response){
-			if(err) return next(err);
-			if(response.nModified === 1){
-				res.json({
-					success: true,
-					id: req.params.id,
-				});
-			} else {
-				res.json({
-					success: false,
-					message: ''
-				});
-			}
-		});*/
 
 
 	});

@@ -17,10 +17,6 @@
   </div>
 </div>
 	
-	<!--<button id="updateDescription" class="btn btn-default">학교 소개글 수정</button>
-	<a href="/school/{{schoolInfo.id}}/board/new" class="btn btn-default">게시글쓰기</a> -->
-
-
 
 <!--수정버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
 <div class="row">
@@ -38,12 +34,7 @@
 			{{#each recentList}}
 				<li>
 				<span><a href="/board/{{id}}"><p>{{title}}</p></a></span>
-				
-				<p>{{content}}</p>
-				<!--<div class="btn-group" role="group" aria-label="...">
-					<button type="button" class="upBoard btn btn-sm btn-default buttonGroup" boardId={{id}}>+{{up}}</button>
-					<button type="button" class="downBoard btn btn-sm btn-default buttonGroup" boardId={{id}}>{{down}}</button>
-				</div>-->
+				<p>{{#trimString content}}{{/trimString}}</p>
 				</li>
 			{{/each}}
 		</ul>
@@ -55,8 +46,7 @@
 			{{#each bestList}}
 				<li>
 				<span><a href="/board/{{id}}"><p>{{title}}</p></a></span>
-				<p>{{content}}</p>
-				
+				<p>{{#trimString content}}{{/trimString}}</p>		
 				</li>
 			{{/each}}
 		</ul>

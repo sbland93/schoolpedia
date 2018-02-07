@@ -1,6 +1,8 @@
 module.exports = function(board){
 	return {
+		success: true,
 		id: board._id,
+		owner: board.owner,
 		writer: board.writer,
 		title: board.title,
 		school: board.school,

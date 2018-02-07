@@ -69,6 +69,7 @@ module.exports = function(passport){
 					newUser.email = email;
 					newUser.password = newUser.generateHash(password);
 					newUser.kakaoEmail = req.body.kakaoEmail;
+					newUser.anonym = newUser.generateAnonym(req.body.kakaoEmail);
 
 					newUser.save(function(err){
 						if(err) throw err;

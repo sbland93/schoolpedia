@@ -3,6 +3,8 @@ var credentials = require('./credentials.js');
 var express = require('express');
 
 var fs = require('fs');
+//날자포맷을 위한 handlebars helper에 사용할 라이브러리.
+var moment = require('moment')
 
 //passport 관련 설정
 var passport = require("passport");
@@ -168,6 +170,23 @@ var handlebars = require('express-handlebars').create({
 			}
 			return accum;
 		},
+
+		//board들의 content가 너무 길때, 잘라서 ...을 붙여 보내는 helper.
+		trimString: function(passedString){
+			console.log(typeof(passedString));
+			if(typeof(passedString) === "string" && passedString.length > 100 ){
+				return passedString.substring(0, 97) + "...";
+			}
+			return passedString;
+		},
+
+		dateFormat : function(date){
+			console.log(typeof(date));
+			console.log(typeof(moment(date).format('YYYY-MM-DD')));
+			if(typeof(date) === "object"){
+				return moment(date).format('MM-DD HH:MM');
+			}
+		}
 	},
 });
 

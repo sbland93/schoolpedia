@@ -4,12 +4,13 @@
 	<div class="col-md-offset-1 col-md-4">
 		<div class="board" id="eachBoard" boardId="{{board.id}}">
 			<div class="content">{{board.content}}</div>
-			<div class="updated_at">{{board.updated_at}}</div>	
+			<div class="updated_at">{{#dateFormat board.updated_at}}{{/dateFormat}}</div>	
+			<div>작성자: {{board.writer}}</div>
 		</div>	
 		<div class="btn-group" role="group" aria-label="...">
 			<button type="button" class="upBoard btn btn-default buttonGroup" boardId={{board.id}}>+{{board.up}}</button>
 			<button type="button" class="downBoard btn btn-default buttonGroup" boardId={{board.id}}>{{board.down}}</button>
-			{{#isEquals board.writer userInfo}}
+			{{#isEquals board.owner userInfo.id}}
 				<button class="btn btn-default buttonGroup" id="removeEachBoard">삭제</button>
 				<a href="/board/{{board.id}}/update" class="btn btn-default buttonGroup">수정</a>
 			{{/isEquals}}

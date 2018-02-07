@@ -14,6 +14,7 @@ module.exports = function(app){
 			});
 	});
 
+
 	// title과 content가 있는지 확인하고, 글을 생성한후 공지사항 페이지로 이동시킨다.
 	app.post('/info', function(req, res, next){
 		if(req.body.title && req.body.content){

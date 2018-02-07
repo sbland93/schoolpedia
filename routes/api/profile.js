@@ -1,4 +1,5 @@
 var Profile = require('../../models/profile.js');
+var authHandlers = require('../../handlers/auth.js')();
 
 var profileViewModel = require('../../viewModels/profile.js');
 
@@ -116,6 +117,85 @@ module.exports = function(app){
 			}
 		});
 	});
+
+
+
+	//id에 해당하는 profile을 요청본문을 토대로 업데이트한다.
+	app.put('/api/profile/:id/updown', authHandlers.ajaxIsLoggedIn ,function(req, res, next){
+		if(!req.params.id) return next('No Id');
+		var data = req.body; 
+		if(!data.target || !data.targetId || !data.upOrDown){
+			return res.json({success: false, type: "Others"});
+		}
+		//query = {_id:profileId, features: {$elemMatch:{_id: targetId, participants:{$ne: userId} } } }
+		var query = {
+			_id: req.params.id,
+		};
+		query[data.target] = {};
+		query[data.target]["$elemMatch"] = {_id: data.targetId, participants: {$ne: req.user._id}};
+		//query[data.target]["participants"] = { $ne : req.user._id };
+		console.log("query : ", query);
+		//{ {$inc: {features.$.up: 1}}, $push  {features.$.participants: req.user._id}}
+		var incNum;
+		if(data.upOrDown === "up") incNum = 1;
+		else if(data.upOrDown === "down") incNum = -1;
+		var updateData = {$inc: {}, $push:{}};
+		updateData.$inc[data.target+".$."+data.upOrDown] = incNum;
+		updateData.$push[data.target+".$.participants"] = req.user._id;
+		console.log("updateData : ", updateData);
+		/*Profile.update(query, updateData, function(err, response){
+			console.log(response);
+			if(err) return next(err);
+			if(response.nModified === 1){
+				res.json({
+					success: true,
+					id: req.params.id,
+				});
+			} else {
+				res.json({
+					success: false,
+					type: 'Already', //이게 꼭 이미 참여를 뜻하지 않는데...
+				});
+			}
+		});*/
+
+		var userUpdateObj = {$inc: {}};
+		userUpdateObj[data.upOrDown] = incNum;
+		Profile.find(req.params.id, function(err, profile){
+			if(!profile) return res.json({success: false, type:"Others"});
+			profile[data.target].map(function(element){
+				if(element._id.equals(data.targetId)){
+					var isAlready = element.participants.some(function(userId){
+						return userId.equals(req.user._id);
+					})
+					if(isAlready) return res.json({success: false, type: "Already"});
+					else return User.update(element.user, userUpdateObj ,function(err, response){
+						if(err) return next(err);
+						if(response.nModified === 1){
+							return res.json({success: true, id: req.params.id});
+						}else{
+							return res.json({success: true, type: "Others"});
+						}
+					})
+				}
+			})
+		})
+
+
+
+
+
+
+
+
+
+	});
+
+
+
+
+
+
 
 
 

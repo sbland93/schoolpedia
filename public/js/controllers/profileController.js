@@ -56,6 +56,8 @@ $(document).ready(function(){
 					id: self._id,
 					user: self.user,
 					feature: self.feature,
+					up: self.up,
+					down: self.down,
 					isMyPage: isMyPage,
 				};
 			},
@@ -71,6 +73,8 @@ $(document).ready(function(){
 				return {
 					id: self._id,
 					content: self.content,
+					up: self.up,
+					down: self.down,
 					isMyPage: isMyPage,
 				};
 			},
@@ -86,6 +90,8 @@ $(document).ready(function(){
 				return {
 					id: self._id,
 					user: self.user,
+					up: self.up,
+					down: self.down,
 					content: self.content,
 					isMyPage: isMyPage,
 				};
@@ -170,7 +176,8 @@ $(document).ready(function(){
 
 				makeDynamicTPL("#updateClassTPL", TPL.EPupdateClass, contextHere, profileTPLC.updateClass(profileId, response, schoolId));
 
-			})
+			});
+
 			//학교 추가버튼을 클릭시 학교 검색 폼 
 			$("#updateSchool").on('click',function(evt){
 				evt.preventDefault();
@@ -203,6 +210,41 @@ $(document).ready(function(){
 						alert("문제가 생긴것 같습니다!");
 					}
 				})
+			});
+
+			//TODO : 위와 마찬가지. 여기들어가면 안된다. 비동기 타이밍.
+			$(".profileUpDown").on('click', function(evt){
+				console.log("Click");
+				var self = $(this);
+				var upOrDown = self.attr("upOrDown");
+				var data = {
+					target: self.attr("target"),
+					targetId: self.attr("targetId"),
+					upOrDown: self.attr("upOrDown"),
+				};
+				upDownProfile(profileId , data).then(function(data){
+					console.log("data: ", data);
+					if(data.success){
+						if(upOrDown === "up"){
+							alert("의견(+1)이 반영되었어요");
+							var number = Number(self.html());
+							self.html("+"+(number+1));
+						}else if(upOrDown === "down"){
+							alert("의견(-1)이 반영되었어요");
+							var number = Number(self.html());
+							self.html(number-1);
+						}else{
+							alert("하는 과정사이에 문제가 발생했어요");	
+						}
+					}else{
+						if(data.type === "Login"){
+							alert("로그인이 필요한 서비스에요!");
+							location.href = "/login";
+						}else if(data.type=== "Already"){
+							alert("이미 의견이 반영되었어요!");	
+						}
+					}
+				});
 			});
 			
     	} else {

@@ -1,6 +1,8 @@
 <div class="score-structural score-column2-wideright search-listings post">
     <div class="score-right">
         <p style="z-index: 1;">{{ feature }}</p>
+        <button class="profileUpDown btn btn-sm" target="features" targetId="{{id}}" upOrDown="up">+{{up}}</button>
+        <button class="profileUpDown btn btn-sm" target="features" targetId="{{id}}" upOrDown="down">{{down}}</button>
         {{#if isMyPage}}
         <button class="manageProfile btn btn-sm btn-default" target="features" targetId="{{id}}">-</button>
         {{/if}}
