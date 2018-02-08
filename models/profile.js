@@ -62,36 +62,8 @@ profileSchema.path('bugName').validate(function (v) {
 }, 'The bugName should be length of 2');
 
 
-//profile의 content를 찾아 participants에 이미 있는지 확인하고, 없다면 저장하고 있다면 Already를 리턴한다.
-profileSchema.methods.verifiedUpDown = function(target, targetId, userId, upOrDown, cb){
-	var returnValue; //성공했는지, 실패했는지
-	var self = this;
-	return new Promise(function(resolve, reject){
-		if(self[target] || self[target].length){
-			self[target].map(function(realTarget){ //el가 features중 하나의 객체를 가리킨다.
-				if(realTarget._id == targetId){ //target의 배열중에 정확히 targetId를 찾아 (못찾을가능성은 없지만, 그래도 처리해야한다 TODO),
-					if(realTarget.participants || realTarget.participants.length){
-						var isAlready = realTarget.participants.some(function(_el){
-							return _el == userId;
-						})
-						if(isAlready){
-							reject({success: false, type: "Already"});
-						}else{ //participants에 없다면, participants에 넣고 UP/DOWN 시키고 저장한다.
-							realTarget.participants.unshift(userId);
-							if(upOrDown === "up") realTarget.up += 1;
-							else if(upOrDown === "down") realTarget.down -= 1;
-							else reject("Some Error Occur");
-							self.save(function(err){
-								if(err) return reject({success: false, type: "Others"});
-								resolve({success: true});
-							});
-						}				
-					}
-				}
-			});
-		}	
-	})	
-};
+
+
 
 var Profile = mongoose.model('Profile', profileSchema);
 module.exports = Profile;

@@ -25,6 +25,7 @@ var seedDev = function(){
 	p1.then(function(schools){
 
 
+		var defaultClass = {elementary: [100, 200, 300, 400, 500, 600], middle: [100, 200, 300], high: [100, 200, 300]};
 
 		//available한 school만 리스트를 새로 뽑음.
 		var availableSchools = schools.filter(function(el){
@@ -35,8 +36,8 @@ var seedDev = function(){
 			var randomInt = getRandomInt(availableSchools.length);
 			//하나만저장함, DOLATER, Class도 없음.
 			el.schools = [];
-	
-			el.schools.push({school : availableSchools[randomInt]._id, class: [101, 202, 303]});
+			var school = availableSchools[randomInt];
+			el.schools.push({school : school._id, class: defaultClass[school.category]});
 		});
 		//boardList에 school을 채워줌.
 		seedData.boardList.forEach(function(el){

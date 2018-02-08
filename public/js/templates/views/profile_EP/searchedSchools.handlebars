@@ -1,9 +1,8 @@
-
+<!--프로필페이지에서 학교추가후, 검색시에 나오는 Template. -->
 <ul class="schoolList">
 	{{#each searchedList}}
-		<!-- 열려있든, 안열려있든 공통의경우는 아래-->
-		<li>{{name}} {{location}}</li><button class="sendData btn btn-default btn-sm" schoolId={{id}}>확인</button></br>
-		<input class="inputName" type="hidden" name="school" value={{name}}>
+		<li>{{name}}{{location}}</li>
+		<button class="sendData btn btn-default btn-sm" schoolId={{id}} category="{{category}}" schoolName="{{name}}">확인</button></br>
 	{{/each}}
 </ul>
 

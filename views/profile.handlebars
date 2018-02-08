@@ -1,6 +1,6 @@
 <!--NameSpace: EP -->
 
-<div id="profileTemplate"></div>
+<div id="profileTPL"></div>
 {{#unless userInfo.profile}}
 	{{#isEquals userInfo.name profile.name}}
 	<button class="btn btn-lg btn-warning" id="takeProfile" userId={{userInfo.id}}>프로필 차지하기</button>
@@ -8,10 +8,10 @@
 {{/unless}}
 <div class="btn-group btn-group-justified" role="group" aria-label="...">
   <div class="btn-group" role="group">
-    <button id="updateBugName" class="btn btn-default buttonGroup">충호변경</button>
+    <button class="btn btn-default buttonGroup" id="updateBugName">충호변경</button>
   </div>
   <div class="btn-group" role="group">
-    <button id="updateSchool" class="btn btn-default buttonGroup">학교추가</button>
+    <button class="btn btn-default buttonGroup" id="addSchool">학교추가</button>
   </div>
   <div class="btn-group" role="group">
     <button class="btn btn-default buttonGroup" id="addReply">방명록</button>
@@ -33,16 +33,13 @@
 	<div id="updateClassTPL"></div>
 	<!-- 충호변경-->
 	<div id="updateBugNameTPL"></div>
-	<!-- 학교수정-->
-	<div id="updateSchoolTPL"></div>
+	<!-- 학교추가-->
+	<div id="addSchoolTPL"></div>
 
 	<!-- 방명록 기록칸-->
 	<div id="replies"></div>
 	
-
 	<!--방명록추가 버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
-	
-
 </div>
 
 

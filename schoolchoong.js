@@ -114,9 +114,6 @@ switch(app.get('env')){
 }
 
 
-
-
-
 //static 미들우어는 정적 자원을 담고 있는 하나 이상의 디렉터리를 지목해서
 //특별한 처리 없이 클라이언트에 전송 할 수 있도록 해준다.
 //여기선 퍼블릭 디렉토리 지정.
@@ -186,7 +183,8 @@ var handlebars = require('express-handlebars').create({
 			if(typeof(date) === "object"){
 				return moment(date).format('MM-DD HH:MM');
 			}
-		}
+		},
+
 	},
 });
 

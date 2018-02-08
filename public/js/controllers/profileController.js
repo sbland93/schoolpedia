@@ -112,11 +112,8 @@ $(document).ready(function(){
     	//profile을 ajax를 통해서 가져오는데 성공하면 홈으로 보내고, 실패시에(페이지 이동 및, 없는 데이터, 에러) 홈으로 보낸다.
     	if(response.success){
 
-	    	//기본정보(충호, 이름, 학교, 학급)들받는 프로필.
-			var profileTemplate = TPL.EPprofile;
-			$('#profileTemplate').html(profileTemplate({
-				profile : response,
-			}))
+	    	
+			makeDynamicTPL("#profileTPL", TPL.EPprofile, {profile: response}, profileTPLC.profile(profileId, response));				
 
 			console.log(response);
 
@@ -135,7 +132,6 @@ $(document).ready(function(){
 			//특징추가하기 버튼을 클릭시에 동적으로 특징 추가 폼을 추가한다.
 			$("#addFeature").on('click', function(evt){
 				evt.preventDefault();
-				var template = TPL.EPaddFeature;
 				//특징추가 위한 Form 검증.
 				makeDynamicTPL("#addFeatureTPL", TPL.EPaddFeature, context, profileTPLC.addFeature(profileId, response, tplAndContext));				
 			});
@@ -144,7 +140,6 @@ $(document).ready(function(){
 			//썰추가 버튼은 클릭시에 동적으로 썰 추가 폼을 생성한다.
 			$("#addStory").on('click', function(evt){
 				evt.preventDefault();
-				var template = TPL.EPaddStory;
 				//썰추가 위한 Form 검증.
 				makeDynamicTPL("#addStoryTPL", TPL.EPaddStory, context, profileTPLC.addStory(profileId, response, tplAndContext));
 			});
@@ -152,39 +147,19 @@ $(document).ready(function(){
 			//방명록추가 버튼은 클릭시에 동적으로 방명록 추가 폼을 생성한다.
 			$("#addReply").on('click', function(evt){
 				evt.preventDefault();
-				var template = TPL.EPaddReply;
 				//방명록추가 위한 Form 검증.
 				makeDynamicTPL("#addReplyTPL", TPL.EPaddReply, context, profileTPLC.addReply(profileId, response, tplAndContext));
 			});
 
-			//학교링크 클릭시 템플릿 생성.
-			$(".updateClass").on('click',function(evt){
-				evt.preventDefault();
-				var schoolId = $(this).attr("schoolId")
-
-				var schoolObj;
-				response.schools.map(function(el){
-					if(el.school._id === schoolId){
-						schoolObj = el;
-					}
-				})
-
-				var contextHere = {
-					schoolObj:schoolObj,
-					profileId:profileId,
-				};
-
-				makeDynamicTPL("#updateClassTPL", TPL.EPupdateClass, contextHere, profileTPLC.updateClass(profileId, response, schoolId));
-
-			});
 
 			//학교 추가버튼을 클릭시 학교 검색 폼 
-			$("#updateSchool").on('click',function(evt){
+			$("#addSchool").on('click',function(evt){
 				evt.preventDefault();
-				
-				makeDynamicTPL("#updateSchoolTPL", TPL.EPupdateSchool, context, profileTPLC.updateSchool(profileId, response));
+				//학교 추가를 위한 Form 검증.
+				makeDynamicTPL("#addSchoolTPL", TPL.EPaddSchool, context, profileTPLC.addSchool(profileId, response));
 			});
 
+			//충호를 수정하는 버튼을 클릭시 충호 수정 폼 생성.
 			$("#updateBugName").on('click',function(evt){
 				evt.preventDefault();
 				makeDynamicTPL("#updateBugNameTPL", TPL.EPupdateBugName, context, profileTPLC.updateBugName(profileId));
@@ -255,7 +230,7 @@ $(document).ready(function(){
 
     }).catch(function(err){
     	console.log(err);
-    	location.href = "/";
+//    	location.href = "/";
     });
 
 

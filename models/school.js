@@ -6,11 +6,18 @@ var schoolSchema = mongoose.Schema({
 	name: String,
 	location: String,
 	description: String,
-	category: { type: String, enum: ['elementarySchool', 'middleSchool', 'highSchool'] },
+	category: { type: String, enum: ['elementary', 'middle', 'high'] },
 	available: { type: Boolean, default: false },
 	up: { type: Number, default: 0 },
 	down: { type: Number, default: 0 },
 	updated_at: {type: Date, default: Date.now },
+});
+
+//schoolSchema를 통해 'save'할시에, category를 알아서 저장해주게끔. 나중엔 굳이 필요 없을듯.
+schoolSchema.pre('save', function(next){
+	var lengthOfLocation = this["location"].length;
+	this["location"] = this["location"].substring(0, lengthOfLocation-4);
+	next();
 });
 
 
