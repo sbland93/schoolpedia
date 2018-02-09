@@ -80,72 +80,49 @@ module.exports = function(){
 
 
 		//fields("school, fields, q")
-		//"school" => 'all', 'only' / "fields" => 'name', 'all', 'stories'
-		//"age" => 그대로활용  / "class" => schoolCategory를 통해서 활용
+		//"school" => 'all', 'only' / "fields" => 'only', 'all'
+		//"graduation" => 그대로활용  / "class" => schoolCategory를 통해서 활용
 		//"q" => searchString
-		//DOLATER 'stories'
+		//TODO: ajax api/로 바꾸자.
 		searchProfiles: function(req, res, next){
 			console.log('req.query From searchProfiles', req.query);
 
 			var query = req.query
-			var stringQ = query.q;
-			var data1 = {}, data2 = {}, data3 = {}, data4 = {}, queryObject;
+			var searchString = query.q;
+			var data1 = {}, data2 = {}, data3 = {}, queryObject;
 
-			//DOLATER !School
-			var schoolPromise = new Promise(function(resolve, reject){
-				School.findById(query.schoolId, function(err, school){
-					if(err) reject(err);
-					resolve(school);
-				});
-			});
-
-			if(stringQ !== ""){
+			//이름검색(only) / 본문포함(all)에 따라, data1생성.
+			if(searchString !== ""){
 				if(query.fields === "only"){
-					data1 = {"name" : new RegExp(stringQ)};
+					data1 = {"name" : new RegExp(searchString)};
 				}else if(query.fields === "all"){
-					data1 = {$or: [{"name" : new RegExp(stringQ)}, {'stories.content' : new RegExp(stringQ)}]};
+					data1 = {$or: [{"name" : new RegExp(searchString)}, {'stories.content' : new RegExp(searchString)}]};
 				}
 			}
 
-			if(query.age !== ""){
-				data2 = {"age" : query.age};
+			//graduation이 없으면 따로 조건을 안주면 되는것.
+			if(query.graduation !== ""){
+				data2 = {"graduation" : query.graduation};
 			}
 
-			schoolPromise.then(function(school){
-				if(!school){
-					res.locals.message404 = '잘못된 주소이거나, 페이지가 이동했을거에요ㅠㅠ';
-					return next();
-				}
-
-				if(query.school === "only"){
+			//학교내 검색(only) / 전체학교에서(all) 이면 따로 학교검색조건을 주지 않으면 된다.
+			if(query.school !== ""){
+				if(query.school === "only"){ //해당학교내 검색이면서,
 					data3 = {"schools.school" : school._id};
-				}
-
-				//school이 all일때랑 all이아닐때랑 class검색구별해야하는거 아닌가?
-				if(query.classNum !== ""){
-					data4 = {"schools.class": query.classNum}
-				}
-
-				queryObject = {$and : [data1, data2, data3, data4]}
-
-				Profile.find(queryObject, function(err, profiles){
-					var context;
-					if(!profiles.length){
-						context = {
-							empty: true,
-							schoolInfo: schoolViewModel(school),
-						}
-					}else{
-						context = {
-							profileList : profiles.map(profileViewModel),
-							schoolInfo : schoolViewModel(school),
-						}
+					//학급 검색칸에 학급이 적혀있다면 (전체학교검색이라면 학급검색을 무시)
+					if(query.classNum !== ""){
+						data3["schools.class"] = query.classNum;
 					}
-					res.render('searchedProfiles', context);
-				});
+				}
+			}
+			//queryObject를 생성하고.
+			queryObject = {$and : [data1, data2, data3]};
+			//검색후에 json응답.
+			Profile.find(queryObject, function(err, profiles){
+				if(err) return res.json({success: false, type: "Others"});
+				return res.json({success: true, profileList: profiles});
 			});
 		}
-
 
 	}
 

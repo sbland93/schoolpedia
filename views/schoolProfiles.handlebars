@@ -16,7 +16,7 @@
 </div>
 <!--프로필검색 form -->
 <div class="col-md-8">
-	<form class="form-horizontal searchBoardForm" id="searchBoardForm" role="form" action="api/profile/search" method="GET">
+	<form class="form-horizontal searchProfileForm" id="searchBoardForm" role="form" action="api/profile/search" method="GET">
 		<!-- DOLATER 학교내검색 변경  -->
 		<input type="hidden" name="schoolId" value="{{schoolInfo.id}}">
 		
@@ -27,7 +27,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="fields" class="col-md-3 control-label">이름</label>
+			<label for="fields" class="col-md-3 control-label">검색범위</label>
 			<input type="radio" name="fields" value="only" id="fields" checked> 이름
 			<input type="radio" name="fields" value="all" id="fields"> 본문포함(일화속 친구 포함)
 		</div>
@@ -35,14 +35,14 @@
 		<div class="form-group">
 			<label for="searchField" class="col-md-3 control-label">검색내용</label>
 			<div class="col-md-9">
-				<input type="text" class="form-control" name="q" id="searchField" placeholder="검색...">
+				<input type="text" class="form-control" name="q" id="searchField" placeholder="검색..." required="required">
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label for="graduation" class="col-md-3 control-label">졸업년도</label>
+			<label for="fieldGraduation" class="col-md-3 control-label">졸업년도</label>
 			<div class="col-md-6">
-				<input type="text" class="form-control" name="graduation" id="graduation" placeholder="예) 1992, 1988">
+				<input type="text" class="form-control" name="graduation" id="fieldGraduation" placeholder="예) 1992, 1988">
 			</div>
 		</div>
 
@@ -63,3 +63,8 @@
 	</form>
 </div>
 
+{{#section 'jquery'}}
+	<script type="text/javascript" src="/js/api/profile.js"></script>
+	<script type="text/javascript" src="/js/controllers/schoolProfileController.js"></script>
+
+{{/section}}

@@ -52,6 +52,49 @@ module.exports = function(app){
 		}
 	})
 
+	app.post('/api/profile/search', function(req, res, next){
+		console.log('req.body From searchProfiles', req.body);
+
+		var query = req.body
+		var searchString = query.q;
+		var data1 = {}, data2 = {}, data3 = {}, queryObject;
+
+		//이름검색(only) / 본문포함(all)에 따라, data1생성.
+		if(searchString !== ""){
+			if(query.fields === "only"){
+				data1 = {"name" : new RegExp(searchString)};
+			}else if(query.fields === "all"){
+				data1 = {$or: [{"name" : new RegExp(searchString)}, {'stories.content' : new RegExp(searchString)}]};
+			}
+		}
+
+		//graduation이 없으면 따로 조건을 안주면 되는것.
+		if(query.graduation !== ""){
+			data2 = {"graduation" : query.graduation};
+		}
+
+		//학교내 검색(only) / 전체학교에서(all) 이면 따로 학교검색조건을 주지 않으면 된다.
+		if(query.school !== ""){
+			if(query.school === "only"){ //해당학교내 검색이면서,
+				data3 = {"schools.school" : school._id};
+				//학급 검색칸에 학급이 적혀있다면 (전체학교검색이라면 학급검색을 무시)
+				if(query.classNum !== ""){
+					data3["schools.class"] = query.classNum;
+				}
+			}
+		}
+		//queryObject를 생성하고.
+		queryObject = {$and : [data1, data2, data3]};
+		//검색후에 json응답.
+		Profile.find(queryObject, function(err, profiles){
+			if(err) return res.json({success: false, type: "Others"});
+			return res.json({success: true, profileList: profiles});
+		});
+		
+	});
+
+
+
 
 	//해당 id의 profile을 available상태로 만들고 응답은 success를 담아준다.
 	app.get('/api/profile/:id', function(req, res, next){
@@ -126,7 +169,6 @@ module.exports = function(app){
 	});
 
 
-
 	//id에 해당하는 profile을 요청본문을 토대로 업데이트한다.
 	app.put('/api/profile/:id/updown', authHandlers.ajaxIsLoggedIn ,function(req, res, next){
 		if(!req.params.id) return next('No Id');
@@ -186,82 +228,7 @@ module.exports = function(app){
 				}
 			})
 		});
-
-
-		app.get('/api/profile/search', function(req, res, next){//searchProfile에서 검색시에 세분화한 검색.
-
-			console.log('req.query From searchProfiles', req.query);
-
-			var query = req.query
-			var stringQ = query.q;
-			var data1 = {}, data2 = {}, data3 = {}, data4 = {}, data5 = {}, queryObject;
-
-			if(query.school == "only"){
-
-			}
-
-			if(stringQ !== ""){
-				if(query.fields === "only"){
-					data2 = {"name" : new RegExp(stringQ)};
-				}else if(query.fields === "all"){
-					data2 = {$or: [{"name" : new RegExp(stringQ)}, {'stories.content' : new RegExp(stringQ)}]};
-				}
-			}
-
-			if(query.graduation !== ""){
-				data3 = {"graduation" : query.graduation};
-			}
-
-			schoolPromise.then(function(school){
-				if(!school){
-					res.locals.message404 = '잘못된 주소이거나, 페이지가 이동했을거에요ㅠㅠ';
-					return next();
-				}
-
-				if(query.school === "only"){
-					data4 = {"schools.school" : school._id};
-				}
-
-				//school이 all일때랑 all이아닐때랑 class검색구별해야하는거 아닌가?
-				if(query.classNum !== ""){
-					data5 = {"schools.class": query.classNum}
-				}
-
-				queryObject = {$and : [data1, data2, data3, data4]}
-
-				Profile.find(queryObject, function(err, profiles){
-					var context;
-					if(!profiles.length){
-						context = {
-							empty: true,
-							schoolInfo: schoolViewModel(school),
-						}
-					}else{
-						context = {
-							profileList : profiles.map(profileViewModel),
-							schoolInfo : schoolViewModel(school),
-						}
-					}
-					res.render('searchedProfiles', context);
-				});
-			});
-		})
-
-
-
-
-
-
-
-
-
 	});
-
-
-
-
-
-
 
 
 

@@ -34,7 +34,7 @@ $(document).ready(function(){
 		var takeConfirm = confirm("정말 이 페이지의 주인공이 맞나요?");
 
 		if(takeConfirm){
-			updateUser($(self).attr("userId"), { profile: profileId }).then(function(data){
+			updateUser({ profile: profileId }).then(function(data){
 				if(data.success){
 					alert("개인페이지를 획득하셨습니다!");
 					location.reload();
