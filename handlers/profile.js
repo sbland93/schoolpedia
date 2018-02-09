@@ -79,10 +79,10 @@ module.exports = function(){
 		},
 
 
-		//fields("school, fields, q")
 		//"school" => 'all', 'only' / "fields" => 'only', 'all'
 		//"graduation" => 그대로활용  / "class" => schoolCategory를 통해서 활용
 		//"q" => searchString
+		//scholId에는 해당학교 id가 적혀있음.
 		//TODO: ajax api/로 바꾸자.
 		searchProfiles: function(req, res, next){
 			console.log('req.query From searchProfiles', req.query);
