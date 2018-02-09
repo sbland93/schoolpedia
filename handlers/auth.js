@@ -1,4 +1,5 @@
 var passport = require('passport');
+var userViewModel = require('../viewModels/user.js');
 
 module.exports = function(){
 	return {
@@ -42,7 +43,16 @@ module.exports = function(){
 			} else {
 				res.json({success: false, type:"Login"});
 			}
-		} 
+		} ,
+
+
+		ajaxAuth : function(req, res, next){
+			if(req.isAuthenticated()){
+				return res.json({isLoggedIn: true, userInfo : userViewModel(req.user)});
+			} else {
+				return res.json({isLoggedIn: false});
+			}
+		}
 
 
 	}

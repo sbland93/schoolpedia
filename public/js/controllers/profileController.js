@@ -1,9 +1,17 @@
 $(document).ready(function(){
 	
 
-	//profileId와, isMyPage(마이페이지이면 "true" 아니면 attr가져올게 없으므로 undefined);
-	var profileId = $("#defaultVal").attr("profileId");
-	var isMyPage = $("#defaultVal").attr("isMyPage");
+	//profileId와, isMyPage(마이페이지이면 "true" 아니면 attr가져올게 없으므로 undefined)
+	//isLoggedIn(로그인중이면 "true" 아니면 attr가져올게 없으므로 undefined)
+	var isLoggedIn, userInfo;
+	ajaxAuth().then(function(data){
+		isLoggedIn = data.isLoggedIn;
+		userInfo = data.userInfo;
+	});
+
+	var defaultInput = $("#defaultVal");
+	var profileId = defaultInput.attr("profileId");
+	var isMyPage = defaultInput.attr("isMyPage");
 	console.log("isMyPage:", isMyPage);
 	
 	$("#removeProfile").on('click', function(evt){
@@ -54,8 +62,7 @@ $(document).ready(function(){
 				var self = A;
 				return {
 					id: self._id,
-					user: self.user,
-					feature: self.feature,
+					content: self.content,
 					up: self.up,
 					down: self.down,
 					isMyPage: isMyPage,
@@ -89,7 +96,7 @@ $(document).ready(function(){
 				var self = A;
 				return {
 					id: self._id,
-					user: self.user,
+					userInfo: self.userInfo,
 					up: self.up,
 					down: self.down,
 					content: self.content,
@@ -121,9 +128,11 @@ $(document).ready(function(){
 			var featureData = $(response.features);
 			var replyData = $(response.replies);
 			//pagination을 위해서 makePosts함수를 사용해서 생성. 
-			makePosts(storyData, tplAndContext.stories);
-			makePosts(featureData, tplAndContext.features);
-			makePosts(replyData, tplAndContext.replies);
+			//Post가 생성이 완료된후에, 이벤트 등록을 해야하므로, makePost자체는 Promise로 구성.
+			var p1 = makePosts(storyData, tplAndContext.stories);
+			var p2 = makePosts(featureData, tplAndContext.features);
+			var p3 = makePosts(replyData, tplAndContext.replies);
+
 
 			var context = {
 				profileId : profileId
@@ -133,6 +142,10 @@ $(document).ready(function(){
 			$("#addFeature").on('click', function(evt){
 				evt.preventDefault();
 				//특징추가 위한 Form 검증.
+				if(!isLoggedIn){
+					alert("로그인이 필요한 서비스에요! 로그인 부탁드릴게요");
+					return location.href = "/login";
+				}
 				makeDynamicTPL("#addFeatureTPL", TPL.EPaddFeature, context, profileTPLC.addFeature(profileId, response, tplAndContext));				
 			});
 
@@ -141,6 +154,10 @@ $(document).ready(function(){
 			$("#addStory").on('click', function(evt){
 				evt.preventDefault();
 				//썰추가 위한 Form 검증.
+				if(!isLoggedIn){
+					alert("로그인이 필요한 서비스에요! 로그인 부탁드릴게요");
+					return location.href = "/login";
+				}
 				makeDynamicTPL("#addStoryTPL", TPL.EPaddStory, context, profileTPLC.addStory(profileId, response, tplAndContext));
 			});
 
@@ -148,7 +165,11 @@ $(document).ready(function(){
 			$("#addReply").on('click', function(evt){
 				evt.preventDefault();
 				//방명록추가 위한 Form 검증.
-				makeDynamicTPL("#addReplyTPL", TPL.EPaddReply, context, profileTPLC.addReply(profileId, response, tplAndContext));
+				if(!isLoggedIn){
+					alert("로그인이 필요한 서비스에요! 로그인 부탁드릴게요");
+					return location.href = "/login";
+				}
+				makeDynamicTPL("#addReplyTPL", TPL.EPaddReply, context, profileTPLC.addReply(profileId, response, tplAndContext, userInfo));
 			});
 
 
@@ -156,71 +177,23 @@ $(document).ready(function(){
 			$("#addSchool").on('click',function(evt){
 				evt.preventDefault();
 				//학교 추가를 위한 Form 검증.
+				if(!isLoggedIn){
+					alert("로그인이 필요한 서비스에요! 로그인 부탁드릴게요");
+					return location.href = "/login";
+				}
 				makeDynamicTPL("#addSchoolTPL", TPL.EPaddSchool, context, profileTPLC.addSchool(profileId, response));
 			});
 
 			//충호를 수정하는 버튼을 클릭시 충호 수정 폼 생성.
 			$("#updateBugName").on('click',function(evt){
 				evt.preventDefault();
+				if(!isLoggedIn){
+					alert("로그인이 필요한 서비스에요! 로그인 부탁드릴게요");
+					return location.href = "/login";
+				}
 				makeDynamicTPL("#updateBugNameTPL", TPL.EPupdateBugName, context, profileTPLC.updateBugName(profileId));
 			});
 
-			//TODO : 이게 여기들어가면 안된다. 비동기 타이밍을잘 맞춰서 위치를 바꾸자
-			$(".manageProfile").on('click', function(evt){
-				console.log("Click!");
-				var self = $(this);
-				var target = self.attr("target");
-				var targetId = self.attr("targetId");
-				var data = { $pull: {} };
-				data.$pull[target] = { _id: targetId };
-				console.log("data: ", data);
-				updateProfile(profileId, data).then(function(data){
-					if(data.success){
-						alert("삭제했습니다!");
-					}else{
-						if(data.type === "Login"){
-							alert("로그인이 필요한 서비스입니다.");
-							return location.href = '/login';
-						}
-						alert("문제가 생긴것 같습니다!");
-					}
-				})
-			});
-
-			//TODO : 위와 마찬가지. 여기들어가면 안된다. 비동기 타이밍.
-			$(".profileUpDown").on('click', function(evt){
-				console.log("Click");
-				var self = $(this);
-				var upOrDown = self.attr("upOrDown");
-				var data = {
-					target: self.attr("target"),
-					targetId: self.attr("targetId"),
-					upOrDown: self.attr("upOrDown"),
-				};
-				upDownProfile(profileId , data).then(function(data){
-					console.log("data: ", data);
-					if(data.success){
-						if(upOrDown === "up"){
-							alert("의견(+1)이 반영되었어요");
-							var number = Number(self.html());
-							self.html("+"+(number+1));
-						}else if(upOrDown === "down"){
-							alert("의견(-1)이 반영되었어요");
-							var number = Number(self.html());
-							self.html(number-1);
-						}else{
-							alert("하는 과정사이에 문제가 발생했어요");	
-						}
-					}else{
-						if(data.type === "Login"){
-							alert("로그인이 필요한 서비스에요!");
-							location.href = "/login";
-						}else if(data.type=== "Already"){
-							alert("이미 의견이 반영되었어요!");	
-						}
-					}
-				});
-			});
 			
     	} else {
     		//페이지 이동시.
@@ -230,7 +203,6 @@ $(document).ready(function(){
 
     }).catch(function(err){
     	console.log(err);
-//    	location.href = "/";
     });
 
 

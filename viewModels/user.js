@@ -9,6 +9,6 @@ module.exports = function(user){
 		success: true,
 		id: user._id,
 		name: user.name,
-		kEmail : user.kakaoEamil,
+		anonym: user.anonym,
 	};
 };

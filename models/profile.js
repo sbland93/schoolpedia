@@ -4,8 +4,8 @@ var User = require('./user.js')
 
 //특징 Schema
 var featureSchema = mongoose.Schema({
-	feature: String,
 	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+	content: String,
 	up: { type: Number, default: 0 },
 	down: { type: Number, default: 0 },
 	participants: {type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}], default: []}, //추천, 반대 누른 유저(중복방지용)

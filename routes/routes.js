@@ -34,6 +34,8 @@ module.exports = function(app){
 
 	app.get('/logout', authHandlers.logout);
 
+	app.get('/authInfo', authHandlers.ajaxAuth);
+
 	//:id에 해당하는 school의 Board, Profile을 5개씩 리턴한다.
 	//DOLATER
 	app.get('/school/:id', schoolHandlers.school);

@@ -121,7 +121,7 @@ this["TPL"]["EPfeatures"] = Handlebars.template({"1":function(container,depth0,h
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "<div class=\"score-structural score-column2-wideright search-listings post\">\r\n    <div class=\"score-right\">\r\n        <p style=\"z-index: 1;\">"
-    + alias4(((helper = (helper = helpers.feature || (depth0 != null ? depth0.feature : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"feature","hash":{},"data":data}) : helper)))
+    + alias4(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"content","hash":{},"data":data}) : helper)))
     + "</p>\r\n        <button class=\"profileUpDown btn btn-sm\" target=\"features\" targetId=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" upOrDown=\"up\">+"
@@ -184,7 +184,7 @@ this["TPL"]["EPprofile"] = Handlebars.template({"1":function(container,depth0,he
 
   return "					<a class=\"updateClass\" schoolId="
     + container.escapeExpression(container.lambda(((stack1 = (depths[1] != null ? depths[1].school : depths[1])) != null ? stack1._id : stack1), depth0))
-    + ">???</a>\r\n";
+    + ">?</a>\r\n";
 },"5":function(container,depth0,helpers,partials,data) {
     return "					"
     + container.escapeExpression(container.lambda(depth0, depth0))
@@ -210,22 +210,22 @@ this["TPL"]["EPreplies"] = Handlebars.template({"1":function(container,depth0,he
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"id","hash":{},"data":data}) : helper)))
     + "\">-</button>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+    var stack1, helper, alias1=container.escapeExpression, alias2=depth0 != null ? depth0 : (container.nullContext || {}), alias3=helpers.helperMissing, alias4="function";
 
   return "<div class=\"score-structural score-column2-wideright search-listings post\">\r\n    <div class=\"score-right\">\r\n        <h5 style=\"z-index: 1;\">\r\n            <a href=\"#\"> "
-    + alias4(((helper = (helper = helpers.user || (depth0 != null ? depth0.user : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"user","hash":{},"data":data}) : helper)))
+    + alias1(container.lambda(((stack1 = (depth0 != null ? depth0.userInfo : depth0)) != null ? stack1.name : stack1), depth0))
     + "</a>\r\n        </h5>\r\n        <p style=\"z-index: 1;\">"
-    + alias4(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"content","hash":{},"data":data}) : helper)))
+    + alias1(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"content","hash":{},"data":data}) : helper)))
     + "</p>\r\n        <button class=\"profileUpDown btn btn-sm\" target=\"replies\" targetId=\""
-    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + alias1(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" upOrDown=\"up\">+"
-    + alias4(((helper = (helper = helpers.up || (depth0 != null ? depth0.up : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"up","hash":{},"data":data}) : helper)))
+    + alias1(((helper = (helper = helpers.up || (depth0 != null ? depth0.up : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"up","hash":{},"data":data}) : helper)))
     + "</button>\r\n        <button class=\"profileUpDown btn btn-sm\" target=\"replies\" targetId=\""
-    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + alias1(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" upOrDown=\"down\">"
-    + alias4(((helper = (helper = helpers.down || (depth0 != null ? depth0.down : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"down","hash":{},"data":data}) : helper)))
+    + alias1(((helper = (helper = helpers.down || (depth0 != null ? depth0.down : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"down","hash":{},"data":data}) : helper)))
     + "</button>\r\n"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isMyPage : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias2,(depth0 != null ? depth0.isMyPage : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    </div>\r\n</div>\r\n<hr>";
 },"useData":true});
 

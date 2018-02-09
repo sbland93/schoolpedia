@@ -155,12 +155,12 @@ module.exports = {
 				{content: '방명록7', up: 8, down: -2},
 			],
 			features: [
-				{feature: '특징1', up: 7, down: -3},
-				{feature: '특징2', up: 6, down: -4},
-				{feature: '특징3', up: 5, down: -5},
-				{feature: '특징4', up: 4, down: -6},
-				{feature: '특징5', up: 3, down: -1},
-				{feature: '특징6', up: 2, down: -2},
+				{content: '특징1', up: 7, down: -3},
+				{content: '특징2', up: 6, down: -4},
+				{content: '특징3', up: 5, down: -5},
+				{content: '특징4', up: 4, down: -6},
+				{content: '특징5', up: 3, down: -1},
+				{content: '특징6', up: 2, down: -2},
 			]
 		}
 	],

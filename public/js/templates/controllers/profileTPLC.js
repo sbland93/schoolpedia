@@ -53,12 +53,12 @@ var profileTPLC = {
 				submitHandler: function(form, evt) {
 					evt.preventDefault();
 					var newFeature = $('#fieldFeature').val();
-					updateProfile(profileId, {$push: {features : { feature: newFeature }}})
+					updateProfile(profileId, {options: "contents", target:"features", body: newFeature})
 					.then(function(data){
 						if(data.success){
 							alert("추가되었습니다");
 							$("#addFeatureTPL").html("");
-							response.features.unshift({ feature: newFeature });
+							response.features.unshift({ feature: newFeature, up: 0, down: 0 });
 							var featureData = $(response.features);
 							makePosts(featureData, tplAndContext.features);
 						} else{
@@ -98,12 +98,12 @@ var profileTPLC = {
 				submitHandler: function(form, evt) {
 					evt.preventDefault();
 					var newStory = $('#fieldStory').val();
-					updateProfile(profileId, {$push: {stories : { content: newStory }}})
+					updateProfile(profileId, {options: "contents", target:"stories", body: newStory})
 					.then(function(data){
 						if(data.success){
 							alert("추가되었습니다");
 							$("#addStoryTPL").html("");
-							response.stories.unshift({ content: newStory });
+							response.stories.unshift({ content: newStory, up: 0, down: 0 });
 							var sotryData = $(response.stories);
 							makePosts(sotryData, tplAndContext.stories);
 						} else{
@@ -121,7 +121,7 @@ var profileTPLC = {
 	},
 
 
-	addReply : function(profileId, response, tplAndContext){
+	addReply : function(profileId, response, tplAndContext, userInfo){
 		
 		return function(){
 		
@@ -143,12 +143,12 @@ var profileTPLC = {
 				submitHandler: function(form, evt) {
 					evt.preventDefault();
 					var newReply = $('#fieldReply').val();
-					updateProfile(profileId, {$push: {replies : { content: newReply }}})
+					updateProfile(profileId, {options: "contents", target:"replies", body: newReply})
 					.then(function(data){
 						if(data.success){
 							alert("추가되었습니다");
 							$("#addReplyTPL").html("");
-							response.replies.unshift({ content: newReply });
+							response.replies.unshift({ content: newReply, userInfo: userInfo, up:0, down:0 });//생성된 그것의 id를 가져올수 있나..?
 							var replyData = $(response.replies);
 							makePosts(replyData, tplAndContext.replies);
 						} else{
