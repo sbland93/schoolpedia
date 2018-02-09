@@ -114,6 +114,6 @@ var searchProfiles = function(data){
 			fail: function(rtnData){
 				reject(rtnData);
 			},
-		})
-	})
+		});
+	});
 }
