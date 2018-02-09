@@ -20,10 +20,12 @@ module.exports = function(app){
 	//home 페이지 라우팅.
 	//schoolList가 필요.
 	app.get('/', homeHandlers.home);
-
+	//사용자 관리 페이지 라우팅.
+	app.get('/myControll/:id',homeHandlers.myControllpage);
 	//login 페이지 라우팅.
 	app.get('/login',authHandlers.login);
-	
+	//newsfeed 페이지 라우팅.
+	app.get('/newsFeed/:id',homeHandlers.newsFeed);
 	//회원가입 페이지 라우팅.
 	app.get('/register', authHandlers.register);
 

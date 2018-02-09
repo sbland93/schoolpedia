@@ -24,6 +24,7 @@ module.exports = function(passport){
 	},//done(에러인자, 성공시 user인자)
 	function(req, email, password, done){
 		//Email을 가지고, 유저를 찾기시작.
+		console.log(req.body);
 		console.log("HERE!!!!!!");		
 		User.findOne({'email': email}, function(err, user){
 			if(err) return done(err);
@@ -65,12 +66,22 @@ module.exports = function(passport){
 						return done("error");
 					}
 					var newUser = new User();
+					if(!(Array.isArray(req.body.schools))){
+						var schoolArray = [];
+						schoolArray[0]=req.body.schools;
+						newUser.schools = schoolArray;
+						
+					}
+					else{
+						newUser.schools = req.body.schools;
+					}
 					newUser.name = req.body.name;
 					newUser.email = email;
 					newUser.password = newUser.generateHash(password);
 					newUser.kakaoEmail = req.body.kakaoEmail;
 					newUser.anonym = newUser.generateAnonym(req.body.kakaoEmail);
-
+					newUser.graduation = req.body.graduation;
+					
 					newUser.save(function(err){
 						if(err) throw err;
 						return done(null, newUser);

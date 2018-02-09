@@ -48,9 +48,9 @@ $(document).ready(function(){
 			var replynode = document.createTextNode(newReply);
 			node.appendChild(replynode);                              
 			updateBoard(boardId,{$push:{replies:{content:newReply}}}).then(function(data){
-				console.log('hi');
+				
 				if (data.success){
-					console.log('hi');
+					
 					console.log(newReply);
 					document.getElementById("replyList").appendChild(node);
 

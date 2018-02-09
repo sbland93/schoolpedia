@@ -21,13 +21,15 @@ module.exports = {
 			email: "rltmqj@gmail.com",
 			password: bcrypt.hashSync("123098", bcrypt.genSaltSync(8), null),
 			anonym: bcrypt.hashSync(this.kakaoEmail, bcrypt.genSaltSync(8), null).substring(20, 28),
+			graduation:"1972",
 		},
 		{
 			name: "한용희",
 			kakaoEmail: "hyh4829@naver.com",
-			email: "hyh4827@naver.com",
+			email: "hyh4829@naver.com",
 			password: bcrypt.hashSync("930729", bcrypt.genSaltSync(8), null),
 			anonym: bcrypt.hashSync(this.kakaoEmail, bcrypt.genSaltSync(8), null).substring(20, 28),
+			graduation:"2012",
 		}
 	],
 
