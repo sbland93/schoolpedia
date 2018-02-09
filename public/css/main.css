@@ -41,3 +41,7 @@ input[type="password"] {font:small-caption;}
 input{
 	color:black;
 }
+.schoolList > li{
+	display: inline;
+	
+}
