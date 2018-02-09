@@ -1,0 +1,62 @@
+<header>사용자관리 페이지</header>
+
+<form class="form-horizontal myControllPageForm" role="form" action="/api/user/{{users.id}}" method="PUT">
+	<div class="form-group">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<label>비밀번호 변경</label>
+		</div>
+		
+		<div class="col-xs-9 col-sm-6 col-md-5">
+			<input type="text" class="form-control" name="password" id="updatePassword">
+		</div>
+		
+	</div>
+	<div class="form-group">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<label>고등학교 졸업(예정)년도</label>
+		</div>
+		
+		
+		<div class="col-xs-9 col-sm-6 col-md-5">
+			<select class="form-control" name="graduation" id="graduation">
+				<option value="0">{{users.graduation}}</option>
+				{{#iterateFromTo 1990 2020}}
+					<option value="{{index}}">{{index}}</option>
+				{{/iterateFromTo}}
+			</select>
+		</div>
+	</div>
+	<div>
+		<p>업:{{users.up}}</p>
+		<p>다운:{{users.down}}</p>
+	</div>
+	<div>
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<label>내가 쓴 글</label>
+			<div>
+				{{#each users.boards}}
+					{{title}}
+					{{content}}
+				{{/each}}
+			
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="col-xs-12 col-md-12">	
+		<button type="submit" class="pull-right btn btn-default btn-sm buttonGroup">수정</button>
+		
+	</div>
+	<input class="userId" type="hidden" name="userId" value={{users.id}}>
+</form>
+
+{{#section 'head'}}
+	<script type="text/javascript" src="/js/templates/templates.js"></script>
+	
+{{/section}}
+
+{{#section 'jquery'}}
+	<script type="text/javascript" src="/js/api/user.js"></script>
+	<script src="/js/controllers/myControllPageController.js"></script>
+{{/section}}
