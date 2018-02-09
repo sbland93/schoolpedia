@@ -7,7 +7,12 @@
 
 <!--학교 검색  -->
 <div class="col-md-4">
-	
+	{{#each posts}}
+	yes! here!
+	{{else}}
+	아직회원님은 출신학교 정보가 저장되어 있지 않아, 관심글들을 추천해드리기 어려워요.
+	<button class="btn btn-sm btn-default" id="addSchool">학교추가하기</button>
+	{{/each}}
 </div>
 <div class="col-md-4">
 	<form class="searchSchoolForm" action="/api/school" id="searchSchools">
@@ -29,14 +34,6 @@
 				<hr>
 				
 				<h2>공지사항</h2>
-					<!--
-					{{#each infoList}}
-					<ul>
-						<li><a href="/info/{{id}}">{{title}}</a></li>
-					</ul>
-					{{/each}}
-					-->
-				
 				
 			</div>
 			
@@ -57,20 +54,10 @@
 	<div id="searchedProfileListTPL"></div>
 </div>	
 
-<!--
-<div class="col-md-4 infoDivision">
-	<h2>공지사항</h2>
-	{{#each infoList}}
-	<ul>
-		<li><a href="/info/{{id}}">{{title}}</a></li>
-	</ul>
-	{{/each}}
-</div>-->
 
-<!--
-<script type="text/javascript" id="idea">
-	"{{{this}}}"
-</script>> -->
+
+
+
 
 {{#section 'head'}}
 	<script type="text/javascript" src="/js/templates/templates.js"></script>

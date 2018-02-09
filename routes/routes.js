@@ -21,11 +21,11 @@ module.exports = function(app){
 	//schoolList가 필요.
 	app.get('/', homeHandlers.home);
 	//사용자 관리 페이지 라우팅.
-	app.get('/myControll/:id',homeHandlers.myControllpage);
+	app.get('/myControll', authHandlers.isLoggedIn, homeHandlers.myControll);
 	//login 페이지 라우팅.
-	app.get('/login',authHandlers.login);
+	app.get('/login', authHandlers.login);
 	//newsfeed 페이지 라우팅.
-	app.get('/newsFeed/:id',homeHandlers.newsFeed);
+	app.get('/newsFeed',authHandlers.isLoggedIn, homeHandlers.newsFeed);
 	//회원가입 페이지 라우팅.
 	app.get('/register', authHandlers.register);
 

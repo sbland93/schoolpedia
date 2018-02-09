@@ -15,12 +15,12 @@ module.exports = function(){
 		},
 
 		localSignup : passport.authenticate('local', {
-			successRedirect: '/',
+			successRedirect: '/newsFeed',
 			failureRedirect: '/register',
 		}),
 
 		localLogin : passport.authenticate('local', {
-			successRedirect: '/',
+			successRedirect: '/newsFeed',
 			failureRedirect: '/login',
 		}),
 

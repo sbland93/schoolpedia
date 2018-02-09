@@ -1,6 +1,6 @@
 <header>사용자관리 페이지</header>
 
-<form class="form-horizontal myControllPageForm" role="form" action="/api/user/{{users.id}}" method="PUT">
+<form class="form-horizontal myControllPageForm" role="form" action="/api/user/{{user.id}}" method="PUT">
 	<div class="form-group">
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<label>비밀번호 변경</label>
@@ -19,7 +19,7 @@
 		
 		<div class="col-xs-9 col-sm-6 col-md-5">
 			<select class="form-control" name="graduation" id="graduation">
-				<option value="0">{{users.graduation}}</option>
+				<option value="0">{{user.graduation}}</option>
 				{{#iterateFromTo 1990 2020}}
 					<option value="{{index}}">{{index}}</option>
 				{{/iterateFromTo}}
@@ -27,19 +27,17 @@
 		</div>
 	</div>
 	<div>
-		<p>업:{{users.up}}</p>
-		<p>다운:{{users.down}}</p>
+		<p>업:{{user.up}}</p>
+		<p>다운:{{user.down}}</p>
 	</div>
 	<div>
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<label>내가 쓴 글</label>
 			<div>
-				{{#each users.boards}}
+				{{#each user.boards}}
 					{{title}}
 					{{content}}
 				{{/each}}
-			
-				
 			</div>
 		</div>
 		
@@ -48,7 +46,7 @@
 		<button type="submit" class="pull-right btn btn-default btn-sm buttonGroup">수정</button>
 		
 	</div>
-	<input class="userId" type="hidden" name="userId" value={{users.id}}>
+	<input class="userId" type="hidden" name="userId" value={{user.id}}>
 </form>
 
 {{#section 'head'}}

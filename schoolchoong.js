@@ -245,6 +245,7 @@ app.use(function(req, res, next){
 			id: req.user._id,
 			name: req.user.name,
 			profile: req.user.profile,
+			schools: req.user.schools,
 		};
 	}
 	next();

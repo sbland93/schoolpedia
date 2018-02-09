@@ -10,5 +10,8 @@ module.exports = function(user){
 		id: user._id,
 		name: user.name,
 		anonym: user.anonym,
+		boards: user.boards,
+		up: user.up,
+		down: user.down,
 	};
 };

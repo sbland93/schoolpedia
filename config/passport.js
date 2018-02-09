@@ -10,7 +10,7 @@ module.exports = function(passport){
 
 	//deserialize시킬때 어떤 함수를 거칠지.
 	passport.deserializeUser(function(id, done){
-		User.findById(id, function(err, user){
+		User.findById(id).populate('schools').exec(function(err, user){
 			done(err, user);
 		});
 	});

@@ -33,6 +33,14 @@ userSchema.methods.validatePassword = function(password){
 
 userSchema.methods.generateAnonym = function(){
 	return bcrypt.hashSync(this.kakaoEmail, bcrypt.genSaltSync(8), null);
+};
+
+
+//user에 등록된 학교를 가지고, 15개의 뉴스피드를 가져온다. //콜백함수 (function(err, posts){})를 받는다.
+userSchema.methods.getNewsFeed = function(cb){
+	if(this.schools && Array.isArray(this.schools)){ //나중에 skip을 활용해서 보여줄수도 있을듯.
+		this.model('Board').find().in('school', this.schools).sort({'updated_at': -1}).limit(30).populate('school').exec(cb);
+	}
 }
 
 

@@ -33,34 +33,34 @@ module.exports = function(){
 			});
 		},
 		//사용자 관리 페이지 라우팅.
-		myControllpage: function(req,res,next){
-			User.findById(req.params.id).populate('boards').exec(function(err,user){
-
-				if (err) next(err);
-				console.log(user);
-					
-				res.render('myControllPage',{
-					users : user,
+		myControll: function(req,res,next){
+			User.findById(req.user._id).populate('boards').exec(function(err,user){
+				if (err) return next(err);
+				res.render('myControll',{
+					user : userViewModel(user),
 				});
-				
-				
 			});
-			
 		},
+
 		newsFeed:function(req,res,next){
-
-			if (req.isAuthenticated()){
-				User.findById(req.params.id).populate('schools').exec(function(err,user){
-					
-					if(err) next(err);
-					res.render('newsFeed',{
-						users : user,
-					});
-
+			req.user.getNewsFeed(function(err, posts){
+				if(err) return next(err);
+				return res.render('newsFeed', {
+					posts: posts,
 				});
-				
-			}
-			
+			});
+			/*User.findById(req.user._id).exec(function(err,user){
+				console.log("here");
+				if(err) return next(err);
+				if(!user) return next("No User");
+				user.getNewsFeed(function(err, posts){
+					if(err) return next(err);
+					return res.render('newsFeed',{
+						userInfo : user,
+						posts : posts,
+					});
+				});
+			});*/	
 		},
 		clientTest: function(req, res){
 			res.render('test', {
