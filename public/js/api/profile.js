@@ -105,7 +105,7 @@ var upDownProfile = function(id, data){
 var searchProfiles = function(data){
 	return new Promise(function(resolve, reject){
 		$.ajax({
-			url: '/api/profile' + '/search'
+			url: '/api/profile' + '/search',
 			method: 'POST',
 			data: data,
 			success: function(rtnData){
@@ -114,6 +114,6 @@ var searchProfiles = function(data){
 			fail: function(rtnData){
 				reject(rtnData);
 			},
-		})
-	})
+		});
+	});
 }
