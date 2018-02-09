@@ -1,6 +1,22 @@
 <ul class="schoolList">
 	{{#each searchedList}}
-		<li>{{name}} {{location}}</li><button class="sendData btn btn-default btn-sm" schoolId={{id}} schoolName={{name}}>확인</button></br>
+		<!-- 열려있든, 안열려있든 공통의경우는 아래-->
+
+
+		<!--열려있는 경우-->
+		{{#if available}}
+			<a href="/school/{{id}}">
+				<li>{{name}} {{location}}</li>
+			</a>
+		{{/if}}
+		
+		<!--열려있지 않은경우-->
+		{{#unless available}}
+			<li>{{name}} / {{location}}</li>
+			아직 학교문을 아무도 열지않았다리. 교문을 열어야함. 5초면 열 수 있음 진짜.
+			<a class="btn btn-default" href="/school/{{id}}/new">교문열기</a>
+		{{/unless}}
+	
 	{{/each}}
 </ul>
 

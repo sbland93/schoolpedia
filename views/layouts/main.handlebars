@@ -30,7 +30,7 @@
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 
 	{{{_sections.head}}}
-	
+	<script type="text/javascript" src="/js/templates/templates.js"></script>
 </head>
 <body>
 
@@ -57,9 +57,9 @@
 					<button class="btn btn-default" type="submit">검색!</button>
 					
 				</form>
-				<form class="searchProfileForm navbar-form navbar-left">
+				<form class="searchProfileForms navbar-form navbar-left">
 					<div class="form-group">
-						<input type="text" class="form-control" name="name" placeholder="친구검색!!">
+						<input type="text" class="form-control" name="name" placeholder="친구이름!!">
 					</div>
 					<button class="btn btn-default" type="submit">검색!</button>
 				</form>
@@ -74,7 +74,7 @@
 								{{else}}
 								<li><a href="">학교가 없어요!</a></li>
 								{{/each}}
-						    	<li><a href="/newsFeed">뉴스피드</a></li>
+						    	
 								{{#if userInfo.profile}}
 									<li><a href="/profile/{{userInfo.profile}}">마이페이지</a></li>
 								{{else}}
@@ -93,7 +93,9 @@
 			</div>
 		</div>
 	</nav>
-	
+	<div id="mainSearchResult">	
+	</div>
+	<div id="mainSearchedProfileListTPL"></div>
 	<div class="container-fluid">
 			<!-- 메인페이지로 이동하는 링크-->
 		    
@@ -133,9 +135,12 @@
 			<!--DOLATER : 제이쿼리 -->
 
 			{{{_sections.jquery}}}
+
 			<script type="text/javascript" src="/js/controllers/mainController.js"></script>
 			<script type="text/javascript" src="/js/controllers/utils/utils.js"></script>
 			<link rel="stylesheet" type="text/css" href="/css/mainFont.css">
+			<script type="text/javascript" src="/js/api/school.js"></script>
+			<script type="text/javascript" src="/js/api/profile.js"></script>
 	</div>
 </body>
 </html>
