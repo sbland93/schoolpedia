@@ -48,10 +48,16 @@ $(document).ready(function(){
       evt.preventDefault();
       location.href = document.referrer;
     });
+    var EPaddSchool = TPL.EPaddSchool;
     $("#addSchool").on('click',function(evt){
-      var EPupdateSchool = TPL.EPupdateSchool;
+      
       evt.preventDefault();
-      $("#addSchoolTPL").html(EPupdateSchool());
+      
+      $("#addSchoolTPL").html(EPaddSchool());
+      $("#cancelUpdateSchool").on('click',function(evt){
+        evt.preventDefault();
+        $("#addSchoolTPL").html("");
+      })
       $("#searchSchool").validate({
         rules:{
           name:{
@@ -68,17 +74,21 @@ $(document).ready(function(){
           var sendingData = $(form).serialize();
           getSchools(sendingData).then(function(data){
             if(data.length){
-              var template2 = TPL.EPsearchedSchools;
+              var template2 = TPL.RGsearchedSchools;
               $("#searchedSchoolsTPL").html(template2({searchedList:data}));
               $(".sendData").on('click',function(evt){
                 evt.preventDefault();
                 var schoolId = $(this).attr("schoolId");
+                var schoolName = $(".inputName").val();
                 var input = document.createElement("INPUT");
                 input.setAttribute("type","hidden");
                 input.setAttribute("name","schools");
                 input.setAttribute("value",schoolId);
                 document.getElementById("registerForms").appendChild(input);
-                
+                var li = document.createElement("LI");
+                var text = document.createTextNode(schoolName);
+                li.appendChild(text);
+                document.getElementById("addSchoolTemplate").appendChild(li);
                 //첫번째 register form에 동적으로 input을 생성 그래야 registerForm 을 서브밋할때 같이 스쿨정보가 가기때문
                 $("#addSchoolTPL").html("");
               })
