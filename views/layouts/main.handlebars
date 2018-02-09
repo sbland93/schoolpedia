@@ -33,45 +33,70 @@
 	
 </head>
 <body>
-	<div class="log">
-		<div class="dropdown pull-right">
-		  <button class="btn btn-default dropdown-toggle buttonGroup" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		    메뉴
-		    <span class="caret"></span>
-		  </button>
 
-		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-		    {{#if isLoggedIn}}
-				{{#each userInfo.schools}}
-				<li><a href="/school/{{_id}}">{{name}}</a></li>
-				{{else}}
-				<li><a href="">학교가 없어요!</a></li>
-				{{/each}}
-		    	<li><a href="/newsFeed">뉴스피드</a></li>
-				{{#if userInfo.profile}}
-					<li><a href="/profile/{{userInfo.profile}}">마이페이지</a></li>
-				{{else}}
-					<li><a href="/info/5a7830d4b396667a03071264">아직 회원님은 마이페이지가 없어요(클릭!)</a><li>
-					<li><a href="/myControll">사용자 관리페이지</a></li>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+				</button>
+				{{#if isLoggedIn}}
+					<a class="navbar-brand" href="/newsFeed"><em>스쿨충</em></a>
+		    	{{else}}
+					<a class="navbar-brand" href="/"><em>스쿨충</em></a>
 				{{/if}}
-				<li><a href="/logout">로그아웃</a></li>
-			{{else}}
-				<li><a href="/login">로그인</a></li>
-				<li><a href="/register">회원가입</a></li>
-			{{/if}}
-			<li><a href="/info">공지사항</a></li>
-		  </ul>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<form class="searchSchoolForm navbar-form navbar-left" action="/api/school" id="searchSchools">
+					<div class="form-group">
+						<input type="text" class="form-control" name="name" placeholder="학교명을 입력하세요!!">
+					</div>
+					<button class="btn btn-default" type="submit">검색!</button>
+					
+				</form>
+				<form class="searchProfileForm navbar-form navbar-left">
+					<div class="form-group">
+						<input type="text" class="form-control" name="name" placeholder="친구검색!!">
+					</div>
+					<button class="btn btn-default" type="submit">검색!</button>
+				</form>
+				<ul class="nav navbar-nav navbar-right">
 
-
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">메뉴 <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							{{#if isLoggedIn}}
+								{{#each userInfo.schools}}
+								<li><a href="/school/{{_id}}">{{name}}</a></li>
+								{{else}}
+								<li><a href="">학교가 없어요!</a></li>
+								{{/each}}
+						    	<li><a href="/newsFeed">뉴스피드</a></li>
+								{{#if userInfo.profile}}
+									<li><a href="/profile/{{userInfo.profile}}">마이페이지</a></li>
+								{{else}}
+									<li><a href="/info/5a7830d4b396667a03071264">아직 회원님은 마이페이지가 없어요(클릭!)</a><li>
+									<li><a href="/myControll">사용자 관리페이지</a></li>
+								{{/if}}
+								<li><a href="/logout">로그아웃</a></li>
+							{{else}}
+								<li><a href="/login">로그인</a></li>
+								<li><a href="/register">회원가입</a></li>
+							{{/if}}
+							<li><a href="/info">공지사항</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 		</div>
-	</div>
+	</nav>
+	
 	<div class="container-fluid">
 			<!-- 메인페이지로 이동하는 링크-->
-		    {{#if isLoggedIn}}
-				<div class="img"><a href="/newsFeed"><em>스쿨충</em></a></div>
-	    	{{else}}
-				<div class="img"><a href="/"><em>스쿨충</em></a></div>
-			{{/if}}
+		    
 			<div>
 				{{#if flash}}
 					<div class="alert alert-dismissible alert-{{flash.type}}">
