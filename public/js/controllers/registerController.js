@@ -79,11 +79,11 @@ $(document).ready(function(){
               $(".sendData").on('click',function(evt){
                 evt.preventDefault();
                 var schoolId = $(this).attr("schoolId");
-                var schoolName = $(".inputName").val();
+                var schoolName = $(this).attr("schoolName");
                 var input = document.createElement("INPUT");
-                input.setAttribute("type","hidden");
-                input.setAttribute("name","schools");
-                input.setAttribute("value",schoolId);
+                input.setAttribute("type", "hidden");
+                input.setAttribute("name", "schools");
+                input.setAttribute("value", schoolId);
                 document.getElementById("registerForms").appendChild(input);
                 var li = document.createElement("LI");
                 var text = document.createTextNode(schoolName);

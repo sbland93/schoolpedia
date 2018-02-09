@@ -231,10 +231,9 @@ var profileTPLC = {
 			});
 
 
-			$("#cancelUpdateSchool").on('click',function(evt){
+			$("#cancelAddSchool").on('click',function(evt){
 				evt.preventDefault();
 				$("#addSchoolTPL").html("");
-				
 			});
 		}
 	},

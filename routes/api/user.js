@@ -1,6 +1,6 @@
 var User = require('../../models/user.js');
 var userViewModel = require('../../viewModels/user.js');
-
+var authHandlers = require('../../handlers/auth.js')();
 
 
 module.exports = function(app){
@@ -67,10 +67,8 @@ module.exports = function(app){
 
 
 	//id에 해당하는 user를 요청본문을 토대로 업데이트한다.
-	app.put('/api/user/:id', function(req, res, next){
-		if(!req.params.id) return next('No Id');
-		//DOLATER - 업데이트 메커니즘 적용 및 업데이트 검증.
-		User.update({_id: req.params.id}, req.body, function(err, response){
+	app.put('/api/user', authHandlers.ajaxIsLoggedIn, function(req, res, next){
+		User.update({_id: req.user._id}, req.body, function(err, response){
 			if(err) return next(err);
 			if(response.nModified === 1){
 				res.json({

@@ -1,8 +1,8 @@
 $(document).ready(function(){
-	var searchedSchoolList = TPL.HMsearchedSchools;
-	var NPsearchedProfileList = TPL.NPOsearchedProfileList;
+	var searchedSchoolList = TPL.NFsearchedSchools;
+	var searchedProfileList = TPL.NFsearchedProfileList;
+	
 	$(".searchSchoolForm").validate({
-
 		rules:{
 			name:{
 				required:true,
@@ -24,6 +24,7 @@ $(document).ready(function(){
 			});
 		}
 	})
+
 	$(".searchProfileForm").validate({
 		rules:{
 			name:{
@@ -41,12 +42,12 @@ $(document).ready(function(){
 			getProfiles(sendingData).then(function(data){
 				var defaultSchoolId = $('#schoolId').val();
 				if(data.length){
-					return $('#searchedProfileListTPL').html(NPsearchedProfileList({
+					return $('#searchedProfileListTPL').html(searchedProfileList({
 						searchedList : data,
 						schoolId : defaultSchoolId, 
 					}));
 				} 
-				if(!data.success) return $('#searchedProfileListTPL').html(NPsearchedProfileList({
+				if(!data.success) return $('#searchedProfileListTPL').html(searchedProfileList({
 					noData : true,
 					schoolId : defaultSchoolId, 
 				}));
@@ -55,4 +56,12 @@ $(document).ready(function(){
 			});
 		}
 	})
+
+
+	//학교추가버튼을 클릭시에, 생성되는 addSchoolForm
+    $("#addSchool").on('click',function(evt){
+		evt.preventDefault();
+		makeDynamicTPL("#addSchoolTPL", TPL.NFaddSchool, {}, newsFeedTPLC.addSchool());     
+    })
+
 })

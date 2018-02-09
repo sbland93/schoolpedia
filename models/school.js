@@ -16,7 +16,7 @@ var schoolSchema = mongoose.Schema({
 //schoolSchema를 통해 'save'할시에, category를 알아서 저장해주게끔. 나중엔 굳이 필요 없을듯.
 schoolSchema.pre('save', function(next){
 	var lengthOfLocation = this["location"].length;
-	this["location"] = this["location"].substring(0, lengthOfLocation-4);
+	this["location"] = this["location"].substring(0, lengthOfLocation-3);
 	next();
 });
 
