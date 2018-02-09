@@ -48,12 +48,54 @@ $(document).ready(function(){
       evt.preventDefault();
       location.href = document.referrer;
     });
-
+    $("#addSchool").on('click',function(evt){
+      var EPupdateSchool = TPL.EPupdateSchool;
+      evt.preventDefault();
+      $("#addSchoolTPL").html(EPupdateSchool());
+      $("#searchSchool").validate({
+        rules:{
+          name:{
+            required:true,
+            minlength:1,
+            maxlength:10,
+          }
+        },
+        messages:{
+          name:"한글자 이상입니다리."
+        },
+        submitHandler:function(form,evt){
+          evt.preventDefault();
+          var sendingData = $(form).serialize();
+          getSchools(sendingData).then(function(data){
+            if(data.length){
+              var template2 = TPL.EPsearchedSchools;
+              $("#searchedSchoolsTPL").html(template2({searchedList:data}));
+              $(".sendData").on('click',function(evt){
+                evt.preventDefault();
+                var schoolId = $(this).attr("schoolId");
+                var input = document.createElement("INPUT");
+                input.setAttribute("type","hidden");
+                input.setAttribute("name","schools");
+                input.setAttribute("value",schoolId);
+                document.getElementById("registerForms").appendChild(input);
+                
+                //첫번째 register form에 동적으로 input을 생성 그래야 registerForm 을 서브밋할때 같이 스쿨정보가 가기때문
+                $("#addSchoolTPL").html("");
+              })
+              
+               
+            }
+          })
+        }
+      })  
+      
+    })
     // Initialize form validation on the registration form.
     // It has the name attribute "registration"
     $(".registerForm").validate({
       ignore: [],
       // Specify validation rules
+
       rules: {
 
         email:{
@@ -81,6 +123,10 @@ $(document).ready(function(){
         verified: {
           required: true,
         },
+        graduation:{
+          required: true,
+          min: 1950,
+        },
       
       },
       // Specify validation error messages
@@ -90,8 +136,8 @@ $(document).ready(function(){
         name: "예) 홍길동 // 두글자이상 다섯글자이하입니다.",
         password: "비밀번호는 6글자 이상 20글자 이하 필수입니다리",
         passwordConf: "비밀번호와 비밀번호 확인이 다른 것 같습니다리",
+        graduation: "졸업년도 선택은 필수 입니다리",
         verified: "카카오인증을 해주세요!",
-     
       },
       submitHandler: function(form, evt) {
         console.log("Here");
@@ -99,6 +145,47 @@ $(document).ready(function(){
         form.submit();
       }
     });
+    /*$("#addSchool").on('click',function(evt){
+      var EPupdateSchool = TPL.EPupdateSchool;
+      evt.preventDefault();
+      $("#addSchoolTPL").html(EPupdateSchool());
+      $(".addSchoolForm").validate({
+        rules:{
+          name:{
+            required:true,
+            minlength:1,
+            maxlength:10,
+          }
+        },
+        messages:{
+          name:"한글자 이상입니다."
+        },
+        submitHandler:function(form,evt){
+          evt.preventDefault();
+          var sendingData = $(form).serialize();
+          getSchools(sendingData).then(function(data){
+            if(data.length){
+              var template2 = TPL.EPsearchedSchools;
+              $("#searchedSchoolsTPL").html(template2({searchedList:data}));
+              $(".sendData").on('click',function(evt){
+                evt.preventDefault();
+                form.submit();
+              })
+              $("#addSchoolTPL").html("");
+                   
+                  
+                  
+                
+            }
+          });
+
+          
+
+        } 
+      })
+      
+      
+    })*/
 
 
 });

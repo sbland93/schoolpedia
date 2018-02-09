@@ -1,0 +1,10 @@
+<ul class="schoolList">
+	{{#each searchedList}}
+		<li>{{name}} {{location}}</li><button class="sendData btn btn-default btn-sm" schoolId={{id}}>확인</button></br>
+		<input class="inputName" type="hidden" name="schools" value={{name}}>
+	{{/each}}
+</ul>
+
+{{#if noData}}
+	그런학교 없다 ㄹㅇㅠㅠ.
+{{/if}}

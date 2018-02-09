@@ -2,10 +2,14 @@ var School = require('../models/school.js');
 var Profile = require('../models/profile.js');
 var Board = require('../models/board.js');
 var Info = require('../models/info.js');
+var User = require('../models/user.js');
 var schoolViewModel = require('../viewModels/school.js');
 var boardViewModel = require('../viewModels/board.js');
 var profileViewModel = require('../viewModels/profile.js');
 var infoViewModel = require('../viewModels/info.js');
+var userViewModel = require('../viewModels/user.js');
+var Passport = require('passport');
+var Auth = require('./auth.js');
 module.exports = function(){
 
 
@@ -28,7 +32,36 @@ module.exports = function(){
 				
 			});
 		},
-		
+		//사용자 관리 페이지 라우팅.
+		myControllpage: function(req,res,next){
+			User.findById(req.params.id).populate('boards').exec(function(err,user){
+
+				if (err) next(err);
+				console.log(user);
+					
+				res.render('myControllPage',{
+					users : user,
+				});
+				
+				
+			});
+			
+		},
+		newsFeed:function(req,res,next){
+
+			if (req.isAuthenticated()){
+				User.findById(req.params.id).populate('schools').exec(function(err,user){
+					
+					if(err) next(err);
+					res.render('newsFeed',{
+						users : user,
+					});
+
+				});
+				
+			}
+			
+		},
 		clientTest: function(req, res){
 			res.render('test', {
 				pageTestScript: '/qa/tests-clientAPI.js',

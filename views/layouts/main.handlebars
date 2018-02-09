@@ -43,10 +43,12 @@
 
 		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 		    {{#if isLoggedIn}}
+		    	<li><a href="/newsFeed/{{userInfo.id}}">뉴스피드</a></li>
 				{{#if userInfo.profile}}
 					<li><a href="/profile/{{userInfo.profile}}">마이페이지</a></li>
 				{{else}}
-					<li><a href="/info">아직 회원님은 마이페이지가 없어요(클릭!)</a><li>
+					<li><a href="/info/5a7830d4b396667a03071264">아직 회원님은 마이페이지가 없어요(클릭!)</a><li>
+					<li><a href="/myControll/{{userInfo.id}}">사용자 관리페이지</a></li>
 				{{/if}}
 				<li><a href="/logout">로그아웃</a></li>
 			{{else}}
@@ -68,7 +70,7 @@
 			<li><a href="/register">회원가입</a></li>
 		{{/if}}-->
 	</div>
-	<div class="container">
+	<div class="container-fluid">
 			<!-- 메인페이지로 이동하는 링크-->
 			<div class="img"><a href="/"><em>스쿨충</em></a></div>
 			<!-- 로그인 버튼-->

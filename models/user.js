@@ -12,6 +12,7 @@ var userSchema = mongoose.Schema({
 	email: String,
 	password: String,
 	kakaoEmail: String,
+	graduation: String,
 	up: {type: Number, default: 0},
 	down: {type: Number, default: 0},
 	profile: {type: mongoose.Schema.Types.ObjectId, ref: 'Profile'},

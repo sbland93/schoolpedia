@@ -1,5 +1,5 @@
 <header>회원가입</header>
-<form class="form-horizontal registerForm" action="/register" method="POST">
+<form class="form-horizontal registerForm" action="/register" method="POST" id="registerForms">
   
   <div class="form-group">
       <label for="fieldEmail" class="col-xs-11 col-sm-2 col-md-3 control-label">이메일</label>
@@ -27,7 +27,20 @@
         <input type="password" class="form-control" id="fieldPasswordConf" name="passwordConf" placeholder="비밀번호확인">
       </div>
   </div>
+  <div class="form-group">
+    <label for="graduation" class="col-xs-11 col-sm-2 col-md-3 control-label">고등학교 졸업(예정)년도</label>
+    
+    <div class="col-xs-9 col-sm-6 col-md-5">
+      <select class="form-control" name="graduation" id="graduation">
+        <option value="0">졸업(예정)년</option>
+        {{#iterateFromTo 1990 2020}}
+          <option value="{{index}}">{{index}}</option>
+        {{/iterateFromTo}}
+      </select>
+    </div>
+  </div>
 
+  
   <div class="form-group">
       <label for="kakaoButton" class="col-xs-10 col-sm-2 col-md-3 control-label">카카오인증</label>
       <div class="col-xs-10 col-sm-7 col-md-6">
@@ -45,7 +58,16 @@
   </div>
 
   <input type="hidden" name="register" value="true" />
+
 </form>
+<div class="form-group">
+  <div class="col-md-offset-3">
+    <button id="addSchool" class="btn btn-default buttonGroup">학교추가</button> 선택사항
+    <p>학교의 게시물을 확인할수 있습니다!</p>
+    <div id="addSchoolTPL"></div>
+  </div>
+</div>
+
 
 
 {{#section 'head'}}
@@ -53,11 +75,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script type="text/javascript" src="/js/templates/templates.js"></script>
 {{/section}}
 
 
 {{#section 'jquery'}}
     <script type="text/javascript" src="/js/api/user.js"></script>
     <script type="text/javascript" src="/js/api/auth.js"></script>
+    <script type="text/javascript" src="/js/api/school.js"></script>
     <script type="text/javascript" src="/js/controllers/registerController.js"></script>
 {{/section}}
