@@ -26,9 +26,14 @@ $(document).ready(function(){
 		    });
 
 			console.log("searchData :", searchData);
-
+			var EPsearchedFriend = TPL.EPsearchedFriend;
 			searchProfiles(searchData).then(function(data){
-				if(data.success) console.log(data);
+				if(data.success) {
+					console.log(data);
+					$("#searchedFriendsTPL").html(EPsearchedFriend({
+						profileList:data,
+					}))
+				}
 			});
 
 		}
