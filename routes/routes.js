@@ -15,6 +15,7 @@ module.exports = function(app){
 	require('./api/profile.js')(app);
 	require('./api/board.js')(app);
 	require('./api/user.js')(app);
+	require('./api/info.js')(app);
 	require('./traditional/info.js')(app);
 
 	//home 페이지 라우팅.

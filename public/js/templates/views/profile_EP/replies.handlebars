@@ -4,8 +4,11 @@
             <a href="#"> {{ userInfo.name }}</a>
         </h5>
         <p style="z-index: 1;">{{ content }}</p>
-        <button class="profileUpDown btn-default btn-sm buttonGroup" target="replies" targetId="{{id}}" upOrDown="up">+{{up}}</button>
-        <button class="profileUpDown btn-default btn-sm buttonGroup" target="replies" targetId="{{id}}" upOrDown="down">{{down}}</button>
+
+        <button class="profileUpDown btn btn-default btn-sm buttonGroup" target="replies" targetId="{{id}}" upOrDown="up">+{{up}}</button>
+        <button class="profileUpDown btn btn-default btn-sm buttonGroup" target="replies" targetId="{{id}}" upOrDown="down">{{down}}</button>
+
+
         {{#if isMyPage}}
         <button class="manageProfile btn btn-sm btn-default" target="replies" targetId="{{id}}">-</button>
         {{/if}}

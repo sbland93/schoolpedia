@@ -17,6 +17,7 @@ module.exports = function(){
 					res.locals.message404 = '해당학교 글은 존재하지 않아요ㅠㅠ';
 					return next();
 				}
+				console.log(board.content);
 				res.render('board', {
 					board : boardViewModel(board),
 					pageTestScript: '/qa/tests-board.js'

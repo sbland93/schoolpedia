@@ -199,7 +199,7 @@ this["TPL"]["EPaddStory"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main
 this["TPL"]["EPfeatures"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "        <button class=\"manageProfile btn btn-sm btn-default\" target=\"features\" targetId=\""
+  return "        <button class=\"manageProfile btn btn-default btn-sm \" target=\"features\" targetId=\""
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"id","hash":{},"data":data}) : helper)))
     + "\">-</button>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -309,15 +309,15 @@ this["TPL"]["EPreplies"] = Handlebars.template({"1":function(container,depth0,he
     + alias1(container.lambda(((stack1 = (depth0 != null ? depth0.userInfo : depth0)) != null ? stack1.name : stack1), depth0))
     + "</a>\r\n        </h5>\r\n        <p style=\"z-index: 1;\">"
     + alias1(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"content","hash":{},"data":data}) : helper)))
-    + "</p>\r\n        <button class=\"profileUpDown btn-default btn-sm buttonGroup\" target=\"replies\" targetId=\""
+    + "</p>\r\n\r\n        <button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"replies\" targetId=\""
     + alias1(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" upOrDown=\"up\">+"
     + alias1(((helper = (helper = helpers.up || (depth0 != null ? depth0.up : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"up","hash":{},"data":data}) : helper)))
-    + "</button>\r\n        <button class=\"profileUpDown btn-default btn-sm buttonGroup\" target=\"replies\" targetId=\""
+    + "</button>\r\n        <button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"replies\" targetId=\""
     + alias1(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" upOrDown=\"down\">"
     + alias1(((helper = (helper = helpers.down || (depth0 != null ? depth0.down : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"down","hash":{},"data":data}) : helper)))
-    + "</button>\r\n"
+    + "</button>\r\n\r\n\r\n"
     + ((stack1 = helpers["if"].call(alias2,(depth0 != null ? depth0.isMyPage : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    </div>\r\n</div>\r\n";
 },"useData":true});
@@ -534,10 +534,12 @@ this["TPL"]["SPsearchedFriend"] = Handlebars.template({"1":function(container,de
   return "\r\n				"
     + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.school : depth0)) != null ? stack1.name : stack1), depth0))
     + "\r\n			";
+},"4":function(container,depth0,helpers,partials,data) {
+    return "		해당 검색 내용으로는, 결과가 없는거 같아요! 친구의 프로필이 없다면, 회원님이 생성해주세요!\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
   return "<ul class=\"profileList\">\r\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? depth0.profileList : depth0)) != null ? stack1.profileList : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? depth0.profileList : depth0)) != null ? stack1.profileList : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(4, data, 0),"data":data})) != null ? stack1 : "")
     + "</ul>";
 },"useData":true});

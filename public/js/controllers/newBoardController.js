@@ -23,7 +23,20 @@ $(".newBoardForm").validate({
 	},
 	//글생성 버튼을 클릭시 글 생성후, 작성된 게시글페이지로 이동.
 	submitHandler: function(form) {
-		addBoard($(form).serialize()).then(function(data){
+		//textarea br 처리
+		var contents = $(form).serializeObject();
+		
+		
+		/*for (var j=0; j<contents.content.length; j++){
+			if (contents.content.charAt(j) === "\r" || contents.content.charAt(j) === "\n"){
+				console.log('hi');
+				contents.content = contents.content.replace("\r\n","<br>");
+			}
+		}*/
+		/*contents.content = contents.content.replace(/\r\n/g,"<br>");*/
+		replaceBr(contents , "content");
+		addBoard(contents).then(function(data){
+
 			if(data.success) location.href = '/board/' + data.id;
 			else{
 				alert('Error Occured');
