@@ -56,6 +56,7 @@ var profileTPLC = {
 					updateProfile(profileId, {options: "contents", target:"features", body: newFeature})
 					.then(function(data){
 						if(data.success){
+							console.log('hi');
 							alert("추가되었습니다");
 							$("#addFeatureTPL").html("");
 							response.features.unshift({ feature: newFeature, up: 0, down: 0 });
