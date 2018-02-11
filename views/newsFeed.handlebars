@@ -1,7 +1,7 @@
 
 <!--NameSpace : HM -->
 <header>
-	스 쿨 충
+	스 쿨 피 온
 </header>
 
 
@@ -11,12 +11,12 @@
 	{{#each posts}}
 		<div>
 			
-			<a href="/board/{{id}}">{{title}}</a>: 
+			<a href="/board/{{id}}">* {{title}}</a>: 
 			
 		</div>
 		{{content}}
 		<div>
-			{{school.name}}
+			<a href="/school/{{school._id}}">{{school.name}}</a>
 		</div>
 		</br>
 	{{else}}
