@@ -4,7 +4,7 @@ var bcrypt = require('bcrypt-nodejs');
 var School = require('./school.js');
 var Board = require('./board.js');
 var Profile = require('./profile.js');
-
+var SALT_FACTOR = 8;
 
 var userSchema = mongoose.Schema({
 	name: String,
@@ -23,7 +23,7 @@ var userSchema = mongoose.Schema({
 
 //user저장시에, password를 hash해서, 암호화한 후 저장.
 userSchema.methods.generateHash = function(password){
-	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+	return bcrypt.hashSync(password, bcrypt.genSaltSync(SALT_FACTOR), null);
 };
 
 //user저장시에, password가 맞는지 확인.
@@ -32,7 +32,7 @@ userSchema.methods.validatePassword = function(password){
 };
 
 userSchema.methods.generateAnonym = function(){
-	return bcrypt.hashSync(this.kakaoEmail, bcrypt.genSaltSync(8), null);
+	return bcrypt.hashSync(this.kakaoEmail, bcrypt.genSaltSync(SALT_FACTOR), null);
 };
 
 
@@ -41,8 +41,7 @@ userSchema.methods.getNewsFeed = function(cb){
 	if(this.schools && Array.isArray(this.schools)){ //나중에 skip을 활용해서 보여줄수도 있을듯.
 		this.model('Board').find().in('school', this.schools).sort({'updated_at': -1}).limit(30).populate('school').exec(cb);
 	}
-}
-
+};
 
 var User = mongoose.model('User', userSchema);
 module.exports = User;

@@ -52,8 +52,21 @@ module.exports = function(){
 			} else {
 				return res.json({isLoggedIn: false});
 			}
-		}
+		},
 
+		isAdmin : function(req, res, next){
+			if(req.isAuthenticated()){
+				if(req.user.kakaoEmail === "Admin"){ //어드민일경우 kakaoEmail에 "Admin"을 저장해둔다.
+					return next();
+				}else{
+					res.status(404);
+					return res.render('404');
+				}
+			} else {
+				res.status(404);
+				return res.render('404');
+			}
+		},
 
 	}
 }

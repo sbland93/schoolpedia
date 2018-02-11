@@ -11,6 +11,8 @@ module.exports = function(user){
 		name: user.name,
 		anonym: user.anonym,
 		boards: user.boards,
+		schools: user.schools,
+		graduation: user.graduation,
 		up: user.up,
 		down: user.down,
 	};

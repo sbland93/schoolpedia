@@ -75,14 +75,14 @@
 								{{#each userInfo.schools}}
 								<li><a href="/school/{{_id}}">{{name}}</a></li>
 								{{else}}
-								<li><a href="/newsFeed">학교가 없어요!</a></li>
+								<li><a href="/newsFeed">출신학교를 추가해요!</a></li>
 								{{/each}}
-						    	
+						    	<li><a href="/myControll">출신학교추가하기</a></li>
+
 								{{#if userInfo.profile}}
 									<li><a href="/profile/{{userInfo.profile}}">마이페이지</a></li>
 								{{else}}
 									<li><a href="/info/5a7830d4b396667a03071264">아직 회원님은 마이페이지가 없어요(클릭!)</a><li>
-									
 								{{/if}}
 								<li><a href="/logout">로그아웃</a></li>
 							{{else}}

@@ -17,7 +17,7 @@ module.exports = {
 	userList: [
 		{
 			name: "김승범",
-			kakaoEmail: "rltmqj12@gmail.com",
+			kakaoEmail: "Admin",
 			email: "rltmqj@gmail.com",
 			password: bcrypt.hashSync("123098", bcrypt.genSaltSync(8), null),
 			anonym: bcrypt.hashSync(this.kakaoEmail, bcrypt.genSaltSync(8), null).substring(20, 28),
@@ -25,7 +25,7 @@ module.exports = {
 		},
 		{
 			name: "한용희",
-			kakaoEmail: "hyh4829@naver.com",
+			kakaoEmail: "Admin",
 			email: "hyh4829@naver.com",
 			password: bcrypt.hashSync("930729", bcrypt.genSaltSync(8), null),
 			anonym: bcrypt.hashSync(this.kakaoEmail, bcrypt.genSaltSync(8), null).substring(20, 28),

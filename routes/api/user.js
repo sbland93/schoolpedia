@@ -1,4 +1,6 @@
 var User = require('../../models/user.js');
+var bcrypt = require('bcrypt-nodejs');
+
 var userViewModel = require('../../viewModels/user.js');
 var authHandlers = require('../../handlers/auth.js')();
 
@@ -55,7 +57,7 @@ module.exports = function(app){
 
 
 	//id에 해당하는 user를 삭제한다.
-	app.delete('/api/user/:id', function(req, res, next){
+	app.delete('/api/user/:id', authHandlers.ajaxIsLoggedIn, function(req, res, next){
 		if(!req.params.id) return next('No Id');
 		User.remove({_id: req.params.id}, function(err){
 			if(err) return next(err);
@@ -68,6 +70,12 @@ module.exports = function(app){
 
 	//id에 해당하는 user를 요청본문을 토대로 업데이트한다.
 	app.put('/api/user', authHandlers.ajaxIsLoggedIn, function(req, res, next){
+		//비밀번호가 있으면, encrypt시킨후에 넣는다.
+		var newPassword;
+		if(req.body["$set"] && (newPassword = req.body["$set"]["password"])){
+			req.body["$set"]["password"] = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(8), null);
+			console.log(req.body);
+		}
 		User.update({_id: req.user._id}, req.body, function(err, response){
 			if(err) return next(err);
 			if(response.nModified === 1){

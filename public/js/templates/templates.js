@@ -39,6 +39,10 @@ this["TPL"]["HMsearchedSchools"] = Handlebars.template({"1":function(container,d
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.noData : depth0),{"name":"if","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 },"useData":true});
 
+this["TPL"]["MCupdatePassword"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<form class=\"form-horizontal updatePasswordForm\" role=\"form\" action=\"/api/user\" method=\"PUT\">\r\n\r\n	<div class=\"form-group\">\r\n		<div class=\"col-md-12 col-sm-12 col-xs-12\">\r\n			<label for=\"fieldwPassword\">새로운 비밀번호</label>\r\n			<input type=\"password\" class=\"form-control\" name=\"password\" id=\"fieldPassword\" />\r\n		</div>\r\n	</div>\r\n\r\n	<div class=\"form-group\">\r\n		<div class=\"col-md-12 col-sm-12 col-xs-12\">\r\n			<label for=\"fieldwPasswordConf\">새로운 비밀번호 확인</label>\r\n			<input type=\"password\" class=\"form-control\" name=\"passwordConf\" id=\"fieldPasswordCOnf\" />\r\n		</div>\r\n	</div>\r\n\r\n	<button type=\"submit\" class=\"pull-right btn btn-default btn-sm buttonGroup\">수정</button>\r\n</form>\r\n\r\n	<button class=\"btn btn-default btn-sm\" id=\"cancelUpdatePassword\">취소</button>";
+},"useData":true});
+
 this["TPL"]["NPOsearchedProfileList"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 

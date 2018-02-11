@@ -124,6 +124,7 @@ module.exports = function(app){
 
 
 	//id에 해당하는 board을 요청본문을 토대로 업데이트한다.
+	//게시글을 수정하는것과, 댓글을다는것.
 	app.put('/api/board/:id', authHandlers.ajaxIsLoggedIn , function(req, res, next){
 		if(!req.params.id) return next('No Id');
 		Board.findById(req.params.id, function(err, board){

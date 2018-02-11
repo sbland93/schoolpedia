@@ -155,47 +155,7 @@ $(document).ready(function(){
         form.submit();
       }
     });
-    /*$("#addSchool").on('click',function(evt){
-      var EPupdateSchool = TPL.EPupdateSchool;
-      evt.preventDefault();
-      $("#addSchoolTPL").html(EPupdateSchool());
-      $(".addSchoolForm").validate({
-        rules:{
-          name:{
-            required:true,
-            minlength:1,
-            maxlength:10,
-          }
-        },
-        messages:{
-          name:"한글자 이상입니다."
-        },
-        submitHandler:function(form,evt){
-          evt.preventDefault();
-          var sendingData = $(form).serialize();
-          getSchools(sendingData).then(function(data){
-            if(data.length){
-              var template2 = TPL.EPsearchedSchools;
-              $("#searchedSchoolsTPL").html(template2({searchedList:data}));
-              $(".sendData").on('click',function(evt){
-                evt.preventDefault();
-                form.submit();
-              })
-              $("#addSchoolTPL").html("");
-                   
-                  
-                  
-                
-            }
-          });
-
-          
-
-        } 
-      })
-      
-      
-    })*/
+    
 
 
 });

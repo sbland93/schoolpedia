@@ -14,7 +14,11 @@
 			<a href="/board/{{id}}">* {{title}}</a>: 
 			
 		</div>
-		{{content}}
+		{{#trimString content}}{{/trimString}}
+		<div>
+			{{#dateFormat updated_at}}{{/dateFormat}}
+		</div>
+
 		<div>
 			<a href="/school/{{school._id}}">{{school.name}}</a>
 		</div>

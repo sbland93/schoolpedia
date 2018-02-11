@@ -47,7 +47,7 @@ $(document).ready(function(){
 			var node = document.createElement("LI");                
 			var replynode = document.createTextNode(newReply);
 			node.appendChild(replynode);                              
-			updateBoard(boardId,{$push:{replies:{content:newReply}}}).then(function(data){
+			updateBoard(boardId, {options:"replies", $push:{replies:{content:newReply}}}).then(function(data){
 				
 				if (data.success){
 					

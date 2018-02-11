@@ -1,5 +1,5 @@
 var Info = require('../../models/info.js');
-
+var authHandlers = require('../../handlers/auth.js')();
 var infoViewModel = require('../../viewModels/info.js');
 
 
@@ -14,9 +14,8 @@ module.exports = function(app){
 			});
 	});
 
-
 	// title과 content가 있는지 확인하고, 글을 생성한후 공지사항 페이지로 이동시킨다.
-	app.post('/info', function(req, res, next){
+	app.post('/info', authHandlers.isAdmin, function(req, res, next){
 		if(req.body.title && req.body.content){
 			Info.create(req.body, function(err, info){
 				if(err) return next(err);
@@ -27,13 +26,13 @@ module.exports = function(app){
 		}
 	})
 	//공지사항 등록 페이지로 이동
-	app.get('/info/new',function(req,res,next){
+	app.get('/info/new', authHandlers.isAdmin,function(req,res,next){
 		res.render("newInfo");
 	})
 
 
 	//해당 id의 info를 가져온다.
-	app.get('/info/:id', function(req, res, next){
+	app.get('/info/:id', authHandlers.isAdmin, function(req, res, next){
 		if(!req.params.id) return next('No Id');
 		Info.findById({_id: req.params.id}).populate('schools.school').exec(function(err, info){
 			if(err) return next(err);
@@ -43,7 +42,7 @@ module.exports = function(app){
 
 
 	//id에 해당하는 info를 삭제한다.
-	app.get('/info/:id/delete', function(req, res, next){
+	app.get('/info/:id/delete', authHandlers.isAdmin, function(req, res, next){
 		if(!req.params.id) return next('No Id');
 		Info.remove({_id: req.params.id}, function(err){
 			if(err) return next(err);
@@ -53,7 +52,7 @@ module.exports = function(app){
 
 
 	//id에 해당하는 info를 요청본문을 토대로 업데이트한다.
-	app.put('/info/:id', function(req, res, next){
+	app.put('/info/:id', authHandlers.isAdmin, function(req, res, next){
 		if(!req.params.id) return next('No Id');
 
 		//DOLATER - 업데이트 메커니즘 적용 및 업데이트 검증.
@@ -66,8 +65,6 @@ module.exports = function(app){
 			}
 		});
 	});
-
-
 
 
 }

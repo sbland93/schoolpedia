@@ -34,7 +34,7 @@ module.exports = function(){
 		},
 		//사용자 관리 페이지 라우팅.
 		myControll: function(req,res,next){
-			User.findById(req.user._id).populate('boards').exec(function(err,user){
+			User.findById(req.user._id).populate('boards').populate('schools').exec(function(err,user){
 				if (err) return next(err);
 				res.render('myControll',{
 					user : userViewModel(user),
@@ -49,18 +49,6 @@ module.exports = function(){
 					posts: posts,
 				});
 			});
-			/*User.findById(req.user._id).exec(function(err,user){
-				console.log("here");
-				if(err) return next(err);
-				if(!user) return next("No User");
-				user.getNewsFeed(function(err, posts){
-					if(err) return next(err);
-					return res.render('newsFeed',{
-						userInfo : user,
-						posts : posts,
-					});
-				});
-			});*/	
 		},
 		clientTest: function(req, res){
 			res.render('test', {

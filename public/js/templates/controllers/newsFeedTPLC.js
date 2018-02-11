@@ -44,12 +44,12 @@ var newsFeedTPLC = {
 						}
 					})
 				}
-			})
+			});
 
 			$("#cancelAddSchool").on('click',function(evt){
 				evt.preventDefault();
 				$("#addSchoolTPL").html("");
-			})  
+			}); 
 		}
 	},
 
