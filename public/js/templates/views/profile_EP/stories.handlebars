@@ -4,11 +4,10 @@
             <a href="#"> {{ user }}</a>
         </h5>
         <p style="z-index: 1;">{{ content }}</p>
-        <button class="profileUpDown btn btn-sm" target="stories" targetId="{{id}}" upOrDown="up">+{{up}}</button>
-        <button class="profileUpDown btn btn-sm" target="stories" targetId="{{id}}" upOrDown="down">{{down}}</button>
+        <button class="profileUpDown btn btn-default btn-sm buttonGroup" target="stories" targetId="{{id}}" upOrDown="up">+{{up}}</button>
+        <button class="profileUpDown btn btn-default btn-sm buttonGroup" target="stories" targetId="{{id}}" upOrDown="down">{{down}}</button>
         {{#if isMyPage}}
         <button class="manageProfile btn btn-sm btn-default" target="stories" targetId="{{id}}">-</button>
         {{/if}}
     </div>
 </div>
-<hr>
