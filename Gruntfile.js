@@ -36,7 +36,7 @@ module.exports = function(grunt){
 			    processName: function(filePath) {
 			        return filePath.replace(/^public\//, '').replace(/^js\//, '').replace(/^templates\//, '').replace(/^views\//, '').replace(/\.handlebars$/, '')
 			        .replace(/^profile_EP\//, 'EP').replace(/^newProfileOne_NPO\//, 'NPO').replace(/^school_SC\//, 'SC').replace(/^home_HM\//, 'HM').replace(/^schoolBoards_SB\//, 'SB').replace(/^register_RG\//, 'RG')
-			        .replace(/^newsFeed_NF\//, 'NF');
+			        .replace(/^newsFeed_NF\//, 'NF').replace(/^schoolProfiles_SP\//, 'SP');
 			    },
 			},
 			all : {

@@ -94,7 +94,7 @@ module.exports = function(){
 			var data1 = {}, data2 = {}, data3 = {}, queryObject;
 
 			//이름검색(only) / 본문포함(all)에 따라, data1생성.
-			if(searchString !== ""){
+			if(searchString && searchString !== ""){
 				if(query.fields === "only"){
 					data1 = {"name" : new RegExp(searchString)};
 				}else if(query.fields === "all"){
@@ -103,12 +103,12 @@ module.exports = function(){
 			}
 
 			//graduation이 없으면 따로 조건을 안주면 되는것.
-			if(query.graduation !== ""){
+			if(query.graduation && query.graduation !== ""){
 				data2 = {"graduation" : query.graduation};
 			}
 
 			//학교내 검색(only) / 전체학교에서(all) 이면 따로 학교검색조건을 주지 않으면 된다.
-			if(query.school !== ""){
+			if(query.school && query.school !== ""){
 				if(query.school === "only"){ //해당학교내 검색이면서,
 					data3 = {"schools.school" : query.schoolId};
 					//학급 검색칸에 학급이 적혀있다면 (전체학교검색이라면 학급검색을 무시)
@@ -119,6 +119,7 @@ module.exports = function(){
 			}
 			//queryObject를 생성하고.
 			queryObject = {$and : [data1, data2, data3]};
+			console.log(queryObject);
 			//검색후에 json응답.
 			Profile.find(queryObject, function(err, profiles){
 				if(err) return next(err);

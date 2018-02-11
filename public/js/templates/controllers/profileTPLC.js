@@ -64,7 +64,7 @@ var profileTPLC = {
 							console.log('hi');
 							alert("추가되었습니다");
 							$("#addFeatureTPL").html("");
-							response.features.unshift({ feature: newFeature, up: 0, down: 0 });
+							response.features.unshift({ content: newFeature, up: 0, down: 0 });
 							var featureData = $(response.features);
 							makePosts(featureData, tplAndContext.features);
 						} else{
@@ -199,29 +199,36 @@ var profileTPLC = {
 							$(".sendData").on('click',function(evt){
 								evt.preventDefault();
 								var self = $(this);
-								var schoolIds = self.attr("schoolId");
+								var schoolId = self.attr("schoolId");
 								var category = self.attr("category");
 								//클릭된 학교의 category별로, defaultClass를 만들어 둔다. 
 								var defaultClass = [100, 200, 300]; //고등학교, 중학교반.
 								var elementaryClass = [100, 200, 300, 400, 500, 600]; //초등학교 반.
 								var classCategory = {"elemantary" : elementaryClass, "middle": defaultClass, "high": defaultClass };
-								updateProfile(profileId, {$push: { schools: { school: schoolIds, class: classCategory[category] }}})
+								var data = {$push : { schools: { school: schoolId, class: classCategory[category] }}};
+								data["options"] = { conditions : {"schools.school" : {"$ne": schoolId}} };
+								updateProfile(profileId, data)
 								.then(function(data){
 									if (data.success){ //성공시에 button에 attr의 schoolName을 response에 추가하고, 다시 랜더링한다.
 
 										alert("수정되었습니다.");
-										var inputName = self.attr("schoolName");
-
+										var schoolName = self.attr("schoolName");
+										console.log(schoolName);
 										response.schools.push({
-											school:{ name: inputName, _id:data.id},
+											school:{ name: schoolName, _id :data.id},
 											class: classCategory[category],
 										 });
 
 										$("#addSchoolTPL").html("");
 
-										$("#profileTemplate").html(TPL.EPprofile({
+										$("#profileTPL").html(TPL.EPprofile({
 											profile: response, // 다시 생성.
 										}));
+									}else{
+
+										alert("문제가 생긴것 같아요...!");
+										location.reaload();
+									
 									}
 									
 								})

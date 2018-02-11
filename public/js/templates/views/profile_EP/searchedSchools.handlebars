@@ -1,8 +1,8 @@
 <!--프로필페이지에서 학교추가후, 검색시에 나오는 Template. -->
 <ul class="schoolList">
 	{{#each searchedList}}
-		<li>{{name}}{{location}}</li>
-		<button class="sendData btn btn-default btn-sm" schoolId={{id}} category="{{category}}" schoolName="{{name}}">확인</button></br>
+		<li>{{name}} ({{location}})</li>
+		<button class="sendData btn btn-default btn-sm" schoolId="{{id}}" category="{{category}}" schoolName="{{name}}">확인</button></br>
 	{{/each}}
 </ul>
 

@@ -2,6 +2,7 @@
 <div class="col-md-4">
 	<ul class="profileList">
 		{{#each profileList}}
+			검색결과입니다!<hr>
 			<a href="/profile/{{id}}">
 				<li>
 				<p>{{#each schools}}
@@ -21,8 +22,10 @@
 	<form class="form-horizontal searchProfilesForm" role="form" action="api/profile/search" method="GET">
 		
 		<div class="form-group">
-			<label for="schoolDetail" class="col-md-3 control-label">학교</label>
-			<input type="radio" name="school" value="all" id="schoolDetail"> 모든학교
+			<label class="col-md-3 control-label">학교</label>
+			<label><input type='radio' name='school' value='all' id="allSchool" checked/>모든학교</label>
+			<label><input type='radio' name='school' value='only' id="onlySchool" />특정학교</label>
+			<label id="onlySchoolTPL"></label>
 		</div>
 
 		<div class="form-group">
@@ -34,7 +37,7 @@
 		<div class="form-group">
 			<label for="searchField" class="col-md-3 control-label">검색내용</label>
 			<div class="col-md-6">
-				<input type="text" class="form-control" name="q" id="searchField" placeholder="검색..." required="required">
+				<input type="text" class="form-control" name="q" id="searchField" placeholder="학생이름 , 이야기 내용 등 프로필에서 검색할 내용">
 			</div>
 		</div>
 

@@ -50,16 +50,16 @@
 				{{/if}}
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<form class="searchSchoolForm navbar-form navbar-left" action="/api/school" id="searchSchools">
+				<form class="mainSearchSchoolForm navbar-form navbar-left" action="/api/school" id="searchSchools">
 					<div class="form-group">
-						<input type="text" class="form-control" name="name" placeholder="학교명을 입력하세요!!">
+						<input type="text" class="form-control" name="name" placeholder="학교명 검색!" id="mainSchoolName">
 					</div>
 					<button class="btn btn-default buttonGroup" type="submit">검색!</button>
 					
 				</form>
-				<form class="searchProfileForms navbar-form navbar-left">
+				<form class="mainSearchProfileForm navbar-form navbar-left">
 					<div class="form-group">
-						<input type="text" class="form-control" name="name" placeholder="친구이름!!">
+						<input type="text" class="form-control" name="name" placeholder="친구이름 검색!" id="mainProfileName">
 					</div>
 					<button class="btn btn-default buttonGroup" type="submit">검색!</button>
 				</form>

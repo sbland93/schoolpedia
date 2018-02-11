@@ -1,8 +1,5 @@
 $(document).ready(function(){
 
-
-
-
 	//ajax로 게시물을 UP(+1) or DOWN(-1)해주는 함수.
 	var ajaxUpDown = function(id, upOrDown){
 		var data;
@@ -68,7 +65,8 @@ $(document).ready(function(){
 	var searchedSchoolList = TPL.NFsearchedSchools;
 	var searchedProfileList = TPL.NFsearchedProfileList;
 	
-	$(".searchSchoolForm").validate({
+	//navBar에 학교검색폼. 
+	$(".mainSearchSchoolForm").validate({
 		rules:{
 			name:{
 				required:true,
@@ -91,7 +89,8 @@ $(document).ready(function(){
 		}
 	})
 
-	$(".searchProfileForms").validate({
+	//navBar에 친구검색폼. 
+	$(".mainSearchProfileForm").validate({
 		rules:{
 			name:{
 				required:true,
@@ -104,22 +103,9 @@ $(document).ready(function(){
 		},
 		submitHandler:function(form,evt){
 			evt.preventDefault();
-			var sendingData = $(form).serialize();
-			getProfiles(sendingData).then(function(data){
-				var defaultSchoolId = $('#schoolId').val();
-				if(data.length){
-					return $('#mainSearchedProfileListTPL').html(searchedProfileList({
-						searchedList : data,
-						schoolId : defaultSchoolId, 
-					}));
-				} 
-				if(!data.success) return $('#mainSearchedProfileListTPL').html(searchedProfileList({
-					noData : true,
-					schoolId : defaultSchoolId, 
-				}));
-			}).catch(function(err){
-				alert(err);
-			});
+			var profileName = $("#mainProfileName").val();
+			location.href = "/profile/search?q="+profileName+"&fields=only";
+			
 		}
 	})
 

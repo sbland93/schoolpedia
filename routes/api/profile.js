@@ -1,5 +1,6 @@
 var Profile = require('../../models/profile.js');
 var User = require('../../models/user.js');
+var School = require('../../models/school.js');
 var authHandlers = require('../../handlers/auth.js')();
 
 var profileViewModel = require('../../viewModels/profile.js');
@@ -99,7 +100,76 @@ module.exports = function(app){
 		
 	});
 
+	//"school" => 'all', 'only' / "fields" => 'only', 'all'
+	//"graduation" => 그대로활용  / "class" => schoolCategory를 통해서 활용
+	//"q" => searchString
+	//scholId에는 해당학교 id가 적혀있음.
+	//TODO: ajax api/로 바꾸자.
+	app.post('/api/profile/search/test', function(req, res, next){
+		console.log('req.body From searchProfiles', req.body);
 
+		var query = req.body
+		var searchString = query.q;
+		var data1 = {}, data2 = {}, data3 = {}, queryObject;
+
+		//이름검색(only) / 본문포함(all)에 따라, data1생성.
+		if(searchString !== ""){
+			if(query.fields === "only"){
+				data1 = {"name" : new RegExp(searchString)};
+			}else if(query.fields === "all"){
+				data1 = {$or: [{"name" : new RegExp(searchString)}, {'stories.content' : new RegExp(searchString)}]};
+			}
+		}
+
+		//graduation이 없으면 따로 조건을 안주면 되는것.
+		if(query.graduation !== ""){
+			data2 = {"graduation" : query.graduation};
+		}
+
+		var p1;
+		//학교내 검색(only) / 전체학교에서(all) 이면 따로 학교검색조건을 주지 않으면 된다.
+		if(query.school !== ""){
+			if(query.school === "only" && query.schoolName){ //해당학교내 검색이면서 학교이름이 함께오면,
+				//학교이름에 해당하는 SchoolId를 찾아서, 조건에 넣어준다.
+				var schoolIdCondition = { $in : [] };
+				p1 = new Promise(function(resolve, reject){
+					School.find({name: new RegExp(query.schoolName)}, function(err, schools){
+						if(err) reject(err);
+						for(var i=0; i<schools.length; i++){
+							schoolIdCondition["$in"].push(schools[i]._id);
+						}
+						data3 = {"schools.school" : schoolIdCondition};
+						console.log("data3:",data3);
+						resolve();
+					});
+				});
+				
+
+				//학급 검색칸에 학급이 적혀있다면 (전체학교검색이라면 학급검색을 무시)
+				if(query.classNum !== ""){
+					data3["schools.class"] = query.classNum;
+				}
+			}
+		}
+
+		if(p1 === undefined) p1 = new Promise(function(resolve, reject){ resolve(); });
+		p1.then(function(data){
+			//queryObject를 생성하고.
+			queryObject = {$and : [data1, data2, data3]};
+			//검색후에 json응답.
+			Profile.find(queryObject).limit(40).exec(function(err, profiles){
+				if(err) return res.json({success: false, type: "Others"});
+				return res.json({success: true, profileList: profiles});
+			});
+		}).catch(function(err){res.json({success: false, type: "Others"})});
+		
+		
+	});
+
+	/*Item.find({}).populate({
+	    path: 'tags',
+	    match: { tagName: { $in: ['funny', 'politics'] }}
+	})*/
 
 
 	//해당 id의 profile을 available상태로 만들고 응답은 success를 담아준다.
@@ -137,6 +207,18 @@ module.exports = function(app){
 		
 		//options == "class"
 		if(query.options){
+			//검색 컨디션이 더 있는경우는, 합쳐서 검색해준다.
+			if(query.options.conditions){
+				var conditions = query.options.conditions;
+				if(Object.assign){
+					console.log(target);
+					Object.assign(target , conditions);
+					console.log("after:", target);
+				}else{
+					for (var attrname in conditions) { target[attrname] = conditions[attrname]; }
+				}
+			}
+
 			if(query.options === "contents"){ //content: "features","stories","replies"
 				var newQuery = {$push: {}};
 				newQuery["$push"][query.target] = {user: req.user._id, content: query.body};
@@ -146,10 +228,10 @@ module.exports = function(app){
 			} else if(query.options === "class"){ //options == "class"인지 확인 후.
 				//쿼리에 스쿨아이디를 추가하는거야.
 				target["schools.school"] = query.schoolId;
-				//options는 담기면 안되기 때문에 이건 삭제.
-				delete query["options"];
 			}
 			
+			//options는 담기면 안되기 때문에 이건 삭제.
+			delete query["options"];
 		}
 
 		console.log("query:", query);

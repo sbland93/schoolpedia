@@ -117,3 +117,19 @@ var searchProfiles = function(data){
 		});
 	});
 }
+
+var searchProfilesTest = function(data){
+	return new Promise(function(resolve, reject){
+		$.ajax({
+			url: '/api/profile' + '/search/test',
+			method: 'POST',
+			data: data,
+			success: function(rtnData){
+				resolve(rtnData);
+			},
+			fail: function(rtnData){
+				reject(rtnData);
+			},
+		});
+	});
+}
