@@ -34,3 +34,6 @@ input{
 .schoolList>li{
 	display: inline;
 }
+hr{
+	border-width:3px; 
+}

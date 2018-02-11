@@ -86,7 +86,9 @@ module.exports = function(){
 		//TODO: ajax api/로 바꾸자.
 		searchProfiles: function(req, res, next){
 			console.log('req.query From searchProfiles', req.query);
-
+			//query가 없으면, searchedProfile들을 보여준다.
+			if(!req.query) return res.render("profileSearch");
+			
 			var query = req.query
 			var searchString = query.q;
 			var data1 = {}, data2 = {}, data3 = {}, queryObject;
@@ -108,7 +110,7 @@ module.exports = function(){
 			//학교내 검색(only) / 전체학교에서(all) 이면 따로 학교검색조건을 주지 않으면 된다.
 			if(query.school !== ""){
 				if(query.school === "only"){ //해당학교내 검색이면서,
-					data3 = {"schools.school" : school._id};
+					data3 = {"schools.school" : query.schoolId};
 					//학급 검색칸에 학급이 적혀있다면 (전체학교검색이라면 학급검색을 무시)
 					if(query.classNum !== ""){
 						data3["schools.class"] = query.classNum;
@@ -119,9 +121,10 @@ module.exports = function(){
 			queryObject = {$and : [data1, data2, data3]};
 			//검색후에 json응답.
 			Profile.find(queryObject, function(err, profiles){
-				if(err) return res.json({success: false, type: "Others"});
-				return res.json({success: true, profileList: profiles});
+				if(err) return next(err);
+				return res.render('profileSearch', {profileList: profiles});
 			});
+			
 		}
 
 	}

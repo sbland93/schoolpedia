@@ -3,7 +3,7 @@
 <div class="row">
 	<div class="col-md-offset-1 col-md-4">
 		<div class="board" id="eachBoard" boardId="{{board.id}}">
-			<div class="content">{{board.content}}</div>
+			<div class="content">{{{board.content}}}</div>
 			<div class="updated_at">{{#dateFormat board.updated_at}}{{/dateFormat}}</div>	
 			<div>작성자: {{board.writer}}</div>
 		</div>	
@@ -29,7 +29,7 @@
 			<div>
 				{{#each board.replies}}
 					<ul>
-						<li>{{content}}</li>
+						<li>{{{content}}}</li>
 					</ul>
 				{{/each}}
 				<ul id="replyList"></ul>

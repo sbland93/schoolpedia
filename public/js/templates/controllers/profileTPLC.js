@@ -2,12 +2,17 @@
 //profile.handlebars view에서 필요한 TPL에 대한 Controllers.
 var profileTPLC = {
 
-	profile: function(profileId, response){
+	profile: function(profileId, response, isLoggedIn){
 
 		return function(){
+			
 			//학교링크 클릭시 템플릿 생성.
 			$(".updateClass").on('click',function(evt){
 				evt.preventDefault();
+				if(!isLoggedIn){
+					alert("로그인이 필요한 서비스에요 로그인을 부탁드려요");
+					return location.href = "/login"
+				}
 				var schoolId = $(this).attr("schoolId");
 
 				var schoolObj;
@@ -56,6 +61,7 @@ var profileTPLC = {
 					updateProfile(profileId, {options: "contents", target:"features", body: newFeature})
 					.then(function(data){
 						if(data.success){
+							console.log('hi');
 							alert("추가되었습니다");
 							$("#addFeatureTPL").html("");
 							response.features.unshift({ feature: newFeature, up: 0, down: 0 });
@@ -318,6 +324,9 @@ var profileTPLC = {
 							$("#profileTPL").html(TPL.EPprofile({
 								profile:response,
 							}));
+						}else{
+							alert("무슨 문제가 생긴것 같아요...");
+							location.reload();
 						}
 					})
 				}
