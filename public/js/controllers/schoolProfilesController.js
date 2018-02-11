@@ -5,14 +5,14 @@ $(document).ready(function(){
 	$(".searchProfilesForm").validate({
 		// Specify validation rules
 		rules: {
-			q:{
+			/*q:{
 				required: true,
 				minlength: 1,
-			}
+			}*/
 		},
 		// Specify validation error messages
 		messages: {
-			q: "최소한글자의 검색내용이 필요합니다",
+			//q: "최소한글자의 검색내용이 필요합니다",
 		},
 		submitHandler: function(form, evt) {
 			evt.preventDefault();

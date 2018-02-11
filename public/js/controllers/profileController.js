@@ -120,7 +120,7 @@ $(document).ready(function(){
     	if(response.success){
 
 	    	
-			makeDynamicTPL("#profileTPL", TPL.EPprofile, {profile: response}, profileTPLC.profile(profileId, response));				
+			makeDynamicTPL("#profileTPL", TPL.EPprofile, {profile: response}, profileTPLC.profile(profileId, response, isLoggedIn));				
 
 			console.log(response);
 

@@ -14,7 +14,7 @@
 				{{#ifDefaultClass this}}
 					<a class="updateClass" schoolId={{../school._id}}>?</a>
 				{{else}}
-					{{this}}반
+					<a href="/profile/search?school=only&schoolId={{../school._id}}&fields=only&graduation={{../../profile.graduation}}&classNum={{this}}">{{this}}반</a>
 				{{/ifDefaultClass}}
 			{{/each}}
 			</br>

@@ -82,7 +82,7 @@ module.exports = function(app){
 		//학교내 검색(only) / 전체학교에서(all) 이면 따로 학교검색조건을 주지 않으면 된다.
 		if(query.school !== ""){
 			if(query.school === "only"){ //해당학교내 검색이면서,
-				data3 = {"schools.school" : req.body.schoolId};
+				data3 = {"schools.school" : query.schoolId};
 				//학급 검색칸에 학급이 적혀있다면 (전체학교검색이라면 학급검색을 무시)
 				if(query.classNum !== ""){
 					data3["schools.class"] = query.classNum;
