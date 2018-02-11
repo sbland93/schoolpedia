@@ -127,9 +127,42 @@ module.exports = function(app){
 	//게시글을 수정하는것과, 댓글을다는것.
 	app.put('/api/board/:id', authHandlers.ajaxIsLoggedIn , function(req, res, next){
 		if(!req.params.id) return next('No Id');
-		Board.findById(req.params.id, function(err, board){
+		if((req.body.options).equals("reply")){
+
+			Board.update({_id:req.params.id},req.body,function(err,response){
+				if(err) console.error(err);
+				if(response.nModified === 1){
+					res.json({
+						success: true,
+						id: req.params.id,
+					});
+				} else {
+					res.json({
+						success: false,
+						message: ''
+					});
+				}
+			})
+		}
+		else{Board.findById(req.params.id, function(err, board){
 			if(err) return next(err);
 			if(!board) return res.json({type: "Empty", success: false});
+			/*if(req.body.options.equals("reply")){
+				board.update({_id:req.params.id},req.body,function(err,response){
+					if(err) return next(err);
+					if(response.nModified === 1){
+						res.json({
+							success: true,
+							_id: req.params.id,
+						});
+					}else {
+						res.json({
+							success: false,
+							message: '',
+						});
+					}
+				});
+			}*/
 			if(board.isWriter(req.user._id)){
 				board.update(req.body, function(err, response){
 					if(err) return next(err);
@@ -148,7 +181,8 @@ module.exports = function(app){
 			}else{
 				res.json({type: "Auth", success: false});
 			}
-		});		
+		});
+		}		
 	});
 
 

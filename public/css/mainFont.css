@@ -11,18 +11,22 @@
 	h2{
 		font-size:1.7em; 
 	}
+	.formClass{
+		margin-top:0;
+		margin-bottom:0;  
+	}
 }
 @media (max-width: 480px) {
 	body{
 		font-size:1.3em; 
-		/*padding:0.04em; */
+		
 	}
 	header{
 		font-size:12pt; 
 
 	}
 	.buttonGroup{
-		font-size:0.003em;
+		font-size:1em;
 	}
 	span{
 		font-size:1em; 
@@ -43,16 +47,19 @@
 		font-size:0.05em; 
 	}
 	.form-control{
-		font-size:0.5em; 
+		font-size:1em; 
 	}
 	.img{
 		font-size:1.3em; 
 	}
 	li>a{
-		font-size:0.5em; 
+		font-size:1em; 
 	}
 	#takeProfile{
-		font-size:0.5em; 
+		font-size:1em; 
 	}
-
+	.formClass{
+		margin-top:0;
+		margin-bottom:0;  
+	}
 }
