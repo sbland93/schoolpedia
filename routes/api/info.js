@@ -3,14 +3,14 @@ var infoViewModel = require('../../viewModels/info.js');
 module.exports = function(app){
 	app.get("/api/info",function(req,res,next){
 		Info.find(req.query).exec(function(err,infos){
-			if (err) next(err);
+			if (err) return next(err);
 			res.json(infos.map(infoViewModel));
 		})
 	});
 
 	app.get("/api/info/:id",function(req,res,next){
-		if (!req.body.id) next("No id");
-		Info.findBy({_id:req.body.id}).then(function(err,info){
+		if (!req.params.id) next("No id");
+		Info.findBy({_id:req.params.id}).then(function(err,info){
 			if (err) console.error(err);
 			if (info){
 				res.json({
@@ -57,7 +57,7 @@ module.exports = function(app){
 
 	app.delete("/api/info/:id",function(req,res,next){
 		if (!req.params.id) return next("No id");
-		Info.remove({_if:req.params.id},function(err){
+		Info.remove({_id:req.params.id},function(err){
 			if (err) return next(err);
 			res.json({
 				success:true,

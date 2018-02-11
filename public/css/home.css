@@ -9,10 +9,12 @@ form{
 	color:black;
 	font-size:15pt;
 	margin-top:10pt;
-	text-align:center;
+	
 	margin-bottom:10pt;
 }
-
+#searchSchool{
+	text-align:center;
+}
 li{
 	font-weight:bold;
 }

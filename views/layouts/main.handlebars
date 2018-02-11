@@ -8,17 +8,19 @@
 	<meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
-    
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
     <!--script src="//developers.kakao.com/sdk/js/kakao.min.js"></script-->
 
 	<script type="text/javascript" src="/vendor/jquery-3.2.1.js"></script>
 	<!-- Latest compiled and minified CSS -->
+	
+	
+	<script src="/bootstrap/js/bootstrap.min.js"></script>
 	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
 	<!-- Latest compiled and minified JavaScript -->
 	
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
 
-	<script src="/bootstrap/js/bootstrap.min.js"></script>
 	<!-- handlebar library!-->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.0/handlebars.min.js"></script>
 	<script type="text/javascript" src="/js/templates/clientHelper.js"></script>
@@ -40,7 +42,7 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
+					
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
@@ -52,21 +54,19 @@
 				{{/if}}
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<form class="mainSearchSchoolForm navbar-form navbar-left" action="/api/school" id="searchSchools">
+				<form class="mainSearchSchoolForm navbar-form navbar-left formClass" action="/api/school" id="searchSchools">
 					<div class="form-group">
 						<input type="text" class="form-control" name="name" placeholder="학교명 검색!" id="mainSchoolName">
 					</div>
 					<button class="btn btn-default buttonGroup" type="submit">검색!</button>
-					
 				</form>
-				<form class="mainSearchProfileForm navbar-form navbar-left">
+				<form class="mainSearchProfileForm navbar-form navbar-left formClass">
 					<div class="form-group">
 						<input type="text" class="form-control" name="name" placeholder="친구이름 검색!" id="mainProfileName">
 					</div>
 					<button class="btn btn-default buttonGroup" type="submit">검색!</button>
 				</form>
 				<ul class="nav navbar-nav navbar-right">
-
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">메뉴 <span class="caret"></span></a>
 						<ul class="dropdown-menu">
@@ -81,7 +81,7 @@
 								{{#if userInfo.profile}}
 									<li><a href="/profile/{{userInfo.profile}}">마이페이지</a></li>
 								{{else}}
-									<li><a href="/info/5a7830d4b396667a03071264">아직 회원님은 마이페이지가 없어요(클릭!)</a><li>
+									<li><a href="/info">아직 회원님은 마이페이지가 없어요(클릭!)</a><li>
 									
 								{{/if}}
 								<li><a href="/logout">로그아웃</a></li>
