@@ -8,9 +8,6 @@
 {{/unless}}
 <div class="btn-group btn-group-justified" role="group" aria-label="...">
   <div class="btn-group" role="group">
-    <button class="btn btn-default buttonGroup" id="updateBugName">충호변경</button>
-  </div>
-  <div class="btn-group" role="group">
     <button class="btn btn-default buttonGroup" id="addSchool">학교추가</button>
   </div>
   <div class="btn-group" role="group">
@@ -31,8 +28,6 @@
 <div class="pull-right col-xs-12 col-md-4">
 	
 	<div id="updateClassTPL"></div>
-	<!-- 충호변경-->
-	<div id="updateBugNameTPL"></div>
 	<!-- 학교추가-->
 	<div id="addSchoolTPL"></div>
 	
@@ -73,9 +68,9 @@
 
 
 <div class="col-xs-12 col-sm-12 col-md-12">
-	<input type="hidden" id="defaultVal" profileId={{profileId}} {{#isEquals profileId userInfo.profile}} isMyPage="true" {{/isEquals}} {{#if isLoggedIn}}isLoggedIn="true"{{/if}}>
+	<input type="hidden" id="defaultVal" profileId={{profileId}} {{#isEquals profileId userInfo.profile}} isMyPage="true" {{/isEquals}}>
 
-	{{#isEquals profileId userInfo.profile}}<button class="btn btn-default" id="removeProfile">삭제</button>{{/isEquals}}
+	{{#isEquals profileId userInfo.profile}}<!--button class="btn btn-default" id="removeProfile">삭제</button-->{{/isEquals}}
 </div>
 
 
