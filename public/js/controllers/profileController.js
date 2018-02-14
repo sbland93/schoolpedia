@@ -184,15 +184,6 @@ $(document).ready(function(){
 				makeDynamicTPL("#addSchoolTPL", TPL.EPaddSchool, context, profileTPLC.addSchool(profileId, response));
 			});
 
-			//충호를 수정하는 버튼을 클릭시 충호 수정 폼 생성.
-			$("#updateBugName").on('click',function(evt){
-				evt.preventDefault();
-				if(!isLoggedIn){
-					alert("로그인이 필요한 서비스에요! 로그인 부탁드릴게요");
-					return location.href = "/login";
-				}
-				makeDynamicTPL("#updateBugNameTPL", TPL.EPupdateBugName, context, profileTPLC.updateBugName(profileId));
-			});
 
 			
     	} else {

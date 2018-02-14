@@ -287,6 +287,7 @@ module.exports = function(app){
 					console.log("isAlready: ", isAlready);
 					if(isAlready) return res.json({success: false, type: "Already"});
 					else{
+						console.log('hi');
 						element.participants.push(req.user._id);
 						element[data.upOrDown] += incNum;
 						var p1 = new Promise(function(resolve, reject){

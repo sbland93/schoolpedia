@@ -43,7 +43,6 @@ var schoolSchema = mongoose.Schema({
 //DOLATER school required 함.
 var profileSchema = mongoose.Schema({
 	schools : [ schoolSchema ],
-	bugName: { type: String, default: "벌레" },
 	name: String,
 	birth: { type: Number, min: 000000, max: 999999 },
 	graduation: { type: Number, min: 1900, max: 2050 },
@@ -54,13 +53,6 @@ var profileSchema = mongoose.Schema({
 	replies : [ replySchema ],
 	updated_at: {type: Date, default: Date.now },
 });
-
-
-
-profileSchema.path('bugName').validate(function (v) {
-    return v.length == 2;
-}, 'The bugName should be length of 2');
-
 
 
 
