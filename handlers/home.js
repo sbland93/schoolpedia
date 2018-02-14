@@ -15,21 +15,14 @@ module.exports = function(){
 
 	return {
 
-		//home 페이지 라우팅.
-		//available(true)인 학교들의 리스트들을 반환.
+		//home 페이지 라우팅. //공지사항관련 !
 		home:  function(req, res, next){
-			School.find({available: true}).sort({updated_at : '-1'})
-			.exec(function(err, schools){
+			Info.find(function(err,infos){
 				if(err) next(err);
-				Info.find(function(err,infos){
-					if(err) next(err);
-					res.render('home', {
-						schoolList : schools.map(schoolViewModel),
-						pageTestScript: '/qa/tests-home.js',
-						infoList: infos.map(infoViewModel),
-					});
- 				})
-				
+				res.render('home', {
+					infoList: infos.map(infoViewModel),
+					pageTestScript: '/qa/tests-home.js',
+				});
 			});
 		},
 		//사용자 관리 페이지 라우팅.

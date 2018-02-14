@@ -62,20 +62,19 @@ $(document).ready(function(){
 			}
 		});
 	});
-	var searchedSchoolList = TPL.NFsearchedSchools;
+	var searchedSchoolList = TPL.HMsearchedSchools;
 	var searchedProfileList = TPL.NFsearchedProfileList;
 	
 	//navBar에 학교검색폼. 
 	$(".mainSearchSchoolForm").validate({
 		rules:{
 			name:{
+				minlength:2,
 				required:true,
-				minlength:1,
 			},
-
 		},
 		messages:{
-			name:"한글자 이상입니다.",
+			name:"두글자 이상의 학교명을 입력해주세요.",
 		},
 		submitHandler:function(form,evt){
 			evt.preventDefault();

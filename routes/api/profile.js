@@ -289,24 +289,26 @@ module.exports = function(app){
 					else{
 						element.participants.push(req.user._id);
 						element[data.upOrDown] += incNum;
+						//프로필을 수정하는 Promise
 						var p1 = new Promise(function(resolve, reject){
 							profile.save(function(err){
 								if(err) return reject(err);
 								return resolve();
 							});
 						});
+						//User의 up을 수정하는 Promise.
 						var p2 = new Promise(function(resolve, reject){
-							User.findByIdAndUpdate(element.user, userUpdateObj, function(err, response){
+							User.update({_id: element.user}, userUpdateObj, function(err, response){
 								if(err) return reject(err);
 								return resolve(response);
 							});
 						});
+						//프로필수정과 User수정 두개가 완료가 되면.
 						Promise.all([p1, p2]).then(function(responseArray){
-							if(responseArray[1].err) return next(err);
 							if(responseArray[1].nModified === 1){
 								return res.json({success: true, id: req.params.id});
 							}else{
-								return res.json({success: true, type: "Others"});
+								return res.json({success: false, type: "Others", message: "유저 UP/DOWN적용 실패"});
 							}
 						}).catch(function(err){
 							console.log(err);

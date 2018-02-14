@@ -10,6 +10,10 @@ var Info = require('../models/info.js');
 
 module.exports = function(app){
 
+	//home 페이지 라우팅.
+	//schoolList가 필요.
+	app.get('/', homeHandlers.home);
+	
 	//School, Profile, Board에 해당하는 APIRouting 링크.
 	require('./api/school.js')(app);
 	require('./api/profile.js')(app);
@@ -18,9 +22,7 @@ module.exports = function(app){
 	require('./api/info.js')(app);
 	require('./traditional/info.js')(app);
 
-	//home 페이지 라우팅.
-	//schoolList가 필요.
-	app.get('/', homeHandlers.home);
+
 	//사용자 관리 페이지 라우팅.
 	app.get('/myControll', authHandlers.isLoggedIn, homeHandlers.myControll);
 	//login 페이지 라우팅.

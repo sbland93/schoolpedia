@@ -2,6 +2,12 @@
 
 $(document).ready(function(){
 
+	//userInfo담는다. 댓글달때 쓸것.
+	var userInfo, isLoggedIn;
+	ajaxAuth().then(function(data){
+		isLoggedIn = data.isLoggedIn;
+		userInfo = data.userInfo;
+	});
 
 	//각 게시글의 아이디를 받는다.
 	var boardId = $('#eachBoard').attr('boardId');
@@ -27,8 +33,8 @@ $(document).ready(function(){
 		}else{
 			return;
 		}
-	
 	});
+	
 	//게시물 댓글 form 동적으로 댓글 보이게.
 	$(".updateReplyForm").validate({
 		rules:{
@@ -43,24 +49,21 @@ $(document).ready(function(){
 		},
 		submitHandler:function(form,evt){
 			evt.preventDefault();
+			if(!isLoggedIn){
+				alert("로그인이 필요한 서비스입니다.");
+				location.href = '/login';
+			}
 			var newReply = $("#comment").val();
 			var node = document.createElement("LI");                
 			var replynode = document.createTextNode(newReply);
 
 			node.appendChild(replynode);                             
-			updateBoard(boardId, {options:"reply", $push:{replies:{content:newReply}}}).then(function(data){
+			updateBoard(boardId, {$push: { replies: { user:userInfo.id, content:newReply } } }).then(function(data){
 				if (data.success){
-					console.log('hi');
-					console.log(newReply);
 					document.getElementById("replyList").appendChild(node);
-
 				}else{
-					if (data.type === "Login"){
-						alert("로그인이 필요한 서비스입니다.");
-						location.href = '/login';
-					}else{
-						alert("잘못된 정보입니다.");
-					}
+					alert("문제가 생긴것 같아요!");
+					location.reload();
 				}
 			});
 			

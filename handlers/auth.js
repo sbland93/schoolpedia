@@ -45,7 +45,7 @@ module.exports = function(){
 			}
 		} ,
 
-
+		//Loggin 상태와, usrInfo를 담아 보내준다.
 		ajaxAuth : function(req, res, next){
 			if(req.isAuthenticated()){
 				return res.json({isLoggedIn: true, userInfo : userViewModel(req.user)});
