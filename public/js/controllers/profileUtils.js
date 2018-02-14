@@ -143,24 +143,28 @@ function loadPosts(posts, postsDiv, postsTemplate, contextFn, dynamicClass) {
       });
 
       $(".manageProfile").off('click').on('click', function(evt){
-        console.log("Click!");
-        var self = $(this);
-        var target = self.attr("target");
-        var targetId = self.attr("targetId");
-        var data = { $pull: {} };
-        data.$pull[target] = { _id: targetId };
-        console.log("data: ", data);
-        updateProfile(profileId, data).then(function(data){
-          if(data.success){
-            alert("삭제했습니다!");
-          }else{
-            if(data.type === "Login"){
-              alert("로그인이 필요한 서비스입니다.");
-              return location.href = '/login';
+        var check = confirm("정말로 삭제하시겠습니까?");
+        if (check){
+          console.log("Click!");
+          var self = $(this);
+          var target = self.attr("target");
+          var targetId = self.attr("targetId");
+          var data = { $pull: {} };
+          data.$pull[target] = { _id: targetId };
+          console.log("data: ", data);
+          updateProfile(profileId, data).then(function(data){
+            if(data.success){
+              alert("삭제했습니다!");
+              return location.reload();
+            }else{
+              if(data.type === "Login"){
+                alert("로그인이 필요한 서비스입니다.");
+                return location.href = '/login';
+              }
+              alert("문제가 생긴것 같습니다!");
             }
-            alert("문제가 생긴것 같습니다!");
-          }
-        })
+          });
+        } 
       });
 
 }
