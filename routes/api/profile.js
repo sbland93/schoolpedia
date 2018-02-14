@@ -175,7 +175,7 @@ module.exports = function(app){
 	//해당 id의 profile을 available상태로 만들고 응답은 success를 담아준다.
 	app.get('/api/profile/:id', function(req, res, next){
 		if(!req.params.id) return next('No Id');
-		Profile.findById({_id: req.params.id}).populate('schools.school').exec(function(err, profile){
+		Profile.findById({_id: req.params.id}).populate('schools.school').populate('replies.user').exec(function(err, profile){
 			if(err) return next(err);
 			return res.json(profileViewModel(profile));
 		});
@@ -220,16 +220,14 @@ module.exports = function(app){
 			}
 
 			if(query.options === "contents"){ //content: "features","stories","replies"
-				var newQuery = {$push: {}};
-				newQuery["$push"][query.target] = {user: req.user._id, content: query.body};
+				var newQuery = {$push: {}, };
+				//$sort옵션을 통해서 updated_at이 최신순으로 유지되도록한다.
+				newQuery["$push"][query.target] ={ $each: [{ user: req.user._id, content: query.body }], $sort : { updated_at: -1 } }; 
 				//query는 : {options: "contents", target: "stories", body: content};
 				//{$push: {stories : { content: newStory }}}
 				query = newQuery;
-			} else if(query.options === "class"){ //options == "class"인지 확인 후.
-				//쿼리에 스쿨아이디를 추가하는거야.
-				target["schools.school"] = query.schoolId;
 			}
-			
+
 			//options는 담기면 안되기 때문에 이건 삭제.
 			delete query["options"];
 		}
@@ -237,22 +235,13 @@ module.exports = function(app){
 		console.log("query:", query);
 		console.log("target:", target);
 
-		//DOLATER - 업데이트 메커니즘 적용 및 업데이트 검증.
-		Profile.update(target, query, function(err, response){
-			if(err) return next(err);
+		Profile.findOneAndUpdate(target, query, {new: true}, function(err, doc){
+			if(err) return res.json({success: false, type: "Others"});
 			console.log("here");
-			console.log(response);
-			if(response.nModified === 1){
-				res.json({
-					success: true,
-					id: req.params.id,
-				});
-			} else {
-				res.json({
-					success: false,
-					message: ''
-				});
-			}
+			doc.populate('schools.school', function(err, rtnDoc){
+				if(err) return res.json({success: false});
+				return res.json({success: true, changedDoc: doc});
+			})
 		});
 	});
 
@@ -287,6 +276,7 @@ module.exports = function(app){
 					console.log("isAlready: ", isAlready);
 					if(isAlready) return res.json({success: false, type: "Already"});
 					else{
+						console.log('hi');
 						element.participants.push(req.user._id);
 						element[data.upOrDown] += incNum;
 						//프로필을 수정하는 Promise

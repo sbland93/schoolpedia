@@ -60,15 +60,15 @@ var profileTPLC = {
 					var newFeature = $('#fieldFeature').val();
 					updateProfile(profileId, {options: "contents", target:"features", body: newFeature})
 					.then(function(data){
-						if(data.success){
-							console.log('hi');
+						if(data.success){ //돌아온 데이터로, 값을 바꾸고 재 렌더링한다.
 							alert("추가되었습니다");
 							$("#addFeatureTPL").html("");
-							response.features.unshift({ content: newFeature, up: 0, down: 0 });
+							response = data.changedDoc;
 							var featureData = $(response.features);
 							makePosts(featureData, tplAndContext.features);
 						} else{
-							//TODO
+							alert("문제가 생긴것 같아요...!");
+							location.reload();
 						}
 					});
 				}
@@ -109,11 +109,12 @@ var profileTPLC = {
 						if(data.success){
 							alert("추가되었습니다");
 							$("#addStoryTPL").html("");
-							response.stories.unshift({ content: newStory, up: 0, down: 0 });
-							var sotryData = $(response.stories);
-							makePosts(sotryData, tplAndContext.stories);
+							response = data.changedDoc;
+							var storyData = $(response.stories);
+							makePosts(storyData, tplAndContext.stories);
 						} else{
-							//TODO
+							alert("문제가 생긴것 같아요...!");
+							location.reload();
 						}
 					});
 				}
@@ -153,12 +154,13 @@ var profileTPLC = {
 					.then(function(data){
 						if(data.success){
 							alert("추가되었습니다");
-							$("#addReplyTPL").html("");
-							response.replies.unshift({ content: newReply, userInfo: userInfo, up:0, down:0 });//생성된 그것의 id를 가져올수 있나..?
+							$("#addStoryTPL").html("");
+							response = data.changedDoc;
 							var replyData = $(response.replies);
 							makePosts(replyData, tplAndContext.replies);
 						} else{
-							//TODO
+							alert("문제가 생긴것 같아요...!");
+							location.reload();
 						}
 					});
 				}
@@ -180,12 +182,12 @@ var profileTPLC = {
 				rules:{
 					name:{
 						required:true,
-						minlength:1,
+						minlength:2,
 						maxlength:10,
 					}
 				},
 				messages:{
-					name:"한글자 이상의 학교 정보를 검색해주세요."
+					name:"두글자 이상의 학교 정보를 검색해주세요."
 				},
 				submitHandler:function(form,evt){
 				
@@ -204,7 +206,7 @@ var profileTPLC = {
 								//클릭된 학교의 category별로, defaultClass를 만들어 둔다. 
 								var defaultClass = [100, 200, 300]; //고등학교, 중학교반.
 								var elementaryClass = [100, 200, 300, 400, 500, 600]; //초등학교 반.
-								var classCategory = {"elemantary" : elementaryClass, "middle": defaultClass, "high": defaultClass };
+								var classCategory = {"elementary" : elementaryClass, "middle": defaultClass, "high": defaultClass };
 								var data = {$push : { schools: { school: schoolId, class: classCategory[category] }}};
 								data["options"] = { conditions : {"schools.school" : {"$ne": schoolId}} };
 								updateProfile(profileId, data)
@@ -212,23 +214,13 @@ var profileTPLC = {
 									if (data.success){ //성공시에 button에 attr의 schoolName을 response에 추가하고, 다시 랜더링한다.
 
 										alert("수정되었습니다.");
-										var schoolName = self.attr("schoolName");
-										console.log(schoolName);
-										response.schools.push({
-											school:{ name: schoolName, _id :data.id},
-											class: classCategory[category],
-										 });
-
 										$("#addSchoolTPL").html("");
+										response = data.changedDoc;
+										makeDynamicTPL("#profileTPL", TPL.EPprofile, {profile: response}, profileTPLC.profile(profileId, response, true));				
 
-										$("#profileTPL").html(TPL.EPprofile({
-											profile: response, // 다시 생성.
-										}));
 									}else{
-
 										alert("문제가 생긴것 같아요...!");
-										location.reaload();
-									
+										location.reload();
 									}
 									
 								})
@@ -251,43 +243,6 @@ var profileTPLC = {
 		}
 	},
 	
-
-	updateBugName: function(profileId){
-		return function(){
-			console.log("Here");
-			$(".updateBugNameForm").validate({
-				rules:{
-					bugName:{
-						required:true,
-						minlength:2,
-						maxlength:2,
-					}
-				},
-				messages:{
-					bugName:"충호는 두글자 입니다"
-				},
-				submitHandler:function(form,evt){
-					evt.preventDefault();
-					var sendingData = $(form).serialize();
-					var bugName = $("#fieldBugName").val();
-					updateProfile(profileId, sendingData).then(function(data){
-						console.log(data);
-						if(data.success){
-							alert("수정되었습니다.")
-							$("#updateBugNameTPL").html("");
-							$(".bugName").html(bugName);
-						}
-					});
-				}
-			});
-
-			$("#cancelUpdateBugName").on('click',function(evt){
-				$("#updateBugNameTPL").html("");
-			});
-		}
-	},
-
-
 	updateClass : function(profileId, response, schoolId){
 
 		return function(){
@@ -296,44 +251,31 @@ var profileTPLC = {
 				},
 				messages:{
 				},
-				submitHandler:function(form,evt){
+				submitHandler:function(form , evt){
 					evt.preventDefault();
 					//수정된 반 정보를 보낼 데이터 안에 입력.
+					console.log("$(form).serializeObject()", $(form).serializeObject());
 					var updateData = { 
-						schoolId: schoolId,
-						options: "class",
+						options: {
+							conditions: { "schools.school" : schoolId }
+						},
+						"schools.$.class" : $(form).serializeObject().class,
 					};
-					var categoryNum = {elementary: 6, middle: 3, high: 3};
-					var category = $("#updateCategory").val();
 
-					var updatedClass = [];
-
-					for(var i=0; i<categoryNum[category]; i++){
-						var classNum = $("#fieldClass"+(i+1)).val();
-						updateData["schools.$.class."+i] = classNum;
-						updatedClass.push(classNum);
-					}
-									
-					
 					updateProfile(profileId, updateData).then(function(data){
-						var targetSchool;
-						response.schools.map(function(el){
-							if (el.school._id === schoolId){
-								targetSchool = el;
-							}
-						})
-
-						targetSchool.class = updatedClass;
 
 						if (data.success){
+
 							alert("수정되었습니다.");
 							$("#updateClassTPL").html("");
-							$("#profileTPL").html(TPL.EPprofile({
-								profile:response,
-							}));
+							response = data.changedDoc;
+							makeDynamicTPL("#profileTPL", TPL.EPprofile, {profile: response}, profileTPLC.profile(profileId, response, true));				
+
 						}else{
+
 							alert("무슨 문제가 생긴것 같아요...");
 							location.reload();
+
 						}
 					})
 				}

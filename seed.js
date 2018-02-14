@@ -3,7 +3,7 @@ var Profile = require('./models/profile.js');
 var Info = require('./models/info.js');
 var Board = require('./models/board.js');
 var User = require('./models/user.js');
-var schoolData = require('./schoolData.json');
+var schoolData = require('./koreaSchoolData.json');
 var seedData = require('./seedData.js');
 var getRandomInt = require('./utils/testUtils.js')().getRandomInt;
 var fs = require('fs');
@@ -25,31 +25,48 @@ var seedDev = function(){
 		});	
 	});
 
-	p1.then(function(schools){
+	//userData모두 삭제후 seedData기반 user생성.
+	p2 = new Promise(function(resolve, reject){
+		User.remove({}, function(err){
+			User.create(seedData.userList, function(err, users){
+				if(err) reject(err);
+				resolve(users);
+			})			
+		});
+	});
 
+	Promise.all([p1, p2]).then(function(responseArr){
+
+		schools = responseArr[0];
+		users = responseArr[1];
 
 		var defaultClass = {elementary: [100, 200, 300, 400, 500, 600], middle: [100, 200, 300], high: [100, 200, 300]};
 
-		//available한 school만 리스트를 새로 뽑음.
-		var availableSchools = schools.filter(function(el){
-			return el.available === true;
-		});
-		//profileList에 랜덤하게 학교를 배정시켜줌. 초, 중, 고에 따라서!
+		var seedUser = function(obj, userId){
+			obj["user"] = userId;
+		};
+
+		//profileList에 세개의 학교(백영고, 평촌중, 평촌초)를 넣어줌!
+		//방명록 특징, 썰에 유저를 넣어줌!
 		seedData.profileList.forEach(function(el){
-			var randomInt = getRandomInt(availableSchools.length);
-			//하나만저장함, DOLATER, Class도 없음.
 			el.schools = [];
-			var school = availableSchools[randomInt];
-			el.schools.push({school : school._id, class: defaultClass[school.category]});
+			for(var a=0; a<3; a++) el.schools.push({school : schools[a]._id, class: defaultClass[schools[a].category]});
+			
+			if(el.features) for(var b=0; b<el.features.length; b++) seedUser(el.features[b], users[0]);
+			
+			if(el.stories) for(var c=0; c<el.stories.length; c++) seedUser(el.stories[c], users[0]);
+			
+			if(el.replies) for(var d=0; d<el.replies.length; d++) seedUser(el.replies[d], users[0]);
 		});
-		//boardList에 school을 채워줌.
+
+		//boardList에 school을 채워줌 셋중 하나로!
 		seedData.boardList.forEach(function(el){
-			var randomInt = getRandomInt(availableSchools.length);
-			el.school = availableSchools[randomInt]._id;
+			var randomInt = getRandomInt(3);
+			el.school = schools[randomInt]._id;
 		});
 
 		//p2 -> Profile remove - 위에서 채워진 profileList를 바탕으로, profile create
-		p2 = new Promise(function(resolve, reject){
+		p3 = new Promise(function(resolve, reject){
 			Profile.remove({}, function(err){
 				Profile.create(seedData.profileList, function(err, profiles){
 					if(err) reject(err);
@@ -59,7 +76,7 @@ var seedDev = function(){
 		});
 
 		//p3 -> Profile remove - 위에서 채워진 profileList를 바탕으로, profile create
-		p3 = new Promise(function(resolve, reject){
+		p4 = new Promise(function(resolve, reject){
 			Board.remove({}, function(err){
 				Board.create(seedData.boardList, function(err, boards){
 					if(err) reject(err);
@@ -68,15 +85,6 @@ var seedDev = function(){
 			});	
 		});
 
-		//userData모두 삭제후 seedData기반 user생성.
-		p4 = new Promise(function(resolve, reject){
-			User.remove({}, function(err){
-				User.create(seedData.userList, function(err, users){
-					if(err) reject(err);
-					resolve();
-				})			
-			});
-		});
 
 		//infoData모두 삭제후 seedData기반 info생성.
 		/*p5 = new Promise(function(resolve, reject){
