@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 
-    Kakao.init('32a14cfba5363f5cf4d31a39e426e4a9');
+    Kakao.init('6a9cd5c44ae0a61dfc5b951ffe3f4607');
     // 카카오 로그인 버튼을 생성합니다.
     Kakao.Auth.createLoginButton({
       container: '#kakao-login-btn',

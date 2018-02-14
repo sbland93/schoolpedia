@@ -43,12 +43,12 @@ $(document).ready(function(){
 		},
 		submitHandler:function(form,evt){
 			evt.preventDefault();
-			var newReply = $(".newReply").val();
+			var newReply = $("#comment").val();
 			var node = document.createElement("LI");                
 			var replynode = document.createTextNode(newReply);
 
 			node.appendChild(replynode);                             
-			updateBoard(boardId,{options:"reply", $push:{replies:{content:newReply}}}).then(function(data){
+			updateBoard(boardId, {options:"reply", $push:{replies:{content:newReply}}}).then(function(data){
 				if (data.success){
 					console.log('hi');
 					console.log(newReply);
