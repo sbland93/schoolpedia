@@ -10,14 +10,13 @@ module.exports = function(){
 	return {
 		//board 페이지 라우팅
 		board: function(req, res, next){
-			Board.findById(req.params.id)
+			Board.findById(req.params.id).populate('replies.user')
 			.exec(function(err, board){
 				if(err) next(err);
 				if(!board){
-					res.locals.message404 = '해당학교 글은 존재하지 않아요ㅠㅠ';
+					res.locals.message404 = "해당학교 글은 존재하지 않아요ㅠㅠ";
 					return next();
 				}
-				console.log(board.content);
 				res.render('board', {
 					board : boardViewModel(board),
 					pageTestScript: '/qa/tests-board.js'

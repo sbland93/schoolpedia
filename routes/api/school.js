@@ -9,7 +9,7 @@ module.exports = function(app){
 		var query = req.query;
 		//query가 비어있다면
 		if(Object.keys(req.query).length === 0)	query = {available: true};
-		else if(req.query.name)	query = {"name": new RegExp('^'+req.query.name)};
+		else if(req.query.name)	query = {"name": new RegExp(req.query.name)};
 		School.find(query, function(err, schools){
 			if(err) return next(err);
 			if(schools.length === 0) return res.json({

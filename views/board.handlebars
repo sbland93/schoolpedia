@@ -29,7 +29,7 @@
 			<div>
 				{{#each board.replies}}
 					<ul>
-						<li>{{{content}}}</li>
+						<li>{{#isEquals user.anonym ../board.writer}}[글쓴이]{{/isEquals}}{{user.anonym}} {{{content}}}</li>
 					</ul>
 				{{/each}}
 				<ul id="replyList"></ul>
@@ -42,5 +42,6 @@
 
 {{#section 'jquery'}}
 	<script type="text/javascript" src="/js/api/board.js"></script>
+	<script type="text/javascript" src="/js/api/auth.js"></script>
 	<script type="text/javascript" src="/js/controllers/boardController.js"></script>
 {{/section}}

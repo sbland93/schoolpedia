@@ -128,9 +128,12 @@ module.exports = function(app){
 	app.put('/api/board/:id', authHandlers.ajaxIsLoggedIn , function(req, res, next){
 		if(!req.params.id) return next('No Id');
 		Board.findById(req.params.id, function(err, board){
+			console.log("req.body: ", req.body);
 			if(err) return next(err);
 			if(!board) return res.json({type: "Empty", success: false});
-			if(board.isWriter(req.user._id)){
+			var auth = true; //게시글 수정이 아니면, 항상 true로 두고
+			if(req.body.title || req.body.content) auth = board.isWriter(req.user._id); //그것이 게시글 수정이라면, writer인지를 확인한다. 
+			if(auth){
 				board.update(req.body, function(err, response){
 					if(err) return next(err);
 					if(response.nModified === 1){

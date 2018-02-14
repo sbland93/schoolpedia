@@ -7,7 +7,7 @@ var schoolSchema = mongoose.Schema({
 	location: String,
 	description: { type: String, default: "소개글수정" },
 	category: { type: String, enum: ['elementary', 'middle', 'high'] },
-	available: { type: Boolean, default: false },
+	available: { type: Boolean, default: true },
 	up: { type: Number, default: 0 },
 	down: { type: Number, default: 0 },
 	updated_at: {type: Date, default: Date.now },
