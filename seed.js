@@ -3,19 +3,22 @@ var Profile = require('./models/profile.js');
 var Info = require('./models/info.js');
 var Board = require('./models/board.js');
 var User = require('./models/user.js');
-var koreaSchoolData = require('../koreaSchoolData.js')
+var schoolData = require('./schoolData.json');
 var seedData = require('./seedData.js');
 var getRandomInt = require('./utils/testUtils.js')().getRandomInt;
+var fs = require('fs');
+
 
 //Seed All Data From seedData.
 var seedDev = function(){
 
 	var p1,p2,p3,p4,p5;
 
+
 	//p1. School remove -> School create by SeedData
 	p1 = new Promise(function(resolve, reject){
 		School.remove({}, function(err){
-			School.create(seedData.schoolList, function(err, schools){
+			School.create(schoolData, function(err, schools){
 				if(err) reject(err);
 				resolve(schools);
 			});

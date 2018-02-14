@@ -124,45 +124,12 @@ module.exports = function(app){
 
 
 	//id에 해당하는 board을 요청본문을 토대로 업데이트한다.
-	//게시글을 수정하는것과, 댓글을다는것.
+	//게시글을 수정하는것과, 댓글을다는것 => option으로 
 	app.put('/api/board/:id', authHandlers.ajaxIsLoggedIn , function(req, res, next){
 		if(!req.params.id) return next('No Id');
-		if((req.body.options).equals("reply")){
-
-			Board.update({_id:req.params.id},req.body,function(err,response){
-				if(err) console.error(err);
-				if(response.nModified === 1){
-					res.json({
-						success: true,
-						id: req.params.id,
-					});
-				} else {
-					res.json({
-						success: false,
-						message: ''
-					});
-				}
-			})
-		}
-		else{Board.findById(req.params.id, function(err, board){
+		Board.findById(req.params.id, function(err, board){
 			if(err) return next(err);
 			if(!board) return res.json({type: "Empty", success: false});
-			/*if(req.body.options.equals("reply")){
-				board.update({_id:req.params.id},req.body,function(err,response){
-					if(err) return next(err);
-					if(response.nModified === 1){
-						res.json({
-							success: true,
-							_id: req.params.id,
-						});
-					}else {
-						res.json({
-							success: false,
-							message: '',
-						});
-					}
-				});
-			}*/
 			if(board.isWriter(req.user._id)){
 				board.update(req.body, function(err, response){
 					if(err) return next(err);
@@ -182,7 +149,7 @@ module.exports = function(app){
 				res.json({type: "Auth", success: false});
 			}
 		});
-		}		
+				
 	});
 
 
