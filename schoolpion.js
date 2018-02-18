@@ -201,7 +201,7 @@ app.set('port', process.env.PORT || 3000);
 //세션 연결 req.session을 확장한다.
 app.use(require('cookie-parser')(credentials.cookieSecret));
 app.use(require('express-session')({
-	resave: true,
+	resave: false,
 	saveUninitialized: false,
 	secret: credentials.cookieSecret
 }));
@@ -239,7 +239,7 @@ app.use(function(req, res, next){
 app.use(function(req, res, next){
 	console.log(req.user);
 	//로그인 되어있는 상태라면, isLoggedIn(Handlebar context)에 true를 담아준다.
-	if(req.user){
+	if(req.isAuthenticated()){
 		res.locals.isLoggedIn = true;
 		res.locals.userInfo = {
 			id: req.user._id,
@@ -247,6 +247,9 @@ app.use(function(req, res, next){
 			profile: req.user.profile,
 			schools: req.user.schools,
 		};
+	}else{
+		res.locals.isLoggedIn = false;
+		res.locals.userInfo = undefined;
 	}
 	next();
 });
