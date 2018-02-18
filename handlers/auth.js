@@ -26,6 +26,7 @@ module.exports = function(){
 
 		logout : function(req, res, next){
 			req.logout();
+			req.session = null;
 			res.redirect("/");
 		},
 
