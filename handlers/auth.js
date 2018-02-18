@@ -25,9 +25,9 @@ module.exports = function(){
 		}),
 
 		logout : function(req, res, next){
-			req.logout();
-			req.session = null;
-			res.redirect("/");
+			req.session.destroy(function(err){
+				res.redirect('/');
+			});
 		},
 
 		isLoggedIn : function (req, res, next){
