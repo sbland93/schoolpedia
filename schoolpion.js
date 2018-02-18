@@ -201,7 +201,7 @@ app.set('port', process.env.PORT || 3000);
 //세션 연결 req.session을 확장한다.
 app.use(require('cookie-parser')(credentials.cookieSecret));
 app.use(require('express-session')({
-	resave: false,
+	resave: true,
 	saveUninitialized: false,
 	secret: credentials.cookieSecret
 }));
