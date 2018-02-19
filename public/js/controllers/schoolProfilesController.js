@@ -41,12 +41,12 @@ $(document).ready(function(){
 		    });
 
 			console.log("searchData :", searchData);
-			var SPsearchedFriend = TPL.SPsearchedFriend;
+			var SPsearchedProfiles = TPL.SPsearchedProfiles;
 			searchProfilesTest(searchData).then(function(data){
 				if(data.success) {
 					console.log(data);
-					$("#searchedFriendsTPL").html(SPsearchedFriend({
-						profileList:data,
+					$("#searchedFriendsTPL").html(SPsearchedProfiles({
+						profileList:data.profileList,
 					}))
 				}
 			});

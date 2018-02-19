@@ -42,12 +42,7 @@ $(document).ready(function(){
     });
 
 
-    //취소버튼을 누르면 뒤로 가는 controller
-    //DOLATER 단순히 뒤로가면 안될거 같은데..
-    $('.goBack').on('click', function(evt){
-      evt.preventDefault();
-      location.href = document.referrer;
-    });
+
     var EPaddSchool = TPL.EPaddSchool;
     $("#addSchool").on('click',function(evt){
       
@@ -73,9 +68,9 @@ $(document).ready(function(){
           evt.preventDefault();
           var sendingData = $(form).serialize();
           getSchools(sendingData).then(function(data){
-            if(data.length){
+            if(data.success){
               var template2 = TPL.RGsearchedSchools;
-              $("#searchedSchoolsTPL").html(template2({searchedList:data}));
+              $("#searchedSchoolsTPL").html(template2({schoolList:data.schoolList}));
               $(".sendData").on('click',function(evt){
                 evt.preventDefault();
                 var schoolId = $(this).attr("schoolId");

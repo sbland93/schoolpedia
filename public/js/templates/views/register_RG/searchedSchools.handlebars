@@ -1,9 +1,7 @@
 <ul class="schoolList">
-	{{#each searchedList}}
-		<li>{{name}} {{location}}</li><button class="sendData btn btn-default btn-sm" schoolId={{id}} schoolName={{name}}>확인</button></br>
+	{{#each schoolList}}
+		<li>{{name}} ({{location}})</li><button class="sendData btn btn-default btn-sm" schoolId={{id}} schoolName={{name}}>확인</button></br>
+	{{else}}
+		그런학교 없는거같습니다리ㅠㅠ
 	{{/each}}
 </ul>
-
-{{#if noData}}
-	그런학교 없다 ㄹㅇㅠㅠ.
-{{/if}}

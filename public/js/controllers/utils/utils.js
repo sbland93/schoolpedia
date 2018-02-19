@@ -11,7 +11,31 @@ var makeDynamicTPL = function(tag, template, context, templateCtrl){
 
 }
 
-
+//content의 엔터를 유지해주기 위해, 파싱해주는 함수.
 var replaceBr = function(targetObj, targetValue){
 	targetObj[targetValue] = targetObj[targetValue].replace(/\r\n/g,"<br>");
 }
+
+//로그인 여부, 유저객체 정보, 현재 url 등을 받아오는 ajax
+var ajaxAuth = function(){
+
+	return new Promise(function(resolve, reject){
+
+		$.ajax({
+			url: '/authInfo',
+			method: 'GET',
+			success: function(rtnData){
+				resolve(rtnData);
+			},
+			fail: function(rtnData){
+				reject(rtnData);
+			}
+		});
+
+	});
+
+}
+
+
+
+

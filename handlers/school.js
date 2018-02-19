@@ -18,7 +18,7 @@ module.exports = function(){
 					return next();
 				}
 				res.render('newSchool', {
-					schoolInfo: schoolViewModel(school, true),
+					schoolInfo: schoolViewModel(school),
 					pageTestScript: '/qa/tests-newSchool.js'
 				});
 			});

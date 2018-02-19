@@ -11,7 +11,7 @@ var profileTPLC = {
 				evt.preventDefault();
 				if(!isLoggedIn){
 					alert("로그인이 필요한 서비스에요 로그인을 부탁드려요");
-					return location.href = "/login"
+					return location.href = $("#loginBtn").attr("href");
 				}
 				var schoolId = $(this).attr("schoolId");
 
@@ -27,7 +27,7 @@ var profileTPLC = {
 					profileId:profileId,
 				};
 
-				makeDynamicTPL("#updateClassTPL", TPL.EPupdateClass, contextHere, profileTPLC.updateClass(profileId, response, schoolId));
+				makeDynamicTPL("#updateProfileTPL", TPL.EPupdateClass, contextHere, profileTPLC.updateClass(profileId, response, schoolId));
 
 			});	
 		}
@@ -62,7 +62,7 @@ var profileTPLC = {
 					.then(function(data){
 						if(data.success){ //돌아온 데이터로, 값을 바꾸고 재 렌더링한다.
 							alert("추가되었습니다");
-							$("#addFeatureTPL").html("");
+							$("#updateProfileTPL").html("");
 							response = data.changedDoc;
 							var featureData = $(response.features);
 							makePosts(featureData, tplAndContext.features);
@@ -75,7 +75,8 @@ var profileTPLC = {
 			});
 
 			$('#cancelAddFeature').on('click', function(evt){
-				$('#addFeatureTPL').html("");
+				evt.preventDefault();
+				$('#updateProfileTPL').html("");
 			});
 
 		}
@@ -108,7 +109,7 @@ var profileTPLC = {
 					.then(function(data){
 						if(data.success){
 							alert("추가되었습니다");
-							$("#addStoryTPL").html("");
+							$("#updateProfileTL").html("");
 							response = data.changedDoc;
 							var storyData = $(response.stories);
 							makePosts(storyData, tplAndContext.stories);
@@ -121,7 +122,7 @@ var profileTPLC = {
 			});
 
 			$('#cancelAddStory').on('click', function(evt){
-				$('#addStoryTPL').html("");
+				$('#updateProfileTPL').html("");
 			});
 
 		}
@@ -154,7 +155,7 @@ var profileTPLC = {
 					.then(function(data){
 						if(data.success){
 							alert("추가되었습니다");
-							$("#addStoryTPL").html("");
+							$("#updateProfileTPL").html("");
 							response = data.changedDoc;
 							var replyData = $(response.replies);
 							makePosts(replyData, tplAndContext.replies);
@@ -167,7 +168,8 @@ var profileTPLC = {
 			});
 
 			$('#cancelAddReply').on('click', function(evt){
-				$('#addReplyTPL').html("");
+				evt.preventDefault();
+				$('#updateProfileTPL').html("");
 			});
 
 
@@ -196,8 +198,8 @@ var profileTPLC = {
 					var sendingData = $(form).serialize();
 					//학교 검색후에 검색된 학교들이 나오고, 옆에 확인버튼을 클릭하면 학교가 추가된다.
 					getSchools(sendingData).then(function(data){
-						if(data.length){ //검색데이터 결과가 있을시에.
-							$("#searchedSchoolsTPL").html(TPL.EPsearchedSchools({searchedList:data}));
+						if(data.success){ //검색데이터 결과가 있을시에.
+							$("#searchedSchoolsTPL").html(TPL.EPsearchedSchools({schoolList:data.schoolList}));
 							$(".sendData").on('click',function(evt){
 								evt.preventDefault();
 								var self = $(this);
@@ -214,7 +216,7 @@ var profileTPLC = {
 									if (data.success){ //성공시에 button에 attr의 schoolName을 response에 추가하고, 다시 랜더링한다.
 
 										alert("수정되었습니다.");
-										$("#addSchoolTPL").html("");
+										$("#updateProfileTPL").html("");
 										response = data.changedDoc;
 										makeDynamicTPL("#profileTPL", TPL.EPprofile, {profile: response}, profileTPLC.profile(profileId, response, true));				
 
@@ -225,8 +227,6 @@ var profileTPLC = {
 									
 								})
 							});
-						}else{ //검색데이터가 없을시에 noData를 true로 주고 데이터가 없음을 알린다.
-							$("#searchedSchoolsTPL").html(TPL.EPsearchedSchools({noData: true}));
 						}
 					});
 
@@ -238,7 +238,7 @@ var profileTPLC = {
 
 			$("#cancelAddSchool").on('click',function(evt){
 				evt.preventDefault();
-				$("#addSchoolTPL").html("");
+				$("#updateProfileTPL").html("");
 			});
 		}
 	},
@@ -267,7 +267,7 @@ var profileTPLC = {
 						if (data.success){
 
 							alert("수정되었습니다.");
-							$("#updateClassTPL").html("");
+							$("#updateProfileTPL").html("");
 							response = data.changedDoc;
 							makeDynamicTPL("#profileTPL", TPL.EPprofile, {profile: response}, profileTPLC.profile(profileId, response, true));				
 
@@ -283,7 +283,7 @@ var profileTPLC = {
 
 			$("#cancelUpdateClass").on('click',function(evt){
 				evt.preventDefault();
-				$("#updateClassTPL").html("");
+				$("#updateProfileTPL").html("");
 			});	
 
 

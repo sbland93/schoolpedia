@@ -132,7 +132,7 @@ function loadPosts(posts, postsDiv, postsTemplate, contextFn, dynamicClass) {
           }else{
             if(data.type === "Login"){
               alert("로그인이 필요한 서비스에요!");
-              location.href = "/login";
+              return location.href = $("#loginBtn").attr("href");
             }else if(data.type=== "Already"){
               alert("이미 의견이 반영되었어요!");  
             }else {
@@ -159,7 +159,7 @@ function loadPosts(posts, postsDiv, postsTemplate, contextFn, dynamicClass) {
             }else{
               if(data.type === "Login"){
                 alert("로그인이 필요한 서비스입니다.");
-                return location.href = '/login';
+                return location.href = $("#loginBtn").attr("href");
               }
               alert("문제가 생긴것 같습니다!");
             }

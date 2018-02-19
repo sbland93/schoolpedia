@@ -7,14 +7,15 @@
 		<form class="form-horizontal newProfileForm" id="newProfileForm" role="form" action="/api/profile" method="POST">
 			
 			<div class="form-group">
-				<label for="fieldName" class="col-xs-12 col-sm-2 control-label">이름</label>
+				<label for="fieldName" class="col-xs-12 col-sm-2 control-label">* 이름</label>
 				<div class="col-xs-9 col-sm-6 col-md-5">
 					<input type="text" class="form-control" name="name" id="fieldName" required>
 				</div>
 			</div>
 
+
 			<div class="form-group">
-				<label for="gender" class="col-xs-12 col-sm-2 control-label">성별</label>
+				<label for="gender" class="col-xs-12 col-sm-2 control-label">* 성별</label>
 				<div class="col-xs-9 col-sm-6 col-md-5">
 					<input type="radio" name="gender" value="true" id="gender" checked> 남자
 		  			<input type="radio" name="gender" value="false" id="gender"> 여자<br>
@@ -22,11 +23,11 @@
 			</div>
 
 			<div class="form-group">
-				<label for="graduation" class="col-xs-12 col-sm-2 control-label">고등학교 졸업(예정)년도</label>
+				<label for="graduation" class="col-xs-12 col-sm-2 control-label">* 고등학교 졸업(예정)년도</label>
 				
 				<div class="col-xs-9 col-sm-6 col-md-5">
 					<select class="form-control" name="graduation" id="graduation">
-						<option value="0">졸업(예정)년</option>
+						<option value="0">졸업년도선택</option>
 						{{#iterateFromTo 1990 2020}}
 							<option value="{{index}}">{{index}}</option>
 						{{/iterateFromTo}}
@@ -35,30 +36,35 @@
 			</div>
 
 			
+			<!--newProfile에서 schoolInfo를 확인받아 넘겨 만드는 동적 학교 추가 템플릿 -->
 
-			<!--DOLATER Hidden -->
-			<input type="hidden" id="defaultSchoolId" name="schoolId" value="{{schoolInfo.id}}" schoolName="{{schoolInfo.name}}" category="{{schoolInfo.category}}">
-			
+			<input type="hidden" name="schools[0][school]" value="{{schoolInfo.id}}">
 
 			<!-- 학교이름 / input으로 처리하지말것 -->
 			<div class="form-group">
-				<label for="school" class="col-xs-12 col-sm-2 control-label">학교</label>
+				<label for="school" class="col-xs-12 col-sm-2 control-label">* 학교</label>
 				<div class="col-xs-9 col-sm-6 col-md-5">
 					{{schoolInfo.name}}
 				</div>
 			</div>
 
+			<hr />선택▽<br><br>
 			<!-- 학교 category가 elementarySchool이면6번 interate 그렇지 않으면 3번 iterate-->
-			{{#isEquals schoolInfo.category 'elementarySchool'}}
+			{{#isEquals schoolInfo.category 'elementary'}}
 				{{#forLoop 6}}
 				<div class="form-group">
 					<label for="class" class="col-xs-12 col-sm-2 control-label">{{index}}학년 학급</label>
 					<div class="col-xs-9 col-sm-6 col-md-5">
-						<select class="form-control" name="class{{index}}" id="class">
-							<option value="0">기억이 잘안나요</option>
-							{{#forLoop 20}}
-								<option value="{{index}}">{{index}}</option>
-							{{/forLoop}}
+						<select class="form-control" name="schools[0][class]" id="class">
+							{{#iterateFromTo (math index "*" 100) (math (math index "*" 100) "+" 20)}}
+								<option value="{{index}}">
+									{{#ifDefaultClass index}}
+										잘모르겠어요
+									{{else}}
+										{{../index}}
+									{{/ifDefaultClass}}
+								</option>
+							{{/iterateFromTo}}
 						</select>
 					</div>
 				</div>
@@ -69,11 +75,16 @@
 				<div class="form-group">
 					<label for="class" class="col-xs-12 col-sm-2 control-label">{{index}}학년 학급</label>
 					<div class="col-xs-9 col-sm-6 col-md-5">
-						<select class="form-control" name="class{{index}}" id="class">
-							<option value="0">기억이 잘안나요</option>
-							{{#forLoop 20}}
-								<option value="{{index}}">{{index}}</option>
-							{{/forLoop}}
+						<select class="form-control" name="schools[0][class]" id="class">
+							{{#iterateFromTo (math index "*" 100) (math (math index "*" 100) "+" 20)}}
+								<option value="{{index}}">
+									{{#ifDefaultClass index}}
+										잘모르겠어요
+									{{else}}
+										{{../index}}
+									{{/ifDefaultClass}}
+								</option>
+							{{/iterateFromTo}}
 						</select>
 					</div>
 				</div>
@@ -82,11 +93,21 @@
 
 
 			<div class="form-group">
-				<label for="fieldStory" class="col-xs-12 col-sm-2 control-label">특징</label>
+				<label for="fieldStory" class="col-xs-12 col-sm-2 control-label">별명</label>
 				<div class="col-xs-9 col-sm-6 col-md-5">
-					<textarea class="form-control stories" name="feature" required></textarea>
+					<input type="hidden" name="features[0][user]" value="{{userInfo.id}}">
+					<input type="text" class="form-control stories" name="features[0][content]">
 				</div>
 			</div>
+
+			<div class="form-group">
+				<label for="fieldStory" class="col-xs-12 col-sm-2 control-label">이야기</label>
+				<div class="col-xs-9 col-sm-6 col-md-5">
+					<input type="hidden" name="stories[0][user]" value="{{userInfo.id}}">
+					<textarea class="form-control stories" placeholder="학창시절 이야기나, 관련 일화를 적어주세요" name="stories[0][content]"></textarea>
+				</div>
+			</div>
+
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-3">

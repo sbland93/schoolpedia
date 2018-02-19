@@ -1,31 +1,19 @@
 var School = require('../../models/school.js');
+var schoolViewModel = require('../../viewModels/school.js');
 
 module.exports = function(app){
 
-	//열려있는 학교들의 배열을 반환하는 API
 	//query가 있으면 query에 해당하는 school들을 조사
-	//없으면 available = true인 school반환.
 	app.get('/api/school', function(req, res, next){
 		var query = req.query;
 		//query가 비어있다면
-		if(Object.keys(req.query).length === 0)	query = {available: true};
-		else if(req.query.name)	query = {"name": new RegExp(req.query.name)};
+		if(req.query.name) query = {"name": new RegExp(req.query.name)};
 		School.find(query, function(err, schools){
 			if(err) return next(err);
-			if(schools.length === 0) return res.json({
-				success: false,
-				message: 'NO DATA',
+			return res.json({
+				success: true,
+				schoolList: schools.map(schoolViewModel),
 			});
-			res.json(schools.map(function(a){
-				return {
-					name: a.name,
-					id: a._id,
-					location: a.location,
-					category: a.category,
-					updated_at: a.updated_at,
-					available: a.available,
-				}
-			}));
 		});
 	});
 

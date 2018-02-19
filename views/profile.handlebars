@@ -6,64 +6,54 @@
 	<button class="btn btn-lg btn-warning" id="takeProfile" userId={{userInfo.id}}>프로필 차지하기</button>
 	{{/isEquals}}
 {{/unless}}
+
 <div class="btn-group btn-group-justified" role="group" aria-label="...">
-  <div class="btn-group" role="group">
-    <button class="btn btn-default buttonGroup" id="addSchool">학교추가</button>
-  </div>
-  <div class="btn-group" role="group">
-    <button class="btn btn-default buttonGroup" id="addReply">방명록</button>
-  </div>
-  <div class="btn-group" role="group">
-    <button class="btn btn-default buttonGroup" id="addFeature">특징</button>
-  </div>
-  <div class="btn-group" role="group">
-    <button class="btn btn-default buttonGroup" id="addStory">썰</button>
-  </div>
+	<div class="btn-group" role="group">
+		<button class="btn btn-default buttonGroup" id="addSchool">학교추가</button>
+	</div>
+	<div class="btn-group" role="group">
+		<button class="btn btn-default buttonGroup" id="addFeature">별명</button>
+	</div>
+	<div class="btn-group" role="group">
+		<button class="btn btn-default buttonGroup" id="addStory">이야기</button>
+	</div>
+	<div class="btn-group" role="group">
+		<button class="btn btn-default buttonGroup" id="addReply">방명록</button>
+	</div>
 </div>
+
 <div>
-	<div id="addReplyTPL"></div> 
-	<div id="addFeatureTPL"></div>
-	<div id="addStoryTPL"></div> 
+	<!--학교추가, 반수정, 방명록, 특징, 썰추가 템플릿.-->
+	<div id="updateProfileTPL"></div>
 </div>
-<div class="pull-right col-xs-12 col-md-4">
+
+<!-- 특징 column -->
+<div class="pull-left col-xs-12 col-md-4">
 	
-	<div id="updateClassTPL"></div>
-	<!-- 학교추가-->
-	<div id="addSchoolTPL"></div>
-	
-	<p>-특징-</p>
+	<p>**별명**</p>
 	<hr>
 	<div id="features"></div>
 	
-
-	<!--특징추가 버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
-	<div id="addFeatureTPL"></div>
-	
-	
 </div>
 
 
-
-<!-- 특징, 이야기 column-->
-<div class="pull-left col-xs-12 col-sm-10 col-md-8">
+<!-- 썰 column-->
+<div class="pull-left col-xs-12 col-md-4">
 	<!-- 썰 div-->
-	<p>-썰-</p>
+	<p>**이야기**</p>
 	<hr>
 	<div id="stories"></div>
-	
+			
+</div>	
 
-	<!--썰추가 버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
-	<div id="addStoryTPL"></div> 
-	<!-- 방명록 기록칸-->
-	<p>-방명록-</p>
+<!-- 방명록 기록칸-->
+<div class="pull-left col-xs-12 col-md-4">
+	
+	<p>**방명록**</p>
 	<hr>
 	<div id="replies"></div>
 	
-	<!--방명록추가 버튼을 눌렀을때 수정 form 동적생성을 위한 div -->
-	
-
-	
-</div>	
+</div>
 
 
 

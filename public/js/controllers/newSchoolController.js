@@ -1,13 +1,6 @@
 	
 $(document).ready(function(){
 
-	//취소버튼을 누르면 뒤로 가는 controller
-	//DOLATER 단순히 뒤로가면 안될거 같은데..
-	$('.goBack').on('click', function(evt){
-		evt.preventDefault();
-		location.href = document.referrer;
-	});
-
 	// Initialize form validation on the registration form.
 	// It has the name attribute "registration"
 	$(".newSchoolForm").validate({
