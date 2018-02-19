@@ -177,12 +177,38 @@ var handlebars = require('express-handlebars').create({
 			return passedString;
 		},
 
+		//mongoose의 Date Format을 보기좋은 형태로 바꿔주는 helper.
 		dateFormat : function(date){
 			console.log(typeof(date));
 			console.log(typeof(moment(date).format('YYYY-MM-DD')));
 			if(typeof(date) === "object"){
 				return moment(date).format('MM-DD HH:MM');
 			}
+		},
+
+		//주로 innerHelper형태로 사용할텐데, 말그대로 계산해서 값을 리턴해주는 helper
+		math : function(a, which, b){
+			console.log("here");
+			if(which === "*"){
+				return a*b;
+			}else if(which === "+"){
+				return a+b;
+			}else if(which === "-"){
+				return a-b;
+			}else if(which === "/"){
+				return a/b;
+			}else if(which === "%"){
+				return a%b;
+			}
+		},
+
+		//Array안에 있는지 없는지에 따라 렌더링해주는 헬퍼. (ex)반[100, 200, 300]에 있다면 아직 없는거로 하기위해 ) 
+		ifDefaultClass : function(element, block){
+			if([100, 200, 300, 400, 500, 600].indexOf(element) !== -1){ //defaultClass가 맞다면
+				return block.fn(element);
+			}else{
+				return block.inverse(element);
+			}	
 		},
 
 	},
@@ -237,7 +263,9 @@ app.use(function(req, res, next){
 });
 
 app.use(function(req, res, next){
-	console.log(req.user);
+	//현재의 url을 담아서, 보내주어서, login시에 redirect되는 곳을 가리키게 하여 활용한다. main의 #loginBtn의 href 활용.
+	res.locals.urlNow = req.url;
+
 	//로그인 되어있는 상태라면, isLoggedIn(Handlebar context)에 true를 담아준다.
 	if(req.isAuthenticated()){
 		res.locals.isLoggedIn = true;
@@ -253,6 +281,7 @@ app.use(function(req, res, next){
 	}
 	next();
 });
+
 //모든 routing 로드.
 require('./routes/routes.js')(app);
 
@@ -275,9 +304,7 @@ app.use(function(err, req, res, next){
 function startServer() {
 	//해당 미들웨어들을 연결한 후, 서버 실행.
 	var server = app.listen(app.get('port'), function(){
-		console.log('Express started in ' + app.get('env') + 
-			' mode on http://localhost: ' + app.get('port') +
-			 ' ; press Ctrl+C to terminate');
+		console.log('스쿨피온 서버가 ' + app.get('env') + ' 모드로 ' + app.get('port') + ' 포트에서 실행되었습니다. 종료는 Ctrl+C 입니다.');
 	});
 	app.set('server', server);
 }

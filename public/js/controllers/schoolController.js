@@ -19,13 +19,13 @@ $(document).ready(function(){
 		rules: {
 			name:{
 				required: true,
-				minlength: 1,
+				minlength: 2,
 				maxlength: 5,
 			}
 		},
 		// Specify validation error messages
 		messages: {
-			name: "이름은 한글자 이상 다섯글자 이하 입니다리",
+			name: "이름은 두글자 이상 다섯글자 이하 입니다리",
 		},
 		submitHandler: function(form, evt) {
 			//form전송을 막는다.

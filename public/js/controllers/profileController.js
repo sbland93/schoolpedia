@@ -3,10 +3,11 @@ $(document).ready(function(){
 
 	//profileId와, isMyPage(마이페이지이면 "true" 아니면 attr가져올게 없으므로 undefined)
 	//isLoggedIn(로그인중이면 "true" 아니면 attr가져올게 없으므로 undefined)
-	var isLoggedIn, userInfo;
+	var isLoggedIn, userInfo, urlNow;
 	ajaxAuth().then(function(data){
 		isLoggedIn = data.isLoggedIn;
 		userInfo = data.userInfo;
+		urlNow = data.urlNow;
 	});
 
 	var defaultInput = $("#defaultVal");
@@ -144,9 +145,9 @@ $(document).ready(function(){
 				//특징추가 위한 Form 검증.
 				if(!isLoggedIn){
 					alert("로그인이 필요한 서비스에요! 로그인 부탁드릴게요");
-					return location.href = "/login";
+					return location.href = $("#loginBtn").attr("href");
 				}
-				makeDynamicTPL("#addFeatureTPL", TPL.EPaddFeature, context, profileTPLC.addFeature(profileId, response, tplAndContext));				
+				makeDynamicTPL("#updateProfileTPL", TPL.EPaddFeature, context, profileTPLC.addFeature(profileId, response, tplAndContext));				
 			});
 
 
@@ -156,9 +157,9 @@ $(document).ready(function(){
 				//썰추가 위한 Form 검증.
 				if(!isLoggedIn){
 					alert("로그인이 필요한 서비스에요! 로그인 부탁드릴게요");
-					return location.href = "/login";
+					return location.href = $("#loginBtn").attr("href");
 				}
-				makeDynamicTPL("#addStoryTPL", TPL.EPaddStory, context, profileTPLC.addStory(profileId, response, tplAndContext));
+				makeDynamicTPL("#updateProfileTPL", TPL.EPaddStory, context, profileTPLC.addStory(profileId, response, tplAndContext));
 			});
 
 			//방명록추가 버튼은 클릭시에 동적으로 방명록 추가 폼을 생성한다.
@@ -167,9 +168,9 @@ $(document).ready(function(){
 				//방명록추가 위한 Form 검증.
 				if(!isLoggedIn){
 					alert("로그인이 필요한 서비스에요! 로그인 부탁드릴게요");
-					return location.href = "/login";
+					return location.href = $("#loginBtn").attr("href");
 				}
-				makeDynamicTPL("#addReplyTPL", TPL.EPaddReply, context, profileTPLC.addReply(profileId, response, tplAndContext, userInfo));
+				makeDynamicTPL("#updateProfileTPL", TPL.EPaddReply, context, profileTPLC.addReply(profileId, response, tplAndContext, userInfo));
 			});
 
 
@@ -179,9 +180,9 @@ $(document).ready(function(){
 				//학교 추가를 위한 Form 검증.
 				if(!isLoggedIn){
 					alert("로그인이 필요한 서비스에요! 로그인 부탁드릴게요");
-					return location.href = "/login";
+					return location.href = $("#loginBtn").attr("href");
 				}
-				makeDynamicTPL("#addSchoolTPL", TPL.EPaddSchool, context, profileTPLC.addSchool(profileId, response));
+				makeDynamicTPL("#updateProfileTPL", TPL.EPaddSchool, context, profileTPLC.addSchool(profileId, response));
 			});
 
 

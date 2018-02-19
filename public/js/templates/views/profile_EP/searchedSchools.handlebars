@@ -1,11 +1,9 @@
 <!--프로필페이지에서 학교추가후, 검색시에 나오는 Template. -->
 <ul class="schoolList">
-	{{#each searchedList}}
+	{{#each schoolList}}
 		<li>{{name}} ({{location}})</li>
 		<button class="sendData btn btn-default btn-sm" schoolId="{{id}}" category="{{category}}" schoolName="{{name}}">확인</button></br>
+	{{else}}
+		그런학교 없다 ㄹㅇㅠㅠ.
 	{{/each}}
 </ul>
-
-{{#if noData}}
-	그런학교 없다 ㄹㅇㅠㅠ.
-{{/if}}

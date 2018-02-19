@@ -1,0 +1,14 @@
+<ul class="profileList">
+	{{#each profileList}}
+		<a href="/profile/{{_id}}">
+			<li>
+			<p>{{#each schools}}
+				{{school.name}}
+			{{/each}}</p>
+			<p>이름:{{name}} 졸업년도: {{graduation}} {{school.name}}</p>
+			</li>
+		</a>
+	{{else}}
+		해당 검색 내용으로는, 결과가 없는거 같아요! 친구의 프로필이 없다면, 회원님이 생성해주세요!
+	{{/each}}
+</ul>

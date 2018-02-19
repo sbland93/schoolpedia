@@ -39,17 +39,30 @@ var helpers = {
 		var accum = '';
 		var grade = Math.round(classVal / 100); //207 이면 2가 return되므로, 학년을 가리킨다.
 		var base = grade * 100; //2학년이면 200부터.
-		console.log("classVal:", classVal);
-		console.log("grade:", grade);
-		console.log("base:", base);
 		for(var i=base; i< base+20; i++){
 			accum +=block.fn({index: i, isDefault: classVal===i});
 		}
 		return accum;
 	},
+
+	math : function(a, which, b){
+		console.log("here");
+		if(which === "*"){
+			return a*b;
+		}else if(which === "+"){
+			return a+b;
+		}else if(which === "-"){
+			return a-b;
+		}else if(which === "/"){
+			return a/b;
+		}else if(which === "%"){
+			return a%b;
+		}
+	},
+
 }
 
-var helperStrings = ["isEquals","indexLoop", "forLoop", "ifDefaultClass", "iterateClass"];
+var helperStrings = ["isEquals","indexLoop", "forLoop", "ifDefaultClass", "iterateClass", "math"];
 
 
 helperStrings.forEach(function(el){

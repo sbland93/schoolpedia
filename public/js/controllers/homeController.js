@@ -2,20 +2,29 @@
 //Home Controller
 $(document).ready(function(){
 
+
 	var searchedSchoolList = TPL.HMsearchedSchools;
-
-	$('#searchSchool').submit(function(evt){
-		evt.preventDefault();
-
-		var $form = $(this),
-			nameOfSchool = $form.find('input[name="name"]').val().split(' ').join(''),
-			url = $form.attr('action');
-
-		getSchools({name: nameOfSchool}).then(function(data){
-			console.log(data);
-			if(data.length) return $('#searchResult').html(searchedSchoolList({searchedList : data}));
-			if(!data.success) return $('#searchResult').html(searchedSchoolList({noData : true}));
-		});
+	
+	$(".searchSchoolForm").validate({
+		rules:{
+			name:{
+				minlength:2,
+				required:true,
+			},
+		},
+		messages:{
+			name:"두글자 이상의 학교명을 입력해주세요.",
+		},
+		submitHandler:function(form,evt){
+			evt.preventDefault();
+			var sendingData = $(form).serialize();
+			
+			getSchools(sendingData).then(function(data){
+				if(data.success){
+					return $('#searchResult').html(searchedSchoolList({schoolList : data.schoolList}));
+				}
+			});
+		}
 	});
 
 });

@@ -1,12 +1,11 @@
 
 <ul class="schoolList">
-	{{#each searchedList}}
+	{{#each schoolList}}
 		<a href="/school/{{id}}">
 			<li>{{name}} ({{location}})</li>
 		</a>
+	{{else}}
+		그런학교 없다 ㄹㅇㅠㅠ.
 	{{/each}}
 </ul>
 
-{{#if noData}}
-	그런학교 없다 ㄹㅇㅠㅠ.
-{{/if}}

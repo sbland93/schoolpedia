@@ -86,8 +86,8 @@
 								{{/if}}
 								<li><a href="/logout">로그아웃</a></li>
 							{{else}}
-								<li><a href="/login">로그인</a></li>
-								<li><a href="/register">회원가입</a></li>
+								<li><a href="/login?redirect={{urlNow}}" id="loginBtn">로그인</a></li>
+								<li><a href="/register?redirect={{urlNow}}" id="registerBtn">회원가입</a></li>
 							{{/if}}
 							<li><a href="/info">공지사항</a></li>
 						</ul>

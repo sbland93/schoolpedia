@@ -6,6 +6,7 @@ module.exports = function(){
 	
 		// '/login' Page Routing.
 		login: function(req, res, next){
+			if(req.query && req.query.redirect) req.session.returnTo = req.query.redirect;
 			res.render('login',{});
 		},
 		
@@ -15,12 +16,12 @@ module.exports = function(){
 		},
 
 		localSignup : passport.authenticate('local', {
-			successRedirect: '/newsFeed',
+			successReturnToOrRedirect : '/newsFeed',
 			failureRedirect: '/register',
 		}),
 
 		localLogin : passport.authenticate('local', {
-			successRedirect: '/newsFeed',
+			successReturnToOrRedirect: '/newsFeed',
 			failureRedirect: '/login',
 		}),
 
@@ -47,12 +48,14 @@ module.exports = function(){
 
 		//Loggin 상태와, usrInfo를 담아 보내준다.
 		ajaxAuth : function(req, res, next){
+			console.log("req.url : ", req.url);
 			if(req.isAuthenticated()){
-				return res.json({isLoggedIn: true, userInfo : userViewModel(req.user)});
+				return res.json({success: true, isLoggedIn: true, userInfo : userViewModel(req.user), url: req.url});
 			} else {
-				return res.json({isLoggedIn: false});
+				return res.json({success: true, isLoggedIn: false, url: req.url});
 			}
 		},
+
 
 		isAdmin : function(req, res, next){
 			if(req.isAuthenticated()){
@@ -67,6 +70,7 @@ module.exports = function(){
 				return res.render('404');
 			}
 		},
+
 
 	}
 }

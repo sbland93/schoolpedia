@@ -25,10 +25,12 @@ module.exports = function(app){
 
 	//사용자 관리 페이지 라우팅.
 	app.get('/myControll', authHandlers.isLoggedIn, homeHandlers.myControll);
+
 	//login 페이지 라우팅.
 	app.get('/login', authHandlers.login);
+
 	//newsfeed 페이지 라우팅.
-	app.get('/newsFeed',authHandlers.isLoggedIn, homeHandlers.newsFeed);
+	app.get('/newsFeed', authHandlers.isLoggedIn, homeHandlers.newsFeed);
 	//회원가입 페이지 라우팅.
 	app.get('/register', authHandlers.register);
 
@@ -56,17 +58,17 @@ module.exports = function(app){
 	//profile 페이지 라우팅
 	//DOLATER !profile
 	app.get('/profile/search', profileHandlers.searchProfiles);
+	
+	//rendering Create Profile Form(Step1)
+	app.get('/profile/newOne', authHandlers.isLoggedIn, profileHandlers.newProfileOne);
+
+	//rendering Create Profile Form(Step2)
+	app.get('/profile/newTwo', authHandlers.isLoggedIn, profileHandlers.newProfileTwo);
 
 	app.get('/profile/:id', profileHandlers.profile);
 
 	//rendering Update Profile Form
 	app.get('/profile/:id/update', profileHandlers.updateProfile);
-
-	//rendering Create Profile Form(Step1)
-	app.get('/school/:id/profile/newOne', profileHandlers.newProfileOne);
-
-	//rendering Create Profile Form(Step2)
-	app.get('/school/:id/profile/newTwo', profileHandlers.newProfileTwo);
 
 	//board 페이지 라우팅
 	app.get('/board/search', boardHandlers.searchBoards);

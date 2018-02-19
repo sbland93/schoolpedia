@@ -1,0 +1,42 @@
+<!--newProfile에서 schoolInfo를 확인받아 넘겨 만드는 동적 학교 추가 템플릿 -->
+
+
+<!-- 학교이름 / input으로 처리하지말것 -->
+<div class="form-group">
+	<label for="school" class="col-xs-12 col-sm-2 control-label">학교</label>
+	<div class="col-xs-9 col-sm-6 col-md-5">
+		{{schoolInfo.name}}
+	</div>
+</div>
+
+<!-- 학교 category가 elementarySchool이면6번 interate 그렇지 않으면 3번 iterate-->
+{{#isEquals schoolInfo.category 'elementarySchool'}}
+	{{#forLoop 6}}
+	<div class="form-group">
+		<label for="class" class="col-xs-12 col-sm-2 control-label">{{index}}학년 학급</label>
+		<div class="col-xs-9 col-sm-6 col-md-5">
+			<select class="form-control" name="class{{index}}" id="class">
+				<option value="0">기억이 잘안나요</option>
+				{{#forLoop 20}}
+					<option value="{{index}}">{{index}}</option>
+				{{/forLoop}}
+			</select>
+		</div>
+	</div>
+	{{/forLoop}}
+
+{{else}}
+	{{#forLoop 3}}
+	<div class="form-group">
+		<label for="class" class="col-xs-12 col-sm-2 control-label">{{index}}학년 학급</label>
+		<div class="col-xs-9 col-sm-6 col-md-5">
+			<select class="form-control" name="class{{index}}" id="class">
+				<option value="0">기억이 잘안나요</option>
+				{{#forLoop 20}}
+					<option value="{{index}}">{{index}}</option>
+				{{/forLoop}}
+			</select>
+		</div>
+	</div>
+	{{/forLoop}}
+{{/isEquals}}

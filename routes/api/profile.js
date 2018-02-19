@@ -166,11 +166,6 @@ module.exports = function(app){
 		
 	});
 
-	/*Item.find({}).populate({
-	    path: 'tags',
-	    match: { tagName: { $in: ['funny', 'politics'] }}
-	})*/
-
 
 	//해당 id의 profile을 available상태로 만들고 응답은 success를 담아준다.
 	app.get('/api/profile/:id', function(req, res, next){
@@ -236,9 +231,8 @@ module.exports = function(app){
 		console.log("target:", target);
 
 		Profile.findOneAndUpdate(target, query, {new: true}, function(err, doc){
-			if(err) return res.json({success: false, type: "Others"});
-			console.log("here");
-			doc.populate('schools.school', function(err, rtnDoc){
+			if(err || !doc) return res.json({success: false, type: "Others"});
+			doc.populate('schools.school replies.user', function(err, rtnDoc){
 				if(err) return res.json({success: false});
 				return res.json({success: true, changedDoc: doc});
 			})

@@ -42,6 +42,7 @@ var schoolSchema = mongoose.Schema({
 //school의 reference.
 //DOLATER school required 함.
 var profileSchema = mongoose.Schema({
+	writer: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	schools : [ schoolSchema ],
 	name: String,
 	birth: { type: Number, min: 000000, max: 999999 },

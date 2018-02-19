@@ -51,7 +51,7 @@ $(document).ready(function(){
 			evt.preventDefault();
 			if(!isLoggedIn){
 				alert("로그인이 필요한 서비스입니다.");
-				location.href = '/login';
+				return location.href = $("#loginBtn").attr("href");
 			}
 			var newReply = $("#comment").val();
 			var node = document.createElement("LI");                

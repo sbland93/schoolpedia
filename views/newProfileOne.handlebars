@@ -1,27 +1,30 @@
 
-<!--DOLATER Hidden -->
-<input type="hidden" name="id" value="{{schoolInfo.id}}" id="schoolId">
 
 <header>
-	먼저, 이미 찾으려는 학생이 있는지 확인해 볼까요.
+	어디학교 학생인가요?
 </header>
 <div class="row">
-	<div class="col-md-offset-1">
-		<form class="form-horizontal searchProfileForm" role="form" action="/api/profile" method="GET">
-			<input class="span2" id="appendedInputButton" type="text" name="name" placeholder="친구이름.!!">
-			<button class="btn btn-default buttonGroup" type="submit">검색!</button>
+	{{#if schoolInfo}}
+		<a href="/profile/newTwo?school={{schoolInfo.id}}" class="btn btn-default">{{schoolInfo.name}} 학생이라면 Click!</a>		
+	{{/if}}
+
+	<div class="col-md-offset-2">
+		
+		<form class="form-horizontal searchSchoolForm" role="form" action="/api/school" method="GET">
+			<input type="text" name="name" placeholder="학교이름 검색">
+			<button class="btn btn-default buttonGroup" type="submit">검색</button>
 		</form>
 
 
 		<br />
 		<!--검색리스트 목록 !-->
-		<div id="searchedProfileListTPL"></div>
+		<div id="searchedSchoolsTPL"></div>
 	</div>
 </div>
 
 
 
 {{#section 'jquery'}}
-	<script type="text/javascript" src="/js/api/profile.js"></script>
+	<script type="text/javascript" src="/js/api/school.js"></script>
 	<script type="text/javascript" src="/js/controllers/newProfileOneController.js"></script>
 {{/section}}

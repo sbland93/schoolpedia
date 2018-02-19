@@ -30,30 +30,31 @@ module.exports = function(){
 
 
 		//rendering Create Profile Form(Step1)
+		//query가 함께 날아오면 ( 학교페이지에서 생성버튼을 누른다면 학교를 추천해준다.)
 		newProfileOne: function(req, res, next){
-			School.findById(req.params.id, function(err, school){
-				if(err) next(err);
-				if(!school){
-					res.locals.message404 = '해당학교 페이지는 존재하지 않아요ㅠㅠ';
-					return next();
-				}
-				res.render('newProfileOne', {
-					schoolInfo: schoolViewModel(school, true),
-					pageTestScript: '/qa/tests-newProfile.js'
+			
+			console.log(req.query);
+			if(!req.query || !req.query.school) return res.render('newProfileOne');
+
+			if(req.query.school){
+				School.findById(req.query.school , function(err, school){
+					if(err) return next(err);
+					return res.render('newProfileOne', {
+						schoolInfo: schoolViewModel(school),
+						pageTestScript: '/qa/tests-newProfile.js'
+					});
 				});
-			});
+			}
 		},
 
 		//rendering Create Profile Form(Step2)
 		newProfileTwo: function(req, res, next){
-			School.findById(req.params.id, function(err, school){
-				if(err) next(err);
-				if(!school){
-					res.locals.message404 = '해당학교 페이지는 존재하지 않아요ㅠㅠ';
-					return next();
-				}
-				res.render('newProfileTwo', {
-					schoolInfo: schoolViewModel(school, true),
+			if(!req.query || !req.query.school) return res.render('newProfileOne');
+
+			School.findById(req.query.school , function(err, school){
+				if(err) return next(err);
+				return res.render('newProfileTwo', {
+					schoolInfo: schoolViewModel(school),
 					pageTestScript: '/qa/tests-newProfile.js'
 				});
 			});
@@ -121,7 +122,7 @@ module.exports = function(){
 			queryObject = {$and : [data1, data2, data3]};
 			console.log(queryObject);
 			//검색후에 json응답.
-			Profile.find(queryObject, function(err, profiles){
+			Profile.find(queryObject).populate('schools.school').exec(function(err, profiles){
 				if(err) return next(err);
 				return res.render('profileSearch', {profileList: profiles});
 			});

@@ -25,9 +25,9 @@ var newsFeedTPLC = {
 					var sendingData = $(form).serialize();
 					//user정보에 학교아이디를 추가하고 성공시에, reload와 함께, 학교게시물을 보여준다.
 					getSchools(sendingData).then(function(data){
-						if(data.length){
-							var template2 = TPL.RGsearchedSchools;
-							$("#searchedSchoolsTPL").html(template2({searchedList:data}));
+						if(data.success){
+							var NFsearchedSchools = TPL.NFsearchedSchools;
+							$("#searchedSchoolsTPL").html(NFsearchedSchools({schoolList : data.schoolList}));
 							$(".sendData").on('click',function(evt){
 								evt.preventDefault();
 								var schoolId = $(this).attr("schoolId");

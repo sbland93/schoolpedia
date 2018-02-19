@@ -19,7 +19,11 @@ $(document).ready(function(){
 				},
 			});
 		});
-	}	
+	}
+
+	$.validator.addMethod("koreanName", function(value, element) {
+	    return this.optional(element) || /^[가-힣]{2,4}$/.test(value);
+	}, "두글자에서 네글자 사이의 한국이름을 입력해주세요");
 
 	//UP button을 클릭시에, 데이터베이스에서 +1해주고, participant에 up을 누른 유저를 추가한다.
 	$(".upBoard").on('click', function(evt){
@@ -34,7 +38,7 @@ $(document).ready(function(){
 			}else{
 				if(data.type === "Login"){
 					alert("로그인이 필요한 서비스에요!");
-					location.href = "/login";
+					return location.href = $("#loginBtn").attr("href");
 				}else if(data.type=== "Already"){
 					alert("이미 의견이 반영되었어요!");	
 				}
@@ -55,7 +59,7 @@ $(document).ready(function(){
 			}else{
 				if(data.type === "Login"){
 					alert("로그인이 필요한 서비스에요!");
-					location.href = "/login";
+					return location.href = $("#loginBtn").attr("href");
 				}else if(data.type=== "Already"){
 					alert("이미 의견이 반영되었어요!");	
 				}
@@ -82,23 +86,22 @@ $(document).ready(function(){
 			
 			getSchools(sendingData).then(function(data){
 				console.log(data);
-				if(data.length) return $('#mainSearchResult').html(searchedSchoolList({searchedList : data}));
-				if(!data.success) return $('#mainSearchResult').html(searchedSchoolList({noData : true}));
+				if(data.success) return $('#mainSearchResult').html(searchedSchoolList({schoolList : data.schoolList}));
 			});
 		}
-	})
+	});
 
 	//navBar에 친구검색폼. 
 	$(".mainSearchProfileForm").validate({
 		rules:{
 			name:{
 				required:true,
-				minlength:1,
+				minlength:2,
 				maxlength:5,
 			}
 		},
 		messages:{
-			name:"한글자 이상입니다.",
+			name:"두글자 이상의 학생이름을 입력해주세요.",
 		},
 		submitHandler:function(form,evt){
 			evt.preventDefault();
@@ -106,6 +109,8 @@ $(document).ready(function(){
 			location.href = "/profile/search?q="+profileName+"&fields=only";
 			
 		}
-	})
+	});
+
+
 
 })
