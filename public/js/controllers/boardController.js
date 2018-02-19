@@ -58,7 +58,7 @@ $(document).ready(function(){
 			var replynode = document.createTextNode(newReply);
 
 			node.appendChild(replynode);                             
-			updateBoard(boardId, {$push: { replies: { user:userInfo.id, content:newReply } } }).then(function(data){
+			updateBoard(boardId, {$push: { replies: { user:userInfo.id, content : newReply } } }).then(function(data){
 				if (data.success){
 					document.getElementById("replyList").appendChild(node);
 				}else{

@@ -44,7 +44,7 @@ $(document).ready(function(){
 			searchProfilesTest(searchData).then(function(data){
 				if(data.success) {
 					console.log(data);
-					$("#searchedFriendsTPL").html(SPsearchedProfiles({
+					$("#searchedFriendsTPL").html(PSsearchedProfiles({
 						profileList:data.profileList,
 					}))
 				}
