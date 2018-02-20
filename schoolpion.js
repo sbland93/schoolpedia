@@ -14,7 +14,8 @@ var app = express();
 var Boards = require('./models/board.js');
 var Profiles = require('./models/profile.js');
 var Schools = require('./models/school.js');
-var Users = require('./models/user.js')
+var Users = require('./models/user.js');
+
 
 
 //uncaughtError를 처리하기 위해서 domain생성 후 연결.

@@ -88,14 +88,14 @@ var seedDev = function(){
 
 
 		//infoData모두 삭제후 seedData기반 info생성.
-		/*p5 = new Promise(function(resolve, reject){
+		p5 = new Promise(function(resolve, reject){
 			Info.remove({}, function(err){
 				Info.create(seedData.infoList, function(err, infos){
 					if(err) reject(err);
 					resolve();
 				})			
 			});
-		}); */
+		});
 
 		return Promise.all([p2,p3,p4])
 	})
