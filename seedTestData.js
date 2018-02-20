@@ -1,5 +1,8 @@
 var bcrypt = require('bcrypt-nodejs');
-var credentials = require('./credentials.js');
+
+
+
+
 
 module.exports = {
 
@@ -14,7 +17,24 @@ module.exports = {
 		}	
 	],
 
-	userList: credentials.userList,
+	userList: [
+		{
+			name: "김승범",
+			kakaoEmail: "Admin",
+			email: "rltmqj@gmail.com",
+			password: bcrypt.hashSync("123098", bcrypt.genSaltSync(8), null),
+			anonym: bcrypt.hashSync(this.kakaoEmail, bcrypt.genSaltSync(8), null).substring(20, 28),
+			graduation:"1972",
+		},
+		{
+			name: "한용희",
+			kakaoEmail: "Admin",
+			email: "hyh4829@naver.com",
+			password: bcrypt.hashSync("930729", bcrypt.genSaltSync(8), null),
+			anonym: bcrypt.hashSync(this.kakaoEmail, bcrypt.genSaltSync(8), null).substring(20, 28),
+			graduation:"2012",
+		}
+	],
 
 	profileList : [
 		{
@@ -106,6 +126,50 @@ module.exports = {
 		},
 		{
 			name: '장세웅',
+			birth: 930312,
+			graduation: 2012,
+			gender: true,
+			stories: [
+				{content: '이야기1', up: 7, down: -1},
+				{content: '이야기2', up: 6, down: -1},
+				{content: '이야기3', up: 5, down: -1},
+				{content: '이야기4', up: 4, down: -1},
+				{content: '이야기5', up: 3, down: -1},
+				{content: '이야기6', up: 2, down: -1},
+				{content: '이야기6', up: 2, down: -1},
+				{content: '이야기6', up: 2, down: -1},
+				{content: '이야기6', up: 2, down: -1},
+				{content: '이야기6', up: 2, down: -1},
+				{content: '이야기6', up: 2, down: -1},
+				{content: '이야기6', up: 2, down: -1},
+				{content: '이야기6', up: 2, down: -1},
+				{content: '이야기6', up: 2, down: -1},
+				{content: '이야기6', up: 2, down: -1},
+				{content: '이야기6', up: 2, down: -1},
+				{content: '이야기6', up: 2, down: -1},
+				{content: '이야기6', up: 2, down: -1},
+				{content: '이야기7', up: 1, down: -1},
+			],
+			replies: [
+				{content: '방명록1', up: 2, down: -2},
+				{content: '방명록2', up: 3, down: -2},
+				{content: '방명록3', up: 4, down: -2},
+				{content: '방명록4', up: 5, down: -2},
+				{content: '방명록5', up: 6, down: -2},
+				{content: '방명록6', up: 7, down: -2},
+				{content: '방명록7', up: 8, down: -2},
+			],
+			features: [
+				{content: '특징1', up: 7, down: -3},
+				{content: '특징2', up: 6, down: -4},
+				{content: '특징3', up: 5, down: -5},
+				{content: '특징4', up: 4, down: -6},
+				{content: '특징5', up: 3, down: -1},
+				{content: '특징6', up: 2, down: -2},
+			]
+		},
+		{
+			name: '전철민',
 			birth: 930312,
 			graduation: 2012,
 			gender: true,

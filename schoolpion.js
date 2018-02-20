@@ -102,7 +102,9 @@ switch(app.get('env')){
 		require('./seed.js').development();
 		break;
 	case 'production' :
+		//production에서는 실행하지 않는다.
 		mongoose.connect(credentials.mongo.production.connectionString, opts);
+		require('./seed.js').production();
 		break;
 	//test환경에서는, 완전히 독립적이게 유지하는게 좋을것이다.
 	case 'test' :

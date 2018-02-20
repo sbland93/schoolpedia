@@ -1,5 +1,6 @@
 var passport = require('passport');
 var userViewModel = require('../viewModels/user.js');
+var credentials = require('../credentials.js');
 
 module.exports = function(){
 	return {
@@ -59,7 +60,7 @@ module.exports = function(){
 
 		isAdmin : function(req, res, next){
 			if(req.isAuthenticated()){
-				if(req.user.kakaoEmail === "Admin"){ //어드민일경우 kakaoEmail에 "Admin"을 저장해둔다.
+				if(req.user.kakaoEmail === credentials.adminUserInfo.kakaoEmail){ 
 					return next();
 				}else{
 					res.status(404);

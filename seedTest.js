@@ -67,7 +67,10 @@ var seedDev = function(){
 	
 }
 
+
+
+
 module.exports =  {
 	development: seedDev,
-	test: seedClearTest,
+	production: seedProducttion,
 };
