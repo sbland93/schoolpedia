@@ -27,7 +27,7 @@ module.exports = {
 		name: "관리자",
 		kakaoEmail: "tmznfvldhszld@tmznfvldhszld.tmznfvldhszld",
 		email: "admin@admin.admin",
-		password: bcrypt.hashSync("1234", bcrypt.genSaltSync(8), null),
+		password: bcrypt.hashSync("930312", bcrypt.genSaltSync(8), null),
 		anonym: "관리자",
 		graduation: 2012,
 	},
