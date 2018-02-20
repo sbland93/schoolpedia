@@ -4,7 +4,7 @@ var Info = require('./models/info.js');
 var Board = require('./models/board.js');
 var User = require('./models/user.js');
 var schoolData = require('./koreaSchoolData.json');
-var seedData = require('./seedData.js');
+var seedTestData = require('./seedTestData.js');
 var getRandomInt = require('./utils/testUtils.js')().getRandomInt;
 var fs = require('fs');
 

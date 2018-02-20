@@ -109,7 +109,7 @@ var profileTPLC = {
 					.then(function(data){
 						if(data.success){
 							alert("추가되었습니다");
-							$("#updateProfileTL").html("");
+							$("#updateProfileTPL").html("");
 							response = data.changedDoc;
 							var storyData = $(response.stories);
 							makePosts(storyData, tplAndContext.stories);

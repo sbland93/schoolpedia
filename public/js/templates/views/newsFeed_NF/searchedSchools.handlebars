@@ -1,9 +1,7 @@
 <ul class="schoolList">
 	{{#each schoolList}}
-		<a href="/school/{{id}}">
-			<li>{{name}} ({{location}})</li>
-		</a>
+		<li>{{name}} ({{location}})</li><button class="sendData btn btn-default btn-sm" schoolId={{id}} schoolName={{name}}>확인</button></br>
 	{{else}}
-		그런학교 없다 ㄹㅇㅠㅠ.
+		그런학교 없는거같습니다리ㅠㅠ
 	{{/each}}
 </ul>
