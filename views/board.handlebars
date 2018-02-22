@@ -30,7 +30,7 @@
 			<div>
 				{{#each board.replies}}
 					<ul>
-						<li>{{#isEquals user.anonym ../board.writer}}[글쓴이]{{/isEquals}}{{user.anonym}} {{{content}}}</li>
+						<li> {{{content}}} -{{#isEquals user.anonym ../board.writer}}[글쓴이]{{/isEquals}}{{user.anonym}}-</li>
 					</ul>
 				{{/each}}
 				<ul id="replyList"></ul>
