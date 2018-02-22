@@ -8,7 +8,7 @@
 	<div class="col-md-offset-4">
 		
 		{{#each profile.schools}}
-			<span>학교</span>: <a class="updateClass" schoolId={{school._id}}>{{school.name}}</a> {{#if ../isMyPage}} <button class="manageProfile btn btn-sm btn-default" target="schools" targetId="{{school._id}}">삭제</button> {{/if}}
+			<span>학교</span>: <a class="updateClass" schoolId={{school._id}}>{{school.name}}</a> {{#if ../isMyPage}} <button class="manageProfile btn btn-default btn-sm buttonGroup" target="schools" targetId="{{school._id}}">삭제</button> {{/if}}
 			<span>학급</span>:
 			{{#each class}}
 				{{#ifDefaultClass this}}
