@@ -63,6 +63,7 @@ $(document).ready(function(){
 			updateBoard(boardId, {$push: { replies: { user:userInfo.id, content : newReply } } }).then(function(data){
 				if (data.success){
 					document.getElementById("replyList").appendChild(node);
+					$("#comment").val("");
 				}else{
 					alert("문제가 생긴것 같아요!");
 					location.reload();

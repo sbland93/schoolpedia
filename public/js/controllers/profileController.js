@@ -96,8 +96,7 @@ $(document).ready(function(){
     	if(response.success){
     		//takeProfile은 원래 false인데, user가 profile을 차지하지 않았고, 프로필명과 유저이름이 같다면 페이지를 차지하는 버튼을 만들어주기 위해 true로 바꾼다.
     		var takeProfile = false;
-    		console.log(userInfo.profile);
-    		if(!userInfo.profile && response.name === userInfo.name) takeProfile = true;
+    		if(userInfo !== undefined && !userInfo.profile && response.name === userInfo.name) takeProfile = true;
     		var context = {profile: response, isMyPage: isMyPage, takeProfile: takeProfile };
 	    	
 			makeDynamicTPL("#profileTPL", TPL.EPprofile, context, profileTPLC.profile(profileId, response, isLoggedIn));				

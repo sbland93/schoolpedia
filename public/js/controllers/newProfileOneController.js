@@ -23,7 +23,7 @@ $(document).ready(function(){
 			
 			//검색내용에 해당하는 프로필을 ajax로 가져오고 결과에 해당하는 템플릿을 동적생성.
 			getSchools(sendingData).then(function(data){
-				console.log("Data: ", data);
+				$('#searchedSchoolsTPL').html("");
 				$('#searchedSchoolsTPL').html(NPOsearchedSchools({schoolList: data.schoolList}));
 			}).catch(function(err){
 				alert(err);

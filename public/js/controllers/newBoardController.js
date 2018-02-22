@@ -7,7 +7,7 @@ $(".newBoardForm").validate({
 		//제목은 5자 이상, 25자 이하.
 		title:{
 			required: true,
-			minlength: 5,
+			minlength: 3,
 			maxlength: 25,
 		},
 		content:{
@@ -18,7 +18,7 @@ $(".newBoardForm").validate({
 	},
 	// Specify validation error messages
 	messages: {
-		title: "제목은 5글자 이상, 25글자 이하로 적어줘",
+		title: "제목은 3글자 이상, 25글자 이하로 적어줘",
 		content: "내용은 1글자 이상, 500글자 이하로 적어줘",
 	},
 	//글생성 버튼을 클릭시 글 생성후, 작성된 게시글페이지로 이동.
@@ -26,14 +26,6 @@ $(".newBoardForm").validate({
 		//textarea br 처리
 		var contents = $(form).serializeObject();
 		
-		
-		/*for (var j=0; j<contents.content.length; j++){
-			if (contents.content.charAt(j) === "\r" || contents.content.charAt(j) === "\n"){
-				console.log('hi');
-				contents.content = contents.content.replace("\r\n","<br>");
-			}
-		}*/
-		/*contents.content = contents.content.replace(/\r\n/g,"<br>");*/
 		replaceBr(contents , "content");
 		addBoard(contents).then(function(data){
 
