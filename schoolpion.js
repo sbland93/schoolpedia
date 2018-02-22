@@ -182,10 +182,8 @@ var handlebars = require('express-handlebars').create({
 
 		//mongoose의 Date Format을 보기좋은 형태로 바꿔주는 helper.
 		dateFormat : function(date){
-			console.log(typeof(date));
-			console.log(typeof(moment(date).format('YYYY-MM-DD')));
 			if(typeof(date) === "object"){
-				return moment(date).format('MM-DD HH:MM');
+				return moment(date).format('lll');
 			}
 		},
 
