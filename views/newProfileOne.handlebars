@@ -5,15 +5,17 @@
 </header>
 <div class="row">
 	{{#if schoolInfo}}
-		<a href="/profile/newTwo?school={{schoolInfo.id}}" class="btn btn-default">{{schoolInfo.name}} 학생이라면 Click!</a>		
+		<a href="/profile/newTwo?school={{schoolInfo.id}}" class="btn btn-default">{{schoolInfo.name}} 학생이라면 Click!</a><br><br>	
 	{{/if}}
 
 	<div class="col-md-offset-2">
-		
-		<form class="form-horizontal searchSchoolForm" role="form" action="/api/school" method="GET">
-			<input type="text" name="name" placeholder="학교이름 검색">
-			<button class="btn btn-default buttonGroup" type="submit">검색</button>
-		</form>
+		<p>학생위키는 중복데이터에 민감해요, 혹시 만드려는 학생이 이미 존재하는지 확인해주시면 감사해요!</p>
+		<div class="col-md-7">
+			<form class="form-inline searchSchoolForm" role="form" action="/api/school" method="GET">
+				<label for="fieldSchoolName">없다면?</label><input type="text" class="form-control" name="name" placeholder="학교이름 검색" id="fieldSchoolName">
+				<button class="btn btn-default" type="submit">검색</button>
+			</form>
+		</div>
 
 
 		<br />

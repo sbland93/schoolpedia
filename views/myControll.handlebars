@@ -1,23 +1,31 @@
 <header>사용자관리 페이지</header>
 
-<ul>
-{{#each user.schools}}
-	<li>{{name}} <button class="btn btn-default btn-sm" schoolId="{{_id}}" id="deleteSchool">삭제</button></li>
-{{else}}
-	<li>출신학교가 아직 저장되지 않았어요, 학교를 저장하고 풍성한 스쿨피온을 즐겨보세요</li>
-{{/each}}
-</ul>
 
-<button class="btn btn-default btn-sm" id="addSchool">학교(초,중,고)추가하기</button>
-<div id="addSchoolTPL"></div>
+<div class="col-md-5">
+	<ul>
+	{{#each user.schools}}
+		<li>{{name}} <button class="btn btn-default btn-sm deleteSchool" schoolId="{{_id}}">삭제</button></li>
+	{{else}}
+		<li>출신학교가 아직 저장되지 않았어요, 학교를 저장하고 풍성한 스쿨피온을 즐겨보세요</li>
+	{{/each}}
+	</ul>
+	<div class="col-md-offset-3">
+		<button class="btn btn-default btn-sm" id="addSchool">학교(초,중,고)추가하기</button>
+		<div id="addSchoolTPL"></div>
+		<br>
+		<button class="btn btn-default btn-sm" id="updatePassword">비밀번호변경하기</button>
+		<div id="updatePasswordTPL"></div>
+	</div>
+</div>
 
-<button class="btn btn-default btn-sm" id="updatePassword">비밀번호변경하기</button>
-<div id="updatePasswordTPL"></div>
+
+
+
 
 
 <form class="form-horizontal myControllPageForm" role="form" action="/api/user/{{user.id}}" method="PUT">
-	<div class="col-md-offset-2">
-		<div class="col-md-5">
+	<div class="col-md-offset-5">
+		<div class="col-md-4">
 			이름: {{user.name}}
 
 			<div class="form-group">
@@ -40,25 +48,22 @@
 				<p>업:{{user.up}}</p>
 				<p>다운:{{user.down}}</p>
 			</div>
+			<button type="submit" class="pull-right btn btn-default btn-sm buttonGroup">수정</button>
 		</div>
 		
-		<div class="col-md-6">
+		<div class="col-md-5">
 			
 				<label>내가 쓴 글</label>
 				<div>
 					{{#each user.boards}}
-						{{title}}
-						{{content}}
+						<ul>
+							<li><a href="/board/{{id}}">{{title}}</a></li>
+						</ul>
 					{{/each}}
 				</div>
-			
-			
 		</div>
 	</div>
-	
-	<div class="col-xs-12 col-md-12">	
-		<button type="submit" class="pull-right btn btn-default btn-sm buttonGroup">수정</button>
-	</div>
+
 </form>
 
 

@@ -209,9 +209,9 @@ var profileTPLC = {
 								var defaultClass = [100, 200, 300]; //고등학교, 중학교반.
 								var elementaryClass = [100, 200, 300, 400, 500, 600]; //초등학교 반.
 								var classCategory = {"elementary" : elementaryClass, "middle": defaultClass, "high": defaultClass };
-								var data = {$push : { schools: { school: schoolId, class: classCategory[category] }}};
-								data["options"] = { conditions : {"schools.school" : {"$ne": schoolId}} };
-								updateProfile(profileId, data)
+								var updateObj = {$push : { schools: { school: schoolId, class: classCategory[category] }}};
+								updateObj["options"] = { conditions : {"schools.school" : {"$ne": schoolId}} };
+								updateProfile(profileId, updateObj)
 								.then(function(data){
 									if (data.success){ //성공시에 button에 attr의 schoolName을 response에 추가하고, 다시 랜더링한다.
 

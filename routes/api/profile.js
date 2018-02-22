@@ -34,17 +34,7 @@ module.exports = function(app){
 		if(req.body.name && req.body.graduation && req.body.gender){
 			Profile.create(req.body, function(err, profile){
 				if(err) return next(err);
-				res.json({
-					success: true,
-					id: profile._id,
-					school: profile.school,
-					class: profile.class,
-					name: profile.name,
-					graduation: profile.graduation,
-					gender: profile.gender,
-					description: profile.description,
-					replies : profile.replies,
-				});
+				res.json(profileViewModel(profile));
 			});
 		}else{
 			res.json({

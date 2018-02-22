@@ -31,7 +31,11 @@ var newsFeedTPLC = {
 							$(".sendData").on('click',function(evt){
 								evt.preventDefault();
 								var schoolId = $(this).attr("schoolId");
-								updateUser({$push: {schools: schoolId}}).then(function(data){
+								var updateObj = {
+									options: { conditions : { "schools" : {"$ne": schoolId}} },
+									$push: {schools: schoolId},
+								};
+								updateUser(updateObj).then(function(data){
 									if(data.success){
 										alert("성공적으로 추가되었습니다!");
 										location.reload();

@@ -10,7 +10,7 @@ module.exports = function(){
 	return {
 		//board 페이지 라우팅
 		board: function(req, res, next){
-			Board.findById(req.params.id).populate('replies.user')
+			Board.findById(req.params.id).populate('replies.user').populate('school')
 			.exec(function(err, board){
 				if(err) next(err);
 				if(!board){

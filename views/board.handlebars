@@ -4,7 +4,8 @@
 	<div class="col-md-offset-1 col-md-4">
 		<div class="board" id="eachBoard" boardId="{{board.id}}">
 			<div class="content">{{{board.content}}}</div>
-			<div class="updated_at">{{#dateFormat board.updated_at}}{{/dateFormat}}</div>	
+			<div class="updated_at">{{{dateFormat board.updated_at}}}</div>
+			<div class="school"><a href="/school/{{board.school._id}}">{{board.school.name}}</a></div>
 			<div>작성자: {{board.writer}}</div>
 		</div>	
 		<div class="btn-group" role="group" aria-label="...">

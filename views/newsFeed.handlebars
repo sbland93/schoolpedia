@@ -8,31 +8,41 @@
 <!--학교 검색  -->
 <div class="col-md-offset-3 col-md-7">
 	
-	{{#each posts}}
-		<div>
-			
-			<a href="/board/{{id}}">* {{title}}</a>: 
-			
-		</div>
-		{{#trimString content}}{{/trimString}}
-		<div>
-			{{#dateFormat updated_at}}{{/dateFormat}}
-		</div>
+	{{#if userInfo.schools}}
+		{{#if (checkBoolean (lengthOf userInfo.schools) "<" 3)}}
+			<p>
+				현재({{{lengthOf userInfo.schools}}})개의 학교({{#each userInfo.schools}} {{name}} {{/each}})만 입력되었어요! 초,중,고 모두 입력가능해요!
+				<button class="btn btn-default btn-sm pull-right" id="addSchool">남은학교추가하기</button>
+				<div id="addSchoolTPL"></div>
+				<br />
+			</p>
+		{{/if}}
+		{{#each posts}}
+			<p>
+				<div>
+					<a href="/board/{{id}}">* {{title}}</a>: 
+				</div>
+					{{{trimString content}}}
+				<div>
+					{{{dateFormat updated_at}}}
+				</div>
 
-		<div>
-			<a href="/school/{{school._id}}">{{school.name}}</a>
-		</div>
-		</br>
+				<div>
+					<a href="/school/{{school._id}}">{{school.name}}</a>
+				</div>
+				<br />
+			</p>
+			
+		{{else}}
+
+			
+		{{/each}}
 	{{else}}
-
-	
 		아직회원님은 출신학교 정보가 저장되어 있지 않아, 관심글들을 추천해드리기 어려워요.
 		<button class="btn btn-sm btn-default" id="addSchool">학교추가하기</button>
-		<div class="col-md-5">
-			<div id="addSchoolTPL"></div>
-		</div>
-		
-	{{/each}}
+		<div id="addSchoolTPL"></div>
+	{{/if}}
+
 	
 </div>
 {{#each infoList}}

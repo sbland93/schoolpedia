@@ -191,7 +191,6 @@ var handlebars = require('express-handlebars').create({
 
 		//주로 innerHelper형태로 사용할텐데, 말그대로 계산해서 값을 리턴해주는 helper
 		math : function(a, which, b){
-			console.log("here");
 			if(which === "*"){
 				return a*b;
 			}else if(which === "+"){
@@ -202,6 +201,8 @@ var handlebars = require('express-handlebars').create({
 				return a/b;
 			}else if(which === "%"){
 				return a%b;
+			}else{
+				return "";
 			}
 		},
 
@@ -212,6 +213,32 @@ var handlebars = require('express-handlebars').create({
 			}else{
 				return block.inverse(element);
 			}	
+		},
+
+		//대수비교의 불린값을(True, False)를 반환하는 헬퍼
+		checkBoolean: function(a, which, b){
+			if(which === ">"){
+				return a>b;
+			}else if(which === "<"){
+				return a<b;
+			}else if(which === "==="){
+				return a===b;
+			}else if(which === "<="){
+				return a<=b;
+			}else if(which === ">="){
+				return a>=b;
+			}else{
+				return "";
+			}
+		},
+
+		//배열의 길이를 리턴해주는 함수
+		lengthOf : function(arr){
+			if(Array.isArray(arr)){
+				return arr.length;
+			}else{
+				return "";
+			}
 		},
 
 	},

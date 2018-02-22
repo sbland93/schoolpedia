@@ -70,13 +70,25 @@ module.exports = function(app){
 
 	//id에 해당하는 user를 요청본문을 토대로 업데이트한다.
 	app.put('/api/user', authHandlers.ajaxIsLoggedIn, function(req, res, next){
+		var target = {_id: req.user._id}; var updateObj = req.body;
+		//검색 컨디션이 더 있는경우는, 합쳐서 검색해준다.
+		if(updateObj.options){
+			if(updateObj.options.conditions){
+				var conditions = updateObj.options.conditions;
+				if(Object.assign){
+					Object.assign(target , conditions);
+				}else{
+					for (var attrname in conditions) { target[attrname] = conditions[attrname]; }
+				}
+			}
+		}
 		//비밀번호가 있으면, encrypt시킨후에 넣는다.
 		var newPassword;
-		if(req.body["$set"] && (newPassword = req.body["$set"]["password"])){
-			req.body["$set"]["password"] = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(8), null);
-			console.log(req.body);
+		if(updateObj["$set"] && (newPassword = updateObj["$set"]["password"])){
+			updateObj["$set"]["password"] = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(8), null);
 		}
-		User.update({_id: req.user._id}, req.body, function(err, response){
+		delete updateObj["options"];
+		User.update(target, updateObj, function(err, response){
 			if(err) return next(err);
 			if(response.nModified === 1){
 				res.json({

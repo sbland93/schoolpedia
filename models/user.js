@@ -32,7 +32,7 @@ userSchema.methods.validatePassword = function(password){
 };
 
 userSchema.methods.generateAnonym = function(){
-	return bcrypt.hashSync(this.kakaoEmail, bcrypt.genSaltSync(SALT_FACTOR), null);
+	return bcrypt.hashSync(this.kakaoEmail, bcrypt.genSaltSync(SALT_FACTOR), null).substring(20, 28);
 };
 
 

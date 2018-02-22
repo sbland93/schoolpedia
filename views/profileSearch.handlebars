@@ -1,8 +1,8 @@
 <header>{{school.name}}학생 프로필</header>
 <div class="col-md-4">
 	<ul class="profileList">
+		검색결과입니다!<hr>
 		{{#each profileList}}
-			검색결과입니다!<hr>
 			<a href="/profile/{{id}}">
 				<li>
 				<p>{{#each schools}}
@@ -11,12 +11,13 @@
 				<p>이름:{{name}} 졸업년도: {{graduation}} {{school.name}}</p>
 				</li>
 			</a>
-			원하는 검색결과가 없다면, 찾으려는 학생의 프로필을 만들어 학생위키 만들기에 동참해주세요!
-			<a href="/profile/newOne" class="btn btn-default">프로필생성</a>
+			<hr>
 		{{else}}
-		해당학생은 존재하지 않는것 같아요. 찾으려는 학생의 프로필을 만들어 학생위키 만들기에 동참해주세요!
-		<a href="/profile/newOne" class="btn btn-default">프로필생성</a>
+		<p>해당학생은 존재하지 않는것 같아요. </p>
 		{{/each}}
+		원하는 검색결과가 없다면, 찾으려는 학생의 프로필을 만들어 학생위키 만들기에 동참해주세요!
+
+		<a href="/profile/newOne" class="btn btn-default">프로필생성</a>
 	</ul>
 
 </div>
