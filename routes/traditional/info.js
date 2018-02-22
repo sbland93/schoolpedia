@@ -32,9 +32,9 @@ module.exports = function(app){
 
 
 	//해당 id의 info를 가져온다.
-	app.get('/info/:id', authHandlers.isAdmin, function(req, res, next){
+	app.get('/info/:id', function(req, res, next){
 		if(!req.params.id) return next('No Id');
-		Info.findById({_id: req.params.id}).populate('schools.school').exec(function(err, info){
+		Info.findById({_id: req.params.id}).exec(function(err, info){
 			if(err) return next(err);
 			return res.render("info", infoViewModel(info));
 		});
@@ -48,6 +48,15 @@ module.exports = function(app){
 			if(err) return next(err);
 			return res.redirect("/info");
 		})
+	});
+
+	//id에 해당하는 info수정페이지.
+	app.get('/info/:id/update', authHandlers.isAdmin, function(req, res, next){
+		if(!req.params.id) return next('No Id');
+		Info.findById({_id: req.params.id}).exec(function(err, info){
+			if(err) return next(err);
+			return res.render("updateInfo", infoViewModel(info));
+		});
 	});
 
 
