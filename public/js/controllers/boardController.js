@@ -15,21 +15,23 @@ $(document).ready(function(){
 	//삭제버튼을 클릭시의 이벤트 처리.
 	$('#removeEachBoard').on('click', function(evt){
 
+		var self = $(this);
 		evt.preventDefault();
 
-		//삭제 확인후, 확인버튼 클릭시에, 삭제 진행후에, 전페이지로 이동한다.
+		//삭제 확인후, 확인버튼 클릭시에, 삭제 진행후에, 게시물이 속해있던 학교페이지로 이동한다.
 		var deleteConfirm = confirm("정말로 삭제하시겠습니까?");
 
 		if(deleteConfirm){
 			deleteBoard(boardId).then(function(data){
 				if(data.success){
 					alert("삭제되었습니다");
-					location.href = document.referrer;	
+					location.href = self.attr("redirectTo");	
 				}
 				else{
+					console.log(data);
 					alert('Error Occured');	
 				}
-			}).catch(function(){alert('Error occured');});
+			}).catch(function(err){console.log(err); alert('Error occured');});
 		}else{
 			return;
 		}

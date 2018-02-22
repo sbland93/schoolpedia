@@ -98,7 +98,7 @@ module.exports = function(app){
 			if(err) return next(err);
 			if(!board) return res.json({type: "Empty", success : false });
 			if(board.isWriter(req.user._id)){
-				User.update({ $pull: {"boards": board._id} }, function(err, response){
+				User.update({_id: req.user._id}, { $pull: {"boards": board._id} }, function(err, response){
 					if(err) return next(err);
 					if(response.nModified === 1){
 						board.remove(function(err){
