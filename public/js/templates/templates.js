@@ -65,7 +65,9 @@ this["TPL"]["NPOsearchedSchools"] = Handlebars.template({"1":function(container,
 
   return "	"
     + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
-    + "의 학교 학생 만들기 <a href=\"/profile/newTwo?school="
+    + " ("
+    + alias4(((helper = (helper = helpers.location || (depth0 != null ? depth0.location : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"location","hash":{},"data":data}) : helper)))
+    + ")의 학교 학생 만들기 <a href=\"/profile/newTwo?school="
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" class=\"btn btn-default\">GO!</a>\r\n";
 },"3":function(container,depth0,helpers,partials,data) {
