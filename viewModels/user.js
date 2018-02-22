@@ -9,6 +9,7 @@ module.exports = function(user){
 		success: true,
 		id: user._id,
 		name: user.name,
+		profile: user.profile,
 		anonym: user.anonym,
 		boards: user.boards,
 		schools: user.schools,

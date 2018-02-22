@@ -6,8 +6,8 @@ $(document).ready(function(){
 	var isLoggedIn, userInfo, urlNow;
 	ajaxAuth().then(function(data){
 		isLoggedIn = data.isLoggedIn;
-		userInfo = data.userInfo;
 		urlNow = data.urlNow;
+		userInfo = data.userInfo;
 	});
 
 	var defaultInput = $("#defaultVal");
@@ -27,31 +27,6 @@ $(document).ready(function(){
 	
 	});
 
-	$("#takeProfile").on('click', function(evt){
-		var self = this;
-		evt.preventDefault();
-
-		//삭제 확인후, 확인버튼 클릭시에, 삭제 진행후에, 전페이지로 이동한다.
-		var takeConfirm = confirm("정말 이 페이지의 주인공이 맞나요?");
-
-		if(takeConfirm){
-			updateUser({ profile: profileId }).then(function(data){
-				if(data.success){
-					alert("개인페이지를 획득하셨습니다!");
-					location.reload();
-				}else{
-					if(data.type === "Login"){
-						alert("문제가 생긴것 같습니다..!")
-					}else{
-						alert("문제가 생긴것 같습니다..!");
-					}
-				}
-			})
-		} else{
-			return;
-		}
-
-	});
 	
 
 	//pagination을 실행할, template들과, 그에 따라 필요한 context와, Div의 Tag들의 모음 객체.
@@ -119,9 +94,13 @@ $(document).ready(function(){
 
     	//profile을 ajax를 통해서 가져오는데 성공하면 홈으로 보내고, 실패시에(페이지 이동 및, 없는 데이터, 에러) 홈으로 보낸다.
     	if(response.success){
-
+    		//takeProfile은 원래 false인데, user가 profile을 차지하지 않았고, 프로필명과 유저이름이 같다면 페이지를 차지하는 버튼을 만들어주기 위해 true로 바꾼다.
+    		var takeProfile = false;
+    		console.log(userInfo.profile);
+    		if(!userInfo.profile && response.name === userInfo.name) takeProfile = true;
+    		var context = {profile: response, isMyPage: isMyPage, takeProfile: takeProfile };
 	    	
-			makeDynamicTPL("#profileTPL", TPL.EPprofile, {profile: response, isMyPage: isMyPage}, profileTPLC.profile(profileId, response, isLoggedIn));				
+			makeDynamicTPL("#profileTPL", TPL.EPprofile, context, profileTPLC.profile(profileId, response, isLoggedIn));				
 
 			console.log(response);
 

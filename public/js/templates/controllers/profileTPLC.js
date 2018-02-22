@@ -30,6 +30,35 @@ var profileTPLC = {
 				makeDynamicTPL("#updateProfileTPL", TPL.EPupdateClass, contextHere, profileTPLC.updateClass(profileId, response, schoolId));
 
 			});	
+
+			$("#takeProfile").on('click', function(evt){
+				var self = this;
+				evt.preventDefault();
+
+				//삭제 확인후, 확인버튼 클릭시에, 삭제 진행후에, 전페이지로 이동한다.
+				var takeConfirm = confirm("정말 이 페이지의 주인공이 맞나요?");
+
+				if(takeConfirm){
+					updateUser({ profile: profileId }).then(function(data){
+						if(data.success){
+							alert("개인페이지를 획득하셨습니다!");
+							location.reload();
+						}else{
+							if(data.type === "Login"){
+								alert("문제가 생긴것 같습니다..!")
+							}else{
+								alert("문제가 생긴것 같습니다..!");
+							}
+						}
+					})
+				} else{
+					return;
+				}
+
+			});
+
+
+			
 		}
 		
 	

@@ -163,7 +163,7 @@ this["TPL"]["EPaddReply"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main
 },"useData":true});
 
 this["TPL"]["EPaddSchool"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<form class=\"form-horizontal\" action=\"/api/school\" id=\"searchSchool\">\r\n	<div class=\"form-group\">\r\n		<label class=\"col-md-12 col-sm-12 col-xs-12\">학교추가</label>\r\n		\r\n		<div class=\"col-xs-9 col-sm-8 col-md-12\">\r\n			<input type=\"text\" class=\"form-control\" name=\"name\" placeholder=\"학교명을 입력하세요!\">\r\n		</div>\r\n		<div class=\"col-xs-12 col-md-12\">	\r\n			<button class=\"btn btn-default btn-sm buttonGroup\" type=\"submit\">검색!</button>\r\n			<button class=\"btn btn-default btn-sm buttonGroup\" id=\"cancelAddSchool\">취소</button>\r\n		</div>\r\n	</div>\r\n</form>\r\n\r\n<div id=\"searchedSchoolsTPL\"></div>\r\n\r\n\r\n\r\n";
+    return "<form class=\"form-horizontal\" action=\"/api/school\" id=\"searchSchool\">\r\n	<div class=\"form-group\">\r\n		<label class=\"col-md-12 col-sm-12 col-xs-12\">학교추가</label>\r\n		\r\n		<div class=\"col-xs-9 col-sm-8 col-md-7\">\r\n			<input type=\"text\" class=\"form-control\" name=\"name\" placeholder=\"학교명을 입력하세요!\">\r\n		</div>\r\n		<div class=\"col-xs-12 col-md-12\">	\r\n			<button class=\"btn btn-default btn-sm buttonGroup\" type=\"submit\">검색!</button>\r\n			<button class=\"btn btn-default btn-sm buttonGroup\" id=\"cancelAddSchool\">취소</button>\r\n		</div>\r\n	</div>\r\n</form>\r\n\r\n<div id=\"searchedSchoolsTPL\"></div>\r\n\r\n\r\n\r\n";
 },"useData":true});
 
 this["TPL"]["EPaddStory"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -229,10 +229,16 @@ this["TPL"]["EPpagination"] = Handlebars.template({"1":function(container,depth0
 },"useData":true});
 
 this["TPL"]["EPprofile"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    return "남";
+    var stack1;
+
+  return "<button class=\"btn btn-lg btn-warning\" id=\"takeProfile\" userId="
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.userInfo : depth0)) != null ? stack1.id : stack1), depth0))
+    + ">프로필 차지하기</button>\r\n";
 },"3":function(container,depth0,helpers,partials,data) {
+    return "남";
+},"5":function(container,depth0,helpers,partials,data) {
     return "여";
-},"5":function(container,depth0,helpers,partials,data,blockParams,depths) {
+},"7":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
   return "			<span>학교</span>: <a class=\"updateClass\" schoolId="
@@ -240,27 +246,27 @@ this["TPL"]["EPprofile"] = Handlebars.template({"1":function(container,depth0,he
     + ">"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.school : depth0)) != null ? stack1.name : stack1), depth0))
     + "</a> "
-    + ((stack1 = helpers["if"].call(alias3,(depths[1] != null ? depths[1].isMyPage : depths[1]),{"name":"if","hash":{},"fn":container.program(6, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias3,(depths[1] != null ? depths[1].isMyPage : depths[1]),{"name":"if","hash":{},"fn":container.program(8, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\r\n			<span>학급</span>:\r\n"
-    + ((stack1 = helpers.each.call(alias3,(depth0 != null ? depth0["class"] : depth0),{"name":"each","hash":{},"fn":container.program(8, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias3,(depth0 != null ? depth0["class"] : depth0),{"name":"each","hash":{},"fn":container.program(10, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "			</br>\r\n";
-},"6":function(container,depth0,helpers,partials,data) {
+},"8":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return " <button class=\"manageProfile btn btn-sm btn-default\" target=\"schools\" targetId=\""
+  return " <button class=\"manageProfile btn btn-default btn-sm buttonGroup\" target=\"schools\" targetId=\""
     + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.school : depth0)) != null ? stack1._id : stack1), depth0))
     + "\">삭제</button> ";
-},"8":function(container,depth0,helpers,partials,data,blockParams,depths) {
+},"10":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
 
-  return ((stack1 = (helpers.ifDefaultClass || (depth0 && depth0.ifDefaultClass) || helpers.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"ifDefaultClass","hash":{},"fn":container.program(9, data, 0, blockParams, depths),"inverse":container.program(11, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "");
-},"9":function(container,depth0,helpers,partials,data,blockParams,depths) {
+  return ((stack1 = (helpers.ifDefaultClass || (depth0 && depth0.ifDefaultClass) || helpers.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"ifDefaultClass","hash":{},"fn":container.program(11, data, 0, blockParams, depths),"inverse":container.program(13, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "");
+},"11":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
 
   return "					<a class=\"updateClass\" schoolId="
     + container.escapeExpression(container.lambda(((stack1 = (depths[1] != null ? depths[1].school : depths[1])) != null ? stack1._id : stack1), depth0))
     + ">?</a>\r\n";
-},"11":function(container,depth0,helpers,partials,data,blockParams,depths) {
+},"13":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
   return "					<a href=\"/profile/search?school=only&schoolId="
@@ -273,16 +279,18 @@ this["TPL"]["EPprofile"] = Handlebars.template({"1":function(container,depth0,he
     + alias2(alias1(depth0, depth0))
     + "반</a>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.lambda, alias3=container.escapeExpression;
 
-  return "<header class=\"bugName\">"
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.name : stack1), depth0))
+  return "\r\n"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.takeProfile : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\r\n\r\n<header class=\"bugName\">"
+    + alias3(alias2(((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.name : stack1), depth0))
     + "("
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.graduation : stack1), depth0))
+    + alias3(alias2(((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.graduation : stack1), depth0))
     + " "
-    + ((stack1 = helpers["if"].call(alias3,((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.gender : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.program(3, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.gender : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0, blockParams, depths),"inverse":container.program(5, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "")
     + ")</header>\r\n\r\n<div class=\"row\">\r\n	<div class=\"col-md-offset-10\">\r\n	</div>\r\n</div>\r\n<div class=\"row\">\r\n	<div class=\"col-md-offset-4\">\r\n		\r\n"
-    + ((stack1 = helpers.each.call(alias3,((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.schools : stack1),{"name":"each","hash":{},"fn":container.program(5, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.schools : stack1),{"name":"each","hash":{},"fn":container.program(7, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "	</div>\r\n</div>";
 },"useData":true,"useDepths":true});
 
