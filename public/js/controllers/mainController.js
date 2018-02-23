@@ -85,7 +85,6 @@ $(document).ready(function(){
 			var sendingData = $(form).serialize();
 			
 			getSchools(sendingData).then(function(data){
-				console.log(data);
 				if(data.success) return $('#mainSearchResult').html(searchedSchoolList({schoolList : data.schoolList}));
 			});
 		}

@@ -1,5 +1,5 @@
 
-
+//학교게시물 검색 form
 $(".searchBoardForm").validate({
 
 	rules: {
@@ -18,13 +18,8 @@ $(".searchBoardForm").validate({
 		evt.preventDefault();
 
 		var sendingData = $(form).serialize();
-
-		console.log(sendingData);
-
 		getBoards(sendingData).then(function(data){
-			console.log(data);
 			var template = TPL.SBsearchedBoards;
-			console.log(template);
 			$("#searchedBoardsTPL").html(template({ boardList : data }));
 		});
 

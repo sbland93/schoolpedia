@@ -21,9 +21,7 @@ module.exports = function(app){
 			query.push({school : req.query.schoolId});	
 		}
 		
-		console.log(query);	
-		console.log(query[0].$or);	
-
+	
 		Board.find().and(query)
 			.populate('school')
 			.exec(function(err, boards){
@@ -127,7 +125,7 @@ module.exports = function(app){
 	app.put('/api/board/:id', authHandlers.ajaxIsLoggedIn , function(req, res, next){
 		if(!req.params.id) return next('No Id');
 		Board.findById(req.params.id, function(err, board){
-			console.log("req.body: ", req.body);
+			
 			if(err) return next(err);
 			if(!board) return res.json({type: "Empty", success: false});
 			var auth = true; //게시글 수정이 아니면, 항상 true로 두고
@@ -164,7 +162,6 @@ module.exports = function(app){
 
 		Board.findById({_id: req.params.id}, function(err, board){
 			if(err) return next(err);
-			console.log(board);
 			var isAlready = board.participants.some(function(element){
 				return element.equals(req.user._id);
 			})

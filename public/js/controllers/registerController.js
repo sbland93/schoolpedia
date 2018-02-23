@@ -145,7 +145,6 @@ $(document).ready(function(){
         verified: "카카오인증을 해주세요!",
       },
       submitHandler: function(form, evt) {
-        console.log("Here");
         evt.preventDefault();
         form.submit();
       }

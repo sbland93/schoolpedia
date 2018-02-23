@@ -25,15 +25,6 @@ $(".newBoardForm").validate({
 	submitHandler: function(form) {
 		//textarea br 처리
 		var contents = $(form).serializeObject();
-		
-		
-		/*for (var j=0; j<contents.content.length; j++){
-			if (contents.content.charAt(j) === "\r" || contents.content.charAt(j) === "\n"){
-				console.log('hi');
-				contents.content = contents.content.replace("\r\n","<br>");
-			}
-		}*/
-		/*contents.content = contents.content.replace(/\r\n/g,"<br>");*/
 		replaceBr(contents , "content");
 		addBoard(contents).then(function(data){
 

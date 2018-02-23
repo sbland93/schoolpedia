@@ -34,7 +34,7 @@ module.exports = function(){
 				});
 			});
 		},
-
+		//로그인 후 메인페이지 라우팅.
 		newsFeed:function(req,res,next){
 			req.user.getNewsFeed(function(err, posts){
 				if(err) return next(err);

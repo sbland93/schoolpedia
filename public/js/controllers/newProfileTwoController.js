@@ -47,9 +47,6 @@ $(document).ready(function(){
 				delete profileData['stories[0][content]'];
 				delete profileData['stories[0][user]'];
 			}
-
-			console.log("profileData: ", profileData);
-			
 			//프로필을 추가하고, 그 프로필 개인 페이지로 이동한다.
 			addProfile(profileData).then(function(data){
 				if(data.success){

@@ -56,7 +56,7 @@ module.exports = function(app){
 			}
  		});
 	});
-
+	//공지사항 삭제
 	app.delete("/api/info/:id",function(req,res,next){
 		if (!req.params.id) return next("No id");
 		Info.remove({_id:req.params.id},function(err){

@@ -107,7 +107,6 @@ function loadPosts(posts, postsDiv, postsTemplate, contextFn, dynamicClass) {
 
     //contents들(features, stories, replies)를 Up / Down 을 누르면 작동. //한번만등록되도록, off후에 on으로!
     $(".profileUpDown").off('click').on('click', function(evt){
-      console.log("Click");
       var self = $(this);
       var upOrDown = self.attr("upOrDown");
       var data = {
@@ -116,7 +115,6 @@ function loadPosts(posts, postsDiv, postsTemplate, contextFn, dynamicClass) {
         upOrDown: self.attr("upOrDown"),
       };
       upDownProfile(profileId , data).then(function(data){
-          console.log("data: ", data);
           if(data.success){
             if(upOrDown === "up"){
               alert("의견(+1)이 반영되었어요");
@@ -145,14 +143,12 @@ function loadPosts(posts, postsDiv, postsTemplate, contextFn, dynamicClass) {
       $(".manageProfile").off('click').on('click', function(evt){
         var takeConfirm = confirm("정말로 삭제하시겠습니까?");
         if (takeConfirm){
-          console.log("Click!");
           var self = $(this);
           var target = self.attr("target");
           var targetId = self.attr("targetId");
           var data = { $pull: {} };
           data.$pull[target] = { _id: targetId };
           if(target === "schools") data.$pull[target] = { school : targetId };
-          console.log("data: ", data);
           updateProfile(profileId, data).then(function(data){
             if(data.success){
               alert("삭제했습니다!");
