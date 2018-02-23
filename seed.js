@@ -3,7 +3,7 @@ var Profile = require('./models/profile.js');
 var Info = require('./models/info.js');
 var Board = require('./models/board.js');
 var User = require('./models/user.js');
-var schoolData = require('./koreaSchoolData.json');
+var schoolData= require('./schools.json');
 var seedData = require('./seedData.js');
 var credentials = require('./credentials.js');
 var getRandomInt = require('./utils/testUtils.js')().getRandomInt;
@@ -12,6 +12,8 @@ var fs = require('fs');
 
 //Seed All Data From seedData.
 var seedDev = function(){
+
+
 
 	var p1,p2,p3,p4,p5;
 
@@ -142,22 +144,7 @@ var seedTest = function(){
 
 
 var seedProduction = function(){
-	//production에서 처음만 학교데이터 생성.
-	School.find({}, function(err, schools){
-		if(err) throw new Error("Data Fail");
-		if(schools.length > 0) return;
-		School.create(schoolData, function(err, schools){
-			if(err) throw new Error("Data Fail");
-		});
-	});
-
-	User.find({}, function(err, users){
-		if(err) throw new Error("Data initializing fail");
-		if(users.length > 0) return;
-		User.create(credentials.adminUserInfo, function(err){
-			if(err) throw new Error("Data Fail");
-		});
-	});
+	
 }
 
 //DOLATER process.env에 따른 데이터 변경. 
