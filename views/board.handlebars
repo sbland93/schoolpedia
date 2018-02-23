@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/css/board.css">
 <header>{{board.title}}</header>
 <div class="row">
-	<div class="col-md-offset-1 col-md-4">
+	<div class="col-md-offset-1 col-md-3">
 		<div class="board" id="eachBoard" boardId="{{board.id}}">
 			<div class="content">{{{board.content}}}</div>
 			<div class="updated_at">{{{dateFormat board.updated_at}}}</div>
@@ -24,19 +24,23 @@
 				<div class="form-group">
 				  <label for="comment">Comment:</label>
 				  <textarea class="form-control" rows="3" id="comment"></textarea>
+				  <button type="submit" class="btn btn-default buttonGroup">입력</button>
 				</div>
-				<button type="submit" class="btn btn-default buttonGroup">입력</button>
+				
 			</div>
-			<div>
-				{{#each board.replies}}
-					<ul>
-						<li> {{{content}}} -{{#isEquals user.anonym ../board.writer}}[글쓴이]{{/isEquals}}{{user.anonym}}-</li>
-					</ul>
-				{{/each}}
-				<ul id="replyList"></ul>
-			</div>
+
 		</form>
 	</div>
+
+</div>
+<div class="col-md-offset-1 col-md-5">
+	<ul>
+	{{#each board.replies}}
+			<li> {{{content}}} -{{#isEquals user.anonym ../board.writer}}[글쓴이]{{/isEquals}}{{user.anonym}}-</li>
+			<hr>
+	{{/each}}
+	</ul>
+	<ul id="replyList"></ul>
 </div>
 
 
