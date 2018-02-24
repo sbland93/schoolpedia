@@ -1,19 +1,19 @@
 
 
 <header>
-	어디학교 학생인가요?
+	학생위키 - 어디학교 학생인가요?
 </header>
 <div class="row">
 	
 	<div class="col-md-offset-2">
 		{{#if schoolInfo}}
-			<a href="/profile/newTwo?school={{schoolInfo.id}}" class="btn btn-default">{{schoolInfo.name}} 학생이라면 Click!</a><br><br>	
+			<a href="/profile/newTwo?school={{schoolInfo.id}}" class="btn btn-default btn-lg">{{schoolInfo.name}} 학생이라면 Click!</a><br><br>	
 		{{/if}}
 
-		<p>학생위키는 중복데이터에 민감해요, 혹시 만드려는 학생이 이미 존재하는지 확인해주시면 감사해요!</p>
+		<p>학생위키는 중복데이터에 민감해요, 혹시 만드려는 친구의 프로필이 이미 존재하는지 확인해주시면 감사해요!</p>
 		<div class="col-md-4">
 			<form class="form-inline searchSchoolForm" role="form" action="/api/school" method="GET">
-				<label for="fieldSchoolName">없다면?</label><input type="text" class="form-control" name="name" placeholder="학교이름 검색" id="fieldSchoolName">
+				존재하지 않는다면? ▽<input type="text" class="form-control" name="name" placeholder="학교이름 검색" id="fieldSchoolName">
 				<button class="btn btn-default" type="submit">검색</button>
 			</form>
 		</div>
