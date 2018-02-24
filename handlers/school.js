@@ -54,7 +54,7 @@ module.exports = function(){
 		schoolBoards: function(req, res, next){
 			var boardPromise = new Promise(function(resolve, reject){
 				Board.find({school : req.params.id}).sort({updated_at : '-1'})
-				.limit(5).populate('school').exec(function(err, boards){
+				.limit(30).populate('school').exec(function(err, boards){
 					if(err) reject(err);
 					resolve(boards);
 				});
