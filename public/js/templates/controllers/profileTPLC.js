@@ -77,7 +77,7 @@ var profileTPLC = {
 			      content: {
 			        title: '스쿨피온-'+response.name,
 			        description: kakaoDescription,
-			        imageUrl: 'http://www.schoolpion.com/img/kakaoImage.png',
+			        imageUrl: 'https://cdn.pixabay.com/photo/2017/01/31/17/51/scorpion-2025946_960_720.png',
 			        link: {
 			          mobileWebUrl: 'http://www.schoolpion.com/profile/'+response.id,
 			          webUrl: 'http://www.schoolpion.com/profile/'+response.id,
