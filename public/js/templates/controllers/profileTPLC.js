@@ -2,7 +2,7 @@
 //profile.handlebars view에서 필요한 TPL에 대한 Controllers.
 var profileTPLC = {
 
-	profile: function(profileId, response, isLoggedIn){
+	profile: function(profileId, response, isLoggedIn, kakaoInit){
 
 		return function(){
 			
@@ -57,6 +57,7 @@ var profileTPLC = {
 
 			});
 
+
 			//카카오링크 생성 컨트롤러 로직이 담긴곳.
 			var kakaoDescription = "#스쿨피온 #이거너아니냐 #별명 #이야기" 
     		if(response.features){
@@ -69,7 +70,7 @@ var profileTPLC = {
     		if(kakaoDescription.length < 10) kakaoDescription += " #"+response.name;
     		//카카오링크버튼
     		//<![CDATA[
-			    Kakao.init('6a9cd5c44ae0a61dfc5b951ffe3f4607');
+			    if(kakaoInit !== false) Kakao.init('6a9cd5c44ae0a61dfc5b951ffe3f4607');
 			    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
 			    Kakao.Link.createDefaultButton({
 			      container: '#kakao-link-btn',
@@ -99,10 +100,6 @@ var profileTPLC = {
 			      ]
 			    });
 			//]]>
-
-
-
-			
 		}
 		
 	
@@ -291,7 +288,7 @@ var profileTPLC = {
 										alert("수정되었습니다.");
 										$("#updateProfileTPL").html("");
 										response = data.changedDoc;
-										makeDynamicTPL("#profileTPL", TPL.EPprofile, {profile: response}, profileTPLC.profile(profileId, response, true));				
+										makeDynamicTPL("#profileTPL", TPL.EPprofile, {profile: response}, profileTPLC.profile(profileId, response, true, false));				
 
 									}else{
 										alert("문제가 생긴것 같아요...!");
@@ -342,7 +339,7 @@ var profileTPLC = {
 							alert("수정되었습니다.");
 							$("#updateProfileTPL").html("");
 							response = data.changedDoc;
-							makeDynamicTPL("#profileTPL", TPL.EPprofile, {profile: response}, profileTPLC.profile(profileId, response, true));				
+							makeDynamicTPL("#profileTPL", TPL.EPprofile, {profile: response}, profileTPLC.profile(profileId, response, true, false));				
 
 						}else{
 
