@@ -19,7 +19,9 @@ $(document).ready(function(){
 				if (data.success){
 					console.log('hi');
 					alert("수정되었습니다.");
-					location.href = '/'
+					location.reload();
+				}else{
+					alert("딱히 수정한게 없으신것 아닐까요!?");
 				}
 			});
 		},

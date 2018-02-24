@@ -2,6 +2,7 @@
 $(document).ready(function(){
 
     Kakao.init('6a9cd5c44ae0a61dfc5b951ffe3f4607');
+  //<![CDATA[
     // 카카오 로그인 버튼을 생성합니다.
     Kakao.Auth.createLoginButton({
       container: '#kakao-login-btn',
@@ -40,7 +41,7 @@ $(document).ready(function(){
          alert(JSON.stringify(err));
       }
     });
-
+  //]]>
 
 
     var EPaddSchool = TPL.EPaddSchool;

@@ -23,17 +23,14 @@
 
 
 
-<form class="form-horizontal myControllPageForm" role="form" action="/api/user/{{user.id}}" method="PUT">
-	<div class="col-md-offset-5">
-		<div class="col-md-4">
+<div class="col-md-offset-5">
+	<div class="col-md-4">
+		<form class="form-horizontal myControllPageForm" role="form" action="/api/user/{{user.id}}" method="PUT">
 			이름: {{user.name}}
-
 			<div class="form-group">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<label>고등학교 졸업(예정)년도</label>
 				</div>
-				
-				
 				<div class="col-xs-8 col-sm-9 col-md-12">
 					<select class="form-control" name="graduation" id="graduation">
 						{{#iterateFromTo 1990 2020}}
@@ -41,30 +38,26 @@
 						{{/iterateFromTo}}
 					</select>
 				</div>
-
-
 			</div>
+			<button type="submit" class="pull-right btn btn-default btn-sm">수정</button>
 			<div>
 				<p>업:{{user.up}}</p>
 				<p>다운:{{user.down}}</p>
 			</div>
-			<button type="submit" class="pull-right btn btn-default btn-sm buttonGroup">수정</button>
-		</div>
-		
-		<div class="col-md-5">
-			
-				<label>내가 쓴 글</label>
-				<div>
-					{{#each user.boards}}
-						<ul>
-							<li><a href="/board/{{id}}">{{title}}</a></li>
-						</ul>
-					{{/each}}
-				</div>
+		</form>
+	</div>
+	<div class="col-md-5">
+		<label>내가 쓴 글</label>
+		<div>
+			{{#each user.boards}}
+				<ul>
+					<li><a href="/board/{{id}}">{{title}}</a></li>
+				</ul>
+			{{/each}}
 		</div>
 	</div>
+</div>
 
-</form>
 
 
 

@@ -57,6 +57,50 @@ var profileTPLC = {
 
 			});
 
+			//카카오링크 생성 컨트롤러 로직이 담긴곳.
+			var kakaoDescription = "#스쿨피온 #이거너아니냐 #별명 #이야기" 
+    		if(response.features){
+    			kakaoDescription = "#스쿨피온";
+    			for(var i=0; i<response.features.length; i++){
+    				if(kakaoDescription.length>20) break;
+    				kakaoDescription += " #"+response.features[i]["content"];
+    			}
+    		}
+    		if(kakaoDescription.length < 10) kakaoDescription += " #"+response.name;
+    		//카카오링크버튼
+    		//<![CDATA[
+			    Kakao.init('6a9cd5c44ae0a61dfc5b951ffe3f4607');
+			    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+			    Kakao.Link.createDefaultButton({
+			      container: '#kakao-link-btn',
+			      objectType: 'feed',
+			      content: {
+			        title: '스쿨피온-'+response.name,
+			        description: kakaoDescription,
+			        imageUrl: 'http://www.schoolpion.com/img/kakaoImage.png',
+			        link: {
+			          mobileWebUrl: 'http://www.schoolpion.com/profile/'+response.id,
+			          webUrl: 'http://www.schoolpion.com/profile/'+response.id,
+			        }
+			      },
+			      social: {
+			        likeCount: 17,
+			        commentCount: 4,
+			        sharedCount: 1,
+			      },
+			      buttons: [
+			        {
+			          title: '웹으로 보기',
+			          link: {
+			            mobileWebUrl: 'http://schoolpion.com/profile/'+response.id,
+			            webUrl: 'http://schoolpion.com/profile/'+response.id
+			          }
+			        }
+			      ]
+			    });
+			//]]>
+
+
 
 			
 		}

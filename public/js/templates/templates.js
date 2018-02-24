@@ -291,7 +291,7 @@ this["TPL"]["EPprofile"] = Handlebars.template({"1":function(container,depth0,he
     + alias3(alias2(((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.graduation : stack1), depth0))
     + " "
     + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.gender : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0, blockParams, depths),"inverse":container.program(5, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "")
-    + ")</header>\r\n\r\n<div class=\"row\">\r\n	<div class=\"col-md-offset-10\">\r\n	</div>\r\n</div>\r\n<div class=\"row\">\r\n	<div class=\"col-md-offset-4\">\r\n		\r\n"
+    + ")<a id=\"kakao-link-btn\" href=\"javascript:;\">\r\n<img src=\"//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png\"/>\r\n</a></header> \r\n\r\n<div class=\"row\">\r\n	<div class=\"col-md-offset-4\">\r\n		\r\n"
     + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.schools : stack1),{"name":"each","hash":{},"fn":container.program(7, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "	</div>\r\n</div>";
 },"useData":true,"useDepths":true});

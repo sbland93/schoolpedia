@@ -3,7 +3,7 @@ var Profile = require('./models/profile.js');
 var Info = require('./models/info.js');
 var Board = require('./models/board.js');
 var User = require('./models/user.js');
-var schoolData= require('./schools.json');
+var schoolData= require('./schools.json')["schools"];
 var seedData = require('./seedData.js');
 var credentials = require('./credentials.js');
 var getRandomInt = require('./utils/testUtils.js')().getRandomInt;
@@ -144,7 +144,7 @@ var seedTest = function(){
 
 
 var seedProduction = function(){
-	
+
 }
 
 //DOLATER process.env에 따른 데이터 변경. 
