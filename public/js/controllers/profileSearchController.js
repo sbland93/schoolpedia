@@ -38,12 +38,9 @@ $(document).ready(function(){
 		    $.map(unindexed_array, function(n, i){
 		        searchData[n['name']] = n['value'];
 		    });
-
-			console.log("searchData :", searchData);
 			var PSsearchedProfiles = TPL.PSsearchedProfiles;
 			searchProfilesTest(searchData).then(function(data){
 				if(data.success) {
-					console.log(data);
 					$("#searchedFriendsTPL").html(PSsearchedProfiles({
 						profileList:data.profileList,
 					}))

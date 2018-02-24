@@ -25,7 +25,6 @@ $(".newBoardForm").validate({
 	submitHandler: function(form) {
 		//textarea br 처리
 		var contents = $(form).serializeObject();
-		
 		replaceBr(contents , "content");
 		addBoard(contents).then(function(data){
 

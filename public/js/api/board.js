@@ -1,5 +1,5 @@
 var baseBoard = "/api/board";
-
+//게시물 모두 
 var getBoards = function(data){
 	return new Promise(function(resolve, reject){
 		$.ajax({
@@ -15,7 +15,7 @@ var getBoards = function(data){
 		});
 	});
 };
-
+//해당하는 게시물만 
 var getBoard = function(id){
 	return new Promise(function(resolve, reject){
 		$.ajax({

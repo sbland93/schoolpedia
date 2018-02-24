@@ -104,8 +104,6 @@ $(document).ready(function(){
 	    	
 			makeDynamicTPL("#profileTPL", TPL.EPprofile, context, profileTPLC.profile(profileId, response, isLoggedIn));				
 
-			console.log(response);
-
 			var storyData = $(response.stories);
 			var featureData = $(response.features);
 			var replyData = $(response.replies);

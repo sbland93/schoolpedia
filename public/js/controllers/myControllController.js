@@ -17,7 +17,6 @@ $(document).ready(function(){
 			var sendingdata = $(form).serialize();
 			updateUser(sendingdata).then(function(data){
 				if (data.success){
-					console.log('hi');
 					alert("수정되었습니다.");
 					location.reload();
 				}else{
@@ -36,7 +35,6 @@ $(document).ready(function(){
     //학교삭제 버튼을 클릭시에, 확인을 묻고, 삭제한다.
     $(".deleteSchool").on('click', function(evt){
     	evt.preventDefault();
-    	console.log("here!");
     	//삭제 확인후, 확인버튼 클릭시에 학교삭제를 진행하고, 리프레시 시킨다.
 		var takeConfirm = confirm("학교삭제를 하시겠습니까?");
 
@@ -55,7 +53,7 @@ $(document).ready(function(){
 			return;
 		}
     });
-
+    //비밀번호를 변경한다.
     $("#updatePassword").on('click', function(evt){
     	evt.preventDefault();
 		makeDynamicTPL("#updatePasswordTPL", TPL.MCupdatePassword, {}, myControllTPLC.updatePassword());     

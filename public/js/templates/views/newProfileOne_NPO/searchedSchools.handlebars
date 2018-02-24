@@ -1,5 +1,8 @@
+
 {{#each schoolList}}
-	{{name}} ({{location}})의 학교 학생 만들기 <a href="/profile/newTwo?school={{id}}" class="btn btn-default">GO!</a>
+	<div>
+		{{name}} ({{location}})의 학교 학생 만들기 <a href="/profile/newTwo?school={{id}}" class="btn btn-default">GO!</a>
+	</div>
 {{else}}
 	입력한 학교는 존재하지 않아요ㅠㅠ 다시한번 검색해주세요!
 {{/each}}

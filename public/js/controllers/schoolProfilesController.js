@@ -39,12 +39,9 @@ $(document).ready(function(){
 		    $.map(unindexed_array, function(n, i){
 		        searchData[n['name']] = n['value'];
 		    });
-
-			console.log("searchData :", searchData);
 			var SPsearchedProfiles = TPL.SPsearchedProfiles;
 			searchProfilesTest(searchData).then(function(data){
 				if(data.success) {
-					console.log(data);
 					$("#searchedFriendsTPL").html(SPsearchedProfiles({
 						profileList:data.profileList,
 					}))

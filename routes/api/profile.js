@@ -13,7 +13,7 @@ module.exports = function(app){
 	//Query가 없으면 모든 profile을 내보낸다.
 	app.get('/api/profile', function(req, res, next){
 		var query = req.query;
-		console.log(query);
+
 		if(req.query.name) query.name = new RegExp('^'+req.query.name);
 		Profile.find(query)
 			.populate('schools.school')
@@ -50,7 +50,7 @@ module.exports = function(app){
 	//scholId에는 해당학교 id가 적혀있음.
 	//TODO: ajax api/로 바꾸자.
 	app.post('/api/profile/search', function(req, res, next){
-		console.log('req.body From searchProfiles', req.body);
+		
 
 		var query = req.body
 		var searchString = query.q;
@@ -96,8 +96,7 @@ module.exports = function(app){
 	//scholId에는 해당학교 id가 적혀있음.
 	//TODO: ajax api/로 바꾸자.
 	app.post('/api/profile/search/test', function(req, res, next){
-		console.log('req.body From searchProfiles', req.body);
-
+		
 		var query = req.body
 		var searchString = query.q;
 		var data1 = {}, data2 = {}, data3 = {}, queryObject;
@@ -129,7 +128,7 @@ module.exports = function(app){
 							schoolIdCondition["$in"].push(schools[i]._id);
 						}
 						data3 = {"schools.school" : schoolIdCondition};
-						console.log("data3:",data3);
+						
 						resolve();
 					});
 				});
@@ -182,9 +181,6 @@ module.exports = function(app){
 	//id에 해당하는 profile을 요청본문을 토대로 업데이트한다.
 	app.put('/api/profile/:id', authHandlers.ajaxIsLoggedIn, function(req, res, next){
 		if(!req.params.id) return next('No Id');
-
-		console.log(req.params.id);
-		console.log(req.body);
 		//수정할것이 담겨있는것.
 		var query = req.body;
 		//수정할 그 document를 가져오기위함
@@ -196,9 +192,9 @@ module.exports = function(app){
 			if(query.options.conditions){
 				var conditions = query.options.conditions;
 				if(Object.assign){
-					console.log(target);
+					
 					Object.assign(target , conditions);
-					console.log("after:", target);
+					
 				}else{
 					for (var attrname in conditions) { target[attrname] = conditions[attrname]; }
 				}
@@ -216,9 +212,6 @@ module.exports = function(app){
 			//options는 담기면 안되기 때문에 이건 삭제.
 			delete query["options"];
 		}
-
-		console.log("query:", query);
-		console.log("target:", target);
 
 		Profile.findOneAndUpdate(target, query, {new: true}, function(err, doc){
 			if(err || !doc) return res.json({success: false, type: "Others"});
@@ -243,24 +236,21 @@ module.exports = function(app){
 
 		var userUpdateObj = {$inc: {}};
 		userUpdateObj["$inc"][data.upOrDown] = incNum;
-		console.log("userUpdateObj: ", userUpdateObj);
-
+		
 		Profile.findById(req.params.id, function(err, profile){
 			if(err) return res.json({success: false, type: "Others"});
 			if(!profile) return res.json({success: false, type:"Others"});
-			console.log("profile[data.target]:",profile[data.target]);
+			
 			profile[data.target].map(function(element){
-				console.log("element._id:", element._id);
-				console.log("typeof(element._id):", typeof(element._id));
+				
 				if(element._id.equals(data.targetId)){
-					console.log("일단같은것은 있다: element:", element);
+					
 					var isAlready = element.participants.some(function(userId){
 						return userId.equals(req.user._id);
 					});
-					console.log("isAlready: ", isAlready);
+					
 					if(isAlready) return res.json({success: false, type: "Already"});
 					else{
-						console.log('hi');
 						element.participants.push(req.user._id);
 						element[data.upOrDown] += incNum;
 						//프로필을 수정하는 Promise

@@ -327,7 +327,7 @@ var profileTPLC = {
 				submitHandler:function(form , evt){
 					evt.preventDefault();
 					//수정된 반 정보를 보낼 데이터 안에 입력.
-					console.log("$(form).serializeObject()", $(form).serializeObject());
+					
 					var updateData = { 
 						options: {
 							conditions: { "schools.school" : schoolId }

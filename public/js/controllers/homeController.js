@@ -1,5 +1,5 @@
 
-//Home Controller
+//Home Controller 학교리스트 동적으로 생성
 $(document).ready(function(){
 
 

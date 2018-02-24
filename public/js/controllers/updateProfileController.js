@@ -47,8 +47,6 @@ $(document).ready(function(){
 			profileData[a.name] = a.value;
 		});
 
-		console.log(profileData);
-
 		updateProfile(profileId, profileData).then(function(data){
 			if(data.success){
 				location.href = '/profile/' + data.id;	
