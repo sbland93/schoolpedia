@@ -106,7 +106,6 @@ $(document).ready(function(){
 			evt.preventDefault();
 			var profileName = $("#mainProfileName").val();
 			location.href = "/profile/search?q="+profileName+"&fields=only";
-			
 		}
 	});
 
