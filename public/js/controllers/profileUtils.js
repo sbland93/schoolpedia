@@ -128,10 +128,7 @@ function loadPosts(posts, postsDiv, postsTemplate, contextFn, dynamicClass) {
               alert("하는 과정사이에 문제가 발생했어요");  
             }
           }else{
-            if(data.type === "Login"){
-              alert("로그인이 필요한 서비스에요!");
-              return location.href = $("#loginBtn").attr("href");
-            }else if(data.type=== "Already"){
+            if(data.type=== "Already"){
               alert("이미 의견이 반영되었어요!");  
             }else {
               alert("하는 과정 사이에 문제가 생겼어요!");
@@ -153,10 +150,6 @@ function loadPosts(posts, postsDiv, postsTemplate, contextFn, dynamicClass) {
             if(data.success){
               alert("삭제했습니다!");
             }else{
-              if(data.type === "Login"){
-                alert("로그인이 필요한 서비스입니다.");
-                return location.href = $("#loginBtn").attr("href");
-              }
               alert("문제가 생긴것 같습니다!");
             }
             return location.reload();

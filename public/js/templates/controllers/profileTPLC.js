@@ -2,17 +2,13 @@
 //profile.handlebars view에서 필요한 TPL에 대한 Controllers.
 var profileTPLC = {
 
-	profile: function(profileId, response, isLoggedIn, kakaoInit){
+	profile: function(profileId, response, kakaoInit){
 
 		return function(){
 			
 			//학교링크 클릭시 템플릿 생성.
 			$(".updateClass").on('click',function(evt){
 				evt.preventDefault();
-				if(!isLoggedIn){
-					alert("로그인이 필요한 서비스에요 로그인을 부탁드려요");
-					return location.href = $("#loginBtn").attr("href");
-				}
 				var schoolId = $(this).attr("schoolId");
 
 				var schoolObj;
@@ -44,11 +40,7 @@ var profileTPLC = {
 							alert("개인페이지를 획득하셨습니다!");
 							location.reload();
 						}else{
-							if(data.type === "Login"){
-								alert("문제가 생긴것 같습니다..!")
-							}else{
-								alert("문제가 생긴것 같습니다..!");
-							}
+							alert("문제가 생긴것 같습니다..!")
 						}
 					})
 				} else{
@@ -56,7 +48,7 @@ var profileTPLC = {
 				}
 
 			});
-
+			console.log("response", response);
 
 			//카카오링크 생성 컨트롤러 로직이 담긴곳.
 			var kakaoDescription = "#스쿨피온 #이거너아니냐 #별명 #이야기" 
@@ -67,10 +59,10 @@ var profileTPLC = {
     				kakaoDescription += " #"+response.features[i]["content"];
     			}
     		}
-    		if(kakaoDescription.length < 10) kakaoDescription += " #"+response.name;
+    		if(kakaoDescription.length < 10) kakaoDescription += " #"+ response.name;
     		//카카오링크버튼
     		//<![CDATA[
-			    if(kakaoInit !== false) Kakao.init('6a9cd5c44ae0a61dfc5b951ffe3f4607');
+			    if(kakaoInit === true) Kakao.init('6a9cd5c44ae0a61dfc5b951ffe3f4607');
 			    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
 			    Kakao.Link.createDefaultButton({
 			      container: '#kakao-link-btn',
@@ -163,13 +155,13 @@ var profileTPLC = {
 				rules: {
 					story:{
 						required: true,
-						minlength: 10,
+						minlength: 5,
 						maxlength: 500,
 					}
 				},
 				// Specify validation error messages
 				messages: {
-					story: "썰은 열자 이상 오백자 이하 입니다리",
+					story: "이야기는 다섯글자이상 오백자 이하 입니다리",
 				},
 				//추가성공시에, 특징추가 동적생성 Form을 없앤다.
 				submitHandler: function(form, evt) {
@@ -288,7 +280,7 @@ var profileTPLC = {
 										alert("수정되었습니다.");
 										$("#updateProfileTPL").html("");
 										response = data.changedDoc;
-										makeDynamicTPL("#profileTPL", TPL.EPprofile, {profile: response}, profileTPLC.profile(profileId, response, true, false));				
+										makeDynamicTPL("#profileTPL", TPL.EPprofile, {profile: response}, profileTPLC.profile(profileId, response));				
 
 									}else{
 										alert("문제가 생긴것 같아요...!");
@@ -339,7 +331,7 @@ var profileTPLC = {
 							alert("수정되었습니다.");
 							$("#updateProfileTPL").html("");
 							response = data.changedDoc;
-							makeDynamicTPL("#profileTPL", TPL.EPprofile, {profile: response}, profileTPLC.profile(profileId, response, true, false));				
+							makeDynamicTPL("#profileTPL", TPL.EPprofile, {profile: response}, profileTPLC.profile(profileId, response));				
 
 						}else{
 

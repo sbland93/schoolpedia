@@ -9,13 +9,6 @@ module.exports = function(){
 	
 		// '/login' Page Routing.
 		login: function(req, res, next){
-			//로그인에 성공시에, redirect페이지로 넘겨주는데, 홈에서 이동했을시에 , 즉 바로 로그인했을시에는
-			//newsFeed로 넘겨야하므로 분기로 처리한다.
-			var returnTo = req.query.redirect;
-			if(req.query && req.query.redirect){
-				if(req.query.redirect === "/") returnTo = "/newsFeed";
-				req.session.returnTo = returnTo;	
-			} 
 			res.render('login',{});
 		},
 
@@ -27,14 +20,14 @@ module.exports = function(){
 
 
 		localSignup : passport.authenticate('local', {
-			successReturnToOrRedirect : '/newsFeed',
+			successReturnToOrRedirect : '/',
 			failureRedirect: '/register',
 		}),
 
 
 		localLogin : passport.authenticate('local', {
-			successReturnToOrRedirect: '/newsFeed',
-			failureRedirect: '/login',
+			successReturnToOrRedirect: '/',
+			failureRedirect: '/',
 		}),
 
 
@@ -48,7 +41,8 @@ module.exports = function(){
 			if(req.isAuthenticated()){
 				return next();
 			} else {
-				res.redirect('/login');
+				req.session.returnTo = req.url;	
+				res.redirect('/');
 			}
 		},
 

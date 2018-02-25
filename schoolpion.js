@@ -309,7 +309,8 @@ app.use(function(req, res, next){
 		res.locals.isLoggedIn = false;
 		res.locals.userInfo = undefined;
 	}
-	next();
+	next(); //다음 라우팅으로 넘어가라.
+
 });
 
 //모든 routing 로드.

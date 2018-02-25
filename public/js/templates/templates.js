@@ -166,7 +166,7 @@ this["TPL"]["EPaddReply"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main
 },"useData":true});
 
 this["TPL"]["EPaddSchool"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<form class=\"form-horizontal\" action=\"/api/school\" id=\"searchSchool\">\r\n	<div class=\"form-group\">\r\n		<label class=\"col-md-12 col-sm-12 col-xs-12\">학교추가</label>\r\n		\r\n		<div class=\"col-xs-9 col-sm-8 col-md-7\">\r\n			<input type=\"text\" class=\"form-control\" name=\"name\" placeholder=\"학교명을 입력하세요!\">\r\n		</div>\r\n		<div class=\"col-xs-12 col-md-12\">	\r\n			<button class=\"btn btn-default btn-sm buttonGroup\" type=\"submit\">검색!</button>\r\n			<button class=\"btn btn-default btn-sm buttonGroup\" id=\"cancelAddSchool\">취소</button>\r\n		</div>\r\n	</div>\r\n</form>\r\n\r\n<div id=\"searchedSchoolsTPL\"></div>\r\n\r\n\r\n\r\n";
+    return "<form class=\"form-horizontal\" action=\"/api/school\" id=\"searchSchool\">\r\n	<div class=\"form-group\">\r\n		<label class=\"col-md-12 col-sm-12 col-xs-12\">학교추가</label>\r\n		\r\n		<div class=\"col-xs-9 col-sm-8 col-md-7\">\r\n			<input type=\"text\" class=\"form-control\" name=\"name\" placeholder=\"학교명을 입력하세요!\">\r\n		</div>\r\n		<div class=\"col-xs-12 col-md-12\">	\r\n			<button class=\"btn btn-default btn-sm buttonGroup\" type=\"submit\">검색!</button>\r\n			<button class=\"btn btn-default btn-sm buttonGroup\" id=\"cancelAddSchool\">취소</button>\r\n		</div>\r\n	</div>\r\n</form>\r\n\r\n<div id=\"searchedSchoolsTPL\"></div>";
 },"useData":true});
 
 this["TPL"]["EPaddStory"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -453,10 +453,6 @@ this["TPL"]["EPupdateClass"] = Handlebars.template({"1":function(container,depth
     + "\" />\r\n		<div class=\"col-md-12 col-sm-12 col-xs-12\">\r\n			<button class=\"btn btn-default btn-sm buttonGroup\" id=\"updateClassButton\">수정</button>\r\n			<button class=\"btn btn-default btn-sm buttonGroup\" id=\"cancelUpdateClass\">취소</button>\r\n		</div>\r\n		\r\n	</div>\r\n	\r\n</form>\r\n	";
 },"useData":true});
 
-this["TPL"]["EPupdateProfile"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "";
-},"useData":true});
-
 this["TPL"]["PSsearchedProfiles"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
@@ -485,6 +481,10 @@ this["TPL"]["PSsearchedProfiles"] = Handlebars.template({"1":function(container,
   return "<ul class=\"profileList\">\r\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.profileList : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(4, data, 0),"data":data})) != null ? stack1 : "")
     + "</ul>";
+},"useData":true});
+
+this["TPL"]["RGaddSchool"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<form class=\"form-horizontal\" action=\"/api/school\" id=\"searchSchool\">\r\n	<div class=\"form-group\">\r\n		<label class=\"col-md-12 col-sm-12 col-xs-12\">학교추가</label>\r\n		\r\n		<div class=\"col-xs-9 col-sm-8 col-md-7\">\r\n			<input type=\"text\" class=\"form-control\" name=\"name\" placeholder=\"학교명을 입력하세요!\">\r\n		</div>\r\n		<div class=\"col-xs-12 col-md-12\">	\r\n			<button class=\"btn btn-default btn-sm buttonGroup\" type=\"submit\">검색!</button>\r\n			<button class=\"btn btn-default btn-sm buttonGroup\" id=\"cancelAddSchool\">취소</button>\r\n		</div>\r\n	</div>\r\n</form>\r\n\r\n<div id=\"searchedSchoolsTPL\"></div>";
 },"useData":true});
 
 this["TPL"]["RGsearchedSchools"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {

@@ -8,7 +8,7 @@ module.exports = {
 	mongo: {
 		//기본 mlab주소.
 		development: {
-			connectionString : 'mongodb://SBLAND:tmznfvldhszld@ds261247.mlab.com:61247/websbland2'
+			connectionString : 'mongodb://SBLAND:rhksflwhagkwk@ds055574.mlab.com:55574/websbland'
 		},
 		//deploy된 상태에서의 mongodb mlab 주소.
 		production: {

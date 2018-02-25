@@ -11,22 +11,6 @@ module.exports = function(){
 
 		//profile 페이지 라우팅
 		profile: function(req, res, next){
-			/*Profile.findById(req.params.id)
-				.populate('schools.school')
-				.exec(function(err, profile){
-				if(err) next(err);
-				if(!profile){
-					res.locals.message404 = '해당학생 페이지는 존재하지 않아요ㅠㅠ';
-					return next();
-				}else{
-					res.render('profile', {
-						profileId: req.params.id,
-						profile: profileViewModel(profile),		
-						pageTestScript: '/qa/tests-profile.js'
-					});
-				}
-			});*/
-
 			res.render('profile', {
 				profileId: req.params.id,
 				pageTestScript: '/qa/tests-profile.js'

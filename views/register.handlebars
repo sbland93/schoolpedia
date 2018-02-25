@@ -41,23 +41,21 @@
   </div>
   
   <div class="form-group">
-    <label for="schoolName" class="col-xs-11 col-sm-2 col-md-3 control-label">출신학교</label>
-    <div class="col-xs-10 col-sm-7 col-md-6">
-      <ul>
-        <div id="addSchoolTemplate">
-      </ul>
-    </div>
-  </div>
- 
-  
-  <div class="form-group">
       <label for="kakaoButton" class="col-xs-10 col-sm-2 col-md-3 control-label">*카카오인증</label>
       <div class="col-xs-10 col-sm-7 col-md-6">
           <a id="kakao-login-btn" id="kakaoButton"></a>
           <br/><span id="kakaoMessage">현재 미인증 상태입니다. 카카오인증은 필수입니다!</span>
       </div>
   </div>
-
+<div class="form-group">
+    <label for="schoolName" class="col-xs-11 col-sm-2 col-md-3 control-label">*출신학교(아래 학교추가이용)</label>
+    <div class="col-xs-10 col-sm-7 col-md-6">
+      <ul>
+        <div id="addSchoolTemplate">
+      </ul>
+    </div>
+  </div>
+</div>
 
   <div class="col-sm-offset-2 col-md-offset-3">
     <input type="hidden" name="verified" id="verified" />
@@ -70,29 +68,19 @@
 
 </form>
 </br>
+
 <div class="form-horizontal">
   <div class="form-group">
-  
-
-    <label for="school" class="col-xs-11 col-sm-2 col-md-3 control-label">학교추가</label>
-    <div class="col-xs-12 col-sm-10 col-md-5">
-      <button id="addSchool" class="btn btn-default btn btn-sm buttonGroup">학교추가</button> 학교의 게시물을 확인할수 있습니다!
-      
-      <div id="addSchoolTPL"></div>
-      
-      
-    </div>
-  
-
+  <label for="school" class="col-xs-11 col-sm-2 col-md-3 control-label">- 학교추가(초,중,고 세개 혹은 전학시에 세개 이상 입력 가능)</label>
+  <div class="col-xs-12 col-sm-10 col-md-5">
+    <button id="addSchool" class="btn btn-default btn btn-sm">학교추가</button> 출신 초,중,고등학교의 게시물을 확인할수 있습니다!
+    <div id="addSchoolTPL"></div>
   </div>
 </div>
 
 
 
 {{#section 'head'}}
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 {{/section}}
 

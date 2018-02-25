@@ -3,9 +3,8 @@
 $(document).ready(function(){
 
 	//userInfo담는다. 댓글달때 쓸것.
-	var userInfo, isLoggedIn;
+	var userInfo;
 	ajaxAuth().then(function(data){
-		isLoggedIn = data.isLoggedIn;
 		userInfo = data.userInfo;
 	});
 
@@ -51,10 +50,6 @@ $(document).ready(function(){
 		},
 		submitHandler:function(form,evt){
 			evt.preventDefault();
-			if(!isLoggedIn){
-				alert("로그인이 필요한 서비스입니다.");
-				return location.href = $("#loginBtn").attr("href");
-			}
 			var newReply = $("#comment").val();
 			var node = document.createElement("LI");                
 			var replynode = document.createTextNode(newReply);

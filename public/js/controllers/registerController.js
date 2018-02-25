@@ -14,7 +14,7 @@ $(document).ready(function(){
           //사용자의 카카오아이디가 이미 인증에 사용된것이 아닌지 확인합니다.
           success: function(res) {
             getUsers({kakaoEmail: res.kaccount_email}).then(function(data){
-              
+              console.log(data);
               //카카오 이메일이 인증에 사용되지 않았다면,
               if(data.length === 0){
                 
@@ -44,16 +44,18 @@ $(document).ready(function(){
   //]]>
 
 
-    var EPaddSchool = TPL.EPaddSchool;
+    var RGaddSchool = TPL.RGaddSchool;
     $("#addSchool").on('click',function(evt){
       
       evt.preventDefault();
       
-      $("#addSchoolTPL").html(EPaddSchool());
-      $("#cancelUpdateSchool").on('click',function(evt){
+      $("#addSchoolTPL").html(RGaddSchool());
+      
+      $("#cancelAddSchool").on('click', function(evt){
         evt.preventDefault();
         $("#addSchoolTPL").html("");
-      })
+      });
+
       $("#searchSchool").validate({
         rules:{
           name:{

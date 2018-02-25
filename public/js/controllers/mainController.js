@@ -36,11 +36,11 @@ $(document).ready(function(){
 				var numberOfUp = Number(button.html());
 				button.html("+"+(numberOfUp+1));
 			}else{
-				if(data.type === "Login"){
-					alert("로그인이 필요한 서비스에요!");
-					return location.href = $("#loginBtn").attr("href");
-				}else if(data.type=== "Already"){
-					alert("이미 의견이 반영되었어요!");	
+				if(data.type === "Already"){
+					alert("이미 의견이 반영되었어요!");
+				}else{
+					alert("문제가 생긴것 같아요!");
+					location.reload();	
 				}
 			}
 		});
@@ -57,11 +57,11 @@ $(document).ready(function(){
 				var numberOfDown = Number(button.html());
 				button.html(numberOfDown-1);
 			}else{
-				if(data.type === "Login"){
-					alert("로그인이 필요한 서비스에요!");
-					return location.href = $("#loginBtn").attr("href");
-				}else if(data.type=== "Already"){
-					alert("이미 의견이 반영되었어요!");	
+				if(data.type === "Already"){
+					alert("이미 의견이 반영되었어요!");
+				}else{
+					alert("문제가 생긴것 같아요!");
+					location.reload();	
 				}
 			}
 		});

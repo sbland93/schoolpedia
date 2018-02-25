@@ -66,11 +66,11 @@ module.exports = function(passport){
 						return done("error");
 					}
 					var newUser = new User();
-					if(!(Array.isArray(req.body.schools))){
+					//학교가 하나 들어오면 배열로 오지 않기때문에 하나 보냈다면 배열로 만들어 넣어준다.
+					if(req.body.schools!==undefined && !(Array.isArray(req.body.schools))){
 						var schoolArray = [];
 						schoolArray[0]=req.body.schools;
 						newUser.schools = schoolArray;
-						
 					}
 					else{
 						newUser.schools = req.body.schools;

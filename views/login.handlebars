@@ -1,19 +1,19 @@
-<header>로그인</header>
+<header>스쿨피온</header>
 <div class="row">
 
 	<!-- 안내사항 column-->
 	<div class="col-md-6">
 		<ul>
-			<legend>안내사항</legend>
-			<li>로그인을 할 경우 개인페이지를 본인이 관리 가능</li>
-			<li>타인의 페이지 생성가능</li>
-			<li>악의적인 댓글 혹은 음란물 유포 시 강력하게 제제</li>
+			<legend>스쿨피온?</legend>
+			<li><b>친구의 프로필</b>을 위키 방식으로 만들고, 친구에게 알려주세요</li>
+			<li>학교 친구, 선후배들과 재밌는 커뮤니티를 만들어가세요</li>
+			<li>상대가 싫어할 행동은 하지 말아주세요</li>
 		</ul>
 	</div>
 
-	<!-- 로그인 column-->
+	<!-- 로그인 column '/'로 post방식으로 보내면 확인하고 로그인시켜주고 newsFeed화면을 렌더링한다.-->
 	<div class="col-xs-offset-1 col-md-5">
-		<form class="form-horizontal loginForm" action="/login" method="POST">
+		<form class="form-horizontal loginForm" action="/" method="POST">
 			<div class="form-group">
 				<label for="fieldEmail" class="col-xs-11 col-sm-2 col-md-3 control-label">이메일</label>
 				<div class="col-xs-11 col-sm-7 col-md-9">
@@ -29,7 +29,7 @@
 			<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-9">
 				  <button type="submit" class="btn btn-default buttonGroup">로그인</button>
-				  <a  href="/register" class="btn btn-default buttonGroup">회원가입</a>
+				  <a  href="/register" class="btn btn-default buttonGroup">간편회원가입</a>
 				</div>
 			</div>
 			<input type="hidden" name="login" value="true">

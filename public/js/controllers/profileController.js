@@ -2,10 +2,8 @@ $(document).ready(function(){
 	
 
 	//profileId와, isMyPage(마이페이지이면 "true" 아니면 attr가져올게 없으므로 undefined)
-	//isLoggedIn(로그인중이면 "true" 아니면 attr가져올게 없으므로 undefined)
-	var isLoggedIn, userInfo, urlNow;
+	var userInfo, urlNow;
 	ajaxAuth().then(function(data){
-		isLoggedIn = data.isLoggedIn;
 		urlNow = data.urlNow;
 		userInfo = data.userInfo;
 	});
@@ -101,8 +99,8 @@ $(document).ready(function(){
     		var takeProfile = false;
     		if(userInfo !== undefined && !userInfo.profile && response.name === userInfo.name) takeProfile = true;
     		var context = {profile: response, isMyPage: isMyPage, takeProfile: takeProfile };
-	    	
-			makeDynamicTPL("#profileTPL", TPL.EPprofile, context, profileTPLC.profile(profileId, response, isLoggedIn));				
+	    	//처음에는 kakaoInit을 True로 준다.
+			makeDynamicTPL("#profileTPL", TPL.EPprofile, context, profileTPLC.profile(profileId, response, true));				
 
 			var storyData = $(response.stories);
 			var featureData = $(response.features);
@@ -122,10 +120,6 @@ $(document).ready(function(){
 			$("#addFeature").on('click', function(evt){
 				evt.preventDefault();
 				//특징추가 위한 Form 검증.
-				if(!isLoggedIn){
-					alert("로그인이 필요한 서비스에요! 로그인 부탁드릴게요");
-					return location.href = $("#loginBtn").attr("href");
-				}
 				makeDynamicTPL("#updateProfileTPL", TPL.EPaddFeature, context, profileTPLC.addFeature(profileId, response, tplAndContext));				
 			});
 
@@ -134,10 +128,6 @@ $(document).ready(function(){
 			$("#addStory").on('click', function(evt){
 				evt.preventDefault();
 				//썰추가 위한 Form 검증.
-				if(!isLoggedIn){
-					alert("로그인이 필요한 서비스에요! 로그인 부탁드릴게요");
-					return location.href = $("#loginBtn").attr("href");
-				}
 				makeDynamicTPL("#updateProfileTPL", TPL.EPaddStory, context, profileTPLC.addStory(profileId, response, tplAndContext));
 			});
 
@@ -145,10 +135,6 @@ $(document).ready(function(){
 			$("#addReply").on('click', function(evt){
 				evt.preventDefault();
 				//방명록추가 위한 Form 검증.
-				if(!isLoggedIn){
-					alert("로그인이 필요한 서비스에요! 로그인 부탁드릴게요");
-					return location.href = $("#loginBtn").attr("href");
-				}
 				makeDynamicTPL("#updateProfileTPL", TPL.EPaddReply, context, profileTPLC.addReply(profileId, response, tplAndContext, userInfo));
 			});
 
@@ -157,10 +143,6 @@ $(document).ready(function(){
 			$("#addSchool").on('click',function(evt){
 				evt.preventDefault();
 				//학교 추가를 위한 Form 검증.
-				if(!isLoggedIn){
-					alert("로그인이 필요한 서비스에요! 로그인 부탁드릴게요");
-					return location.href = $("#loginBtn").attr("href");
-				}
 				makeDynamicTPL("#updateProfileTPL", TPL.EPaddSchool, context, profileTPLC.addSchool(profileId, response));
 			});
 

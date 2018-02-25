@@ -84,20 +84,6 @@ module.exports = function(){
 		//DOLATER 학교글이 부족할경우.
 		school: function(req, res, next){
 			var schoolDocument;
-			/*var profilePromise = new Promise(function(resolve, reject){
-				School.findById(req.params.id, function(err, school){
-					if(err) return reject(err);
-					schoolDocument = school;
-					if(!school){
-						res.locals.message404 = '해당학교 페이지는 존재하지 않아요ㅠㅠ';
-						return next();
-					}
-					school.getProfiles({updated_at : '-1'},  5, function(err, profiles){
-						if(err) reject(err);
-						resolve(profiles);
-					});
-				});
-			});*/
 			//학교 아이디를 통해서, 학교의 정보를 가져온다.
 			var schoolPromise = new Promise(function(resolve, reject){
 				School.findById(req.params.id, function(err, school){

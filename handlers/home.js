@@ -15,15 +15,18 @@ module.exports = function(){
 
 	return {
 
-		//home 페이지 라우팅. //공지사항관련 !
+		//기본 홈 페이지는 로그인이 된 상태라면, newsFeed이고 로그인이 되어있지 않은 상태라면 login페이지를 보여준다.
 		home:  function(req, res, next){
-			Info.find(function(err,infos){
-				if(err) next(err);
-				res.render('home', {
-					infoList: infos.map(infoViewModel),
-					pageTestScript: '/qa/tests-home.js',
-				});
-			});
+			if(req.isAuthenticated()){ //로그인이 되어있는 상태라면 뉴스피드를 보여준다.
+				req.user.getNewsFeed(function(err, posts){
+					if(err) return next(err);
+					return res.render('newsFeed', {
+						posts: posts,
+					});
+				});	
+			}else{ //로그인이 되어있지 않다면
+				res.render('login',{});
+			}
 		},
 		//사용자 관리 페이지 라우팅.
 		myControll: function(req,res,next){

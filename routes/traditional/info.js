@@ -26,7 +26,7 @@ module.exports = function(app){
 		}
 	})
 	//공지사항 등록 페이지로 이동
-	app.get('/info/new', authHandlers.isAdmin,function(req,res,next){
+	app.get('/info/new', authHandlers.isAdmin, function(req,res,next){
 		res.render("newInfo");
 	})
 

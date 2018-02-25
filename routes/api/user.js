@@ -11,7 +11,6 @@ module.exports = function(app){
 	//Query를 보내면,쿼리에 해당하는 user에 해당하는 것들을 내보내고
 	//Query가 없으면 모든 User를 내보낸다.
 	app.get('/api/user', function(req, res, next){
-		
 		User.find(req.query)
 			.exec(function(err, users){
 				if(err) return next(err);

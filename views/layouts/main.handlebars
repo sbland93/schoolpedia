@@ -42,29 +42,29 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
 				</button>
-				{{#if isLoggedIn}}
-					<a class="navbar-brand" href="/newsFeed"><em>뉴스피드</em></a>
-		    	{{else}}
-					<a class="navbar-brand" href="/"><em>스쿨피온</em></a>
-				{{/if}}
+					<a class="navbar-brand" href="/"><em>{{#if isLoggedIn}}뉴스피드
+					{{else}}스쿨피온{{/if}}</em></a>
 			</div>
+			<form class="mainSearchProfileForm navbar-form navbar-left formClass">
+				<div class="input-group">
+					<input type="text" class="form-control" name="name" placeholder="친구검색!" id="mainProfileName">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="submit">검색!</button>
+					</span>
+				</div>
+			</form>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<form class="mainSearchSchoolForm navbar-form navbar-left formClass" action="/api/school" id="searchSchools">
-					<div class="form-group">
+					<div class="input-group">
 						<input type="text" class="form-control" name="name" placeholder="학교명 검색!" id="mainSchoolName">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">검색!</button>
+						</span>
 					</div>
-					<button class="btn btn-default buttonGroup" type="submit">검색!</button>
-				</form>
-				<form class="mainSearchProfileForm navbar-form navbar-left formClass">
-					<div class="form-group">
-						<input type="text" class="form-control" name="name" placeholder="친구이름 검색!" id="mainProfileName">
-					</div>
-					<button class="btn btn-default buttonGroup" type="submit">검색!</button>
 				</form>
 				<div class="navbar-left" id="schools">
 				{{#if isLoggedIn}}
@@ -105,7 +105,6 @@
 	<div id="mainSearchedProfileListTPL"></div>
 	<div class="container-fluid">
 			<!-- 메인페이지로 이동하는 링크-->
-		    
 			<div>
 				{{#if flash}}
 					<div class="alert alert-dismissible alert-{{flash.type}}">
