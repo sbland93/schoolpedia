@@ -28,7 +28,7 @@ $(document).ready(function(){
 		evt.preventDefault();
 		var deleteConfirm = confirm("정말로 삭제하시겠습니까?");
 		if (deleteConfirm){
-			deleteProfile(profileId).then(function(data){
+			adminDeleteProfile(profileId).then(function(data){
 				if(data.success) location.reload();
 				else alert('Error occured');
 			}).catch(function(){

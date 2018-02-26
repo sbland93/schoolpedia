@@ -19,7 +19,7 @@ var adminGetBoards = function(data){
 var adminGetBoard = function(id){
 	return new Promise(function(resolve, reject){
 		$.ajax({
-			url: baseUrl + '/' + id,
+			url: baseUrl + '/board' + '/' + id,
 			method: 'GET',
 			success: function(rtnData){
 				resolve(rtnData);
@@ -50,7 +50,7 @@ var adminAddBoard = function(data){
 var adminDeleteBoard = function(id){
 	return new Promise(function(resolve, reject){
 		$.ajax({
-			url: baseUrl + '/' + id,
+			url: baseUrl + '/board' + '/' + id,
 			method: 'DELETE',
 			success: function(rtnData){
 				resolve(rtnData);
@@ -65,7 +65,7 @@ var adminDeleteBoard = function(id){
 var adminUpdateBoard = function(id, data){
 	return new Promise(function(resolve, reject){
 		$.ajax({
-			url: baseUrl + '/' + id,
+			url: baseUrl + '/board' +'/' + id,
 			method: 'PUT',
 			data: data,
 			success: function(rtnData){
@@ -77,4 +77,81 @@ var adminUpdateBoard = function(id, data){
 		});
 	});
 };
+var adminGetProfiles = function(data){
+	return new Promise(function(resolve, reject){
+		$.ajax({
+			url: baseUrl,
+			method: 'GET',
+			data: data,
+			success: function(rtnData){
+				resolve(rtnData);
+			},
+			fail: function(rtnData){
+				reject(rtnData);
+			},
+		});
+	});
+};
 
+var adminGetProfile = function(id){
+	return new Promise(function(resolve, reject){
+		$.ajax({
+			url: baseUrl + '/profile' + '/' + id,
+			method: 'GET',
+			success: function(rtnData){
+				resolve(rtnData);
+			},
+			fail: function(rtnData){
+				reject(rtnData);
+			},
+		});
+	});
+};
+
+var adminAddProfile = function(data){
+	return new Promise(function(resolve, reject){
+		$.ajax({
+			url: baseUrl,
+			method: 'POST',
+			data: data,
+			success: function(rtnData){
+				resolve(rtnData);
+			},
+			fail: function(rtnData){
+				alert('Error Occured Here');
+				reject(rtnData);
+			},
+		});
+	});
+};
+
+var adminDeleteProfile = function(id){
+	return new Promise(function(resolve, reject){
+		$.ajax({
+			url: baseUrl + '/profile' + '/' + id,
+			method: 'DELETE',
+			success: function(rtnData){
+				resolve(rtnData);
+			},
+			fail: function(rtnData){
+				reject(rtnData);
+			},
+		});
+	});
+};
+
+var adminUpdateProfile = function(id, data){
+	return new Promise(function(resolve, reject){
+		$.ajax({
+			url: baseUrl + '/profile' + '/' + id,
+			method: 'PUT',
+			data: data,
+			success: function(rtnData){
+				resolve(rtnData);
+			},
+			fail: function(rtnData){
+				reject(rtnData);
+			},
+		});
+	});
+};

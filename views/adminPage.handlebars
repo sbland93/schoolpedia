@@ -1,34 +1,39 @@
 <div class="col-md-5">
-	<label>게시물 목록</label>
+	<label><em>게시물 목록<em></label>
 	{{#each boardList}}
 		<div>
+			<a href="/school/{{school.id}}">{{school.name}}</a>
 			<ul>
 				<li><a href="/board/{{id}}">{{title}}</a></li>
 				{{content}}
 				<button class="btn btn-default btn-sm buttonGroup removeBoard" boardIds={{id}}>삭제</button>
-				<input type="hidden" name="boardId" id="boardID" >
+				<div>
+				{{updated_at}}
+				</div>
 			</ul>
-			
 		</div>
 		
 	{{/each}}
 </div>
+
 <div class="col-md-4">
-	<label>프로필 목록</label>
+	<label><em>프로필 목록<em></label>
 	{{#each profileList}}
 		<ul>
 			<li><a href="/profile/{{id}}">{{name}}</a><button class="btn btn-default btn-sm buttonGroup removeProfile" profileId={{id}}>삭제</button></li>
 			<input type="hidden" name="profile" id="profileId" >
 			{{#each schools}}
-			{{school.name}}
-		{{/each}}
+				{{school.name}}
+			{{/each}}
+			<div>
+				{{updated_at}}
+			</div>
 		</ul>
-		
-		
 	{{/each}}
 </div>
+
 <div class="col-md-3">
-	<label>최근가입목록</label>
+	<label><em>최근가입목록<em></label>
 	<ul>
 	{{#each userList}}
 		<li>{{name}}</li>
