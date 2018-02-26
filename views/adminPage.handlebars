@@ -1,0 +1,53 @@
+<div class="col-md-5">
+	<label>게시물 목록</label>
+	{{#each boardList}}
+		<div>
+			<ul>
+				<li><a href="/board/{{id}}">{{title}}</a></li>
+				{{content}}
+				<button class="btn btn-default btn-sm buttonGroup removeBoard" boardIds={{id}}>삭제</button>
+				<input type="hidden" name="boardId" id="boardID" >
+			</ul>
+			
+		</div>
+		
+	{{/each}}
+</div>
+<div class="col-md-4">
+	<label>프로필 목록</label>
+	{{#each profileList}}
+		<ul>
+			<li><a href="/profile/{{id}}">{{name}}</a><button class="btn btn-default btn-sm buttonGroup removeProfile" profileId={{id}}>삭제</button></li>
+			<input type="hidden" name="profile" id="profileId" >
+			{{#each schools}}
+			{{school.name}}
+		{{/each}}
+		</ul>
+		
+		
+	{{/each}}
+</div>
+<div class="col-md-3">
+	<label>최근가입목록</label>
+	<ul>
+	{{#each userList}}
+		<li>{{name}}</li>
+		{{#each schools}}
+			{{school.name}}
+		{{/each}}
+	{{/each}}
+	</ul>
+</div>
+
+{{#section 'head'}}
+	<script type="text/javascript" src="/js/templates/templates.js"></script>
+{{/section}}
+
+{{#section 'jquery'}}
+	<script type="text/javascript" src="/js/api/admin.js"></script>
+	<script type="text/javascript" src="/js/api/auth.js"></script>
+	<script type="text/javascript" src="/js/api/board.js"></script>
+	<script type="text/javascript" src="/js/api/school.js"></script>
+	<script type="text/javascript" src="/js/api/profile.js"></script>
+	<script type="text/javascript" src="/js/controllers/adminController.js"></script>	
+{{/section}}

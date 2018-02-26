@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var authHandlers = require('../handlers/auth.js')();
 var passport = require('passport');
 var Info = require('../models/info.js');
+var adminHandlers = require('../handlers/admin.js')();
 
 module.exports = function(app){
 
@@ -14,15 +15,16 @@ module.exports = function(app){
 	//schoolList가 필요.
 	app.get('/', homeHandlers.home);
 	
-	//School, Profile, Board에 해당하는 APIRouting 링크.
+	//School, Profile, Board, User, admin에 해당하는 APIRouting 링크.
 	require('./api/school.js')(app);
 	require('./api/profile.js')(app);
 	require('./api/board.js')(app);
 	require('./api/user.js')(app);
 	require('./api/info.js')(app);
 	require('./traditional/info.js')(app);
-
-
+	require('./api/admin.js')(app);
+	//관리자 페이지 라우팅.
+	app.get('/admin', authHandlers.isAdmin, adminHandlers.adminPage);
 	//사용자 관리 페이지 라우팅.
 	app.get('/myControll', authHandlers.isLoggedIn, homeHandlers.myControll);
 

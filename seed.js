@@ -29,6 +29,7 @@ var seedDev = function(){
 	});
 
 	//userData모두 삭제후 seedData기반 user생성.
+	
 	p2 = new Promise(function(resolve, reject){
 		User.remove({}, function(err){
 			User.create(seedData.userList, function(err, users){

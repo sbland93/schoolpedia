@@ -1,8 +1,7 @@
 <!-- NameSpace: SB -->
 <link rel="stylesheet" type="text/css" href="/css/schoolboard.css">
 <header>게시물</header>
-
-
+<!--게시물 등록 및 검색-->
 <div class="row">
 	<div class="col-md-12">
 		<div class="col-sm-12 col-md-6">
@@ -14,7 +13,6 @@
 						<p>추천:{{up}} 비추:{{down}}</p>
 					</li>
 				{{/each}}
-
 			</ul>
 		</div>
 		<div class="col-xs-offset-1 col-sm-12 col-md-5">
@@ -48,14 +46,10 @@
 			<div id="searchedBoardsTPL"></div>
 		</div>
 	</div>
-
-	
-	
 </div>
 <div class="bottom">
 	<a href="/school/{{schoolInfo.id}}/board/new" class="btn btn-default buttonGroup">글쓰기</a>
 </div>
-
 
 {{#section 'jquery'}}
 	<script type="text/javascript" src="/js/api/board.js"></script>

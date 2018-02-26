@@ -18,6 +18,7 @@ var userSchema = mongoose.Schema({
 	profile: {type: mongoose.Schema.Types.ObjectId, ref: 'Profile'},
 	schools: [{type: mongoose.Schema.Types.ObjectId, ref: 'School'}],
 	boards: [{type: mongoose.Schema.Types.ObjectId, ref: 'Board'}],
+	updated_at: {type: Date, default: Date.now },
 });
 
 

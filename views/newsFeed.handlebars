@@ -4,10 +4,8 @@
 	스 쿨 피 온
 </header>
 
-
 <!--학교 검색  -->
 <div class="col-md-offset-3 col-md-7">
-	
 	{{#if userInfo.schools}}
 		{{#if (checkBoolean (lengthOf userInfo.schools) "<" 3)}}
 			<p>
@@ -43,18 +41,12 @@
 		<button class="btn btn-sm btn-default" id="addSchool">학교추가하기</button>
 		<div id="addSchoolTPL"></div>
 	{{/if}}
-
-	
 </div>
 {{#each infoList}}
 <ul>
 	<li><a href="/info/{{id}}">{{title}}</a></li>
 </ul>
 {{/each}}
-
-
-
-
 
 {{#section 'jquery'}}
 	<script type="text/javascript" src="/js/templates/controllers/newsFeedTPLC.js"></script>

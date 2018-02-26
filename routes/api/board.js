@@ -20,8 +20,6 @@ module.exports = function(app){
 		if(req.query.school == "here"){
 			query.push({school : req.query.schoolId});	
 		}
-		
-	
 		Board.find().and(query)
 			.populate('school')
 			.exec(function(err, boards){
