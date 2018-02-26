@@ -1,13 +1,11 @@
 <header>공지사항수정</header>
 <form class="form-horizontal updateInfoForm" role="form" action="/info/{{id}}" method="PUT" infoId="{{id}}">
-	<div class="form-group">
-		
+	<div class="form-group">	
 		<label for="infoTitle" class="col-sm-2 control-label">제목</label>
 		<div class="col-sm-9">
 			<input type="text" class="form-control" name="title" id="infoTitle" value="{{title}}" required>
 		</div>
 		</br>
-	
 
 		<label for="infoContent" class="col-sm-2 control-label">내용</label>
 		<div class="col-sm-9">

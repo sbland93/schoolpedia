@@ -26,7 +26,9 @@ var boardSchema = mongoose.Schema({
 
 //userId를 받아서, writer와 같은지 확인해준다.
 boardSchema.methods.isWriter = function(userId){
-	if(!this.owner) return false;
+	if(!this.owner) {	
+		return false;	
+	}
 	return this.owner.equals(userId);
 };
 

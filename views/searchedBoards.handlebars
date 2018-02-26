@@ -1,5 +1,4 @@
 <!-- NameSpace: SB -->
-
 <h1>searched Board Page, This page include board and sorting TODO</h1>
 
 {{#if empty}}
@@ -19,7 +18,6 @@
 </ul>
 
 <form class="form-horizontal searchBoardForm" id="searchBoardForm" role="form" action="/board/search" method="GET">
-	
 	<input type="hidden" name="schoolId" value="{{schoolInfo.id}}">
 
 	<div class="form-group">
@@ -47,5 +45,4 @@
 			<button type="submit" class="btn btn-default">검색</button>
 		</div>
 	</div>
-
 </form>
