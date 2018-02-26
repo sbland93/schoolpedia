@@ -3,7 +3,7 @@ var baseUrl = "/api/admin";
 var adminGetBoards = function(data){
 	return new Promise(function(resolve, reject){
 		$.ajax({
-			url: baseUrl,
+			url: baseUrl + '/board',
 			method: 'GET',
 			data: data,
 			success: function(rtnData){
@@ -34,7 +34,7 @@ var adminGetBoard = function(id){
 var adminAddBoard = function(data){
 	return new Promise(function(resolve, reject){
 		$.ajax({
-			url: baseUrl,
+			url: baseUrl + '/board',
 			method: 'POST',
 			data: data,
 			success: function(rtnData){
@@ -111,7 +111,7 @@ var adminGetProfile = function(id){
 var adminAddProfile = function(data){
 	return new Promise(function(resolve, reject){
 		$.ajax({
-			url: baseUrl,
+			url: baseUrl + '/profile',
 			method: 'POST',
 			data: data,
 			success: function(rtnData){

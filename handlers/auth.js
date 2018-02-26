@@ -5,37 +5,30 @@ var credentials = require('../credentials.js');
 module.exports = function(){
 
 	return {
-
-	
 		// '/login' Page Routing.
 		login: function(req, res, next){
 			res.render('login',{});
 		},
 
-		
 		// '/register' Page Routing.
 		register: function(req, res, next){
 			res.render('register',{});
 		},
-
 
 		localSignup : passport.authenticate('local', {
 			successReturnToOrRedirect : '/',
 			failureRedirect: '/register',
 		}),
 
-
 		localLogin : passport.authenticate('local', {
 			successReturnToOrRedirect: '/',
 			failureRedirect: '/',
 		}),
 
-
 		logout : function(req, res, next){
 			req.logout();
 			res.redirect('/');
 		},
-
 
 		isLoggedIn : function (req, res, next){
 			if(req.isAuthenticated()){
@@ -46,7 +39,6 @@ module.exports = function(){
 			}
 		},
 
-
 		ajaxIsLoggedIn: function(req, res, next){
 			if(req.isAuthenticated()){ // 로그인되어있는지 확인!
 				return next();
@@ -54,7 +46,6 @@ module.exports = function(){
 				res.json({success: false, type:"Login"});
 			}
 		},
-
 
 		//Loggin 상태와, usrInfo를 담아 보내준다.
 		ajaxAuth : function(req, res, next){
@@ -65,7 +56,6 @@ module.exports = function(){
 				return res.json({success: true, isLoggedIn: false, url: req.url});
 			}
 		},
-
 
 		isAdmin : function(req, res, next){
 			if(req.isAuthenticated()){

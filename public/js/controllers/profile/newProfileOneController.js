@@ -1,6 +1,5 @@
 
 $(document).ready(function(){
-	
 	var NPOsearchedSchools = TPL.NPOsearchedSchools;
 
 	//학생검색을 위한 Form 검증.

@@ -32,6 +32,5 @@ boardSchema.methods.isWriter = function(userId){
 	return this.owner.equals(userId);
 };
 
-
 var Board = mongoose.model('Board', boardSchema);
 module.exports = Board;

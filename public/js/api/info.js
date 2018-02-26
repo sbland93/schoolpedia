@@ -43,7 +43,6 @@ var addInfo = function(data){
 			fail: function(rtnData){
 				reject(rtnData);
 			},
-
 		});
 	});
 };

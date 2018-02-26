@@ -1,6 +1,5 @@
 
 $(document).ready(function(){
-
 	//특정학교를 클릭하면, 학교이름을 입력받는 Form을 생성시킨다.
 	$("#onlySchool").on('click', function(evt){
 		var input = document.createElement("INPUT");
@@ -14,7 +13,6 @@ $(document).ready(function(){
 	$("#allSchool").on('click', function(evt){
 		$("#onlySchoolTPL").html("");
 	});
-
 
 	//searchProfileForm Validate.
 	$(".searchProfilesForm").validate({

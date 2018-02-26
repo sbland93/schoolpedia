@@ -7,6 +7,5 @@ var infoSchema = mongoose.Schema({
 	updated_at: { type: Date, default: Date.now }, //글의 생성시기
 });
 
-
 var Info = mongoose.model('Info', infoSchema);
 module.exports = Info;

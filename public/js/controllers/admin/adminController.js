@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
 	//관리자 페이지에서 board삭제.
 	$(".removeBoard").on('click',function(evt){
@@ -38,4 +39,39 @@ $(document).ready(function(){
 			return;
 		}
 	});
+	//관리자가 게시글 생성.
+	$(".newBoardForm").validate({
+		rules: {
+			//제목은 5자 이상, 25자 이하.
+			title:{
+				required: true,
+				minlength: 3,
+				maxlength: 25,
+			},
+			content:{
+				required: true,
+				minlength: 1,
+				maxlength: 500,
+			}
+		},
+		// Specify validation error messages
+		messages: {
+			title: "제목은 3글자 이상, 25글자 이하로 적어줘",
+			content: "내용은 1글자 이상, 500글자 이하로 적어줘",
+		},
+		//글생성 버튼을 클릭시 글 생성후, 관리자페이지로 이동.
+		submitHandler: function(form) {
+			//textarea br 처리
+			var contents = $(form).serializeObject();
+			replaceBr(contents , "content");
+			adminAddBoard(contents).then(function(data){
+				if(data.success) location.href = '/admin';
+				else{
+					alert('Error Occured');
+				}
+			}).catch(function(){
+				alert('Error Occured');
+			});
+		}
+	})
 })

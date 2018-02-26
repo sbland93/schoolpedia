@@ -11,10 +11,7 @@ var userViewModel = require('../viewModels/user.js');
 var Passport = require('passport');
 var Auth = require('./auth.js');
 module.exports = function(){
-
-
 	return {
-
 		//기본 홈 페이지는 로그인이 된 상태라면, newsFeed이고 로그인이 되어있지 않은 상태라면 login페이지를 보여준다.
 		home:  function(req, res, next){
 			if(req.isAuthenticated()){ //로그인이 되어있는 상태라면 뉴스피드를 보여준다.

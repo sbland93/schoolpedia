@@ -24,8 +24,12 @@ module.exports = function(app){
 	require('./api/info.js')(app);
 	require('./traditional/info.js')(app);
 	require('./api/admin.js')(app);
+	
 	//관리자 페이지 라우팅.
 	app.get('/admin', authHandlers.isAdmin, adminHandlers.adminPage);
+	//관리자 페이지에서 게시글 작성 페이지 라우팅.
+	app.get('/admin/school/:id/board/new', authHandlers.isAdmin, adminHandlers.adminNewBoard);
+
 	//사용자 관리 페이지 라우팅.
 	app.get('/myControll', authHandlers.isLoggedIn, homeHandlers.myControll);
 

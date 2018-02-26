@@ -43,6 +43,19 @@ userSchema.methods.getNewsFeed = function(cb){
 		this.model('Board').find().in('school', this.schools).sort({'updated_at': -1}).limit(30).populate('school').exec(cb);
 	}
 };
+//관리자 익명 랜덤하게 생성.
+userSchema.methods.generateRandomAnonym = function(){
+	var returnAnonym = "";
+	//hashed는 60length의 string
+	var hashed = bcrypt.hashSync(this.kakaoEmail, bcrypt.genSaltSync(SALT_FACTOR), null)
+	
+	for(var a=0; a<4; a++){ //0~50 사이의 랜덤한 수를 발생시키고 두개씩 가져와 더한다.
+		var randomInt = Math.floor(Math.random() * (50));
+		returnAnonym += hashed.substring(randomInt , randomInt+2); 
+	}
+	//완성된 8글자의 randomAnonym을 리턴!
+	return returnAnonym;
+};
 
 var User = mongoose.model('User', userSchema);
 module.exports = User;

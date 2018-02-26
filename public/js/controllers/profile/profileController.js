@@ -1,6 +1,4 @@
 $(document).ready(function(){
-	
-
 	//profileId와, isMyPage(마이페이지이면 "true" 아니면 attr가져올게 없으므로 undefined)
 	var userInfo, urlNow;
 	ajaxAuth().then(function(data){
@@ -24,8 +22,6 @@ $(document).ready(function(){
 		});
 	
 	});
-
-	
 
 	//pagination을 실행할, template들과, 그에 따라 필요한 context와, Div의 Tag들의 모음 객체.
 	var tplAndContext = {
@@ -92,9 +88,6 @@ $(document).ready(function(){
 
     	//profile을 ajax를 통해서 가져오는데 성공하면 홈으로 보내고, 실패시에(페이지 이동 및, 없는 데이터, 에러) 홈으로 보낸다.
     	if(response.success){
-    		
-
-
     		//takeProfile은 원래 false인데, user가 profile을 차지하지 않았고, 프로필명과 유저이름이 같다면 페이지를 차지하는 버튼을 만들어주기 위해 true로 바꾼다.
     		var takeProfile = false;
     		if(userInfo !== undefined && !userInfo.profile && response.name === userInfo.name) takeProfile = true;

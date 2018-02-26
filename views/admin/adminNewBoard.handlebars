@@ -1,0 +1,49 @@
+<header>한줄게시판 글생성</header>
+<!--관리자 게시글 생성 페이지-->
+<form class="form-horizontal newBoardForm" role="form" action="/api/admin/board" method="POST">
+	<!--제목부분-->
+	<div class="form-group">
+		<label for="fieldTitle" class="col-sm-2 control-label">제목</label>
+		<div class="col-sm-9">
+			<input type="text" class="form-control" required name="title" id="fieldTitle">
+		</div>
+	</div>
+	
+	<!--DOLATER Hidden -->
+	<div class="form-group">
+		<label for="fieldSchool" class="col-sm-2 control-label">학교</label>
+		<div class="col-sm-9" id="fieldSchool">
+			<b>{{schoolInfo.name}}</b>
+		</div>
+	</div>
+
+	<input type="hidden" class="form-control" required name="school" value="{{schoolInfo.id}}">
+	
+	<!--내용부분-->
+	<div class="form-group">
+		<label for="fieldContent" class="col-sm-2 control-label">내용</label>
+		<div class="col-sm-9">
+			
+			<textarea class="form-control" required name="content" id="fieldContent" rows="10"></textarea>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-4">
+			<label for="fieldAnonym">익명</label>
+			<input type="checkbox" id="fieldAnonym" name="anonym" checked="checked" />
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-4">
+			<button type="submit" class="btn btn-default buttronGroup">글생성</button>
+		</div>
+	</div>
+
+</form>
+
+{{#section 'jquery'}}
+	<script type="text/javascript" src="/js/api/admin.js"></script>
+	<script type="text/javascript" src="/js/controllers/admin/adminController.js"></script>
+{{/section}}

@@ -32,8 +32,7 @@ $(document).ready(function(){
 			evt.preventDefault();
 
 			//검색내용을 serialize 한다.
-			var sendingData = $(form).serialize();
-			
+			var sendingData = $(form).serialize();	
 
 			//검색내용에 해당하는 프로필을 ajax로 가져오고 결과에 해당하는 템플릿을 동적생성.
 			getProfiles(sendingData).then(function(data){

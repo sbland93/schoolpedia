@@ -13,7 +13,6 @@ $(document).ready(function(){
 
 	//삭제버튼을 클릭시의 이벤트 처리.
 	$('#removeEachBoard').on('click', function(evt){
-
 		var self = $(this);
 		evt.preventDefault();
 
@@ -63,8 +62,7 @@ $(document).ready(function(){
 					alert("문제가 생긴것 같아요!");
 					location.reload();
 				}
-			});
-			
+			});	
 		}
 	})
 
