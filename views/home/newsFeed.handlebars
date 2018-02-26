@@ -14,6 +14,11 @@
 				<br />
 			</p>
 		{{/if}}
+		<p>
+			{{#each userInfo.schools}}
+				<a href="/school/{{id}}/board/new" class="btn btn-default">{{name}}글쓰기</a>
+			{{/each}}
+		</p><br>
 		{{#each posts}}
 			<p>
 				<div>

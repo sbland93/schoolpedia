@@ -67,7 +67,7 @@ module.exports = function(passport){
 					}
 					var newUser = new User();
 					//학교가 하나 들어오면 배열로 오지 않기때문에 하나 보냈다면 배열로 만들어 넣어준다.
-					if(req.body.schools!==undefined && !(Array.isArray(req.body.schools))){
+					if(req.body.schools!== undefined && !(Array.isArray(req.body.schools))){
 						var schoolArray = [];
 						schoolArray[0]=req.body.schools;
 						newUser.schools = schoolArray;

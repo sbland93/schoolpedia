@@ -31,7 +31,7 @@ module.exports = function(){
 		},
 		//관리자 게시글 생성 페이지 라우팅.
 		adminNewBoard:function(req,res,next){
-			School.findById(req.params.id,function(err,school){
+			School.findById(req.params.id, function(err,school){
 				if(err) next(err);
 				if(!school){
 					res.locals.message404 = '해당학교 페이지는 존재하지 않아요ㅠㅠ';

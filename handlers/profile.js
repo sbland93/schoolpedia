@@ -24,7 +24,7 @@ module.exports = function(){
 		newProfileOne: function(req, res, next){
 			
 			console.log(req.query);
-			if(!req.query || !req.query.school) return res.render('newProfileOne');
+			if(!req.query || !req.query.school) return res.render('profile/newProfileOne');
 
 			if(req.query.school){
 				School.findById(req.query.school , function(err, school){
@@ -39,7 +39,7 @@ module.exports = function(){
 
 		//rendering Create Profile Form(Step2)
 		newProfileTwo: function(req, res, next){
-			if(!req.query || !req.query.school) return res.render('newProfileOne');
+			if(!req.query || !req.query.school) return res.render('profile/newProfileOne');
 
 			School.findById(req.query.school , function(err, school){
 				if(err) return next(err);
@@ -78,7 +78,7 @@ module.exports = function(){
 		searchProfiles: function(req, res, next){
 			console.log('req.query From searchProfiles', req.query);
 			//query가 없으면, searchedProfile들을 보여준다.
-			if(!req.query) return res.render("profileSearch");
+			if(!req.query) return res.render("profile/profileSearch");
 			
 			var query = req.query
 			var searchString = query.q;

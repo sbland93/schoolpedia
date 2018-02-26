@@ -7,7 +7,7 @@
 			<a href="/admin/school/{{school.id}}/board/new" class="btn btn-default btn-sm buttonGroup">게시글쓰기</a>
 			<ul>
 				<li><a href="/board/{{id}}">{{title}}</a></li>
-				{{content}}
+				{{{trimString content}}}
 				<button class="btn btn-default btn-sm buttonGroup removeBoard" boardIds={{id}}>삭제</button>
 				<div>
 				{{{dateFormat updated_at}}}
