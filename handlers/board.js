@@ -17,7 +17,7 @@ module.exports = function(){
 					res.locals.message404 = "해당학교 글은 존재하지 않아요ㅠㅠ";
 					return next();
 				}
-				res.render('board', {
+				res.render('board/board', {
 					board : boardViewModel(board),
 					pageTestScript: '/qa/tests-board.js'
 				});
@@ -33,7 +33,7 @@ module.exports = function(){
 					res.locals.message404 = '해당학교 페이지는 존재하지 않아요ㅠㅠ';
 					return next();
 				}
-				res.render('newBoard', {
+				res.render('board/newBoard', {
 					schoolInfo: schoolViewModel(school),
 					pageTestScript: '/qa/tests-newBoard.js'
 				});
@@ -51,7 +51,7 @@ module.exports = function(){
 					res.locals.message404 = '잘못된 경로이거나, 수정하려는 그 글은 없어졌거나 이동했어요ㅠㅠ';
 					return next();
 				}
-				res.render('updateBoard', {
+				res.render('board/updateBoard', {
 					board: boardViewModel(board),		
 					pageTestScript: '/qa/tests-updateBoard.js'
 				});
@@ -124,7 +124,7 @@ module.exports = function(){
 						schoolInfo : schoolViewModel(schoolDoc), 
 					};
 				}
-				res.render('searchedBoards', context);
+				res.render('board/searchedBoards', context);
 			}).catch(function(err){
 				next(err);
 			});

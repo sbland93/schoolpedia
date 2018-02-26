@@ -17,7 +17,7 @@ module.exports = function(){
 					res.locals.message404 = '해당학교 페이지는 존재하지 않아요ㅠㅠ';
 					return next();
 				}
-				res.render('newSchool', {
+				res.render('school/newSchool', {
 					schoolInfo: schoolViewModel(school),
 					pageTestScript: '/qa/tests-newSchool.js'
 				});
@@ -42,7 +42,7 @@ module.exports = function(){
 				});
 			});
 			profilePromise.then(function(profiles){
-				res.render('schoolProfiles', {
+				res.render('school/schoolProfiles', {
 					profileList : profiles.map(profileViewModel),
 					schoolInfo : schoolViewModel(schoolDocument),
 					pageTestScript: '/qa/tests-schoolProfiles.js'
@@ -72,7 +72,7 @@ module.exports = function(){
 			Promise.all([boardPromise , schoolPromise]).then(function(rtnArr){
 				var boards = rtnArr[0];
 				var school = rtnArr[1];
-				res.render('schoolBoards', {
+				res.render('school/schoolBoards', {
 					boardList : boards.map(boardViewModel),
 					schoolInfo: schoolViewModel(school),
 					pageTestScript: '/qa/tests-schoolBoards.js'
@@ -117,7 +117,7 @@ module.exports = function(){
 			//학교정보, 최신글, Hot게시물들을 데이터베이스에서 가져오는것을 완료하면, 응답한다.
 			//TODO : 여기도 MAP을 해서 ViewModel을 입혀야한다.
 			Promise.all([schoolPromise, boardRecent, boardBest]).then(function(rtnArr){
-				res.render('school', {
+				res.render('school/school', {
 					schoolInfo: schoolViewModel(rtnArr[0]),
 					recentList : rtnArr[1].map(boardViewModel),
 					bestList : rtnArr[2].map(boardViewModel),

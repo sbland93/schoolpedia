@@ -50,7 +50,7 @@
 			</div>
 			<form class="mainSearchProfileForm navbar-form navbar-left formClass">
 				<div class="input-group">
-					<input type="text" class="form-control" name="name" placeholder="친구검색!" id="mainProfileName">
+					<input type="text" class="form-control" name="name" placeholder="친구를 검색하고 프로필을 채워주세요!" id="mainProfileName">
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="submit">검색!</button>
 					</span>
@@ -90,7 +90,7 @@
 								{{/if}}
 								<li><a href="/logout">로그아웃</a></li>
 							{{else}}
-								<li><a href="/login?redirect={{urlNow}}" id="loginBtn">로그인</a></li>
+								<li><a href="/" id="loginBtn">로그인</a></li>
 								<li><a href="/register?redirect={{urlNow}}" id="registerBtn">회원가입</a></li>
 							{{/if}}
 							<li><a href="/info">공지사항</a></li>
@@ -142,7 +142,7 @@
 			<script type="text/javascript" src="/js/api/school.js"></script>
 			{{{_sections.jquery}}}
 			<script type="text/javascript" src="/js/controllers/utils/utils.js"></script>
-			<script type="text/javascript" src="/js/controllers/mainController.js"></script>
+			<script type="text/javascript" src="/js/controllers/home/mainController.js"></script>
 	</div>
 </body>
 </html>

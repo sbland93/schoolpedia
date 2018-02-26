@@ -10,7 +10,7 @@ module.exports = function(app){
 		Info.find()
 			.exec(function(err, infos){
 				if(err) return next(err);
-				res.render("infoHome", { infoList: infos.map(infoViewModel) });
+				res.render("info/infoHome", { infoList: infos.map(infoViewModel) });
 			});
 	});
 
@@ -27,7 +27,7 @@ module.exports = function(app){
 	})
 	//공지사항 등록 페이지로 이동
 	app.get('/info/new', authHandlers.isAdmin, function(req,res,next){
-		res.render("newInfo");
+		res.render("info/newInfo");
 	})
 
 
@@ -36,7 +36,7 @@ module.exports = function(app){
 		if(!req.params.id) return next('No Id');
 		Info.findById({_id: req.params.id}).exec(function(err, info){
 			if(err) return next(err);
-			return res.render("info", infoViewModel(info));
+			return res.render("info/info", infoViewModel(info));
 		});
 	});
 
@@ -55,7 +55,7 @@ module.exports = function(app){
 		if(!req.params.id) return next('No Id');
 		Info.findById({_id: req.params.id}).exec(function(err, info){
 			if(err) return next(err);
-			return res.render("updateInfo", infoViewModel(info));
+			return res.render("info/updateInfo", infoViewModel(info));
 		});
 	});
 

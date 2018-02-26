@@ -11,7 +11,7 @@ module.exports = function(){
 
 		//profile 페이지 라우팅
 		profile: function(req, res, next){
-			res.render('profile', {
+			res.render('profile/profile', {
 				profileId: req.params.id,
 				pageTestScript: '/qa/tests-profile.js'
 			});
@@ -29,7 +29,7 @@ module.exports = function(){
 			if(req.query.school){
 				School.findById(req.query.school , function(err, school){
 					if(err) return next(err);
-					return res.render('newProfileOne', {
+					return res.render('profile/newProfileOne', {
 						schoolInfo: schoolViewModel(school),
 						pageTestScript: '/qa/tests-newProfile.js'
 					});
@@ -43,7 +43,7 @@ module.exports = function(){
 
 			School.findById(req.query.school , function(err, school){
 				if(err) return next(err);
-				return res.render('newProfileTwo', {
+				return res.render('profile/newProfileTwo', {
 					schoolInfo: schoolViewModel(school),
 					pageTestScript: '/qa/tests-newProfile.js'
 				});
@@ -62,7 +62,7 @@ module.exports = function(){
 					res.locals.message404 = '잘못된 경로이거나, 수정하려는 학생이 없어졌거나 이동했어요ㅠㅠ';
 					return next();
 				}
-				res.render('updateProfile', {
+				res.render('profile/updateProfile', {
 					profile: profileViewModel(profile),		
 					pageTestScript: '/qa/tests-updateProfile.js'
 				});
@@ -114,7 +114,7 @@ module.exports = function(){
 			//검색후에 json응답.
 			Profile.find(queryObject).populate('schools.school').exec(function(err, profiles){
 				if(err) return next(err);
-				return res.render('profileSearch', {profileList: profiles});
+				return res.render('profile/profileSearch', {profileList: profiles});
 			});
 			
 		}

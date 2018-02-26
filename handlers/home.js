@@ -20,19 +20,19 @@ module.exports = function(){
 			if(req.isAuthenticated()){ //로그인이 되어있는 상태라면 뉴스피드를 보여준다.
 				req.user.getNewsFeed(function(err, posts){
 					if(err) return next(err);
-					return res.render('newsFeed', {
+					return res.render('home/newsFeed', {
 						posts: posts,
 					});
 				});	
 			}else{ //로그인이 되어있지 않다면
-				res.render('login',{});
+				res.render('home/login',{});
 			}
 		},
 		//사용자 관리 페이지 라우팅.
 		myControll: function(req,res,next){
 			User.findById(req.user._id).populate('boards').populate('schools').exec(function(err,user){
 				if (err) return next(err);
-				res.render('myControll',{
+				res.render('home/myControll',{
 					user : userViewModel(user),
 				});
 			});
@@ -41,7 +41,7 @@ module.exports = function(){
 		newsFeed:function(req,res,next){
 			req.user.getNewsFeed(function(err, posts){
 				if(err) return next(err);
-				return res.render('newsFeed', {
+				return res.render('home/newsFeed', {
 					posts: posts,
 				});
 			});

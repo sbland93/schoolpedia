@@ -18,7 +18,7 @@ module.exports = function(){
 					else{
 						Board.find({}).sort({updated_at:'-1'}).limit(50).populate('school').exec(function(err,board){
 							if(err) next(err);
-							res.render('adminPage',{
+							res.render('admin/adminPage',{
 								boardList:board.map(boardViewModel),
 								profileList:profile.map(profileViewModel),
 								userList:user.map(userViewModel),
