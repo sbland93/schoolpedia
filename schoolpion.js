@@ -5,7 +5,7 @@ var express = require('express');
 var fs = require('fs');
 //날자포맷을 위한 handlebars helper에 사용할 라이브러리.
 var moment = require('moment')
-
+moment.locale('ko');
 
 
 //passport 관련 설정
@@ -186,7 +186,7 @@ var handlebars = hbs.create({
 		//mongoose의 Date Format을 보기좋은 형태로 바꿔주는 helper.
 		dateFormat : function(date){
 			if(typeof(date) === "object"){
-				return moment(date).format('lll');
+				return moment(date).calendar();
 			}
 		},
 

@@ -7,14 +7,15 @@
                 <a href="#"> {{ userInfo.name }}</a>
             {{/if}}
         </h5>
-        <p style="z-index: 1;">{{ content }} {{{dateFormat updated_at}}}</p>
-
-        <button class="profileUpDown btn btn-default btn-sm buttonGroup" target="replies" targetId="{{id}}" upOrDown="up">+{{up}}</button>
-        <button class="profileUpDown btn btn-default btn-sm buttonGroup" target="replies" targetId="{{id}}" upOrDown="down">{{down}}</button>
-
-
-        {{#if isMyPage}}
-        <button class="manageProfile btn btn-sm btn-default" target="replies" targetId="{{id}}">삭제</button>
-        {{/if}}
+        <p style="z-index: 1;">
+            {{ content }}  <div class="pull-right">{{{dateFormat updated_at}}}</div> 
+            <div class="btn-group" role="group" aria-label="Profile Up Down">
+                <button class="profileUpDown btn btn-default btn-sm buttonGroup" target="replies" targetId="{{id}}" upOrDown="up">+{{up}}</button>
+                <button class="profileUpDown btn btn-default btn-sm buttonGroup" target="replies" targetId="{{id}}" upOrDown="down">{{down}}</button>
+            </div>
+            {{#if isMyPage}}
+                <button class="manageProfile btn btn-sm btn-default" target="replies" targetId="{{id}}">삭제</button>
+            {{/if}}
+        </p>
     </div>
 </div>

@@ -180,27 +180,27 @@ this["TPL"]["EPaddStory"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main
 this["TPL"]["EPfeatures"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "        <button class=\"manageProfile btn btn-default btn-sm \" target=\"features\" targetId=\""
+  return "        	<button class=\"manageProfile btn btn-default btn-sm \" target=\"features\" targetId=\""
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"id","hash":{},"data":data}) : helper)))
     + "\">삭제</button>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "<div class=\"score-structural score-column2-wideright search-listings post\">\r\n    <div class=\"score-right\">\r\n\r\n        <p style=\"z-index: 1;\">"
+  return "<div class=\"score-structural score-column2-wideright search-listings post\">\r\n    <div class=\"score-right\">\r\n        <p style=\"z-index: 1;\">\r\n        	"
     + alias4(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"content","hash":{},"data":data}) : helper)))
-    + "</p> "
+    + "  <div class=\"pull-right\">"
     + ((stack1 = (helpers.dateFormat || (depth0 && depth0.dateFormat) || alias2).call(alias1,(depth0 != null ? depth0.updated_at : depth0),{"name":"dateFormat","hash":{},"data":data})) != null ? stack1 : "")
-    + "\r\n        <button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"features\" targetId=\""
+    + "</div> \r\n	        <div class=\"btn-group\" role=\"group\" aria-label=\"Profile Up Down\">\r\n				<button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"features\" targetId=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" upOrDown=\"up\">+"
     + alias4(((helper = (helper = helpers.up || (depth0 != null ? depth0.up : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"up","hash":{},"data":data}) : helper)))
-    + "</button>\r\n        <button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"features\" targetId=\""
+    + "</button>\r\n	        	<button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"features\" targetId=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" upOrDown=\"down\">"
     + alias4(((helper = (helper = helpers.down || (depth0 != null ? depth0.down : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"down","hash":{},"data":data}) : helper)))
-    + "</button>\r\n"
+    + "</button>\r\n			</div>\r\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isMyPage : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    </div>\r\n</div>\r\n";
+    + "        </p>\r\n        <hr>\r\n    </div>\r\n</div>\r\n";
 },"useData":true});
 
 this["TPL"]["EPpagination"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -325,7 +325,7 @@ this["TPL"]["EPreplies"] = Handlebars.template({"1":function(container,depth0,he
 },"5":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "        <button class=\"manageProfile btn btn-sm btn-default\" target=\"replies\" targetId=\""
+  return "                <button class=\"manageProfile btn btn-sm btn-default\" target=\"replies\" targetId=\""
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"id","hash":{},"data":data}) : helper)))
     + "\">삭제</button>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -333,21 +333,21 @@ this["TPL"]["EPreplies"] = Handlebars.template({"1":function(container,depth0,he
 
   return "<div class=\"score-structural score-column2-wideright search-listings post\">\r\n    <div class=\"score-right\">\r\n        <h5 style=\"z-index: 1;\">\r\n"
     + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.userInfo : depth0)) != null ? stack1.profile : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
-    + "        </h5>\r\n        <p style=\"z-index: 1;\">"
+    + "        </h5>\r\n        <p style=\"z-index: 1;\">\r\n            "
     + alias4(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"content","hash":{},"data":data}) : helper)))
-    + " "
+    + "  <div class=\"pull-right\">"
     + ((stack1 = (helpers.dateFormat || (depth0 && depth0.dateFormat) || alias2).call(alias1,(depth0 != null ? depth0.updated_at : depth0),{"name":"dateFormat","hash":{},"data":data})) != null ? stack1 : "")
-    + "</p>\r\n\r\n        <button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"replies\" targetId=\""
+    + "</div> \r\n            <div class=\"btn-group\" role=\"group\" aria-label=\"Profile Up Down\">\r\n                <button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"replies\" targetId=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" upOrDown=\"up\">+"
     + alias4(((helper = (helper = helpers.up || (depth0 != null ? depth0.up : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"up","hash":{},"data":data}) : helper)))
-    + "</button>\r\n        <button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"replies\" targetId=\""
+    + "</button>\r\n                <button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"replies\" targetId=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" upOrDown=\"down\">"
     + alias4(((helper = (helper = helpers.down || (depth0 != null ? depth0.down : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"down","hash":{},"data":data}) : helper)))
-    + "</button>\r\n\r\n\r\n"
+    + "</button>\r\n            </div>\r\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isMyPage : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    </div>\r\n</div>\r\n";
+    + "        </p>\r\n        <hr>\r\n    </div>\r\n</div>\r\n";
 },"useData":true});
 
 this["TPL"]["EPsearchedFriend"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -405,27 +405,27 @@ this["TPL"]["EPsearchedSchools"] = Handlebars.template({"1":function(container,d
 this["TPL"]["EPstories"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "        <button class=\"manageProfile btn btn-sm btn-default\" target=\"stories\" targetId=\""
+  return "                <button class=\"manageProfile btn btn-sm btn-default\" target=\"stories\" targetId=\""
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"id","hash":{},"data":data}) : helper)))
     + "\">삭제</button>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "<div class=\"score-structural score-column2-wideright search-listings post\">\r\n    <div class=\"score-right\">\r\n        <p style=\"z-index: 1;\">"
+  return "<div class=\"score-structural score-column2-wideright search-listings post\">\r\n    <div class=\"score-right\">\r\n        <p style=\"z-index: 1;\">\r\n            "
     + alias4(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"content","hash":{},"data":data}) : helper)))
-    + " "
+    + "  <div class=\"pull-right\">"
     + ((stack1 = (helpers.dateFormat || (depth0 && depth0.dateFormat) || alias2).call(alias1,(depth0 != null ? depth0.updated_at : depth0),{"name":"dateFormat","hash":{},"data":data})) != null ? stack1 : "")
-    + "</p>\r\n        <button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"stories\" targetId=\""
+    + "</div> \r\n            <div class=\"btn-group\" role=\"group\" aria-label=\"Profile Up Down\">\r\n                <button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"stories\" targetId=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" upOrDown=\"up\">+"
     + alias4(((helper = (helper = helpers.up || (depth0 != null ? depth0.up : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"up","hash":{},"data":data}) : helper)))
-    + "</button>\r\n        <button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"stories\" targetId=\""
+    + "</button>\r\n                <button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"stories\" targetId=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" upOrDown=\"down\">"
     + alias4(((helper = (helper = helpers.down || (depth0 != null ? depth0.down : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"down","hash":{},"data":data}) : helper)))
-    + "</button>\r\n"
+    + "</button>\r\n            </div>\r\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isMyPage : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    </div>\r\n</div>\r\n";
+    + "        </p>\r\n        <hr>\r\n    </div>\r\n</div>\r\n";
 },"useData":true});
 
 this["TPL"]["EPupdateClass"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {

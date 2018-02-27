@@ -88,8 +88,9 @@ var helpers = {
 
 	//mongoose의 Date Format을 보기좋은 형태로 바꿔주는 helper.
 	dateFormat : function(date){
-		if(typeof(date) === "object"){
-			return moment(date).format('lll');
+		if(typeof(date) === "string"){
+			moment.locale();
+			return moment(date).calendar();
 		}
 	},
 

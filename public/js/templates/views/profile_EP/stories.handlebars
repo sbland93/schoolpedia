@@ -1,10 +1,14 @@
 <div class="score-structural score-column2-wideright search-listings post">
     <div class="score-right">
-        <p style="z-index: 1;">{{ content }} {{{dateFormat updated_at}}}</p>
-        <button class="profileUpDown btn btn-default btn-sm buttonGroup" target="stories" targetId="{{id}}" upOrDown="up">+{{up}}</button>
-        <button class="profileUpDown btn btn-default btn-sm buttonGroup" target="stories" targetId="{{id}}" upOrDown="down">{{down}}</button>
-        {{#if isMyPage}}
-        <button class="manageProfile btn btn-sm btn-default" target="stories" targetId="{{id}}">삭제</button>
-        {{/if}}
+        <p style="z-index: 1;">
+            {{ content }}  <div class="pull-right">{{{dateFormat updated_at}}}</div> 
+            <div class="btn-group" role="group" aria-label="Profile Up Down">
+                <button class="profileUpDown btn btn-default btn-sm buttonGroup" target="stories" targetId="{{id}}" upOrDown="up">+{{up}}</button>
+                <button class="profileUpDown btn btn-default btn-sm buttonGroup" target="stories" targetId="{{id}}" upOrDown="down">{{down}}</button>
+            </div>
+            {{#if isMyPage}}
+                <button class="manageProfile btn btn-sm btn-default" target="stories" targetId="{{id}}">삭제</button>
+            {{/if}}
+        </p>
     </div>
 </div>
