@@ -200,7 +200,7 @@ this["TPL"]["EPfeatures"] = Handlebars.template({"1":function(container,depth0,h
     + alias4(((helper = (helper = helpers.down || (depth0 != null ? depth0.down : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"down","hash":{},"data":data}) : helper)))
     + "</button>\r\n			</div>\r\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isMyPage : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        </p>\r\n        <hr>\r\n    </div>\r\n</div>\r\n";
+    + "        </p>\r\n    </div>\r\n</div>\r\n";
 },"useData":true});
 
 this["TPL"]["EPpagination"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -347,7 +347,7 @@ this["TPL"]["EPreplies"] = Handlebars.template({"1":function(container,depth0,he
     + alias4(((helper = (helper = helpers.down || (depth0 != null ? depth0.down : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"down","hash":{},"data":data}) : helper)))
     + "</button>\r\n            </div>\r\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isMyPage : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        </p>\r\n        <hr>\r\n    </div>\r\n</div>\r\n";
+    + "        </p>\r\n    </div>\r\n</div>\r\n";
 },"useData":true});
 
 this["TPL"]["EPsearchedFriend"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -425,7 +425,7 @@ this["TPL"]["EPstories"] = Handlebars.template({"1":function(container,depth0,he
     + alias4(((helper = (helper = helpers.down || (depth0 != null ? depth0.down : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"down","hash":{},"data":data}) : helper)))
     + "</button>\r\n            </div>\r\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isMyPage : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        </p>\r\n        <hr>\r\n    </div>\r\n</div>\r\n";
+    + "        </p>\r\n    </div>\r\n</div>\r\n";
 },"useData":true});
 
 this["TPL"]["EPupdateClass"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
