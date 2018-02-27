@@ -7,12 +7,12 @@ module.exports = function(){
 	return {
 		// '/login' Page Routing.
 		login: function(req, res, next){
-			res.render('login',{});
+			res.render('home/login',{});
 		},
 
 		// '/register' Page Routing.
 		register: function(req, res, next){
-			res.render('register',{});
+			res.render('home/register',{});
 		},
 
 		localSignup : passport.authenticate('local', {
