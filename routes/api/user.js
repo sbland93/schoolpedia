@@ -1,12 +1,10 @@
-var User = require('../../models/user.js');
 var bcrypt = require('bcrypt-nodejs');
-
+var User = require('../../models/user.js');
 var userViewModel = require('../../viewModels/user.js');
 var authHandlers = require('../../handlers/auth.js')();
 
 
 module.exports = function(app){
-
 
 	//Query를 보내면,쿼리에 해당하는 user에 해당하는 것들을 내보내고
 	//Query가 없으면 모든 User를 내보낸다.
@@ -35,8 +33,7 @@ module.exports = function(app){
 				message: 'TITLE CONTENT SCHOOL REQUIRED',
 			});
 		}
-	})
-
+	});
 
 	//해당 id의 user를 available상태로 만들고 응답은 success를 담아준다.
 	app.get('/api/user/:id', function(req, res, next){

@@ -1,9 +1,6 @@
 <div class="score-structural score-column2-wideright search-listings post">
     <div class="score-right">
-        <h5 style="z-index: 1;">
-            <a href="#"> {{ user }}</a>
-        </h5>
-        <p style="z-index: 1;">{{ content }}</p>
+        <p style="z-index: 1;">{{ content }} {{{dateFormat updated_at}}}</p>
         <button class="profileUpDown btn btn-default btn-sm buttonGroup" target="stories" targetId="{{id}}" upOrDown="up">+{{up}}</button>
         <button class="profileUpDown btn btn-default btn-sm buttonGroup" target="stories" targetId="{{id}}" upOrDown="down">{{down}}</button>
         {{#if isMyPage}}

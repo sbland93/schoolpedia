@@ -7,11 +7,7 @@
 		<div class="col-sm-12 col-md-6">
 			<ul class="boardList">
 				{{#each boardList}}
-					<li>
-						<a href="/board/{{id}}">제목: {{title}}</a>
-						<p>내용: {{#trimString content}}{{/trimString}}</p>
-						<p>추천:{{up}} 비추:{{down}}</p>
-					</li>
+					{{> board this}}
 				{{/each}}
 			</ul>
 		</div>

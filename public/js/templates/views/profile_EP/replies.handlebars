@@ -7,7 +7,7 @@
                 <a href="#"> {{ userInfo.name }}</a>
             {{/if}}
         </h5>
-        <p style="z-index: 1;">{{ content }}</p>
+        <p style="z-index: 1;">{{ content }} {{{dateFormat updated_at}}}</p>
 
         <button class="profileUpDown btn btn-default btn-sm buttonGroup" target="replies" targetId="{{id}}" upOrDown="up">+{{up}}</button>
         <button class="profileUpDown btn btn-default btn-sm buttonGroup" target="replies" targetId="{{id}}" upOrDown="down">{{down}}</button>

@@ -1,32 +1,46 @@
-var passport = require('passport');
-var userViewModel = require('../viewModels/user.js');
-var boardViewModel = require('../viewModels/board.js');
-var profileViewModel = require('../viewModels/profile.js');
-var credentials = require('../credentials.js');
 var School = require('../models/school.js');
 var Profile = require('../models/profile.js');
 var Board = require('../models/board.js');
 var User = require('../models/user.js');
+var boardViewModel = require('../viewModels/board.js');
+var profileViewModel = require('../viewModels/profile.js');
+var userViewModel = require('../viewModels/user.js');
 var schoolViewModel = require('../viewModels/school.js');
 
 module.exports = function(){
 	return {
-		//관리자 페이지 렌더링.
-		adminPage:function(req,res,next){
-			User.find({}).sort({updated_at:'-1'}).limit(50).populate('schools.school').exec(function(err,user){
-				Profile.find({}).sort({updated_at:'-1'}).limit(50).populate('schools.school').exec(function(err,profile){
-					if(err) next(err);
-					else{
-						Board.find({}).sort({updated_at:'-1'}).limit(50).populate('school').exec(function(err,board){
-							if(err) next(err);
-							res.render('admin/adminPage',{
-								boardList:board.map(boardViewModel),
-								profileList:profile.map(profileViewModel),
-								userList:user.map(userViewModel),
-							});
-						});
-					}
+		//관리자 페이지 렌더링. //생성된 유저, 프로필, 게시글을 최신순으로 50개를 보내 렌더링한다.
+		adminPage: function(req, res, next){
+			var sortOption = {updated_at:'-1'}; var limitNum = 50;
+			//User 50개 최신순
+			var p1 = new Promise(function(resolve, reject){
+				User.find({}).sort(sortOption).limit(limitNum).populate('schools.school').exec(function(err,users){
+					if(err) return reject(err);
+					resolve(users);
 				});
+			});
+			//Profile 50개 최신순
+			var p2 = new Promise(function(resolve, reject){
+				Profile.find({}).sort(sortOption).limit(limitNum).populate('schools.school').exec(function(err,profiles){
+					if(err) return reject(err);
+					resolve(profiles);
+				});
+			});
+			//Board 50개 최신순
+			var p3 = new Promise(function(resolve, reject){
+				Board.find({}).sort(sortOption).limit(limitNum).populate('school').exec(function(err,boards){
+					if(err) return reject(err);
+					resolve(boards);
+				});
+			});
+			Promise.all([p1, p2, p3]).then(function(rtnArr){
+				res.render('admin/adminPage',{
+					userList:rtnArr[0].map(userViewModel),
+					profileList:rtnArr[1].map(profileViewModel),
+					boardList:rtnArr[2].map(boardViewModel),
+				});
+			}).catch(function(err){
+				return next(err);
 			});
 		},
 		//관리자 게시글 생성 페이지 라우팅.

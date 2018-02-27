@@ -70,26 +70,10 @@ module.exports = function(app){
 	//개인의 프로필.
 	app.get('/profile/:id',authHandlers.isLoggedIn, profileHandlers.profile);
 
-	//rendering Update Profile Form
-	//app.get('/profile/:id/update', profileHandlers.updateProfile);
-
-	//board 페이지 라우팅
-	//app.get('/board/search', boardHandlers.searchBoards);
-	
 	app.get('/board/:id', authHandlers.isLoggedIn, boardHandlers.board);
 
 	app.get('/board/:id/update', authHandlers.isLoggedIn, boardHandlers.updateBoard);
 	//rendering Create Board Form
 	app.get('/school/:id/board/new', authHandlers.isLoggedIn, boardHandlers.newBoard);
-
-	//Client Test Page (API)
-	//app.get('/test', homeHandlers.clientTest);
-
-	//Test epic fail uncaught Error
-	/*app.get('/makeError', function(req, res){
-		process.nextTick(function(){
-			throw new Error('kaboom');	
-		});
-	});*/
 
 }

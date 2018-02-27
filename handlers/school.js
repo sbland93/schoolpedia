@@ -7,6 +7,7 @@ var profileViewModel = require('../viewModels/profile.js');
 
 
 module.exports = function(){
+	
 	return {
 		newSchool: function(req, res, next){
 			School.findById(req.params.id, function(err, school){

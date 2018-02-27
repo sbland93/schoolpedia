@@ -1,0 +1,46 @@
+<form class="form-horizontal searchProfilesForm" role="form" action="api/profile/search" method="GET" id="searchProfilesForm">
+	<label for="searchProfilesForm">고급검색-></label>
+	<div class="form-group">
+		<label class="col-md-3 control-label">학교</label>
+		<label><input type='radio' name='school' value='all' id="allSchool" checked/>모든학교</label>
+		<label><input type='radio' name='school' value='only' id="onlySchool" />특정학교</label>
+		<label id="onlySchoolTPL"></label>
+	</div>
+
+	<div class="form-group">
+		<label for="fields" class="col-md-3 control-label">검색범위</label>
+		<input type="radio" name="fields" value="only" id="fields" checked> 이름
+		<input type="radio" name="fields" value="all" id="fields"> 본문포함(일화속 친구 포함)
+	</div>
+
+	<div class="form-group">
+		<label for="searchField" class="col-md-3 control-label">검색내용</label>
+		<div class="col-md-6">
+			<input type="text" class="form-control" name="q" id="searchField" placeholder="학생이름 , 이야기 내용 등 프로필에서 검색할 내용">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="fieldGraduation" class="col-md-3 control-label">졸업년도</label>
+		<div class="col-md-6">
+			<input type="text" class="form-control" name="graduation" id="fieldGraduation" placeholder="예) 1992, 1988">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="classNum" class="col-md-3 control-label">학급</label>
+		<div class="col-md-6">
+			<input type="text" class="form-control" name="classNum" id="classNum" placeholder="예) 107, 212, 314">
+		</div>
+	</div>
+	<div class="col-md-offset-3">
+		<div id="searchedFriendsTPL"></div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-sm-offset-9 col-md-offset-9">
+			<button type="submit" class="btn btn-default">검색</button>
+		</div>
+	</div>
+
+</form>

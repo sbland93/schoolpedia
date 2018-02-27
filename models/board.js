@@ -7,6 +7,7 @@ var User = require('./user.js');
 var replySchema = mongoose.Schema({
 	user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	content: String,
+	updated_at : { type: Date, default: Date.now },
 });
 
 //School의 reference두기.

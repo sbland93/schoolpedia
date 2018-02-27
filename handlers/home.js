@@ -1,15 +1,5 @@
-var School = require('../models/school.js');
-var Profile = require('../models/profile.js');
-var Board = require('../models/board.js');
-var Info = require('../models/info.js');
 var User = require('../models/user.js');
-var schoolViewModel = require('../viewModels/school.js');
-var boardViewModel = require('../viewModels/board.js');
-var profileViewModel = require('../viewModels/profile.js');
-var infoViewModel = require('../viewModels/info.js');
 var userViewModel = require('../viewModels/user.js');
-var Passport = require('passport');
-var Auth = require('./auth.js');
 module.exports = function(){
 	return {
 		//기본 홈 페이지는 로그인이 된 상태라면, newsFeed이고 로그인이 되어있지 않은 상태라면 login페이지를 보여준다.

@@ -4,16 +4,21 @@
 {{/if}}
 
 
-<header class="bugName">{{profile.name}}({{profile.graduation}} {{#if profile.gender}}남{{else}}여{{/if}})<a id="kakao-link-btn" href="javascript:;">
-<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png"/>
-</a></header> 
-
+<header class="bugName">{{profile.name}}({{profile.graduation}} - {{{math profile.graduation "-" 1919}}} {{#if profile.gender}}남{{else}}여{{/if}})</header> 
+<div class="row">
+	<div class="pull-right">
+		프로필 친구에게 공유하기<a id="kakao-link-btn" href="javascript:;"><img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png"/></a>
+	</div>
+</div>
 <div class="row">
 	<div class="col-md-offset-4">
 		
+		{{#if (checkBoolean (lengthOf profile.schools) "<" 3)}}
+			친구의 학교가 {{{lengthOf profile.schools}}}개 밖에 등록되지 않았어요! 친구의 초, 중, 고를 알고있으면 추가해주세요!
+		{{/if}}
 		{{#each profile.schools}}
-			<span>학교</span>: <a class="updateClass" schoolId={{school._id}}>{{school.name}}</a> {{#if ../isMyPage}} <button class="manageProfile btn btn-default btn-sm buttonGroup" target="schools" targetId="{{school._id}}">삭제</button> {{/if}}
-			<span>학급</span>:
+			<a class="updateClass" schoolId={{school._id}}>{{school.name}}</a> {{#if ../isMyPage}} <button class="manageProfile btn btn-default btn-sm buttonGroup" target="schools" targetId="{{school._id}}">삭제</button> {{/if}}
+			->
 			{{#each class}}
 				{{#ifDefaultClass this}}
 					<a class="updateClass" schoolId={{../school._id}}>?</a>

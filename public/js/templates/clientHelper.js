@@ -60,9 +60,44 @@ var helpers = {
 		}
 	},
 
+	//대수비교의 불린값을(True, False)를 반환하는 헬퍼
+	checkBoolean: function(a, which, b){
+		if(which === ">"){
+			return a>b;
+		}else if(which === "<"){
+			return a<b;
+		}else if(which === "==="){
+			return a===b;
+		}else if(which === "<="){
+			return a<=b;
+		}else if(which === ">="){
+			return a>=b;
+		}else{
+			return "";
+		}
+	},
+
+	//배열의 길이를 리턴해주는 함수
+	lengthOf : function(arr){
+		if(Array.isArray(arr)){
+			return arr.length;
+		}else{
+			return "";
+		}
+	},
+
+	//mongoose의 Date Format을 보기좋은 형태로 바꿔주는 helper.
+	dateFormat : function(date){
+		if(typeof(date) === "object"){
+			return moment(date).format('lll');
+		}
+	},
+
 }
 
-var helperStrings = ["isEquals","indexLoop", "forLoop", "ifDefaultClass", "iterateClass", "math"];
+var helperStrings = ["isEquals","indexLoop", "forLoop",
+ "ifDefaultClass", "iterateClass", "math",
+  "checkBoolean", "lengthOf", "dateFormat"];
 
 
 helperStrings.forEach(function(el){

@@ -20,25 +20,9 @@
 			{{/each}}
 		</p><br>
 		{{#each posts}}
-			<p>
-				<div>
-					<a href="/board/{{id}}">* {{title}}</a>({{{lengthOf replies}}}개의 댓글)
-				</div>
-					{{{trimString content}}}
-				<div>
-					{{{dateFormat updated_at}}}
-				</div>
-
-				<div>
-					<a href="/school/{{school._id}}">{{school.name}}</a>
-				</div>
-				<br />
-			</p>
-			
+			{{> board this}}
 		{{else}}
-
 			현재 회원님의 학교 ({{#each userInfo.schools}} <a href="/school/{{id}}">{{name}}(click!) </a>{{/each}})에 아직 첫글이 존재하지 않는것 같아요! 중요한 글이 될 첫 글을 남겨보세요!
-			
 		{{/each}}
 	{{else}}
 		아직회원님은 출신학교 정보가 저장되어 있지 않아, 관심글들을 추천해드리기 어려워요.

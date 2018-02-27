@@ -34,7 +34,7 @@
       <select class="form-control" name="graduation" id="graduation">
         <option value="0">졸업(예정)년</option>
         {{#iterateFromTo 1990 2020}}
-          <option value="{{index}}">{{index}}</option>
+          <option value="{{index}}">{{index}} ({{{math index "-" 1919}}}년생)</option>
         {{/iterateFromTo}}
       </select>
     </div>
@@ -47,7 +47,7 @@
           <br/><span id="kakaoMessage">현재 미인증 상태입니다. 카카오인증은 필수입니다!</span>
       </div>
   </div>
-<div class="form-group">
+<!--div class="form-group">
     <label for="schoolName" class="col-xs-11 col-sm-2 col-md-3 control-label">*출신학교(아래 학교추가이용)</label>
     <div class="col-xs-10 col-sm-7 col-md-6">
       <ul>
@@ -55,7 +55,7 @@
       </ul>
     </div>
   </div>
-</div>
+</div-->
 
   <div class="col-sm-offset-2 col-md-offset-3">
     <input type="hidden" name="verified" id="verified" />
@@ -68,14 +68,14 @@
 </form>
 </br>
 
-<div class="form-horizontal">
+<!--div class="form-horizontal">
   <div class="form-group">
   <label for="school" class="col-xs-11 col-sm-2 col-md-3 control-label">- 학교추가(초,중,고 세개 혹은 전학시에 세개 이상 입력 가능)</label>
   <div class="col-xs-12 col-sm-10 col-md-5">
     <button id="addSchool" class="btn btn-default btn btn-sm">학교추가</button> 출신 초,중,고등학교의 게시물을 확인할수 있습니다!
     <div id="addSchoolTPL"></div>
   </div>
-</div>
+</div-->
 
 {{#section 'head'}}
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>

@@ -9,7 +9,6 @@ $(document).ready(function(){
 	var defaultInput = $("#defaultVal");
 	var profileId = defaultInput.attr("profileId");
 	var isMyPage = defaultInput.attr("isMyPage");
-	console.log("isMyPage:", isMyPage);
 	
 	$("#removeProfile").on('click', function(evt){
 		
@@ -35,6 +34,7 @@ $(document).ready(function(){
 					content: self.content,
 					up: self.up,
 					down: self.down,
+					updated_at: self.updated_at,
 					isMyPage: isMyPage,
 				};
 			},
@@ -52,6 +52,7 @@ $(document).ready(function(){
 					content: self.content,
 					up: self.up,
 					down: self.down,
+					updated_at: self.updated_at,
 					isMyPage: isMyPage,
 				};
 			},
@@ -70,6 +71,7 @@ $(document).ready(function(){
 					up: self.up,
 					down: self.down,
 					content: self.content,
+					updated_at: self.updated_at,
 					isMyPage: isMyPage,
 				};
 			},

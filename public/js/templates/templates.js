@@ -188,7 +188,9 @@ this["TPL"]["EPfeatures"] = Handlebars.template({"1":function(container,depth0,h
 
   return "<div class=\"score-structural score-column2-wideright search-listings post\">\r\n    <div class=\"score-right\">\r\n\r\n        <p style=\"z-index: 1;\">"
     + alias4(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"content","hash":{},"data":data}) : helper)))
-    + "</p>\r\n        <button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"features\" targetId=\""
+    + "</p> "
+    + ((stack1 = (helpers.dateFormat || (depth0 && depth0.dateFormat) || alias2).call(alias1,(depth0 != null ? depth0.updated_at : depth0),{"name":"dateFormat","hash":{},"data":data})) != null ? stack1 : "")
+    + "\r\n        <button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"features\" targetId=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" upOrDown=\"up\">+"
     + alias4(((helper = (helper = helpers.up || (depth0 != null ? depth0.up : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"up","hash":{},"data":data}) : helper)))
@@ -241,35 +243,41 @@ this["TPL"]["EPprofile"] = Handlebars.template({"1":function(container,depth0,he
     return "남";
 },"5":function(container,depth0,helpers,partials,data) {
     return "여";
-},"7":function(container,depth0,helpers,partials,data,blockParams,depths) {
+},"7":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "			친구의 학교가 "
+    + ((stack1 = (helpers.lengthOf || (depth0 && depth0.lengthOf) || helpers.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.schools : stack1),{"name":"lengthOf","hash":{},"data":data})) != null ? stack1 : "")
+    + "개 밖에 등록되지 않았어요! 친구의 초, 중, 고를 알고있으면 추가해주세요!\r\n";
+},"9":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "			<span>학교</span>: <a class=\"updateClass\" schoolId="
+  return "			<a class=\"updateClass\" schoolId="
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.school : depth0)) != null ? stack1._id : stack1), depth0))
     + ">"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.school : depth0)) != null ? stack1.name : stack1), depth0))
     + "</a> "
-    + ((stack1 = helpers["if"].call(alias3,(depths[1] != null ? depths[1].isMyPage : depths[1]),{"name":"if","hash":{},"fn":container.program(8, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\r\n			<span>학급</span>:\r\n"
-    + ((stack1 = helpers.each.call(alias3,(depth0 != null ? depth0["class"] : depth0),{"name":"each","hash":{},"fn":container.program(10, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias3,(depths[1] != null ? depths[1].isMyPage : depths[1]),{"name":"if","hash":{},"fn":container.program(10, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\r\n			->\r\n"
+    + ((stack1 = helpers.each.call(alias3,(depth0 != null ? depth0["class"] : depth0),{"name":"each","hash":{},"fn":container.program(12, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "			</br>\r\n";
-},"8":function(container,depth0,helpers,partials,data) {
+},"10":function(container,depth0,helpers,partials,data) {
     var stack1;
 
   return " <button class=\"manageProfile btn btn-default btn-sm buttonGroup\" target=\"schools\" targetId=\""
     + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.school : depth0)) != null ? stack1._id : stack1), depth0))
     + "\">삭제</button> ";
-},"10":function(container,depth0,helpers,partials,data,blockParams,depths) {
+},"12":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
 
-  return ((stack1 = (helpers.ifDefaultClass || (depth0 && depth0.ifDefaultClass) || helpers.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"ifDefaultClass","hash":{},"fn":container.program(11, data, 0, blockParams, depths),"inverse":container.program(13, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "");
-},"11":function(container,depth0,helpers,partials,data,blockParams,depths) {
+  return ((stack1 = (helpers.ifDefaultClass || (depth0 && depth0.ifDefaultClass) || helpers.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"ifDefaultClass","hash":{},"fn":container.program(13, data, 0, blockParams, depths),"inverse":container.program(15, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "");
+},"13":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
 
   return "					<a class=\"updateClass\" schoolId="
     + container.escapeExpression(container.lambda(((stack1 = (depths[1] != null ? depths[1].school : depths[1])) != null ? stack1._id : stack1), depth0))
     + ">?</a>\r\n";
-},"13":function(container,depth0,helpers,partials,data,blockParams,depths) {
+},"15":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
   return "					<a href=\"/profile/search?school=only&schoolId="
@@ -282,7 +290,7 @@ this["TPL"]["EPprofile"] = Handlebars.template({"1":function(container,depth0,he
     + alias2(alias1(depth0, depth0))
     + "반</a>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.lambda, alias3=container.escapeExpression;
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.lambda, alias3=container.escapeExpression, alias4=helpers.helperMissing;
 
   return "\r\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.takeProfile : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -290,10 +298,13 @@ this["TPL"]["EPprofile"] = Handlebars.template({"1":function(container,depth0,he
     + alias3(alias2(((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.name : stack1), depth0))
     + "("
     + alias3(alias2(((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.graduation : stack1), depth0))
+    + " - "
+    + ((stack1 = (helpers.math || (depth0 && depth0.math) || alias4).call(alias1,((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.graduation : stack1),"-",1919,{"name":"math","hash":{},"data":data})) != null ? stack1 : "")
     + " "
     + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.gender : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0, blockParams, depths),"inverse":container.program(5, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "")
-    + ")<a id=\"kakao-link-btn\" href=\"javascript:;\">\r\n<img src=\"//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png\"/>\r\n</a></header> \r\n\r\n<div class=\"row\">\r\n	<div class=\"col-md-offset-4\">\r\n		\r\n"
-    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.schools : stack1),{"name":"each","hash":{},"fn":container.program(7, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ")</header> \r\n<div class=\"row\">\r\n	<div class=\"pull-right\">\r\n		프로필 친구에게 공유하기<a id=\"kakao-link-btn\" href=\"javascript:;\"><img src=\"//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png\"/></a>\r\n	</div>\r\n</div>\r\n<div class=\"row\">\r\n	<div class=\"col-md-offset-4\">\r\n		\r\n"
+    + ((stack1 = helpers["if"].call(alias1,(helpers.checkBoolean || (depth0 && depth0.checkBoolean) || alias4).call(alias1,(helpers.lengthOf || (depth0 && depth0.lengthOf) || alias4).call(alias1,((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.schools : stack1),{"name":"lengthOf","hash":{},"data":data}),"<",3,{"name":"checkBoolean","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(7, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.schools : stack1),{"name":"each","hash":{},"fn":container.program(9, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "	</div>\r\n</div>";
 },"useData":true,"useDepths":true});
 
@@ -324,6 +335,8 @@ this["TPL"]["EPreplies"] = Handlebars.template({"1":function(container,depth0,he
     + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.userInfo : depth0)) != null ? stack1.profile : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
     + "        </h5>\r\n        <p style=\"z-index: 1;\">"
     + alias4(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"content","hash":{},"data":data}) : helper)))
+    + " "
+    + ((stack1 = (helpers.dateFormat || (depth0 && depth0.dateFormat) || alias2).call(alias1,(depth0 != null ? depth0.updated_at : depth0),{"name":"dateFormat","hash":{},"data":data})) != null ? stack1 : "")
     + "</p>\r\n\r\n        <button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"replies\" targetId=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" upOrDown=\"up\">+"
@@ -398,10 +411,10 @@ this["TPL"]["EPstories"] = Handlebars.template({"1":function(container,depth0,he
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "<div class=\"score-structural score-column2-wideright search-listings post\">\r\n    <div class=\"score-right\">\r\n        <h5 style=\"z-index: 1;\">\r\n            <a href=\"#\"> "
-    + alias4(((helper = (helper = helpers.user || (depth0 != null ? depth0.user : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"user","hash":{},"data":data}) : helper)))
-    + "</a>\r\n        </h5>\r\n        <p style=\"z-index: 1;\">"
+  return "<div class=\"score-structural score-column2-wideright search-listings post\">\r\n    <div class=\"score-right\">\r\n        <p style=\"z-index: 1;\">"
     + alias4(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"content","hash":{},"data":data}) : helper)))
+    + " "
+    + ((stack1 = (helpers.dateFormat || (depth0 && depth0.dateFormat) || alias2).call(alias1,(depth0 != null ? depth0.updated_at : depth0),{"name":"dateFormat","hash":{},"data":data})) != null ? stack1 : "")
     + "</p>\r\n        <button class=\"profileUpDown btn btn-default btn-sm buttonGroup\" target=\"stories\" targetId=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" upOrDown=\"up\">+"

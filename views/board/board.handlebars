@@ -23,12 +23,10 @@
 			<div class="text">
 				<div class="form-group">
 				  <label for="comment">Comment:</label>
-				  <textarea class="form-control" rows="3" id="comment"></textarea>
+				  <textarea class="form-control" rows="2" id="comment"></textarea>
 				  <button type="submit" class="btn btn-default buttonGroup">입력</button>
 				</div>
-				
 			</div>
-
 		</form>
 	</div>
 
@@ -36,8 +34,8 @@
 <div class="col-md-offset-1 col-md-5">
 	<ul>
 	{{#each board.replies}}
-			<li> {{{content}}} -{{#isEquals user.anonym ../board.writer}}[글쓴이]{{/isEquals}}{{user.anonym}}-</li>
-			<hr>
+		<li> {{{content}}} -{{#isEquals user.anonym ../board.writer}}[글쓴이]{{/isEquals}}{{user.anonym}}-</li> {{{dateFormat updated_at}}}
+		<hr>
 	{{/each}}
 	</ul>
 	<ul id="replyList"></ul>
