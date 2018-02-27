@@ -248,7 +248,7 @@ this["TPL"]["EPprofile"] = Handlebars.template({"1":function(container,depth0,he
 
   return "			친구의 학교가 "
     + ((stack1 = (helpers.lengthOf || (depth0 && depth0.lengthOf) || helpers.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? depth0.profile : depth0)) != null ? stack1.schools : stack1),{"name":"lengthOf","hash":{},"data":data})) != null ? stack1 : "")
-    + "개 밖에 등록되지 않았어요! 친구의 초, 중, 고를 알고있으면 추가해주세요!\r\n";
+    + "개 밖에 등록되지 않았어요! 친구의 초, 중, 고를 알고있으면 추가해주세요! <br>\r\n";
 },"9":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
