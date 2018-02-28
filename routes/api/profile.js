@@ -207,12 +207,15 @@ module.exports = function(app){
 				//query는 : {options: "contents", target: "stories", body: content};
 				//{$push: {stories : { content: newStory }}}
 				query = newQuery;
+				query["$set"] = {"updated_at": Date.now()};
 			}
 
 			//options는 담기면 안되기 때문에 이건 삭제.
 			delete query["options"];
 		}
 
+		console.log("query:", query);
+		//업데이트 마다 {updated_at : Date.now}를 넣어서, 업데이트 될때마다 업데이트 프로필임을 알린다.
 		Profile.findOneAndUpdate(target, query, {new: true}, function(err, doc){
 			if(err || !doc) return res.json({success: false, type: "Others"});
 			doc.populate('schools.school replies.user', function(err, rtnDoc){

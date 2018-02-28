@@ -1,0 +1,48 @@
+{"schools": [
+		{
+			"name": "안산양지초등학교",
+			"category": "elementary",
+			"location": "경기도안산"
+		},
+		{
+			"name": "시곡초등학교",
+			"category": "elementary",
+			"location": "경기도안산"
+		},
+		{
+			"name": "본오초등학교",
+			"category": "elementary",
+			"location": "경기도안산"
+		},
+		{
+			"name": "본원초등학교",
+			"category": "elementary",
+			"location": "경기도안산"
+		},
+		{
+			"name": "각골초등학교",
+			"category": "elementary",
+			"location": "경기도안산"
+		},
+		{
+			"name": "팔곡초등학교",
+			"category": "elementary",
+			"location": "경기도안산"
+		},
+		{
+			"name": "반월초등학교",
+			"category": "elementary",
+			"location": "경기도안산"
+		},
+		{
+			"name": "안산창촌초등학교",
+			"category": "elementary",
+			"location": "경기도안산"
+		},
+		{
+			"name": "안산초등학교",
+			"category": "elementary",
+			"location": "경기도안산"
+		}
+	]
+}

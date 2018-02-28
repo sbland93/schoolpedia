@@ -5,6 +5,13 @@
 
 <!--학교 검색  -->
 <div class="col-md-offset-3 col-md-7">
+	<p>
+	최근 업데이트 된 프로필: 
+		{{#each profileList}}
+			<a href="/profile/{{id}}">{{name}}</a>
+		{{/each}}
+	</p>
+
 	{{#if userInfo.schools}}
 		{{#if (checkBoolean (lengthOf userInfo.schools) "<" 3)}}
 			<p>
@@ -25,7 +32,7 @@
 			현재 회원님의 학교 ({{#each userInfo.schools}} <a href="/school/{{id}}">{{name}}(click!) </a>{{/each}})에 아직 첫글이 존재하지 않는것 같아요! 중요한 글이 될 첫 글을 남겨보세요!
 		{{/each}}
 	{{else}}
-		아직회원님은 출신학교 정보가 저장되어 있지 않아, 관심글들을 추천해드리기 어려워요.
+		아직회원님은 출신학교 정보가 저장되어 있지 않아, 학교 커뮤니티 글들을 추천해드리기 어려워요.
 		<button class="btn btn-sm btn-default" id="addSchool">학교추가하기</button>
 		<div id="addSchoolTPL"></div>
 	{{/if}}
