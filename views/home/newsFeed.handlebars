@@ -4,14 +4,12 @@
 </header>
 
 <!--학교 검색  -->
-<div class="col-md-offset-3 col-md-7">
-	<p>
-	최근 업데이트 된 프로필: 
-		{{#each profileList}}
-			<a href="/profile/{{id}}">{{name}}</a>
-		{{/each}}
-	</p>
-
+<div class="col-md-3">
+	{{#each profileList}}
+		<a href="/profile/{{id}}">{{name}}</a>
+	{{/each}}
+</div>
+<div class="col-md-7">
 	{{#if userInfo.schools}}
 		{{#if (checkBoolean (lengthOf userInfo.schools) "<" 3)}}
 			<p>
