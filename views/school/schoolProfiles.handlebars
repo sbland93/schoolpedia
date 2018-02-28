@@ -4,7 +4,7 @@
 	<ul class="profileList">
 		{{schoolInfo.name}}의 최신생성 프로필 ▽<hr>
 		{{#each profileList}}
-			{{>searchedprofile this}}
+			{{>searchedProfile this}}
 		{{else}}
 			아직 {{schoolInfo.name}}의 최신생성 프로필이 없는것 같아요!<br><br> 학생위키에 참여하여서, {{schoolInfo.name}}의 첫 학생 프로필을 만드는 행운을 누려보세요!<br><br> <a href="/profile/newOne?school={{schoolInfo.id}}" class="btn btn-default buttonGroup pull-right">프로필생성</a>
 		{{/each}}
