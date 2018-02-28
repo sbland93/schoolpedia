@@ -1,70 +1,16 @@
-var Info = require("../../models/info.js");
 var authHandlers = require("../../handlers/auth.js")();
-var infoViewModel = require('../../viewModels/info.js');
+var infoHandlers = require('../../handlers/api/info.js')();
+
 module.exports = function(app){
 	
-	app.get("/api/info", function(req,res,next){
-		Info.find(req.query).exec(function(err,infos){
-			if (err) return next(err);
-			res.json(infos.map(infoViewModel));
-		})
-	});
+	app.get("/api/info", infoHandlers.getInfos);
 
-	app.get("/api/info/:id",function(req,res,next){
-		if (!req.params.id) next("No id");
-		Info.findBy({_id:req.params.id}).then(function(err,info){
-			if (err) console.error(err);
-			if (info){
-				res.json({
-					success:true,
-					id:info._id,
-					title:info.title,
-					content:info.content,
-				});
-			}
-		});
-	});
+	app.get("/api/info/:id",infoHandlers.getInfo);
 	//공지사항 추가시
-	app.post("/api/info", authHandlers.isAdmin, function(req,res,next){
-		if(req.body.title && req.body.content){
-			Info.create(req.body, function(err, info){
-				if(err) return next(err);
-				res.json({
-					success:true,
-					id:info._id,
-					title:info.title,
-					content:info.content,
-				})
-			});
-		}
-	});
+	app.post("/api/info", authHandlers.isAdmin, infoHandlers.newInfo);
 	//공지사항 수정
-	app.put("/api/info/:id", authHandlers.isAdmin, function(req,res,next){
-		if (!req.params.id) return next("No id");
-		Info.update({_id:req.params.id}, req.body, function(err,response){
-			if (err) console.error(err);
-			if(response.nModified === 1){
-				res.json({
-					success:true,
-					id:req.params.id,
-				});
-			}else{
-				res.json({
-					success:false,
-					message:'',
-				});
-			}
- 		});
-	});
+	app.put("/api/info/:id", authHandlers.isAdmin, infoHandlers.updateInfo);
 	//공지사항 삭제
-	app.delete("/api/info/:id",function(req,res,next){
-		if (!req.params.id) return next("No id");
-		Info.remove({_id:req.params.id},function(err){
-			if (err) return next(err);
-			res.json({
-				success:true,
-			})
-		})
-	})
+	app.delete("/api/info/:id", authHandlers.isAdmin, infoHandlers.deleteInfo);
 
 }

@@ -36,11 +36,25 @@ module.exports = function(){
 		},
 		//로그인 후 메인페이지 라우팅.
 		newsFeed:function(req,res,next){
-			req.user.getNewsFeed(function(err, posts){
-				if(err) return next(err);
-				return res.render('home/newsFeed', {
-					posts: posts,
+			var limitNum = 30;
+			var p1 = new Promise(function(resolve, reject){
+				Profile.find({}).sort({updated_at:'-1'}).limit(limitNum).populate('schools.school').exec(function(err, profiles){
+					if(err) reject(err);
+					resolve(profiles);
+				})
+			});
+			var p2 = new Promise(function(resolve, reject){
+				req.user.getNewsFeed(function(err, posts){
+					if(err) reject(err);
+					resolve(posts);
 				});
+			});
+
+			Promise.all([p1, p2]).then(function(rtnArr){
+				res.render('home/newsFeed',{
+					profileList: rtnArr[0].map(profileViewModel),
+					posts: rtnArr[1].map(boardViewModel),
+				}).catch(function(err){ next(err); });
 			});
 		},
 		clientTest: function(req, res){
