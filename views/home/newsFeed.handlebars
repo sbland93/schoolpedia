@@ -4,12 +4,8 @@
 </header>
 
 <!--학교 검색  -->
-<div class="col-md-3">
-	{{#each profileList}}
-		<a href="/profile/{{id}}">{{name}}</a>
-	{{/each}}
-</div>
-<div class="col-md-7">
+
+<div class="col-md-offset-2 col-md-6">
 	{{#if userInfo.schools}}
 		{{#if (checkBoolean (lengthOf userInfo.schools) "<" 3)}}
 			<p>
@@ -35,7 +31,20 @@
 		<div id="addSchoolTPL"></div>
 	{{/if}}
 </div>
-
+<div class="col-md-4">
+	<label><em>최신생성프로필</em></label>
+	<ul>
+	{{#each profileList}}
+		<li>
+			<a href="/profile/{{id}}">{{name}}</a>
+			{{#each schools}}
+				{{school.name}}
+			{{/each}}
+		</li>
+		
+	{{/each}}
+	</ul>
+</div>
 {{#section 'jquery'}}
 	<script type="text/javascript" src="/js/api/user.js"></script>
 	<script type="text/javascript" src="/js/api/profile.js"></script>
