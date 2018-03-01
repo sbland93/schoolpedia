@@ -26,6 +26,7 @@ var newsFeedTPLC = {
 					//user정보에 학교아이디를 추가하고 성공시에, reload와 함께, 학교게시물을 보여준다.
 					getSchools(sendingData).then(function(data){
 						if(data.success){
+						
 							var NFsearchedSchools = TPL.NFsearchedSchools;
 							$("#searchedSchoolsTPL").html(NFsearchedSchools({schoolList : data.schoolList}));
 							$(".sendData").on('click',function(evt){

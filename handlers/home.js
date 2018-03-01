@@ -1,6 +1,8 @@
 var User = require('../models/user.js');
 var Profile = require('../models/profile.js');
 var userViewModel = require('../viewModels/user.js');
+var boardViewModel = require('../viewModels/board.js');
+var profileViewModel = require('../viewModels/profile.js');
 module.exports = function(){
 	return {
 		//기본 홈 페이지는 로그인이 된 상태라면, newsFeed이고 로그인이 되어있지 않은 상태라면 login페이지를 보여준다.
@@ -14,7 +16,7 @@ module.exports = function(){
 				});
 
 				var p2 = new Promise(function(resolve, reject){
-					Profile.find({}).sort({'updated_at': -1}).limit(20).exec(function(err, profiles){
+					Profile.find({}).sort({'updated_at': -1}).limit(20).populate('schools.school').exec(function(err, profiles){
 						if(err) return reject(err);
 						return resolve(profiles);
 					});
@@ -48,7 +50,7 @@ module.exports = function(){
 			});
 
 			var p2 = new Promise(function(resolve, reject){
-				Profile.find({}).sort({'updated_at': -1}).limit(20).exec(function(err, profiles){
+				Profile.find({}).sort({'updated_at': -1}).limit(20).populate('schools.school').exec(function(err, profiles){
 					if(err) return reject(err);
 					return resolve(profiles);
 				});
