@@ -26,8 +26,8 @@
 				<div class="col-xs-9 col-sm-6 col-md-5">
 					<select class="form-control" name="graduation" id="graduation">
 						<option value="0">졸업년도선택</option>
-						{{#iterateFromTo 1990 2020}}
-							<option value="{{index}}">{{index}} ({{{math index "-" 1919}}}년생)</option>
+						{{#iterateFromTo 1990 2030}}
+							<option value="{{index}}">{{index}} ({{{math index "-" 19}}}년생)</option>
 						{{/iterateFromTo}}
 					</select>
 				</div>
