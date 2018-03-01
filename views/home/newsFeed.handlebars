@@ -9,7 +9,7 @@
 	{{#if userInfo.schools}}
 		{{#if (checkBoolean (lengthOf userInfo.schools) "<" 3)}}
 			<p>
-				현재({{{lengthOf userInfo.schools}}})개의 학교({{#each userInfo.schools}} {{name}} {{/each}})만 입력되었어요! 초,중,고 모두 입력가능해요!
+				현재({{{lengthOf userInfo.schools}}})개의 학교({{#each userInfo.schools}} {{name}} {{/each}})의 커뮤니티글만 받아보는 중이에요! 초,중,고 모두 받아볼 수 있어요!
 				<button class="btn btn-default btn-sm pull-right" id="addSchool">남은학교추가하기</button>
 				<div id="addSchoolTPL"></div>
 				<br />
@@ -20,6 +20,8 @@
 				<a href="/school/{{id}}/board/new" class="btn btn-default">{{name}}글쓰기</a>
 			{{/each}}
 		</p><br>
+		
+		<label><em>학교커뮤니티 최신글</em></label>
 		{{#each posts}}
 			{{> board this}}
 		{{else}}
