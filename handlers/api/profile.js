@@ -85,7 +85,7 @@ module.exports = function(){
 					return res.json({success: true, changedDoc: doc});
 				})
 			});
-		}
+		},
 		//요청본문에 해당하는 profile을 새로 생성한다.
 		//검증과정이 있어야하는데, 어떤게 필수일까 name, graduation, gender은 필수로 하자!
 		//DOLATER school중 하나도 있어야한다.
