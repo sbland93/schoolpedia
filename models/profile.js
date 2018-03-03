@@ -83,7 +83,7 @@ profileSchema.post('findOneAndUpdate', function(next) {
 		var profileId = self._conditions._id;
 		Profile.findById(profileId, function(err, profile){ //update Hook에서 document에 접근할 방법이 없으므로, 다시한번 찾는다.(개선여지)
 			if(!profile.alarmUsers) return;
-			var alarmUpdateObj = {"$push": { alarms : { $each: [{kind:"board", what: what, targetId: profileId, title: board.title}], $sort : { updated_at: -1 } }}};
+			var alarmUpdateObj = {"$push": { alarms : { $each: [{kind:"profile", what: what, targetId: profileId, title: board.title}], $sort : { updated_at: -1 } }}};
 			profile.alarmUsers.map(function(user){ //현재 update하는 profile에 있는 user들에게 alarm을 보낸다.
 				if(user.equals(userId)) return; //본인한테는 알람을 보낼 필요 없으므로 이렇게 넣어둔다. 
 				promiseArr.push(new Promise(function(resolve, reject){
