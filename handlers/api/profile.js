@@ -91,6 +91,9 @@ module.exports = function(){
 		//DOLATER school중 하나도 있어야한다.
 		newProfile: function(req, res, next){
 			if(req.body.name && req.body.graduation && req.body.gender){
+				req.body.alarmUsers = [req.user._id];
+				req.body.writer = req.user._id;
+				console.log("req.body.alarmUsers:", req.body.alarmUsers);
 				Profile.create(req.body, function(err, profile){
 					if(err) return next(err);
 					res.json(profileViewModel(profile));

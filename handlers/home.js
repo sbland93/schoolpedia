@@ -65,6 +65,15 @@ module.exports = function(){
 			});
 
 		},
+
+		alarm : function(req, res, next){
+			if(Array.isArray(req.user.alarms)) req.user.alarms.map(function(elem){elem.unread = false});
+			req.user.save(function(err){
+				if(err) return next(err);
+				res.render('home/alarm', {alarmList: req.user.alarms});
+			})
+		},
+
 		clientTest: function(req, res){
 			res.render('test', {
 				pageTestScript: '/qa/tests-clientAPI.js',

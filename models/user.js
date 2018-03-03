@@ -6,6 +6,15 @@ var Board = require('./board.js');
 var Profile = require('./profile.js');
 var SALT_FACTOR = 8;
 
+var alarmSchema = mongoose.Schema({
+	kind: String, //board인지 profile인지
+	what: String, //추천했는지, 비추천했는지, 댓글을 달았는지 
+	targetId: mongoose.Schema.Types.ObjectId, //board 혹은 profile의 id
+	unread: {type: Boolean, default: true}, //알람을 읽었는지
+	title: String,
+	updated_at : {type: Date, default: Date.now},
+});
+
 var userSchema = mongoose.Schema({
 	name: String,
 	anonym: String,
@@ -18,6 +27,7 @@ var userSchema = mongoose.Schema({
 	profile: {type: mongoose.Schema.Types.ObjectId, ref: 'Profile'},
 	schools: [{type: mongoose.Schema.Types.ObjectId, ref: 'School'}],
 	boards: [{type: mongoose.Schema.Types.ObjectId, ref: 'Board'}],
+	alarms : { type: [alarmSchema] , default: [] },
 	updated_at: {type: Date, default: Date.now },
 });
 

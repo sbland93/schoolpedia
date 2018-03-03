@@ -31,6 +31,7 @@ module.exports = function(){
 		newBoard: function(req, res, next){
 			if(req.body.title && req.body.content && req.body.school && req.user){
 				req.body.owner = req.user._id; //글작성 유저를 추가한다.
+				req.body.alarmUsers = [req.user._id]; //알람을 받는 유저를 추가한다.
 				if(req.body.anonym === "on"){ //글이 익명이라면 user의 anonym(익명 식별자)를 적어주고,
 					req.body.writer = req.user.anonym;
 				}else{ //글이 익명이 아니라면 실명을 담아준다.

@@ -1,0 +1,11 @@
+
+
+
+{{#if (checkBoolean kind "===" "profile")}}
+	<a href="/profile/{{targetId}}">참여하신 학생위키 프로필 중 "{{title}}" 에 다른 친구가 {{{schemaToKorean what}}}</a>  -  {{{dateFormat updated_at}}}<br><br>
+{{/if}}
+
+
+{{#if (checkBoolean kind "===" "board")}}
+	<a href="/board/{{targetId}}">참여하신 게시글 "{{title}}"에 다른 친구가 {{{schemaToKorean what}}}</a>  -  {{{dateFormat updated_at}}}<br><br>
+{{/if}}

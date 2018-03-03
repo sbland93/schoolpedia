@@ -14,8 +14,8 @@
 	<script type="text/javascript" src="/vendor/jquery-3.2.1.js"></script>
 	<!-- Latest compiled and minified CSS -->
 	
-	<script src="/bootstrap/js/bootstrap.min.js"></script>
-	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
 	<link rel="stylesheet" type="text/css" href="/css/mainFont.css">
 	<!-- Latest compiled and minified JavaScript -->
@@ -43,23 +43,24 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-
+				
+				<a class="navbar-brand" href="/">
+				<em>{{#if isLoggedIn}}뉴스피드{{else}}스쿨피온{{/if}}</em>
+				</a>
+				{{#if isLoggedIn}}
+					{{#each userInfo.schools}}
+						<a class="navbar-text" href="/school/{{_id}}">{{name}}</a>
+					{{else}}
+						<span class="navbar-text">학교추가를 해야해요</span>
+					{{/each}}
+					<a class="navbar-text glyphicon glyphicon-globe btn" id="alarmBtn" href="/alarm"> ({{userInfo.unReadAlarm}}) </a>
+				{{/if}}	
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">	
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/"><em>{{#if isLoggedIn}}뉴스피드
-				{{else}}스쿨피온{{/if}}</em></a>
-				<div class="navbar-left" id="schools">
-					{{#if isLoggedIn}}
-						{{#each userInfo.schools}}
-							<a class="navbar-text" href="/school/{{_id}}">{{name}}</a>
-						{{else}}
-							<div class="navbar-text">학교입력을 해야해요!</div>
-						{{/each}}
-					{{/if}}	
-				</div>
+				
 			</div>
 			<form class="mainSearchProfileForm navbar-form navbar-left formClass">
 				<div class="input-group">
@@ -79,26 +80,20 @@
 					</div>
 				</form>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">메뉴<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							{{#if isLoggedIn}}
-								
-								<li><a href="/myControll">사용자 관리페이지</a></li>
-								
-								{{#if userInfo.profile}}
-									<li><a href="/profile/{{userInfo.profile}}">마이 프로필 페이지</a></li>
-								{{else}}
-									<li><a href="/info/5a8fb5e01ed70500042c0a8d">아직 마이 프로필 페이지가 없어요!(클릭!)</a><li>
-								{{/if}}
-								<li><a href="/logout">로그아웃</a></li>
-							{{else}}
-								<li><a href="/" id="loginBtn">로그인</a></li>
-								<li><a href="/register?redirect={{urlNow}}" id="registerBtn">회원가입</a></li>
-							{{/if}}
-							<li><a href="/info">공지사항</a></li>
-						</ul>
-					</li>
+					{{#if isLoggedIn}}
+						<li><a class="glyphicon glyphicon-cog" href="/myControll"></a></li>
+						{{#if userInfo.profile}}
+							<li><a class="glyphicon glyphicon-user" href="/profile/{{userInfo.profile}}"></a></li>
+						{{else}}
+							<li><a class="glyphicon glyphicon-user" href="/info/5a8fb5e01ed70500042c0a8d"></a><li>
+						{{/if}}
+						<li><a class="glyphicon glyphicon-info-sign" href="/info"></a></li>
+						<li><a href="/logout">로그아웃</a></li>
+					{{else}}
+						<li><a class="glyphicon glyphicon-info-sign" href="/info"></a></li>
+						<li><a href="/" id="loginBtn">로그인</a></li>
+						<li><a href="/register?redirect={{urlNow}}" id="registerBtn">회원가입</a></li>
+					{{/if}}
 				</ul>
 			</div>
 		</div>
@@ -107,44 +102,44 @@
 	</div>
 	<div id="mainSearchedProfileListTPL"></div>
 	<div class="container-fluid">
-			<!-- 메인페이지로 이동하는 링크-->
-			<div>
-				{{#if flash}}
-					<div class="alert alert-dismissible alert-{{flash.type}}">
-						<button type="button" class="close" data-dismiss="alert"
-						aria-hidden="true">&times;</button>
-						<strong>{{flash.intro}}</strong> {{{flash.message}}}
-					</div>
-				{{/if}}
-			</div>
-
-			{{#if showTests}}
-				<div id="mocha"></div>
-				<script type="text/javascript" src="/vendor/mocha.js"></script>
-				<script type="text/javascript" src="/vendor/chai.js"></script>
-				<script>
-					mocha.ui('bdd');
-					var expect = chai.expect;
-				</script>
-				<script type="text/javascript" src="/qa/tests-global.js"></script>
-				{{#if pageTestScript}}
-					<script type="text/javascript" src="{{pageTestScript}}"></script>
-				{{/if}}
-				{{#if testAPI}}
-					<script type="text/javascript" src="/js/api/customAjax.js"></script>
-					<script type="text/javascript" src="/js/api/board.js"></script>
-					<script type="text/javascript" src="/js/api/profile.js"></script>
-					<script type="text/javascript" src="/js/api/school.js"></script>
-				{{/if}}
-				<script type="text/javascript">mocha.run();</script>
+		<!-- 메인페이지로 이동하는 링크-->
+		<div>
+			{{#if flash}}
+				<div class="alert alert-dismissible alert-{{flash.type}}">
+					<button type="button" class="close" data-dismiss="alert"
+					aria-hidden="true">&times;</button>
+					<strong>{{flash.intro}}</strong> {{{flash.message}}}
+				</div>
 			{{/if}}
+		</div>
 
-			{{{body}}}
+		{{#if showTests}}
+			<div id="mocha"></div>
+			<script type="text/javascript" src="/vendor/mocha.js"></script>
+			<script type="text/javascript" src="/vendor/chai.js"></script>
+			<script>
+				mocha.ui('bdd');
+				var expect = chai.expect;
+			</script>
+			<script type="text/javascript" src="/qa/tests-global.js"></script>
+			{{#if pageTestScript}}
+				<script type="text/javascript" src="{{pageTestScript}}"></script>
+			{{/if}}
+			{{#if testAPI}}
+				<script type="text/javascript" src="/js/api/customAjax.js"></script>
+				<script type="text/javascript" src="/js/api/board.js"></script>
+				<script type="text/javascript" src="/js/api/profile.js"></script>
+				<script type="text/javascript" src="/js/api/school.js"></script>
+			{{/if}}
+			<script type="text/javascript">mocha.run();</script>
+		{{/if}}
 
-			<!--DOLATER : 제이쿼리 -->
-			<script type="text/javascript" src="/js/api/school.js"></script>
-			{{{_sections.jquery}}}
-			<script type="text/javascript" src="/js/controllers/home/mainController.js"></script>
+		{{{body}}}
+
+		<!--DOLATER : 제이쿼리 -->
+		<script type="text/javascript" src="/js/api/school.js"></script>
+		{{{_sections.jquery}}}
+		<script type="text/javascript" src="/js/controllers/home/mainController.js"></script>
 	</div>
 </body>
 </html>

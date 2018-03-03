@@ -146,7 +146,43 @@ var seedTest = function(){
 
 
 var seedProduction = function(){
+	
+	/*var p1 = new Promise(function(resolve, reject){
+		User.find({}, function(err, users){
+			console.log(users.length);
+			for(var a=0; a<users.length; a++){
+				console.log(users[a].alarms);
+				if(Array.isArray(users[a].alarms)) continue;
+				else{
+					users[a].alarms = [];
+					users[a].save(function(err){
+						if(err) reject(err);
+					});
+				}
+			}
+			resolve();
+		});
+	});
+	var p2 = new Promise(function(resolve, reject){
+		Board.find({}, function(err, boards){
+			for(var a=0; a<boards.length; a++){
+				if(Array.isArray(boards[a].alarmUsers)) continue;
+				else{
+					console.log("here");
+					if(boards[a].owner) boards[a].alarmUsers = [board[a].owner];
+					boards[a].save(function(err){
+						if(err) reject(err);
+					});
+				}
+			}
+			resolve();
+		})
+	});
+	
 
+	Promise.all([p1, p2]).then(function(data){console.log("finish")}).catch(function(err){
+		console.log("data fail");
+	});*/
 }
 
 //DOLATER process.env에 따른 데이터 변경. 

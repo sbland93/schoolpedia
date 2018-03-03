@@ -92,7 +92,7 @@ var helpers = {
 			moment.locale();
 			return moment(date).calendar();
 		}
-	},
+	}
 
 }
 

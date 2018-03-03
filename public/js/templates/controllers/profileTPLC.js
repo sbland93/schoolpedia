@@ -27,17 +27,28 @@ var profileTPLC = {
 
 			});	
 
+			//프로필 차지하기 버튼을 클릭 했을때의 이벤트 등록.
 			$("#takeProfile").on('click', function(evt){
 				var self = this;
 				evt.preventDefault();
 
-				//삭제 확인후, 확인버튼 클릭시에, 삭제 진행후에, 전페이지로 이동한다.
 				var takeConfirm = confirm("정말 이 페이지의 주인공이 맞나요?");
 
+				//프로필의 학교의 id를 arr로 만들기 위해 파싱.
+				var profileSchoolArr = [];
+				for(var a =0; a< response.schools.length; a++){
+					profileSchoolArr.push(response.schools[a].school._id);
+				}
+
+				//user의 schools에 profile에 school들중 없는 것을 자동으로 넣어준다.
+				var conditions = { "$addToSet" : { "schools": { "$each" : profileSchoolArr } } }
+				conditions["profile"] = profileId;
+
+				//유저가 개인 페이지가 맞다고 확인을 하면 프로필 페이지를 획득시킨다.
 				if(takeConfirm){
-					updateUser({ profile: profileId }).then(function(data){
+					updateUser(conditions).then(function(data){
 						if(data.success){
-							alert("개인페이지를 획득하셨습니다!");
+							alert("마이 프로필 페이지를 획득하셨습니다!");
 							location.reload();
 						}else{
 							alert("문제가 생긴것 같습니다..!")
@@ -48,7 +59,6 @@ var profileTPLC = {
 				}
 
 			});
-			console.log("response", response);
 
 			//카카오링크 생성 컨트롤러 로직이 담긴곳.
 			var kakaoDescription = "#스쿨피온 #이거너아니냐 #별명 #이야기" 
@@ -98,7 +108,6 @@ var profileTPLC = {
 	},
 
 
-	
 	addFeature : function(profileId, response, tplAndContext){
 
 		return function(){
@@ -169,6 +178,7 @@ var profileTPLC = {
 					var newStory = $('#fieldStory').val();
 					updateProfile(profileId, {options: "contents", target:"stories", body: newStory})
 					.then(function(data){
+						console.log("data:", data);
 						if(data.success){
 							alert("추가되었습니다");
 							$("#updateProfileTPL").html("");
@@ -242,6 +252,7 @@ var profileTPLC = {
 	addSchool : function(profileId, response){
 
 		return function(){
+			
 			$("#searchSchool").validate({
 				rules:{
 					name:{
@@ -291,8 +302,6 @@ var profileTPLC = {
 							});
 						}
 					});
-
-					
 
 				}
 			});

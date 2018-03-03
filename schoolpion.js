@@ -1,3 +1,5 @@
+require("./jsUtils.js")();
+
 //credentials보안파일 로드
 var credentials = require('./credentials.js');
 var express = require('express');
@@ -242,6 +244,21 @@ var handlebars = hbs.create({
 			}
 		},
 
+		schemaToKorean : function(schemaName){
+			if(schemaName === "feature"){
+				return "별명을 추가하셨습니다.";
+			}else if(schemaName === "story"){
+				return "이야기를 추가하셨습니다.";
+			}else if(schemaName === "reply"){
+				return "댓글/방명록을 추가하셨습니다.";
+			}else if(schemaName === "up"){
+				return "의견(+1)을 반영하셨습니다.";
+			}else if(schemaName === "down"){
+				return "의견(-1)을 반영하셨습니다.";
+			}
+			return "";
+		}
+
 	},
 });
 
@@ -293,22 +310,40 @@ app.use(function(req, res, next){
 	next();
 });
 
+
+
 app.use(function(req, res, next){
 	//현재의 url을 담아서, 보내주어서, login시에 redirect되는 곳을 가리키게 하여 활용한다. main의 #loginBtn의 href 활용.
 	res.locals.urlNow = req.url;
 
+
 	//로그인 되어있는 상태라면, isLoggedIn(Handlebar context)에 true를 담아준다.
 	if(req.isAuthenticated()){
+		//읽지 않은 알람의 숫자를 보여주기 위해서 센다.
+		var unReadAlarm = 0;
+		var alarm = req.user.alarms;
+
+		if(Array.isArray(alarm)){
+			for(var a=0; a<alarm.length; a++){
+				if(alarm[a]["unread"]) unReadAlarm += 1;
+			}
+		}
+
 		res.locals.isLoggedIn = true;
+		
 		res.locals.userInfo = {
 			id: req.user._id,
 			name: req.user.name,
 			profile: req.user.profile,
 			schools: req.user.schools,
+			unReadAlarm : unReadAlarm,
 		};
+
 	}else{
+
 		res.locals.isLoggedIn = false;
 		res.locals.userInfo = undefined;
+	
 	}
 	next(); //다음 라우팅으로 넘어가라.
 

@@ -36,6 +36,7 @@ module.exports = function(app){
 		if(!req.params.id) return next('No Id');
 		Info.findById({_id: req.params.id}).exec(function(err, info){
 			if(err) return next(err);
+			if(!info) return next();
 			return res.render("info/info", infoViewModel(info));
 		});
 	});
