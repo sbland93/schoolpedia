@@ -147,7 +147,7 @@ var seedTest = function(){
 
 var seedProduction = function(){
 	
-	/*var p1 = new Promise(function(resolve, reject){
+/*	var p1 = new Promise(function(resolve, reject){
 		User.find({}, function(err, users){
 			console.log(users.length);
 			for(var a=0; a<users.length; a++){
@@ -166,14 +166,14 @@ var seedProduction = function(){
 	var p2 = new Promise(function(resolve, reject){
 		Board.find({}, function(err, boards){
 			for(var a=0; a<boards.length; a++){
-				if(Array.isArray(boards[a].alarmUsers)) continue;
-				else{
-					console.log("here");
-					if(boards[a].owner) boards[a].alarmUsers = [board[a].owner];
+				console.log("here");
+				if(boards[a].owner){
+					console.log("here!!!!");
+					boards[a].alarmUsers = [boards[a].owner];
 					boards[a].save(function(err){
 						if(err) reject(err);
 					});
-				}
+				} 
 			}
 			resolve();
 		})
